@@ -1,0 +1,12 @@
+version: '2'
+services:
+    wildfly:
+        build: images/wildfly
+        ports:
+            - "9090:8080"
+            - "9990:9990"
+    db:
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+            MYSQL_ROOT_PASSWORD: root
