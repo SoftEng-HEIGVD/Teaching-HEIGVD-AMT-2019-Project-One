@@ -7,27 +7,27 @@ import java.util.ArrayList;
 
 public class WatchingInfoManager implements IDAO {
     @Override
-    boolean create(Entity e) {
-
+    public boolean create(Entity e) {
+        return false;
     }
 
     @Override
-    ArrayList<Entity> findAll() {
-
+    public ArrayList<Entity> findAll() {
+        return null;
     }
 
     @Override
-    Entity findById(int id) {
-
+    public Entity findById(int id) {
+        return null;
     }
 
     @Override
-    boolean update(Entity e) {
-
+    public boolean update(Entity e) {
+        return false;
     }
 
     @Override
-    boolean delete(Entity e) {
-
+    public boolean delete(Entity e) {
+        return false;
     }
 }
