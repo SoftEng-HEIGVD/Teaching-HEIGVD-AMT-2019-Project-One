@@ -1,0 +1,21 @@
+version: '3.1'
+services:
+  payara:
+    build: ../images/payara
+    environment:
+     - ADMIN_PASSWORD=adminadmin
+    ports:
+     - "8080:8080"
+     - "4848:4848"
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: tchoutchouthread
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 9090:8080
