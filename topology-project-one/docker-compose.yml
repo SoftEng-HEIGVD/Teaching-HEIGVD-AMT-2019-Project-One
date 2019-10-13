@@ -9,10 +9,12 @@ services:
      - "4848:4848"
   db:
     image: mysql
+    volumes: 
+      - ../volumeMySQL:/docker-entrypoint-initdb.d
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: tchoutchouthread
+      MYSQL_ROOT_PASSWORD: florian
 
   adminer:
     image: adminer
