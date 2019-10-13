@@ -65,7 +65,7 @@ You don't have to follow this sequence if you prefer to do some of the tasks bef
 
 * ~~You should have a project in GitHub (or GitLab). Add your full e-mails, GitHub IDs and the repo URL on this [sheet](https://docs.google.com/spreadsheets/d/1vh1dKHtx6FnlnnNwTdk4VlRpzfjS_htFNRVCUtyKgsQ/edit?usp=sharing).~~
 * ~~You should have selected your business domain (don't waste 2 hours on this, it is not the most important thing). You should have a first version of your business entities and their properties.~~ -> chillout.ch
-* You should have a mockup of your UI.
+* ~~You should have a mockup of your UI.~~
 * ~~You should have a script that builds a fresh Docker image and a `docker-compose.yml` file that uses this image.~~ It should be possible for someone to clone your repo and test your app with 1-2 commands.
 * You should have unit test for your domain objects. We will see how to unit test servlets next week.
 
