@@ -28,3 +28,5 @@ services:
     ports:
       - 8888:80
     container_name: amt_pgadmin
+    volumes:
+      - ./dump:/var/lib/pgadmin
