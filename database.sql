@@ -1,24 +1,25 @@
+CREATE TABLE public."Character" (
+    stamina integer NOT NULL DEFAULT 50 ,
+    name varchar(64) NOT NULL,
+    level integer NOT NULL DEFAULT 1,
+    id SERIAL NOT NULL,
+    health integer NOT NULL DEFAULT 50,
+    mana integer NOT NULL DEFAULT 50,
+    password varchar(64) NOT NULL,
+    mount_id integer,
+    class_id integer
+);
+
 CREATE TABLE public."Casting" (
     class_id integer NOT NULL,
     spell_id integer NOT NULL
 );
 
-ALTER TABLE public."Casting" OWNER TO postgres;
-
 --
 -- Name: Character; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public."Character" (
-    stamina integer,
-    name varchar(64) NOT NULL,
-    level integer NOT NULL,
-    id SERIAL NOT NULL,
-    health integer,
-    mana integer,
-    mount_id integer,
-    class_id integer
-);
+ALTER TABLE public."Casting" OWNER TO postgres;
 
 
 ALTER TABLE public."Character" OWNER TO postgres;
@@ -44,7 +45,7 @@ ALTER TABLE public."Class" OWNER TO postgres;
 CREATE TABLE public."Guild" (
     id SERIAL,
     name varchar(64) NOT NULL,
-    description varchar(1024)[]
+    description varchar(1024)
 );
 
 
@@ -70,7 +71,7 @@ ALTER TABLE public."Membership" OWNER TO postgres;
 CREATE TABLE public."Mount" (
     id SERIAL,
     name varchar(64) NOT NULL,
-    speed integer
+    speed integer NOT NULL
 );
 
 
@@ -82,10 +83,10 @@ ALTER TABLE public."Mount" OWNER TO postgres;
 
 CREATE TABLE public."Spell" (
     id SERIAL,
-    type varchar(64),
-    damage integer,
-    cooldown integer,
-    range integer
+    type varchar(64) NOT NULL,
+    damage integer NOT NULL,
+    cooldown integer NOT NULL,
+    range integer NOT NULL
 );
 
 
