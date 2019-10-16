@@ -1,18 +1,7 @@
-CREATE DATABASE "TestImport"
-    WITH 
-    OWNER = postgres
-    ENCODING = 'UTF8'
-    LC_COLLATE = 'en_US.utf8'
-    LC_CTYPE = 'en_US.utf8'
-    TABLESPACE = pg_default
-    CONNECTION LIMIT = -1;
-
-
 CREATE TABLE public."Casting" (
     class_id integer NOT NULL,
     spell_id integer NOT NULL
 );
-
 
 ALTER TABLE public."Casting" OWNER TO postgres;
 
@@ -22,7 +11,7 @@ ALTER TABLE public."Casting" OWNER TO postgres;
 
 CREATE TABLE public."Character" (
     stamina integer,
-    name character varying(32)[] NOT NULL,
+    name varchar(64) NOT NULL,
     level integer NOT NULL,
     id integer NOT NULL,
     health integer,
@@ -40,9 +29,9 @@ ALTER TABLE public."Character" OWNER TO postgres;
 
 CREATE TABLE public."Class" (
     id integer NOT NULL,
-    name character varying(32)[] NOT NULL,
-    weapon character varying(32)[],
-    armor character varying(32)[]
+    name varchar(64) NOT NULL,
+    weapon varchar(64),
+    armor varchar(64)
 );
 
 
@@ -54,8 +43,8 @@ ALTER TABLE public."Class" OWNER TO postgres;
 
 CREATE TABLE public."Guild" (
     id integer NOT NULL,
-    name character varying(64)[] NOT NULL,
-    description character varying(1024)[]
+    name varchar(64) NOT NULL,
+    description varchar(1024)[]
 );
 
 
@@ -68,7 +57,7 @@ ALTER TABLE public."Guild" OWNER TO postgres;
 CREATE TABLE public."Membership" (
     character_id integer NOT NULL,
     guild_id integer NOT NULL,
-    rank character varying(32)[]
+    rank varchar(64)
 );
 
 
@@ -80,7 +69,7 @@ ALTER TABLE public."Membership" OWNER TO postgres;
 
 CREATE TABLE public."Mount" (
     id integer NOT NULL,
-    name character varying(32)[] NOT NULL,
+    name varchar(64) NOT NULL,
     speed integer
 );
 
@@ -93,7 +82,7 @@ ALTER TABLE public."Mount" OWNER TO postgres;
 
 CREATE TABLE public."Spell" (
     id integer NOT NULL,
-    type character varying(32)[],
+    type varchar(64),
     damage integer,
     cooldown integer,
     range integer
