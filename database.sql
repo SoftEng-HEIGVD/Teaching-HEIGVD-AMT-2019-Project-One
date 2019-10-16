@@ -13,7 +13,7 @@ CREATE TABLE public."Character" (
     stamina integer,
     name varchar(64) NOT NULL,
     level integer NOT NULL,
-    id integer NOT NULL,
+    id SERIAL NOT NULL,
     health integer,
     mana integer,
     mount_id integer,
@@ -28,7 +28,7 @@ ALTER TABLE public."Character" OWNER TO postgres;
 --
 
 CREATE TABLE public."Class" (
-    id integer NOT NULL,
+    id SERIAL,
     name varchar(64) NOT NULL,
     weapon varchar(64),
     armor varchar(64)
@@ -42,7 +42,7 @@ ALTER TABLE public."Class" OWNER TO postgres;
 --
 
 CREATE TABLE public."Guild" (
-    id integer NOT NULL,
+    id SERIAL,
     name varchar(64) NOT NULL,
     description varchar(1024)[]
 );
@@ -68,7 +68,7 @@ ALTER TABLE public."Membership" OWNER TO postgres;
 --
 
 CREATE TABLE public."Mount" (
-    id integer NOT NULL,
+    id SERIAL,
     name varchar(64) NOT NULL,
     speed integer
 );
@@ -81,7 +81,7 @@ ALTER TABLE public."Mount" OWNER TO postgres;
 --
 
 CREATE TABLE public."Spell" (
-    id integer NOT NULL,
+    id SERIAL,
     type varchar(64),
     damage integer,
     cooldown integer,
