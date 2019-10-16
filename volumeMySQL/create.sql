@@ -1,5 +1,5 @@
-CREATE DATABASE AMTProjectOne;
-USE AMTProjectOne;
+CREATE DATABASE amtprojectone;
+USE amtprojectone;
 
 CREATE TABLE Serie (
     ID int NOT NULL PRIMARY KEY,    
