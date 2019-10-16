@@ -11,8 +11,8 @@ import java.util.LinkedList;
 @EqualsAndHashCode
 public class Class {
 
+    private int id;
     private String name;
     private LinkedList<Spell> spells;
-
 
 }
