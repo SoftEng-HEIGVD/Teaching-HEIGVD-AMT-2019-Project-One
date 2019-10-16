@@ -1,7 +1,25 @@
 version: '3'
 services:
+  mysql:
+    image: mysql:5.7.28
+    environment:
+        MYSQL_ROOT_PASSWORD: admin
+    ports:
+        - 3306:3306
+
+  phpmyadmin:
+    build: ../phpmyadmin
+    ports:
+        - 6060:80
+    environment:
+        MYSQL_ROOT_PASSWORD: admin
+    links:
+        - mysql:db
+    
   wildfly:
     build: ../wildfly
     ports:
      - "9090:8080"
      - "9990:9990"
+     
+
