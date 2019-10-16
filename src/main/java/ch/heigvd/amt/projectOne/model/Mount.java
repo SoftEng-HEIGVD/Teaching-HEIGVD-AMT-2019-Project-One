@@ -9,6 +9,7 @@ import lombok.Getter;
 @EqualsAndHashCode
 public class Mount {
 
+    private int id;
     private String name;
     private int speed;
 

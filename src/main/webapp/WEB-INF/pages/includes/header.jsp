@@ -38,19 +38,19 @@
 
     <ul class="nav nav-pills nav-fill" style="background-color: orange">
       <li class="nav-item">
-        <a href="/projectOne/home" class="nav-link" style="color: white"><h3>Home</h3></a>
+        <a href="${pageContext.request.contextPath}/home" class="nav-link" style="color: white"><h3>Home</h3></a>
       </li>
       <li class="nav-item">
-        <a href="/projectOne/character" class="nav-link" style="color: white"><h3>Character</h3></a>
+        <a href="${pageContext.request.contextPath}/character" class="nav-link" style="color: white"><h3>Character</h3></a>
       </li>
       <li class="nav-item">
-        <a href="/projectOne/class" class="nav-link" style="color: white"><h3>Classes</h3></a>
+        <a href="${pageContext.request.contextPath}/class" class="nav-link" style="color: white"><h3>Classes</h3></a>
       </li>
       <li class="nav-item">
-        <a href="/projectOne/guild" class="nav-link" style="color: white"><h3>Guilds</h3></a>
+        <a href="${pageContext.request.contextPath}/guild" class="nav-link" style="color: white"><h3>Guilds</h3></a>
       </li>
       <li class="nav-item">
-        <a href="/projectOne/profile" class="nav-link" style="color: white"><h3>MyProfile</h3></a>
+        <a href="${pageContext.request.contextPath}/profile" class="nav-link" style="color: white"><h3>MyProfile</h3></a>
       </li>
     </ul>
 

@@ -9,6 +9,7 @@ import lombok.Getter;
 @EqualsAndHashCode
 public class Spell {
 
+    private int id;
     private spellType type;
     private int damage;
     private int cooldown;

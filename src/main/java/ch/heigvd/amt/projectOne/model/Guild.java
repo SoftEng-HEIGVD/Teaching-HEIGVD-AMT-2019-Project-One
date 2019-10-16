@@ -9,6 +9,7 @@ import lombok.Getter;
 @EqualsAndHashCode
 public class Guild {
 
+    private int id;
     private String name;
     private String description;
 }
