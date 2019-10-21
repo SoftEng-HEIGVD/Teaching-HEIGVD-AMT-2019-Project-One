@@ -21,11 +21,12 @@ public class CharacterManager implements CharacterManagerLocal {
     private DataSource dataSource;
 
     @Override
-    public List<Character> findAllCharacters() {
+    public List<Character> findAllCharacters() throws SQLException {
         List<Character> characters = new ArrayList<>();
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM Character");
+            System.out.println("Schema: " + connection.getSchema());
+            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM character");
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -41,7 +42,32 @@ public class CharacterManager implements CharacterManagerLocal {
 
         } catch (SQLException ex) {
             Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
         }
         return characters;
+    }
+
+    @Override
+    public boolean addCharacter(String username, String password) throws SQLException {
+
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement("INSERT INTO public.character (name, password) VALUES (?, ?)");
+            pstmt.setObject(1, username);
+            pstmt.setObject(2, password);
+
+            int row = pstmt.executeUpdate();
+
+            connection.close();
+
+            return row > 0;
+
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+
+
     }
 }

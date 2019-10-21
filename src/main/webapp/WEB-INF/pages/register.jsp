@@ -40,18 +40,6 @@
     <div class="container" style="background-color: orange">
         <form action="${pageContext.request.contextPath}/register" method="post">
             <div class="form-group">
-                <label for="firstNameField">First name</label>
-                <input type="text" class="form-control" id="firstNameField" name="firstname" value="${firstname}">
-            </div>
-            <div class="form-group">
-                <label for="lastNameField">Last name</label>
-                <input type="text" class="form-control" id="lastNameField" name="lastname" value="${lastname}">
-            </div>
-            <div class="form-group">
-                <label for="emailAddressField">Email address</label>
-                <input type="email" class="form-control" id="emailAddressField" name="email" value="${email}">
-            </div>
-            <div class="form-group">
                 <label for="usernameField">Username</label>
                 <input type="text" class="form-control" id="usernameField" name="username" value="${username}">
             </div>
