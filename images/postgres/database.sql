@@ -10,6 +10,8 @@ CREATE TABLE public."Character" (
     class_id integer
 );
 
+\connect AMT
+
 CREATE TABLE public."Casting" (
     class_id integer NOT NULL,
     spell_id integer NOT NULL
