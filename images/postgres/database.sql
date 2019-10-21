@@ -7,9 +7,11 @@ CREATE DATABASE "AMT"
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1;
 
+\connect AMT
+
 CREATE TABLE public.character (
     stamina integer NOT NULL DEFAULT 50 ,
-    name varchar(64) NOT NULL UNIQUE,
+    name varchar(64) NOT NULL UNIQUE ,
     level integer NOT NULL DEFAULT 1,
     id SERIAL NOT NULL,
     health integer NOT NULL DEFAULT 50,
@@ -17,6 +19,7 @@ CREATE TABLE public.character (
     password varchar(64) NOT NULL,
     mount_id integer,
     class_id integer
+
 );
 
 CREATE TABLE public.casting (
