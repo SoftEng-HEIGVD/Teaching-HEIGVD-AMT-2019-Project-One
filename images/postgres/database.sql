@@ -1,6 +1,17 @@
-CREATE TABLE public."Character" (
+CREATE DATABASE "AMT"
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'en_US.utf8'
+    LC_CTYPE = 'en_US.utf8'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+
+\connect AMT
+
+CREATE TABLE public.character (
     stamina integer NOT NULL DEFAULT 50 ,
-    name varchar(64) NOT NULL,
+    name varchar(64) NOT NULL UNIQUE ,
     level integer NOT NULL DEFAULT 1,
     id SERIAL NOT NULL,
     health integer NOT NULL DEFAULT 50,
@@ -8,11 +19,11 @@ CREATE TABLE public."Character" (
     password varchar(64) NOT NULL,
     mount_id integer,
     class_id integer
+
 );
 
-\connect AMT
 
-CREATE TABLE public."Casting" (
+CREATE TABLE public.casting (
     class_id integer NOT NULL,
     spell_id integer NOT NULL
 );
@@ -21,16 +32,16 @@ CREATE TABLE public."Casting" (
 -- Name: Character; Type: TABLE; Schema: public; Owner: postgres
 --
 
-ALTER TABLE public."Casting" OWNER TO postgres;
+ALTER TABLE public.casting OWNER TO postgres;
 
 
-ALTER TABLE public."Character" OWNER TO postgres;
+ALTER TABLE public.character OWNER TO postgres;
 
 --
 -- Name: Class; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public."Class" (
+CREATE TABLE public.class (
     id SERIAL,
     name varchar(64) NOT NULL,
     weapon varchar(64),
@@ -38,52 +49,52 @@ CREATE TABLE public."Class" (
 );
 
 
-ALTER TABLE public."Class" OWNER TO postgres;
+ALTER TABLE public.class OWNER TO postgres;
 
 --
 -- Name: Guild; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public."Guild" (
+CREATE TABLE public.guild (
     id SERIAL,
     name varchar(64) NOT NULL,
     description varchar(1024)
 );
 
 
-ALTER TABLE public."Guild" OWNER TO postgres;
+ALTER TABLE public.guild OWNER TO postgres;
 
 --
 -- Name: Membership; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public."Membership" (
+CREATE TABLE public.membership (
     character_id integer NOT NULL,
     guild_id integer NOT NULL,
     rank varchar(64)
 );
 
 
-ALTER TABLE public."Membership" OWNER TO postgres;
+ALTER TABLE public.membership OWNER TO postgres;
 
 --
 -- Name: Mount; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public."Mount" (
+CREATE TABLE public.mount (
     id SERIAL,
     name varchar(64) NOT NULL,
     speed integer NOT NULL
 );
 
 
-ALTER TABLE public."Mount" OWNER TO postgres;
+ALTER TABLE public.mount OWNER TO postgres;
 
 --
 -- Name: Spell; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public."Spell" (
+CREATE TABLE public.spell (
     id SERIAL,
     type varchar(64) NOT NULL,
     damage integer NOT NULL,
@@ -92,13 +103,13 @@ CREATE TABLE public."Spell" (
 );
 
 
-ALTER TABLE public."Spell" OWNER TO postgres;
+ALTER TABLE public.spell OWNER TO postgres;
 
 --
 -- Name: Character Character_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."Character"
+ALTER TABLE ONLY public.character
     ADD CONSTRAINT "Character_pkey" PRIMARY KEY (id);
 
 
@@ -106,7 +117,7 @@ ALTER TABLE ONLY public."Character"
 -- Name: Casting Class_Spell_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."Casting"
+ALTER TABLE ONLY public.casting
     ADD CONSTRAINT "Class_Spell_pkey" PRIMARY KEY (class_id, spell_id);
 
 
@@ -114,7 +125,7 @@ ALTER TABLE ONLY public."Casting"
 -- Name: Class Class_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."Class"
+ALTER TABLE ONLY public.class
     ADD CONSTRAINT "Class_pkey" PRIMARY KEY (id);
 
 
@@ -122,7 +133,7 @@ ALTER TABLE ONLY public."Class"
 -- Name: Guild Guild_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."Guild"
+ALTER TABLE ONLY public.guild
     ADD CONSTRAINT "Guild_pkey" PRIMARY KEY (id);
 
 
@@ -130,7 +141,7 @@ ALTER TABLE ONLY public."Guild"
 -- Name: Membership Membership_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."Membership"
+ALTER TABLE ONLY public.membership
     ADD CONSTRAINT "Membership_pkey" PRIMARY KEY (character_id, guild_id);
 
 
@@ -138,7 +149,7 @@ ALTER TABLE ONLY public."Membership"
 -- Name: Character Mount_id_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."Character"
+ALTER TABLE ONLY public.character
     ADD CONSTRAINT "Mount_id_unique" UNIQUE (mount_id);
 
 
@@ -146,7 +157,7 @@ ALTER TABLE ONLY public."Character"
 -- Name: Mount Mount_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."Mount"
+ALTER TABLE ONLY public.mount
     ADD CONSTRAINT "Mount_pkey" PRIMARY KEY (id);
 
 
@@ -154,7 +165,7 @@ ALTER TABLE ONLY public."Mount"
 -- Name: Spell Spell_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."Spell"
+ALTER TABLE ONLY public.spell
     ADD CONSTRAINT "Spell_pkey" PRIMARY KEY (id);
 
 
@@ -162,47 +173,47 @@ ALTER TABLE ONLY public."Spell"
 -- Name: Membership Character_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."Membership"
-    ADD CONSTRAINT "Character_id_fkey" FOREIGN KEY (character_id) REFERENCES public."Character"(id) NOT VALID;
+ALTER TABLE ONLY public.membership
+    ADD CONSTRAINT "Character_id_fkey" FOREIGN KEY (character_id) REFERENCES public.character (id) NOT VALID;
 
 
 --
 -- Name: Character Class_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."Character"
-    ADD CONSTRAINT "Class_id_fkey" FOREIGN KEY (class_id) REFERENCES public."Class"(id) NOT VALID;
+ALTER TABLE ONLY public.character
+    ADD CONSTRAINT "Class_id_fkey" FOREIGN KEY (class_id) REFERENCES public.class(id) NOT VALID;
 
 
 --
 -- Name: Casting Class_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."Casting"
-    ADD CONSTRAINT "Class_id_fkey" FOREIGN KEY (class_id) REFERENCES public."Class"(id);
+ALTER TABLE ONLY public.casting
+    ADD CONSTRAINT "Class_id_fkey" FOREIGN KEY (class_id) REFERENCES public.class(id);
 
 
 --
 -- Name: Membership Guild_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."Membership"
-    ADD CONSTRAINT "Guild_id_fkey" FOREIGN KEY (guild_id) REFERENCES public."Guild"(id) NOT VALID;
+ALTER TABLE ONLY public.membership
+    ADD CONSTRAINT "Guild_id_fkey" FOREIGN KEY (guild_id) REFERENCES public.guild(id) NOT VALID;
 
 
 --
 -- Name: Character Mount_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."Character"
-    ADD CONSTRAINT "Mount_id_fkey" FOREIGN KEY (mount_id) REFERENCES public."Mount"(id) NOT VALID;
+ALTER TABLE ONLY public.character
+    ADD CONSTRAINT "Mount_id_fkey" FOREIGN KEY (mount_id) REFERENCES public.mount(id) NOT VALID;
 
 
 --
 -- Name: Casting Spell_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."Casting"
-    ADD CONSTRAINT "Spell_id_fkey" FOREIGN KEY (spell_id) REFERENCES public."Spell"(id);
+ALTER TABLE ONLY public.casting
+    ADD CONSTRAINT "Spell_id_fkey" FOREIGN KEY (spell_id) REFERENCES public.spell(id);
 
 
