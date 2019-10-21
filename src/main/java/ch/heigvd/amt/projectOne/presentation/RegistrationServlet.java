@@ -43,15 +43,18 @@ public class RegistrationServlet extends HttpServlet {
         }
         try{
             characterManager.findAllCharacters();
-            //characterManager.addCharacter(username, password);
-
         }catch (Exception ex){
 
             errors.add(ex.getMessage());
-            req.setAttribute("errors", errors);
-            req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);
         }
 
+        try{
+            characterManager.addCharacter(username, password);
+        }catch (Exception ex){
+
+            errors.add(ex.getMessage());
+
+        }
 
         req.setAttribute("username", username);
 
