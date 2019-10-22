@@ -1,7 +1,5 @@
 package ch.heig.amt.project.one.presentation;
 
-import ch.heig.amt.project.one.dao.SeriesManager;
-
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
