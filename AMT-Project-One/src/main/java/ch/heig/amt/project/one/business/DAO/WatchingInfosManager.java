@@ -1,11 +1,10 @@
 package ch.heig.amt.project.one.business.DAO;
 
-import ch.heig.amt.project.one.business.interfaces.IDAO;
 import ch.heig.amt.project.one.model.Entity;
 
 import java.util.ArrayList;
 
-public class WatchingInfoManager implements IDAO {
+public class WatchingInfosManager implements IDAO {
     @Override
     public boolean create(Entity e) {
         return false;

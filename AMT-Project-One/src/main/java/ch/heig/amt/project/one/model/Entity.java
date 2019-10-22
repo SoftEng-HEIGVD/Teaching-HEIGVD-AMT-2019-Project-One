@@ -9,4 +9,5 @@ import lombok.Setter;
 @EqualsAndHashCode
 public abstract class Entity {
     private long id;
+    private long owner;
 }
