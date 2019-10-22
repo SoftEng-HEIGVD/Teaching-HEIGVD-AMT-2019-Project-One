@@ -41,6 +41,6 @@ public class SeriesManager implements SeriesManagerLocal {
         } catch (SQLException e) {
             Logger.getLogger(SeriesManager.class.getName()).log(Level.SEVERE, null, e);
         }
-
+        return series;
     }
 }
