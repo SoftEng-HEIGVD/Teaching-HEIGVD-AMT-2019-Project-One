@@ -6,7 +6,8 @@ CREATE TABLE Serie (
     Title varchar(255),
     Producer varchar(255),
     Synopsis varchar(255),
-    Genre varchar(255)
+    Genre varchar(255),
+	AgeRestriction int 
 );
 
 CREATE TABLE Viewer (

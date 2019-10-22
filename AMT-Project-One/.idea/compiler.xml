@@ -6,8 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="AMT-Project-One" />
         <module name="AMT-project-one" />
+        <module name="AMT-Project-One" />
       </profile>
     </annotationProcessing>
   </component>

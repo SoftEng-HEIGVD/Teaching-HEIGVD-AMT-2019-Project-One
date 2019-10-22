@@ -8,5 +8,5 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 public abstract class Entity {
-    private int id;
+    private long id;
 }
