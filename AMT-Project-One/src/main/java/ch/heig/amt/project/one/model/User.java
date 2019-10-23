@@ -12,6 +12,7 @@ import java.util.ArrayList;
 @Setter
 @EqualsAndHashCode
 public class User {
+    private long id;
     private String username;
     private String password;
     private ArrayList<Entity> entities;
