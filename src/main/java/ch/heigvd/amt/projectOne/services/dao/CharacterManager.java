@@ -1,6 +1,7 @@
 package ch.heigvd.amt.projectOne.services.dao;
 
 import ch.heigvd.amt.projectOne.model.Character;
+import ch.heigvd.amt.projectOne.model.Mount;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
@@ -25,7 +26,8 @@ public class CharacterManager implements CharacterManagerLocal {
         List<Character> characters = new ArrayList<>();
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM Character");
+            System.out.println("Schema: " + connection.getSchema());
+            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM character");
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -43,5 +45,103 @@ public class CharacterManager implements CharacterManagerLocal {
             Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return characters;
+    }
+
+    @Override
+    public boolean addCharacter(String username, String password) {
+
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement("INSERT INTO character (name, password) VALUES (?, ?)");
+            pstmt.setObject(1, username);
+            pstmt.setObject(2, password);
+
+            int row = pstmt.executeUpdate();
+
+            connection.close();
+
+            return row > 0;
+
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
+    }
+
+    @Override
+    public Character getCharacterById(int id) {
+
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM character WHERE id=?");
+            pstmt.setObject(1, id);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            rs.next();
+            String name = rs.getString("name");
+            int level = rs.getInt("level");
+            int health = rs.getInt("health");
+            int stamina = rs.getInt("stamina");
+            int mana = rs.getInt("mana");
+
+            connection.close();
+            return new Character(id, name, level, health, stamina, mana);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
+    @Override
+    public Character getCharacterByUsername(String username) {
+        try {
+            Character character = null;
+            Connection connection = dataSource.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM character WHERE name=?");
+            pstmt.setObject(1, username);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int level = rs.getInt("level");
+                int health = rs.getInt("health");
+                int stamina = rs.getInt("stamina");
+                int mana = rs.getInt("mana");
+                character = new Character(id, username, level, health, stamina, mana);
+            }
+            connection.close();
+            return character;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean isUsernameFree(String username) {
+
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement("SELECT id FROM character WHERE name=?");
+            pstmt.setObject(1, username);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            return !rs.next();
+
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return true;
     }
 }

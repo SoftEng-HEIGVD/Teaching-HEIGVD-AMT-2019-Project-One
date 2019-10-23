@@ -16,6 +16,7 @@ import java.util.List;
 @WebServlet(urlPatterns = "/login")
 
 public class LoginServlet extends HttpServlet {
+
   @EJB
   private CharacterManagerLocal characterManager;
 
@@ -42,14 +43,14 @@ public class LoginServlet extends HttpServlet {
     }
 
     /* Check dans la DB */
-    List<Character> chars = characterManager.findAllCharacters();
+    //List<Character> chars = characterManager.findAllCharacters();
 
     req.setAttribute("firstName", username);
     //req.setAttribute("lastName", password);
 
     if (errors.size() == 0) {
       //req.setAttribute("fullName", firstName + " " + lastName);
-      req.getRequestDispatcher("/WEB-INF/pages/welcome.jsp").forward(req, resp);
+      req.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(req, resp);
     } else {
       req.setAttribute("errors", errors);
       req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);

@@ -1,16 +1,23 @@
 package ch.heigvd.amt.projectOne.presentation;
 
+import ch.heigvd.amt.projectOne.services.dao.CharacterManagerLocal;
+
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/register")
 public class RegistrationServlet extends HttpServlet {
+
+    @EJB
+    CharacterManagerLocal characterManager;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -19,47 +26,32 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String firstName = req.getParameter("firstname");
-        String lastName = req.getParameter("lastname");
-        String username = req.getParameter("username");
-        String email = req.getParameter("email");
+        String name = req.getParameter("name");
         String password = req.getParameter("password");
         String passwordVerify = req.getParameter("passwordVerify");
+        HttpSession session = req.getSession();
 
         List<String> errors = new ArrayList<>();
-        if (firstName == null || firstName.trim().equals("")) {
-            errors.add("First name cannot be empty");
-        }
-        if (lastName == null || lastName.trim().equals("")) {
-            errors.add("Last name cannot be empty");
-        }
-        if (username == null || username.trim().equals("")) {
+
+        if (name == null || name.trim().equals("")) {
             errors.add("Username cannot be empty");
         }
-        if (email == null || email.trim().equals("")) {
-            errors.add("Email cannot be empty");
+        if (password == null || password.trim().equals("") || passwordVerify == null || passwordVerify.trim().equals("")) {
+            errors.add("Password cannot be empty");
         } else {
-            if (email.indexOf('@') == -1) {
-                errors.add("Invalid format for email.");
+            if (!password.equals(passwordVerify)) {
+                errors.add("Password are not the same");
             }
         }
-        if (password == null || password.trim().equals("") || passwordVerify == null || passwordVerify.trim().equals("")) {
-          errors.add("Password cannot be empty");
-        }else {
-          if(!password.equals(passwordVerify)){
-            errors.add("Password are not the same");
-          }
+        if (!characterManager.isUsernameFree(name)) {
+            errors.add("This name is already taken");
         }
 
-
-        req.setAttribute("firstname", firstName);
-        req.setAttribute("lastname", lastName);
-        req.setAttribute("email", email);
-        req.setAttribute("username", username);
-
         if (errors.size() == 0) {
-            req.setAttribute("fullName", firstName + " " + lastName);
-            req.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(req, resp);
+            characterManager.addCharacter(name, password);
+            session.setAttribute("character", characterManager.getCharacterByUsername(name));
+
+            resp.sendRedirect(req.getContextPath() + "/home");
         } else {
             req.setAttribute("errors", errors);
             req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);
