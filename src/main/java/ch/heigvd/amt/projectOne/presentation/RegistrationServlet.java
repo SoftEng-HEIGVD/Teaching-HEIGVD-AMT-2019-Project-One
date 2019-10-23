@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +26,14 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username");
+        String name = req.getParameter("name");
         String password = req.getParameter("password");
         String passwordVerify = req.getParameter("passwordVerify");
+        HttpSession session = req.getSession();
 
         List<String> errors = new ArrayList<>();
 
-        if (username == null || username.trim().equals("")) {
+        if (name == null || name.trim().equals("")) {
             errors.add("Username cannot be empty");
         }
         if (password == null || password.trim().equals("") || passwordVerify == null || passwordVerify.trim().equals("")) {
@@ -41,26 +43,15 @@ public class RegistrationServlet extends HttpServlet {
                 errors.add("Password are not the same");
             }
         }
-        try{
-            characterManager.findAllCharacters();
-        }catch (Exception ex){
-
-            errors.add(ex.getMessage());
+        if (!characterManager.isUsernameFree(name)) {
+            errors.add("This name is already taken");
         }
-
-        try{
-            characterManager.addCharacter(username, password);
-        }catch (Exception ex){
-
-            errors.add(ex.getMessage());
-
-        }
-
-        req.setAttribute("username", username);
 
         if (errors.size() == 0) {
-            req.setAttribute("username", username);
-            req.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(req, resp);
+            characterManager.addCharacter(name, password);
+            session.setAttribute("character", characterManager.getCharacterByUsername(name));
+
+            resp.sendRedirect(req.getContextPath() + "/home");
         } else {
             req.setAttribute("errors", errors);
             req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);

@@ -1,4 +1,4 @@
-CREATE DATABASE "AMT"
+CREATE DATABASE amt
     WITH
     OWNER = postgres
     ENCODING = 'UTF8'
@@ -7,7 +7,7 @@ CREATE DATABASE "AMT"
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1;
 
-\connect AMT
+\connect amt
 
 CREATE TABLE public.character (
     stamina integer NOT NULL DEFAULT 50 ,

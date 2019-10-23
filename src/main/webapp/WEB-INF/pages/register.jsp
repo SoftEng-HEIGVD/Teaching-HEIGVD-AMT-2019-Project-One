@@ -40,8 +40,8 @@
     <div class="container" style="background-color: orange">
         <form action="${pageContext.request.contextPath}/register" method="post">
             <div class="form-group">
-                <label for="usernameField">Username</label>
-                <input type="text" class="form-control" id="usernameField" name="username" value="${username}">
+                <label for="nameField">Name</label>
+                <input type="text" class="form-control" id="nameField" name="name" value="${name}">
             </div>
             <div class="form-group">
                 <label for="passwordField">Password</label>

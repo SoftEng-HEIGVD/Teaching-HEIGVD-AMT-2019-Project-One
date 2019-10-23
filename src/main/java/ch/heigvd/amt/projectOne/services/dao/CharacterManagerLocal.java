@@ -8,7 +8,13 @@ import java.util.List;
 @Local
 public interface CharacterManagerLocal {
 
-    public List<Character> findAllCharacters() throws SQLException;
+    public List<Character> findAllCharacters();
 
-    public boolean addCharacter(String username, String password) throws SQLException;
+    public boolean addCharacter(String username, String password);
+
+    public Character getCharacterById(int id);
+
+    Character getCharacterByUsername(String username);
+
+    public boolean isUsernameFree(String username);
 }
