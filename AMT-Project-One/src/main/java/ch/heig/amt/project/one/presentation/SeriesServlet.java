@@ -1,6 +1,6 @@
 package ch.heig.amt.project.one.presentation;
 
-import ch.heig.amt.project.one.business.DAO.SeriesManager;
+import ch.heig.amt.project.one.business.interfaces.SeriesManagerLocal;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class SeriesServlet extends HttpServlet {
     @EJB
-    private SeriesManager seriesManager;
+    private SeriesManagerLocal seriesManager;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
