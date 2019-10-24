@@ -65,7 +65,7 @@ public class UsersManager implements UsersManagerLocal {
 
     @Override
     public User findUserByUsername(String username) {
-        User user = null;
+        User user = User.builder().build();
         try {
             Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM User WHERE Username = ?");
