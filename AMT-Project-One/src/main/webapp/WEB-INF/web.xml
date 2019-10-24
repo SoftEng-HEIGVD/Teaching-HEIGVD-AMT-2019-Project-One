@@ -48,4 +48,13 @@
     <servlet-name>AddSerieServlet</servlet-name>
     <url-pattern>/addserie</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AddViewerServlet</servlet-name>
+    <servlet-class>ch.heig.amt.project.one.presentation.AddViewerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddViewerServlet</servlet-name>
+    <url-pattern>/addviewer</url-pattern>
+  </servlet-mapping>
 </web-app>
