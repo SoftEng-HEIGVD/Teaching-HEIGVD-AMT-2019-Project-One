@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/class")
-public class ClassServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/classes")
+public class ClassesServlet extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    req.getRequestDispatcher("/WEB-INF/pages/class.jsp").forward(req, resp);
+    req.getRequestDispatcher("/WEB-INF/pages/classes.jsp").forward(req, resp);
   }
 
   @Override

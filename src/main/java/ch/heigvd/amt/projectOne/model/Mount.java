@@ -13,4 +13,9 @@ public class Mount {
     private String name;
     private int speed;
 
+    public Mount(int id, String name, int speed) {
+        this.id = id;
+        this.name = name;
+        this.speed = speed;
+    }
 }
