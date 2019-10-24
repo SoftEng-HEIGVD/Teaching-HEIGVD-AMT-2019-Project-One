@@ -30,4 +30,13 @@
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>AddSerieServlet</servlet-name>
+    <servlet-class>ch.heig.amt.project.one.presentation.AddSerieServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddSerieServlet</servlet-name>
+    <url-pattern>/addserie</url-pattern>
+  </servlet-mapping>
 </web-app>

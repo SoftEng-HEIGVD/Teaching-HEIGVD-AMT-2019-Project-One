@@ -8,7 +8,7 @@ import java.util.List;
 
 @Local
 public interface SeriesManagerLocal {
-    public boolean create(Serie s, User u);
+    public boolean create(Serie s);
     public List<Serie> findAll(User u, int index, int offset);
     public Serie findById(long id);
     public boolean update(Serie s);

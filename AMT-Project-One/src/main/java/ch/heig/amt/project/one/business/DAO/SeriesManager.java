@@ -22,7 +22,7 @@ public class SeriesManager implements SeriesManagerLocal {
     private DataSource dataSource;
 
     @Override
-    public boolean create(Serie s, User u) {
+    public boolean create(Serie s) {
         boolean created = false;
         try {
             Connection connection = dataSource.getConnection();

@@ -24,7 +24,7 @@ public class WatchingInfosManager implements WatchingInfosManagerLocal {
     private DataSource dataSource;
 
     @Override
-    public boolean create(WatchingInfo w, User u) {
+    public boolean create(WatchingInfo w) {
         boolean created = false;
         try {
             Connection connection = dataSource.getConnection();
@@ -35,7 +35,7 @@ public class WatchingInfosManager implements WatchingInfosManagerLocal {
             java.util.Date dateWatchingInfo = w.getBeginningDate();
             java.sql.Date dateWatchingInfoDB = new java.sql.Date(dateWatchingInfo.getTime());
             preparedStatement.setDate(4, dateWatchingInfoDB);
-            preparedStatement.setLong(5, u.getId());
+            preparedStatement.setLong(5, w.getOwner());
             int row = preparedStatement.executeUpdate();
             if(row == 1) {
                 created = true;
@@ -77,7 +77,7 @@ public class WatchingInfosManager implements WatchingInfosManagerLocal {
 
     @Override
     public WatchingInfo findOne(User u, long idSerie, long idViewer) {
-        WatchingInfo watchingInfo = WatchingInfo.builder().build();
+        WatchingInfo watchingInfo = null;
         try {
             Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM WatchingInfo WHERE OwnerID = ? AND IDSerie = ? AND IDViewer = ?");
