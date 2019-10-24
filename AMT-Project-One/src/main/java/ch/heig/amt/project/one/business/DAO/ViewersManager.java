@@ -22,7 +22,7 @@ public class ViewersManager implements ViewersManagerLocal {
     private DataSource dataSource;
 
     @Override
-    public boolean create(Viewer v, User u) {
+    public boolean create(Viewer v) {
         boolean created = false;
         try {
             Connection connection = dataSource.getConnection();
@@ -35,7 +35,7 @@ public class ViewersManager implements ViewersManagerLocal {
             java.util.Date dateViewer = v.getBirthDate();
             java.sql.Date dateViewerDB = new java.sql.Date(dateViewer.getTime());
             preparedStatement.setDate(5, dateViewerDB);
-            preparedStatement.setLong(6, u.getId());
+            preparedStatement.setLong(6, v.getOwner());
             int row = preparedStatement.executeUpdate();
             if(row == 1) {
                 created = true;
