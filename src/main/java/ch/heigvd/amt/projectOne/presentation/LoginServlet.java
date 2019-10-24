@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,19 +43,13 @@ public class LoginServlet extends HttpServlet {
       errors.add("Password cannot be empty");
     }
 
-    /* Check dans la DB */
-    //List<Character> chars = characterManager.findAllCharacters();
-
-    req.setAttribute("firstName", username);
-    //req.setAttribute("lastName", password);
-
     if (errors.size() == 0) {
-      //req.setAttribute("fullName", firstName + " " + lastName);
-      req.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(req, resp);
+      HttpSession session = req.getSession();
+      session.setAttribute("character", characterManager.getCharacterByUsername(username));
+      resp.sendRedirect(req.getContextPath() + "/home");
     } else {
       req.setAttribute("errors", errors);
       req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
     }
-
   }
 }
