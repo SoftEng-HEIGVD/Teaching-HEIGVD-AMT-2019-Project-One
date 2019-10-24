@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -42,6 +44,10 @@
                 </div>
                 <input type="submit" class="btn btn-primary btn-user btn-block" value="Se Connecter"/>
               </form>
+              <hr>
+              <div class="text-center">
+                <a class="small" href="./register">Pas encore membre ? Créer un compte</a>
+              </div>
             </div>
           </div>
         </div>
