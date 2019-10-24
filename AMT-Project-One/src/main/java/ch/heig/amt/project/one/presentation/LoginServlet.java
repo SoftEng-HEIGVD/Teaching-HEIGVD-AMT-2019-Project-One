@@ -25,6 +25,7 @@ public class LoginServlet extends HttpServlet {
 
         if(connectionSuccessful) {
             request.getSession().setAttribute("user", usersManagerLocal.findUserByUsername(request.getParameter("username")));
+            System.out.println("Done !");
         }
     }
 }

@@ -12,6 +12,8 @@ public class TestWatchingInfo {
         WatchingInfo watchingInfo = WatchingInfo.builder()
                 .beginningDate(new Date())
                 .timeSpent(1789)
+                .idSerie(1)
+                .idViewer(1)
                 .build();
         watchingInfo.setId(7896);
 
@@ -19,5 +21,7 @@ public class TestWatchingInfo {
         assertEquals(7896, watchingInfo.getId());
         assertEquals(new Date(), watchingInfo.getBeginningDate());
         assertEquals(1789, watchingInfo.getTimeSpent());
+        assertEquals(1, watchingInfo.getIdSerie());
+        assertEquals(1, watchingInfo.getIdViewer());
     }
 }
