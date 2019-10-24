@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginServlet extends HttpServlet {
     @EJB
@@ -24,13 +26,27 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        boolean connectionSuccessful = usersManagerLocal.validConnection(username, password);
 
-        if(connectionSuccessful) {
+        List<String> errors = new ArrayList<>();
+        if(username == null || username.trim().equals("")) {
+            errors.add("Le nom d'utilisateur ne peut pas être vide");
+        }
+        if(password == null || password.trim().equals("")) {
+            errors.add("Le mot de passe ne peut pas être libre");
+        }
+        boolean connectionSuccessful = usersManagerLocal.validConnection(username, password);
+        if(!connectionSuccessful) {
+            errors.add("Le nom d'utilisateur ou le mot de passe doit être erroné");
+        }
+
+        if(errors.size() == 0) {
             User user = usersManagerLocal.findUserByUsername(username);
             request.getSession(true);
             request.getSession().setAttribute("user", user);
             response.sendRedirect(request.getContextPath() + "/series");
+        } else {
+            request.setAttribute("errors", errors);
+            request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
         }
     }
 }
