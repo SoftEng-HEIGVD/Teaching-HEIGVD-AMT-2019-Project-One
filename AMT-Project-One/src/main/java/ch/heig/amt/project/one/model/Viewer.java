@@ -16,6 +16,6 @@ public class Viewer extends Entity {
     private String firstname;
     private String lastname;
     private String username;
+    private String genre;
     private Date birthDate;
-    private ArrayList<WatchingInfo> watchingInfos;
 }

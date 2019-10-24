@@ -14,4 +14,6 @@ import java.util.Date;
 public class WatchingInfo extends Entity {
     private int timeSpent;
     private Date beginningDate;
+    private long idSerie;
+    private long idViewer;
 }

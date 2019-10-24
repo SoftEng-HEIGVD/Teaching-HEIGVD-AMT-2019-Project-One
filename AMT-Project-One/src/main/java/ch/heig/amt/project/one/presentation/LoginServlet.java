@@ -1,7 +1,6 @@
 package ch.heig.amt.project.one.presentation;
 
 import ch.heig.amt.project.one.business.interfaces.UsersManagerLocal;
-import ch.heig.amt.project.one.model.User;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -22,10 +21,10 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        boolean connectionSuccessful = usersManagerLocal.connection(request.getParameter("username"), request.getParameter("password"));
+        boolean connectionSuccessful = usersManagerLocal.validConnection(request.getParameter("username"), request.getParameter("password"));
 
         if(connectionSuccessful) {
-            request.getSession().setAttribute("user", usersManagerLocal.getUserByUsername(request.getParameter("username")));
+            request.getSession().setAttribute("user", usersManagerLocal.findUserByUsername(request.getParameter("username")));
         }
     }
 }

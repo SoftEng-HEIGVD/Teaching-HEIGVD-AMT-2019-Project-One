@@ -6,7 +6,7 @@ import javax.ejb.Local;
 
 @Local
 public interface UsersManagerLocal {
-    public boolean create(User u);
-    public boolean connection(String username, String password);
-    public User getUserByUsername(String username);
+    public boolean create(String username, String password);
+    public boolean validConnection(String username, String password);
+    public User findUserByUsername(String username);
 }

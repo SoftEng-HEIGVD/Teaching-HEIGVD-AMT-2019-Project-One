@@ -18,23 +18,44 @@ public class UsersManager implements UsersManagerLocal {
     @Resource(lookup = "jdbc/amtDatasource")
     private DataSource dataSource;
 
-    public boolean create(User u) {
-        return false;
+    @Override
+    public boolean create(String username, String password) {
+        boolean created = false;
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO User(Username, Password) VALUES (?,?)");
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            int row = preparedStatement.executeUpdate();
+
+            if(row == 1) {
+                created = true;
+            }
+            preparedStatement.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            Logger.getLogger(ch.heig.amt.project.one.business.DAO.UsersManager.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return created;
     }
 
-    public boolean connection(String username, String password) {
+    @Override
+    public boolean validConnection(String username, String password) {
         boolean connectionValid = false;
         try {
             Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM User WHERE Username = ?");
             preparedStatement.setString(1, username);
             ResultSet rs = preparedStatement.executeQuery();
-            rs.next();
-            String passwordDB = rs.getString("Password");
+            if(rs.next()) {
+                String passwordDB = rs.getString("Password");
 
-            if(passwordDB.equals(password)) {
-                connectionValid = true;
+                if (passwordDB.equals(password)) {
+                    connectionValid = true;
+                }
             }
+            preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
             Logger.getLogger(ch.heig.amt.project.one.business.DAO.UsersManager.class.getName()).log(Level.SEVERE, null, e);
@@ -42,7 +63,8 @@ public class UsersManager implements UsersManagerLocal {
         return connectionValid;
     }
 
-    public User getUserByUsername(String username) {
+    @Override
+    public User findUserByUsername(String username) {
         User user = null;
         try {
             Connection connection = dataSource.getConnection();

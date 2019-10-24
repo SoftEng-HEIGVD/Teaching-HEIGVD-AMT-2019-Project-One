@@ -2,6 +2,7 @@ package ch.heig.amt.project.one.business.DAO;
 
 import ch.heig.amt.project.one.business.interfaces.SeriesManagerLocal;
 import ch.heig.amt.project.one.model.Serie;
+import ch.heig.amt.project.one.model.User;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
@@ -21,16 +22,40 @@ public class SeriesManager implements SeriesManagerLocal {
     private DataSource dataSource;
 
     @Override
-    public boolean create(Serie s) {
-        return false;
+    public boolean create(Serie s, User u) {
+        boolean created = false;
+        try {
+            Connection connection = dataSource.getConnection();
+            String querySql = "INSERT INTO Serie(Title, Producer, Synopsis, Genre, AgeRestriction, OwnerID) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(querySql);
+            preparedStatement.setString(1, s.getTitle());
+            preparedStatement.setString(2, s.getProducer());
+            preparedStatement.setString(3, s.getSynopsis());
+            preparedStatement.setString(4, s.getGenre());
+            preparedStatement.setInt(5, s.getAgeRestriction());
+            preparedStatement.setLong(6, s.getOwner());
+            int row = preparedStatement.executeUpdate();
+            if(row == 1) {
+                created = true;
+            }
+            preparedStatement.close();
+            connection.close();
+        } catch (SQLException e) {
+            Logger.getLogger(ch.heig.amt.project.one.business.DAO.SeriesManager.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        return created;
     }
 
     @Override
-    public List<Serie> findAll() {
+    public List<Serie> findAll(User u, int index, int offset) {
         List<Serie> series = new ArrayList<>();
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Serie");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Serie WHERE OwnerID = ? LIMIT ?, ?");
+            preparedStatement.setLong(1, u.getId());
+            preparedStatement.setInt(2, index);
+            preparedStatement.setInt(3, offset);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 long id = rs.getLong("ID");
@@ -40,16 +65,16 @@ public class SeriesManager implements SeriesManagerLocal {
                 String synopsis = rs.getString("Synopsis");
                 String genre = rs.getString("Genre");
                 int ageRestriction = rs.getInt("AgeRestriction");
-                Serie tmp = Serie.builder().genre(genre).title(title).producer(producer).synopsis(synopsis).ageRestriction(ageRestriction).build();
-                tmp.setId(id);
-                tmp.setOwner(ownerID);
-                series.add(tmp);
+                Serie serie = Serie.builder().genre(genre).title(title).producer(producer).synopsis(synopsis).ageRestriction(ageRestriction).build();
+                serie.setId(id);
+                serie.setOwner(ownerID);
+                series.add(serie);
             }
+            preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
             Logger.getLogger(ch.heig.amt.project.one.business.DAO.SeriesManager.class.getName()).log(Level.SEVERE, null, e);
         }
-
         return series;
     }
 
@@ -61,17 +86,19 @@ public class SeriesManager implements SeriesManagerLocal {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Serie WHERE ID = ?");
             preparedStatement.setLong(1, id);
             ResultSet rs = preparedStatement.executeQuery();
-            rs.next();
-            long idSerie = rs.getLong("ID");
-            long ownerID = rs.getLong("OwnerID");
-            String title = rs.getString("Title");
-            String producer = rs.getString("Producer");
-            String synopsis = rs.getString("Synopsis");
-            String genre = rs.getString("Genre");
-            int ageRestriction = rs.getInt("AgeRestriction");
-            serie = Serie.builder().genre(genre).title(title).producer(producer).synopsis(synopsis).ageRestriction(ageRestriction).build();
-            serie.setId(idSerie);
-            serie.setOwner(ownerID);
+            if(rs.next()) {
+                long idSerie = rs.getLong("ID");
+                long ownerID = rs.getLong("OwnerID");
+                String title = rs.getString("Title");
+                String producer = rs.getString("Producer");
+                String synopsis = rs.getString("Synopsis");
+                String genre = rs.getString("Genre");
+                int ageRestriction = rs.getInt("AgeRestriction");
+                serie = Serie.builder().genre(genre).title(title).producer(producer).synopsis(synopsis).ageRestriction(ageRestriction).build();
+                serie.setId(idSerie);
+                serie.setOwner(ownerID);
+            }
+            preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
             Logger.getLogger(ch.heig.amt.project.one.business.DAO.SeriesManager.class.getName()).log(Level.SEVERE, null, e);
@@ -81,21 +108,46 @@ public class SeriesManager implements SeriesManagerLocal {
 
     @Override
     public boolean update(Serie s) {
-        return false;
-    }
-
-    @Override
-    public boolean delete(Serie s) {
+        boolean modified = false;
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Serie WHERE ID = ?");
-            preparedStatement.setLong(1, s.getId());
-            preparedStatement.executeUpdate();
+            String querySql = "UPDATE Serie SET Title = ?, Producer = ?, Synopsis = ?, Genre = ?, AgeRestriction = ? WHERE ID = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(querySql);
+            preparedStatement.setString(1, s.getTitle());
+            preparedStatement.setString(2, s.getProducer());
+            preparedStatement.setString(3, s.getSynopsis());
+            preparedStatement.setString(4, s.getGenre());
+            preparedStatement.setInt(5, s.getAgeRestriction());
+            preparedStatement.setLong(6, s.getId());
+            int row = preparedStatement.executeUpdate();
+            if(row == 1) {
+                modified = true;
+            }
+            preparedStatement.close();
             connection.close();
-            return true;
         } catch (SQLException e) {
             Logger.getLogger(ch.heig.amt.project.one.business.DAO.SeriesManager.class.getName()).log(Level.SEVERE, null, e);
         }
-        return false;
+
+        return modified;
+    }
+
+    @Override
+    public boolean delete(long id) {
+        boolean deleted = false;
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Serie WHERE ID = ?");
+            preparedStatement.setLong(1, id);
+            int row = preparedStatement.executeUpdate();
+            if(row == 1) {
+                deleted = true;
+            }
+            preparedStatement.close();
+            connection.close();
+        } catch (SQLException e) {
+            Logger.getLogger(ch.heig.amt.project.one.business.DAO.SeriesManager.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return deleted;
     }
 }
