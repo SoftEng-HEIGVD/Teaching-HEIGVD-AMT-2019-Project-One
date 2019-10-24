@@ -34,9 +34,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <finalName>amt-project-one</finalName>
-
-    </build>
 </project>
