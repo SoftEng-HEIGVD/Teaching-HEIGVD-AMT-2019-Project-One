@@ -80,7 +80,7 @@ public class SeriesManager implements SeriesManagerLocal {
 
     @Override
     public Serie findById(long id) {
-        Serie serie = null;
+        Serie serie = Serie.builder().build();
         try {
             Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Serie WHERE ID = ?");

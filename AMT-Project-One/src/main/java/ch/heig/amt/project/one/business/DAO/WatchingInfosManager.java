@@ -77,7 +77,7 @@ public class WatchingInfosManager implements WatchingInfosManagerLocal {
 
     @Override
     public WatchingInfo findOne(User u, long idSerie, long idViewer) {
-        WatchingInfo watchingInfo = null;
+        WatchingInfo watchingInfo = WatchingInfo.builder().build();
         try {
             Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM WatchingInfo WHERE OwnerID = ? AND IDSerie = ? AND IDViewer = ?");
