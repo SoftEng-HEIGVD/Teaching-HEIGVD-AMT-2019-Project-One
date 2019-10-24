@@ -8,7 +8,7 @@ import java.util.List;
 
 @Local
 public interface ViewersManagerLocal {
-    public boolean create(Viewer v, User u);
+    public boolean create(Viewer v);
     public List<Viewer> findAll(User u, int index, int offset);
     public Viewer findById(long id);
     public boolean update(Viewer v);

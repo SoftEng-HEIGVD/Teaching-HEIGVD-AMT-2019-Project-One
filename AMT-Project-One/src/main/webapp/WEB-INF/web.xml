@@ -38,5 +38,13 @@
   <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/logout</url-pattern>
+  
+  <servlet>
+    <servlet-name>AddSerieServlet</servlet-name>
+    <servlet-class>ch.heig.amt.project.one.presentation.AddSerieServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddSerieServlet</servlet-name>
+    <url-pattern>/addserie</url-pattern>
   </servlet-mapping>
 </web-app>
