@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -48,6 +48,15 @@
               <div class="text-center">
                 <a class="small" href="./register">Pas encore membre ? Créer un compte</a>
               </div>
+              <c:if test="${errors != null}">
+                <hr>
+                Erreurs:
+                <ul>
+                  <c:forEach items="${errors}" var="error">
+                    <li>${error}</li>
+                  </c:forEach>
+                </ul>
+              </c:if>
             </div>
           </div>
         </div>
