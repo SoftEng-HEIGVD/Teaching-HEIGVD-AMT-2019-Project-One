@@ -34,7 +34,7 @@
 <div class="wrapper">
 
   <div class="container-fluid">
-    <h6 style="color: orange">Logout</h6>
+    <a href="${pageContext.request.contextPath}/logout" style="color: orange">Logout</a>
     <img class="mySlides" src="./images/banner.jpg" style="width:100%">
 
     <ul class="nav nav-pills nav-fill" style="background-color: orange">
@@ -42,7 +42,7 @@
         <a href="${pageContext.request.contextPath}/home" class="nav-link" style="color: white"><h3>Home</h3></a>
       </li>
       <li class="nav-item">
-        <a href="${pageContext.request.contextPath}/character" class="nav-link" style="color: white"><h3>Character</h3></a>
+        <a href="${pageContext.request.contextPath}/characters" class="nav-link" style="color: white"><h3>Characters</h3></a>
       </li>
       <li class="nav-item">
         <a href="${pageContext.request.contextPath}/class" class="nav-link" style="color: white"><h3>Classes</h3></a>

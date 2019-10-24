@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,6 +21,15 @@ public class CharacterManager implements CharacterManagerLocal {
 
     @Resource(lookup = "jdbc/amt")
     private DataSource dataSource;
+
+    private int getRandomNumber(int from, int to) {
+        Random r = new Random();
+        return r.nextInt(to - from) + from;
+    }
+
+    /************************************************************
+     * Characters related functions
+     ***********************************************************/
 
     @Override
     public List<Character> findAllCharacters() {
@@ -52,9 +62,11 @@ public class CharacterManager implements CharacterManagerLocal {
 
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement pstmt = connection.prepareStatement("INSERT INTO character (name, password) VALUES (?, ?)");
+            PreparedStatement pstmt = connection.prepareStatement(
+                    "INSERT INTO character (name, password, mount_id) VALUES (?, ?, ?)");
             pstmt.setObject(1, username);
             pstmt.setObject(2, password);
+            pstmt.setObject(3, getRandomNumber(1, 11));
 
             int row = pstmt.executeUpdate();
 

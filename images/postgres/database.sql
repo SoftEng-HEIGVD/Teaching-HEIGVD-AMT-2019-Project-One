@@ -215,4 +215,13 @@ ALTER TABLE ONLY public.character
 ALTER TABLE ONLY public.casting
     ADD CONSTRAINT "Spell_id_fkey" FOREIGN KEY (spell_id) REFERENCES public.spell(id);
 
-
+INSERT INTO public.mount(name, speed) VALUES ('Sir Barton', 8);
+INSERT INTO public.mount(name, speed) VALUES ('Flame', 5);
+INSERT INTO public.mount(name, speed) VALUES ('Fury', 10);
+INSERT INTO public.mount(name, speed) VALUES ('Pegasus', 14);
+INSERT INTO public.mount(name, speed) VALUES ('Ringo', 7);
+INSERT INTO public.mount(name, speed) VALUES ('Rainbow Dash', 8);
+INSERT INTO public.mount(name, speed) VALUES ('White Hawk', 9);
+INSERT INTO public.mount(name, speed) VALUES ('Rusty Saddle', 12);
+INSERT INTO public.mount(name, speed) VALUES ('Artax', 6);
+INSERT INTO public.mount(name, speed) VALUES ('Lord Murphy', 11);
