@@ -4,6 +4,20 @@
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
   <display-name>Archetype Created Web Application</display-name>
+
+  <filter>
+    <filter-name>CheckLoginFilter</filter-name>
+    <filter-class>ch.heig.amt.project.one.presentation.CheckLoginFilter</filter-class>
+    <init-param>
+      <param-name>logFile</param-name>
+      <param-value>checklogin.log</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>CheckLoginFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>ch.heig.amt.project.one.presentation.LoginServlet</servlet-class>
