@@ -6,7 +6,7 @@
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
     <servlet-name>ChilloutServlet</servlet-name>
-    <servlet-class>ch.heigvd.amt.projectone.presentation.ChilloutServlet</servlet-class>
+    <servlet-class>ch.heigvd.amt.projectone.web.ChilloutServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ChilloutServlet</servlet-name>
