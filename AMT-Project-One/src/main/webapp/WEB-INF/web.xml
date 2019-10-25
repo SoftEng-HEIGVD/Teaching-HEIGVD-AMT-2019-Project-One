@@ -57,4 +57,13 @@
     <servlet-name>AddViewerServlet</servlet-name>
     <url-pattern>/addviewer</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ListViewersServlet</servlet-name>
+    <servlet-class>ch.heig.amt.project.one.presentation.ListViewersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListViewersServlet</servlet-name>
+    <url-pattern>/viewers</url-pattern>
+  </servlet-mapping>
 </web-app>
