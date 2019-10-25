@@ -31,13 +31,12 @@ public class CharacterManager implements CharacterManagerLocal {
     private int countRows(String table) {
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) AS count FROM ?");
-            pstmt.setObject(1, table);
+            PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) AS counter FROM " + table);
 
             ResultSet rs = pstmt.executeQuery();
 
             rs.next();
-            int count = rs.getInt("count");
+            int count = rs.getInt("counter");
 
             return count;
 

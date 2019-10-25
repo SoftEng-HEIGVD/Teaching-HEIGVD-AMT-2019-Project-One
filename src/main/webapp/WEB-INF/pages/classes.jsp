@@ -2,24 +2,26 @@
 
 
 <div class="container-fluid">
-    <c:forEach items="${classes}" var="class" varStatus="loop">
-        <c:if test="${loop.index % 2 == 0}">
-            <div class="row">
-        </c:if>
-        <a href="${pageContext.request.contextPath}/classInfo?id=${class.id}" class="col-6">
-            <button class="btn btn-outline-dark">
-                <img src="./images/favicon.ico">
-                    <h2>${class.name}</h2>
-            </button>
-        </a>
+    <table class="table">
+        <c:forEach items="${classes}" var="class" varStatus="loop">
+            <c:if test="${loop.index % 2 == 0}">
+                <tr>
+            </c:if>
+            <td>
+            <a href="${pageContext.request.contextPath}/classInfo?id=${class.id}">
+                <button class="btn btn-outline-dark" style="width: 50%">
+                    <h2 style="color: white"><img src="./images/druid.png" style="background-color: white; border-radius: 50px"> ${class.name}</h2>
+                </button>
+            </a>
+
+            </td>
+            <c:if test="${loop.index % 2 == 1}">
+                </tr>
+            </c:if>
 
 
-        <c:if test="${loop.index % 2 == 1}">
-            </div>
-        </c:if>
-
-
-    </c:forEach>
+        </c:forEach>
+    </table>
 
 </div>
 <%--<script>--%>

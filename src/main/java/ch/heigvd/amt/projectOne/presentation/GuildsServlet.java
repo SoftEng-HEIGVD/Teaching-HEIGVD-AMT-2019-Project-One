@@ -20,9 +20,8 @@ public class GuildsServlet extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    List<Class> classes = classManager.fetchAllClass();
-    req.setAttribute("classes", classes);
-    req.getRequestDispatcher("/WEB-INF/pages/class.jsp").forward(req, resp);
+    req.getRequestDispatcher("/WEB-INF/pages/guilds.jsp").forward(req, resp);
+
 
   }
 

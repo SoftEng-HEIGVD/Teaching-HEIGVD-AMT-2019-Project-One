@@ -14,11 +14,13 @@ class ClassTest {
     @BeforeAll
     static void weShouldPopulateSpells(){
 
-        for(spellType type : spellType.values()){
-            Spell spell = Spell.builder().type(type).cooldown(5).damage(50).range(20).build();
+        Spell spell1 = Spell.builder().cooldown(5).damage(10).range(20).description("This is spell 1").build();
+        Spell spell2 = Spell.builder().cooldown(10).damage(20).range(20).description("This is spell 2").build();
+        Spell spell3 = Spell.builder().cooldown(8).damage(30).range(20).description("This is spell 3").build();
 
-            spells.add(spell);
-        }
+            spells.add(spell1);
+            spells.add(spell2);
+            spells.add(spell3);
 
     }
 

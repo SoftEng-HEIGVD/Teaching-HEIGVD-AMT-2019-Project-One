@@ -10,9 +10,9 @@ import lombok.Getter;
 public class Spell {
 
     private int id;
-    private spellType type;
     private int damage;
     private int cooldown;
     private int range;
+    private String description;
 
 }
