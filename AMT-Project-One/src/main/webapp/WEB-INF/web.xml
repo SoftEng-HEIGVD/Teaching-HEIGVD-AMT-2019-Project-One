@@ -5,15 +5,6 @@
          version="3.1">
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
-    <servlet-name>SeriesServlet</servlet-name>
-    <servlet-class>ch.heig.amt.project.one.presentation.SeriesServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SeriesServlet</servlet-name>
-    <url-pattern>/series</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>ch.heig.amt.project.one.presentation.LoginServlet</servlet-class>
   </servlet>
@@ -65,5 +56,14 @@
   <servlet-mapping>
     <servlet-name>ListViewersServlet</servlet-name>
     <url-pattern>/viewers</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ListSeriesServlet</servlet-name>
+    <servlet-class>ch.heig.amt.project.one.presentation.ListSeriesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListSeriesServlet</servlet-name>
+    <url-pattern>/series</url-pattern>
   </servlet-mapping>
 </web-app>
