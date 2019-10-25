@@ -66,4 +66,13 @@
     <servlet-name>ListSeriesServlet</servlet-name>
     <url-pattern>/series</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DeleteSerieServlet</servlet-name>
+    <servlet-class>ch.heig.amt.project.one.presentation.DeleteSerieServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteSerieServlet</servlet-name>
+    <url-pattern>/deleteserie</url-pattern>
+  </servlet-mapping>
 </web-app>
