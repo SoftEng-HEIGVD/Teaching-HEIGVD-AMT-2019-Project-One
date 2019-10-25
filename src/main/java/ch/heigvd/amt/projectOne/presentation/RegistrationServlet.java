@@ -29,7 +29,6 @@ public class RegistrationServlet extends HttpServlet {
         String name = req.getParameter("name");
         String password = req.getParameter("password");
         String passwordVerify = req.getParameter("passwordVerify");
-        HttpSession session = req.getSession();
 
         List<String> errors = new ArrayList<>();
 
@@ -49,9 +48,7 @@ public class RegistrationServlet extends HttpServlet {
 
         if (errors.size() == 0) {
             characterManager.addCharacter(name, password);
-            session.setAttribute("character", characterManager.getCharacterByUsername(name));
-
-            resp.sendRedirect(req.getContextPath() + "/home");
+            resp.sendRedirect(req.getContextPath() + "/login");
         } else {
             req.setAttribute("errors", errors);
             req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);

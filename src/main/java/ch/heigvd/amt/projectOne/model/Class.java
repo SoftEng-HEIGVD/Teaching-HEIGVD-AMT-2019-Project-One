@@ -35,4 +35,15 @@ public class Class {
         this.spells = null;
     }
 
+    public Class(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Class(int id, String name, LinkedList<Spell> spells) {
+        this.id = id;
+        this.name = name;
+        this.spells = spells;
+    }
+
 }
