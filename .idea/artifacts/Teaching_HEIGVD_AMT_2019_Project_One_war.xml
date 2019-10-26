@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Teaching-HEIGVD-AMT-2019-Project-One:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>Teaching-HEIGVD-AMT-2019-Project-One</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="ProjectOneApp-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Teaching-HEIGVD-AMT-2019-Project-One:war exploded" />
+    </root>
+  </artifact>
+</component>
