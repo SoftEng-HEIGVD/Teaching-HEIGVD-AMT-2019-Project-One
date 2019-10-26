@@ -48,12 +48,41 @@ public class WatchingInfosManager implements WatchingInfosManagerLocal {
         return created;
     }
 
+    @Override
     public List<WatchingInfo> findByViewer(User u, Viewer viewer, int index, int offset) {
         List<WatchingInfo> watchingInfos = new ArrayList<>();
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM WatchingInfo WHERE IDViewer = ?, OwnerID = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM WatchingInfo WHERE IDViewer = ? AND OwnerID = ?");
             preparedStatement.setLong(1, viewer.getId());
+            preparedStatement.setLong(2, u.getId());
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()) {
+                long idSerie = rs.getLong("IDSerie");
+                long idViewer = rs.getLong("IDViewer");
+                int timeSpent = rs.getInt("TimeSpent");
+                java.util.Date beginningDate = rs.getDate("BeginningDate");
+                long idOwner = rs.getLong("OwnerID");
+
+                WatchingInfo watchingInfo = WatchingInfo.builder().idSerie(idSerie).idViewer(idViewer).timeSpent(timeSpent).beginningDate(beginningDate).build();
+                watchingInfo.setOwner(idOwner);
+                watchingInfos.add(watchingInfo);
+            }
+            preparedStatement.close();
+            connection.close();
+        } catch (SQLException e) {
+            Logger.getLogger(ch.heig.amt.project.one.business.DAO.WatchingInfosManager.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return watchingInfos;
+    }
+
+    @Override
+    public List<WatchingInfo> findBySerie(User u, Serie serie, int index, int offset) {
+        List<WatchingInfo> watchingInfos = new ArrayList<>();
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM WatchingInfo WHERE IDSerie = ? AND OwnerID = ?");
+            preparedStatement.setLong(1, serie.getId());
             preparedStatement.setLong(2, u.getId());
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()) {
