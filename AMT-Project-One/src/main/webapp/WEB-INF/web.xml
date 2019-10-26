@@ -84,4 +84,13 @@
     <servlet-name>DeleteViewerServlet</servlet-name>
     <url-pattern>/deleteviewer</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DetailSerieServlet</servlet-name>
+    <servlet-class>ch.heig.amt.project.one.presentation.DetailSerieServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DetailSerieServlet</servlet-name>
+    <url-pattern>/detailserie</url-pattern>
+  </servlet-mapping>
 </web-app>

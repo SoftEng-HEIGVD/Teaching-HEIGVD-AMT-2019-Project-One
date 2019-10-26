@@ -119,51 +119,46 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Series</h1>
-                <p class="mb-4"></p>
+                <h1 class="h3 mb-2 text-gray-800">${serie.title}</h1>
+                <p class="mb-4">${serie.synopsis}</p>
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Liste des series</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Viewers regardant cette série</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>Titre</th>
-                                    <th>Genre</th>
-                                    <th>Producteur</th>
-                                    <th>Restriction d'âge</th>
-                                    <th colspan="2">Action</th>
+                                    <td>Nom d'utilisateur</td>
+                                    <td>Temps de visionnage</td>
+                                    <td>Première visualisation</td>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tbody>
-                                <c:forEach items="${series}" var="serie">
+                                <c:forEach items="${viewersInfos}" var="viewerInfo">
                                     <tr>
-                                        <td>${serie.title}</td>
-                                        <td>${serie.genre}</td>
-                                        <td>${serie.producer}</td>
-                                        <td>${serie.ageRestriction}</td>
-                                        <td><a href="./detailserie?idserie=${serie.id}">Voir</a></td>
-                                        <td><a href="./deleteserie?idserie=${serie.id}">Supprimer</a></td>
+                                        <td>${viewerInfo.key}</td>
+                                        <td>${viewerInfo.value.timeSpent} minutes</td>
+                                        <td>${viewerInfo.value.beginningDate}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
                             </table>
                         </div>
                         <div class="pagination">
-                            <a href="./series?pagetable=0">1</a>
-                            <a href="./series?pagetable=1">2</a>
-                            <a href="./series?pagetable=2">3</a>
-                            <a href="./series?pagetable=3">4</a>
-                            <a href="./series?pagetable=4">5</a>
-                            <a href="./series?pagetable=5">6</a>
-                            <a href="./series?pagetable=6">7</a>
-                            <a href="./series?pagetable=7">8</a>
-                            <a href="./series?pagetable=8">9</a>
-                            <a href="./series?pagetable=9">10</a>
+                            <a href="./detailserie?pagetable=0">1</a>
+                            <a href="./detailserie?pagetable=1">2</a>
+                            <a href="./detailserie?pagetable=2">3</a>
+                            <a href="./detailserie?pagetable=3">4</a>
+                            <a href="./detailserie?pagetable=4">5</a>
+                            <a href="./detailserie?pagetable=5">6</a>
+                            <a href="./detailserie?pagetable=6">7</a>
+                            <a href="./detailserie?pagetable=7">8</a>
+                            <a href="./detailserie?pagetable=8">9</a>
+                            <a href="./detailserie?pagetable=9">10</a>
                         </div>
                     </div>
                 </div>
