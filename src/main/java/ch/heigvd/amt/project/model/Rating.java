@@ -1,4 +1,4 @@
-package ch.heigvd.amt.livecoding.model;
+package ch.heigvd.amt.project.model;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode
 public class Rating {
-    private int user_id;
-    private int film_id;
+    private User user;
+    private Film film;
     private float rating;
 }

@@ -1,4 +1,4 @@
-package ch.heigvd.amt.livecoding.model;
+package ch.heigvd.amt.project.model;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

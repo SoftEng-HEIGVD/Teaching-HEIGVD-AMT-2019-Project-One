@@ -67,6 +67,6 @@
     </dependencies>
 
     <build>
-        <finalName>livecoding</finalName>
+        <finalName>projectone</finalName>
     </build>
 </project>
