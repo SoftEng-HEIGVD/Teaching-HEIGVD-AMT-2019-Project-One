@@ -8,6 +8,6 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode
 public class Film {
-    private int id;
-    private String title;
+    private final int id;
+    private final String title;
 }

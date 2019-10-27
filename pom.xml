@@ -67,6 +67,6 @@
     </dependencies>
 
     <build>
-        <finalName>projectone</finalName>
+        <finalName>filmratingapp</finalName>
     </build>
 </project>
