@@ -59,7 +59,7 @@ public class DetailSerieServlet extends HttpServlet {
             request.setAttribute("viewersInfos", viewersInfo);
             request.getRequestDispatcher("/WEB-INF/pages/detailserie.jsp").forward(request, response);
         } else {
-            response.sendRedirect(request.getContextPath() + "/series");
+            response.sendRedirect(request.getContextPath() + "/restreint/series");
         }
     }
 }

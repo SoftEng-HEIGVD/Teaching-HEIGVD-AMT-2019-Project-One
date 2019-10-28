@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
             User user = usersManagerLocal.findUserByUsername(username);
             request.getSession(true);
             request.getSession().setAttribute("user", user);
-            response.sendRedirect(request.getContextPath() + "/series");
+            response.sendRedirect(request.getContextPath() + "/restreint/series");
         } else {
             request.setAttribute("errors", errors);
             request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);

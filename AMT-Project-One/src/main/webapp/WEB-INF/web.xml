@@ -4,6 +4,17 @@
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
   <display-name>Archetype Created Web Application</display-name>
+
+  <filter>
+    <filter-name>loginFilter</filter-name>
+    <filter-class>ch.heig.amt.project.one.filter.loginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>loginFilter</filter-name>
+    <url-pattern>/restreint/*</url-pattern>
+  </filter-mapping>
+
+
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>ch.heig.amt.project.one.presentation.LoginServlet</servlet-class>
@@ -37,7 +48,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>AddSerieServlet</servlet-name>
-    <url-pattern>/addserie</url-pattern>
+    <url-pattern>/restreint/addserie</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -46,7 +57,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>AddViewerServlet</servlet-name>
-    <url-pattern>/addviewer</url-pattern>
+    <url-pattern>/restreint/addviewer</url-pattern>
   </servlet-mapping>
   
   <servlet>
@@ -55,7 +66,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ListViewersServlet</servlet-name>
-    <url-pattern>/viewers</url-pattern>
+    <url-pattern>/restreint/viewers</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -64,7 +75,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ListSeriesServlet</servlet-name>
-    <url-pattern>/series</url-pattern>
+    <url-pattern>/restreint/series</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -73,7 +84,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>DeleteSerieServlet</servlet-name>
-    <url-pattern>/deleteserie</url-pattern>
+    <url-pattern>/restreint/deleteserie</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -82,7 +93,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>DeleteViewerServlet</servlet-name>
-    <url-pattern>/deleteviewer</url-pattern>
+    <url-pattern>/restreint/deleteviewer</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -91,6 +102,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>DetailSerieServlet</servlet-name>
-    <url-pattern>/detailserie</url-pattern>
+    <url-pattern>/restreint/detailserie</url-pattern>
   </servlet-mapping>
 </web-app>
