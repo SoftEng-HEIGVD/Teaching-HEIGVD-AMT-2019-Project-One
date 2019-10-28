@@ -23,6 +23,9 @@
     <link href="./bootstrap4/css/bootstrap-theme.css" rel="stylesheet"/>
     <link href="./bootstrap4/css/font-awesome.css" rel="stylesheet"/>
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+
+
     <style>
         @import url('https://fonts.googleapis.com/css?family=Risque&display=swap');
     </style>

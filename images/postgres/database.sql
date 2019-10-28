@@ -45,7 +45,7 @@ CREATE TABLE public.class (
     name varchar(64) NOT NULL,
     weapon varchar(64),
     armor varchar(64),
-    description varchar(1024)
+    description varchar(1500)
 );
 
 
@@ -259,5 +259,6 @@ INSERT INTO public.class(name, weapon, armor, description)	VALUES ('Wizard', 'Ca
 
 
 INSERT INTO public.spell(name, damage, cooldown, range, description) VALUES ('Dancing Lights', 10, 5, 40, 'You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target.');
-INSERT INTO public.spell(name, damage, cooldown, range, description) VALUES ('Animal Shapes', 0, 15, 20, 'Your magic turns others into beasts. Choose any number of willing creatures that you can see within range. You transform each target into the form of a Large or smaller beast with a challenge rating of 4 or lower. On subsequent turns, you can use your action to transform affected creatures into new forms. ')
+INSERT INTO public.spell(name, damage, cooldown, range, description) VALUES ('Animal Shapes', 0, 15, 20, 'Your magic turns others into beasts. Choose any number of willing creatures that you can see within range. You transform each target into the form of a Large or smaller beast with a challenge rating of 4 or lower. On subsequent turns, you can use your action to transform affected creatures into new forms. ');
 INSERT INTO public.spell(name, damage, cooldown, range, description) VALUES ('Create Bonfire', 10, 9, 10, 'You create a bonfire on ground that you can see within range. Until the spells ends, the magic bonfire fills a 5-foot cube');
+INSERT INTO public.spell(name, damage, cooldown, range, description) VALUES ('Arcane Hand', 20, 40, 40, 'You create a Large hand of shimmering, translucent force in an unoccupied space that you can see within range. The hand lasts for the spell''s duration, and it moves at your command, mimicking the movements of your own hand.');

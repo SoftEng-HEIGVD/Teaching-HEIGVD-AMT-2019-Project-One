@@ -23,6 +23,7 @@ public class ClassInfoServlet extends HttpServlet {
         String id = req.getParameter("id");
         Class thisClass = classManager.getClassById(Integer.parseInt(id));
         req.setAttribute("class", thisClass);
+        req.setAttribute("image", thisClass.getName().toLowerCase());
         req.getRequestDispatcher("/WEB-INF/pages/class_info.jsp").forward(req, resp);
     }
 
