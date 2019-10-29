@@ -29,10 +29,10 @@ public class CharacterManager implements CharacterManagerLocal {
     }
 
     @Override
-    public int countRows(String table) {
+    public int countRows(String table, String pattern) {
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) AS counter FROM " + table);
+            PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) AS counter FROM " + table + " " + pattern);
 
             ResultSet rs = pstmt.executeQuery();
 
@@ -51,6 +51,7 @@ public class CharacterManager implements CharacterManagerLocal {
      * Characters related functions
      ***********************************************************/
 
+    //TODO Do we really need to have the mount info ?
     @Override
     public List<Character> findAllCharacters() {
         List<Character> characters = new ArrayList<>();
@@ -81,19 +82,16 @@ public class CharacterManager implements CharacterManagerLocal {
         return characters;
     }
 
+    //TODO Do we really need to have the mount info ? We only need the name, the level and the class
     @Override
-    public List<Character> getCharactersByFirstLetter(String letter, int pageNumber) {
+    public List<Character> getCharactersByPattern(String pattern, int pageNumber) {
 
         List<Character> characters = new ArrayList<>();
         try {
             Connection connection = dataSource.getConnection();
             PreparedStatement pstmt = connection.prepareStatement("SELECT character.*, mount.name AS mount_name, mount.speed AS mount_speed, class.name AS class_name FROM character INNER JOIN mount ON character.mount_id = mount.id INNER JOIN class ON character.class_id = class.id WHERE character.name ILIKE ? ORDER BY name LIMIT 25 OFFSET ? ");
-            pstmt.setObject(1,letter+"%");
+            pstmt.setObject(1,pattern+"%");
             pstmt.setObject(2,pageNumber * 25);
-            System.out.println(letter);
-            System.out.println(pageNumber);
-            System.out.println(pstmt);
-            Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, pstmt);
 
             ResultSet rs = pstmt.executeQuery();
 
@@ -120,6 +118,7 @@ public class CharacterManager implements CharacterManagerLocal {
 
     }
 
+    //TODO Do we really need to have the mount info ? We only need the name, the level and the class
     @Override
     public List<Character> getCharactersByPage(int pageNumber) {
         List<Character> characters = new ArrayList<>();
@@ -161,8 +160,8 @@ public class CharacterManager implements CharacterManagerLocal {
                     "INSERT INTO character (name, password, mount_id, class_id) VALUES (?, ?, ?, ?)");
             pstmt.setObject(1, username);
             pstmt.setObject(2, password);
-            pstmt.setObject(3, getRandomNumber(1, countRows("mount") + 1));
-            pstmt.setObject(4, getRandomNumber(1, countRows("class") + 1));
+            pstmt.setObject(3, getRandomNumber(1, countRows("mount", "") + 1));
+            pstmt.setObject(4, getRandomNumber(1, countRows("class", "") + 1));
 
             int row = pstmt.executeUpdate();
 

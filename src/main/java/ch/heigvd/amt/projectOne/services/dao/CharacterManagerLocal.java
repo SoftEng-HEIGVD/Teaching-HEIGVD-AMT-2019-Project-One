@@ -2,17 +2,16 @@ package ch.heigvd.amt.projectOne.services.dao;
 
 import ch.heigvd.amt.projectOne.model.Character;
 import javax.ejb.Local;
-import java.sql.SQLException;
 import java.util.List;
 
 @Local
 public interface CharacterManagerLocal {
 
-    public int countRows(String table);
+    public int countRows(String table, String pattern);
 
     List<Character> findAllCharacters();
 
-    List<Character> getCharactersByFirstLetter(String letter, int pageNumber);
+    List<Character> getCharactersByPattern(String letter, int pageNumber);
 
     List<Character> getCharactersByPage(int pageNumber);
 

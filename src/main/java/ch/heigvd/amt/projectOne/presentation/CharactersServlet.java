@@ -32,11 +32,13 @@ public class CharactersServlet extends HttpServlet {
         }
 
         if (req.getParameterMap().containsKey("letter")) {
-            //TODO if we have a search filter the number of user will be the size of the list
-            characters = characterManager.getCharactersByFirstLetter(req.getParameter("letter"),pageNumberInt -1 );
-            numberOfUser = characters.size();
-        } else {
-            numberOfUser = characterManager.countRows("character");
+            characters = characterManager.getCharactersByPattern(req.getParameter("letter"),pageNumberInt -1 );
+            numberOfUser = characterManager.countRows("character", "WHERE character.name ILIKE '" + req.getParameter("letter") + "%'");
+        } else if(req.getParameterMap().containsKey("searchBar")) {
+            characters = characterManager.getCharactersByPattern(req.getParameter("searchBar"),pageNumberInt -1 );
+            numberOfUser = characterManager.countRows("character", "WHERE character.name ILIKE '" + req.getParameter("searchBar") + "%'");
+        }else{
+            numberOfUser = characterManager.countRows("character", "");
             characters = characterManager.getCharactersByPage(pageNumberInt - 1);
         }
 
