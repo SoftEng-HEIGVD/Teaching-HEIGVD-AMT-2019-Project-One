@@ -3,14 +3,16 @@ services:
     wildfly: 
         build: images/wildfly
         ports:
-            - "9090:8080"
-            - "9990:9990"
+            - "8080:8080"
+            - "9090:9990"
         links:
             - mysql:db
     mysql:
         build: images/mysql
+        command: --default-authentication-plugin=mysql_native_password
         environment:
             - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=root
     phpmyadmin:
         image: phpmyadmin/phpmyadmin:latest
         environment:
