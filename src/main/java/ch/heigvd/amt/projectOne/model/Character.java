@@ -22,36 +22,4 @@ public class Character {
     private Class myClass;
     private LinkedList<Membership> memberships;
 
-
-    public Character(int id, String name, int level, int health, int stamina, int mana) {
-        this.id = id;
-        this.name = name;
-        this.level = level;
-        this.health = health;
-        this.stamina = stamina;
-        this.mana = mana;
-    }
-
-    public Character(int id, String name, int level, int health, int stamina, int mana, Mount mount, Class myClass) {
-        this.id = id;
-        this.name = name;
-        this.level = level;
-        this.health = health;
-        this.stamina = stamina;
-        this.mana = mana;
-        this.mount = mount;
-        this.myClass = myClass;
-    }
-
-    public Character(int id, String name, int level, int health, int stamina, int mana, Mount mount, Class myClass, LinkedList<Membership> memberships) {
-        this.id = id;
-        this.name = name;
-        this.level = level;
-        this.health = health;
-        this.stamina = stamina;
-        this.mana = mana;
-        this.mount = mount;
-        this.myClass = myClass;
-        this.memberships = memberships;
-    }
 }

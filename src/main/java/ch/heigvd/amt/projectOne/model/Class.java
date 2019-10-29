@@ -18,35 +18,5 @@ public class Class {
     private String weapon;
     private String armor;
     private String description;
-    private LinkedList<Spell> spells;
-
-    public Class(int id, String name, String weapon, String armor, String description, LinkedList<Spell> spells) {
-        this.id = id;
-        this.name = name;
-        this.weapon = weapon;
-        this.armor = armor;
-        this.description = description;
-        this.spells = spells;
-    }
-
-    public Class(int id, String name, String weapon, String armor, String description) {
-        this.id = id;
-        this.name = name;
-        this.weapon = weapon;
-        this.armor = armor;
-        this.description = description;
-        this.spells = null;
-    }
-
-    public Class(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public Class(int id, String name, LinkedList<Spell> spells) {
-        this.id = id;
-        this.name = name;
-        this.spells = spells;
-    }
 
 }

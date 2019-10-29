@@ -22,17 +22,6 @@ CREATE TABLE public.character (
 
 );
 
-CREATE TABLE public.casting (
-    class_id integer NOT NULL,
-    spell_id integer NOT NULL
-);
-
---
--- Name: Character; Type: TABLE; Schema: public; Owner: postgres
---
-
-ALTER TABLE public.casting OWNER TO postgres;
-
 
 ALTER TABLE public.character OWNER TO postgres;
 
@@ -90,21 +79,6 @@ CREATE TABLE public.mount (
 
 ALTER TABLE public.mount OWNER TO postgres;
 
---
--- Name: Spell; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.spell (
-    id SERIAL,
-    name varchar(64),
-    damage integer NOT NULL,
-    cooldown integer NOT NULL,
-    range integer NOT NULL,
-    description varchar(1500)
-);
-
-
-ALTER TABLE public.spell OWNER TO postgres;
 
 --
 -- Name: Character Character_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -113,13 +87,6 @@ ALTER TABLE public.spell OWNER TO postgres;
 ALTER TABLE ONLY public.character
     ADD CONSTRAINT "Character_pkey" PRIMARY KEY (id);
 
-
---
--- Name: Casting Class_Spell_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.casting
-    ADD CONSTRAINT "Class_Spell_pkey" PRIMARY KEY (class_id, spell_id);
 
 
 --
@@ -147,27 +114,11 @@ ALTER TABLE ONLY public.membership
 
 
 --
--- Name: Character Mount_id_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.character
-    ADD CONSTRAINT "Mount_id_unique" UNIQUE (mount_id);
-
-
---
 -- Name: Mount Mount_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.mount
     ADD CONSTRAINT "Mount_pkey" PRIMARY KEY (id);
-
-
---
--- Name: Spell Spell_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.spell
-    ADD CONSTRAINT "Spell_pkey" PRIMARY KEY (id);
 
 
 --
@@ -187,14 +138,6 @@ ALTER TABLE ONLY public.character
 
 
 --
--- Name: Casting Class_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.casting
-    ADD CONSTRAINT "Class_id_fkey" FOREIGN KEY (class_id) REFERENCES public.class(id);
-
-
---
 -- Name: Membership Guild_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -209,13 +152,6 @@ ALTER TABLE ONLY public.membership
 ALTER TABLE ONLY public.character
     ADD CONSTRAINT "Mount_id_fkey" FOREIGN KEY (mount_id) REFERENCES public.mount(id) NOT VALID;
 
-
---
--- Name: Casting Spell_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.casting
-    ADD CONSTRAINT "Spell_id_fkey" FOREIGN KEY (spell_id) REFERENCES public.spell(id);
 
 -- Fill mount table 
 
@@ -256,9 +192,3 @@ INSERT INTO public.class(name, weapon, armor, description)	VALUES ('Rogue', 'Dag
 INSERT INTO public.class(name, weapon, armor, description)	VALUES ('Sorcerer', 'Katana', 'Light', 'Golden eyes flashing, a human stretches out her hand and unleashes the dragonfire that burns in her veins. As an inferno rages around her foes, leathery wings spread from her back and she takes to the air. Long hair whipped by a conjured wind, a half-elf spreads his arms wide and throws his head back. Lifting him momentarily off the ground, a wave of magic surges up in him, through him, and out from him in a mighty blast of lightning. Crouching behind a stalagmite, a halfling points a finger at a charging troglodyte. A blast of fire springs from her finger to strike the creature. She ducks back behind the rock formation with a grin, unaware that her wild magic has turned her skin bright blue. Sorcerers carry a magical birthright conferred upon them by an exotic bloodline, some otherworldly influence, or exposure to unknown cosmic forces. One can’t study sorcery as one learns a language, any more than one can learn to live a legendary life. No one chooses sorcery; the power chooses the sorcerer.');
 INSERT INTO public.class(name, weapon, armor, description)	VALUES ('Warlock', 'Whips', 'Light', 'With a pseudodragon curled on his shoulder, a young elf in golden robes smiles warmly, weaving a magical charm into his honeyed words and bending the palace sentinel to his will. As flames spring to life in her hands, a wizened human whispers the secret name of her demonic patron, infusing her spell with fiendish magic. Shifting his gaze between a battered tome and the odd alignment of the stars overhead, a wild-eyed tiefling chants the mystic ritual that will open a doorway to a distant world. Warlocks are seekers of the knowledge that lies hidden in the fabric of the multiverse. Through pacts made with mysterious beings of supernatural power, warlocks unlock magical effects both subtle and spectacular. Drawing on the ancient knowledge of beings such as fey nobles, demons, devils, hags, and alien entities of the Far Realm, warlocks piece together arcane secrets to bolster their own power.');
 INSERT INTO public.class(name, weapon, armor, description)	VALUES ('Wizard', 'Catalyst', 'Light', 'Clad in the silver robes that denote her station, an elf closes her eyes to shut out the distractions of the battlefield and begins her quiet chant. Fingers weaving in front of her, she completes her spell and launches a tiny bead of fire toward the enemy ranks, where it erupts into a conflagration that engulfs the soldiers. Checking and rechecking his work, a human scribes an intricate magic circle in chalk on the bare stone floor, then sprinkles powdered iron along every line and graceful curve. When the circle is complete, he drones a long incantation. A hole opens in space inside the circle, bringing a whiff of brimstone from the otherworldly plane beyond. Crouching on the floor in a dungeon intersection, a gnome tosses a handful of small bones inscribed with mystic symbols, muttering a few words of power over them. Closing his eyes to see the visions more clearly, he nods slowly, then opens his eyes and points down the passage to his left. Wizards are supreme magic-users, defined and united as a class by the spells they cast. Drawing on the subtle weave of magic that permeates the cosmos, wizards cast spells of explosive fire, arcing lightning, subtle deception, and brute-force mind control. Their magic conjures monsters from other planes of existence, glimpses the future, or turns slain foes into zombies. Their mightiest spells change one substance into another, call meteors down from the sky, or open portals to other worlds.');
-
-
-INSERT INTO public.spell(name, damage, cooldown, range, description) VALUES ('Dancing Lights', 10, 5, 40, 'You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target.');
-INSERT INTO public.spell(name, damage, cooldown, range, description) VALUES ('Animal Shapes', 0, 15, 20, 'Your magic turns others into beasts. Choose any number of willing creatures that you can see within range. You transform each target into the form of a Large or smaller beast with a challenge rating of 4 or lower. On subsequent turns, you can use your action to transform affected creatures into new forms. ');
-INSERT INTO public.spell(name, damage, cooldown, range, description) VALUES ('Create Bonfire', 10, 9, 10, 'You create a bonfire on ground that you can see within range. Until the spells ends, the magic bonfire fills a 5-foot cube');
-INSERT INTO public.spell(name, damage, cooldown, range, description) VALUES ('Arcane Hand', 20, 40, 40, 'You create a Large hand of shimmering, translucent force in an unoccupied space that you can see within range. The hand lasts for the spell''s duration, and it moves at your command, mimicking the movements of your own hand.');

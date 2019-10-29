@@ -28,17 +28,17 @@ public class CharacterManager implements CharacterManagerLocal {
         return r.nextInt(to - from) + from;
     }
 
-    private int countRows(String table) {
+    @Override
+    public int countRows(String table, String pattern) {
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) AS counter FROM " + table);
+            PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) AS counter FROM " + table + " " + pattern);
 
             ResultSet rs = pstmt.executeQuery();
 
             rs.next();
-            int count = rs.getInt("counter");
 
-            return count;
+            return rs.getInt("counter");
 
         } catch (SQLException ex) {
             Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -51,13 +51,13 @@ public class CharacterManager implements CharacterManagerLocal {
      * Characters related functions
      ***********************************************************/
 
+    //TODO Do we really need to have the mount info ?
     @Override
     public List<Character> findAllCharacters() {
         List<Character> characters = new ArrayList<>();
         try {
             Connection connection = dataSource.getConnection();
-            System.out.println("Schema: " + connection.getSchema());
-            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM character");
+            PreparedStatement pstmt = connection.prepareStatement("SELECT character.*, mount.name AS mount_name, mount.speed AS mount_speed, class.name AS class_name FROM character INNER JOIN mount ON character.mount_id = mount.id INNER JOIN class ON character.class_id = class.id");
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -67,7 +67,12 @@ public class CharacterManager implements CharacterManagerLocal {
                 int health = rs.getInt("health");
                 int stamina = rs.getInt("stamina");
                 int mana = rs.getInt("mana");
-                characters.add(new Character(id, name, level, health, stamina, mana));
+                int mount_id = rs.getInt("mount_id");
+                String mount_name = rs.getString("mount_name");
+                int mount_speed = rs.getInt("mount_speed");
+                int class_id = rs.getInt("class_id");
+                String class_name = rs.getString("class_name");
+                characters.add(Character.builder().id(id).name(name).level(level).health(health).stamina(stamina).mana(mana).mount(Mount.builder().id(mount_id).name(mount_name).speed(mount_speed).build()).myClass(Class.builder().id(class_id).name(class_name).build()).build());
             }
             connection.close();
 
@@ -75,6 +80,75 @@ public class CharacterManager implements CharacterManagerLocal {
             Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return characters;
+    }
+
+    //TODO Do we really need to have the mount info ? We only need the name, the level and the class
+    @Override
+    public List<Character> getCharactersByPattern(String pattern, int pageNumber) {
+
+        List<Character> characters = new ArrayList<>();
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement("SELECT character.*, mount.name AS mount_name, mount.speed AS mount_speed, class.name AS class_name FROM character INNER JOIN mount ON character.mount_id = mount.id INNER JOIN class ON character.class_id = class.id WHERE character.name ILIKE ? ORDER BY name LIMIT 25 OFFSET ? ");
+            pstmt.setObject(1,pattern+"%");
+            pstmt.setObject(2,pageNumber * 25);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int level = rs.getInt("level");
+                int health = rs.getInt("health");
+                int stamina = rs.getInt("stamina");
+                int mana = rs.getInt("mana");
+                int mount_id = rs.getInt("mount_id");
+                String mount_name = rs.getString("mount_name");
+                int mount_speed = rs.getInt("mount_speed");
+                int class_id = rs.getInt("class_id");
+                String class_name = rs.getString("class_name");
+                characters.add(Character.builder().id(id).name(name).level(level).health(health).stamina(stamina).mana(mana).mount(Mount.builder().id(mount_id).name(mount_name).speed(mount_speed).build()).myClass(Class.builder().id(class_id).name(class_name).build()).build());
+            }
+            connection.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return characters;
+
+    }
+
+    //TODO Do we really need to have the mount info ? We only need the name, the level and the class
+    @Override
+    public List<Character> getCharactersByPage(int pageNumber) {
+        List<Character> characters = new ArrayList<>();
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement("SELECT character.*, mount.name AS mount_name, mount.speed AS mount_speed, class.name AS class_name FROM character INNER JOIN mount ON character.mount_id = mount.id INNER JOIN class ON character.class_id = class.id ORDER BY name LIMIT 25 OFFSET ? ");
+            pstmt.setObject(1,pageNumber * 25);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int level = rs.getInt("level");
+                int health = rs.getInt("health");
+                int stamina = rs.getInt("stamina");
+                int mana = rs.getInt("mana");
+                int mount_id = rs.getInt("mount_id");
+                String mount_name = rs.getString("mount_name");
+                int mount_speed = rs.getInt("mount_speed");
+                int class_id = rs.getInt("class_id");
+                String class_name = rs.getString("class_name");
+                characters.add(Character.builder().id(id).name(name).level(level).health(health).stamina(stamina).mana(mana).mount(Mount.builder().id(mount_id).name(mount_name).speed(mount_speed).build()).myClass(Class.builder().id(class_id).name(class_name).build()).build());
+            }
+            connection.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return characters;
+
     }
 
     @Override
@@ -86,8 +160,8 @@ public class CharacterManager implements CharacterManagerLocal {
                     "INSERT INTO character (name, password, mount_id, class_id) VALUES (?, ?, ?, ?)");
             pstmt.setObject(1, username);
             pstmt.setObject(2, password);
-            pstmt.setObject(3, getRandomNumber(1, countRows("mount") + 1));
-            pstmt.setObject(4, getRandomNumber(1, countRows("class") + 1));
+            pstmt.setObject(3, getRandomNumber(1, countRows("mount", "") + 1));
+            pstmt.setObject(4, getRandomNumber(1, countRows("class", "") + 1));
 
             int row = pstmt.executeUpdate();
 
@@ -123,7 +197,8 @@ public class CharacterManager implements CharacterManagerLocal {
             int class_id = rs.getInt("class_id");
 
             connection.close();
-            return new Character(id, name, level, health, stamina, mana);
+
+            return Character.builder().id(id).name(name).level(level).health(health).stamina(stamina).mana(mana).build();
 
         } catch (SQLException ex) {
             Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -133,13 +208,13 @@ public class CharacterManager implements CharacterManagerLocal {
     }
 
     @Override
-    public Character getCharacterByUsername(String username) {
+    public Character getCharacterByUsername(String name) {
         try {
             Character character = null;
             Connection connection = dataSource.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(
                     "SELECT character.*, mount.name AS mount_name, mount.speed AS mount_speed, class.name AS class_name FROM character INNER JOIN mount ON character.mount_id = mount.id INNER JOIN class ON character.class_id = class.id WHERE character.name = ?");
-            pstmt.setObject(1, username);
+            pstmt.setObject(1, name);
 
             ResultSet rs = pstmt.executeQuery();
 
@@ -154,7 +229,8 @@ public class CharacterManager implements CharacterManagerLocal {
                 int mount_speed = rs.getInt("mount_speed");
                 int class_id = rs.getInt("class_id");
                 String class_name = rs.getString("class_name");
-                character = new Character(id, username, level, health, stamina, mana, new Mount(mount_id, mount_name, mount_speed), new Class(class_id, class_name));
+                character = Character.builder().id(id).name(name).level(level).health(health).stamina(stamina).mana(mana).mount(Mount.builder().id(mount_id).name(mount_name).speed(mount_speed).build()).myClass(Class.builder().id(class_id).name(class_name).build()).build();
+
             }
             connection.close();
             return character;
