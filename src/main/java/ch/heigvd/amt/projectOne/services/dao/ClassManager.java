@@ -37,7 +37,7 @@ public class ClassManager implements ClassManagerLocal {
                 String armor = rs.getString("armor");
                 String description = rs.getString("description");
 
-                classes.add(new Class(id, name, weapon, armor, description));
+                classes.add(Class.builder().id(id).name(name).weapon(weapon).armor(armor).description(description).build());
             }
             connection.close();
 
@@ -63,7 +63,7 @@ public class ClassManager implements ClassManagerLocal {
             String description = rs.getString("description");
 
             connection.close();
-            return new Class(id, name, weapon, armor, description, null);
+            return Class.builder().id(id).name(name).weapon(weapon).armor(armor).description(description).build();
 
         } catch (SQLException ex) {
             Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);

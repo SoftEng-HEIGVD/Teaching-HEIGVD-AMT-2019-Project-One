@@ -8,7 +8,13 @@ import java.util.List;
 @Local
 public interface CharacterManagerLocal {
 
+    public int countRows(String table);
+
     List<Character> findAllCharacters();
+
+    List<Character> getCharactersByFirstLetter(String letter, int pageNumber);
+
+    List<Character> getCharactersByPage(int pageNumber);
 
     boolean addCharacter(String username, String password);
 
