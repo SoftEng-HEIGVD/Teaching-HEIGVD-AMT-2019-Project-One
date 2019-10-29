@@ -85,7 +85,7 @@ sentences long so folks can pick up some informative tidbits. Then, link
             <c:forEach items="${films}" var="film">
               <div class="col-md-4">
                 <div class="card mb-4 box-shadow">
-                  <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="./assets/img/${film.moviePosterPath}" data-holder-rendered="true">
+                  <img class="card-img-top" alt="Thumbnail [100%x225]" style="height: 500px; width: 100%; display: block;" src="./assets/img/${film.moviePosterPath}" >
                   <div class="card-body">
                     <p class="card-text">${film.title}</p>
                     <div class="d-flex justify-content-between align-items-center">
