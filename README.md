@@ -10,3 +10,10 @@ between Film and User.
 
 ### pom
 We add all dependencies and we specify the packaging target as .war.
+
+
+## Issues
+- Bootstrap link and enable interaction
+- Servers on docker compose
+- Username and password
+- Database connection and DAO

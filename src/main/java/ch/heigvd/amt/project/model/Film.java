@@ -10,4 +10,6 @@ import lombok.Getter;
 public class Film {
     private final int id;
     private final String title;
+    private final int runningTime;
+    private final String moviePosterPath;
 }

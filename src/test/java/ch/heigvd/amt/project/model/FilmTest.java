@@ -12,12 +12,14 @@ public class FilmTest {
         Film movie = new Film.FilmBuilder()
                 .id(0)
                 .title("The Reckoning")
+                .runningTime(180)
                 .build();
 
         assertNotNull(movie);
 
         assertEquals(0, movie.getId());
         assertEquals("The Reckoning", movie.getTitle());
+        assertEquals(180, movie.getRunningTime());
 
     }
 
