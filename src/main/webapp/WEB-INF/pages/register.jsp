@@ -63,6 +63,10 @@
         </c:if>
     </div>
 
+    <div class="container" style="background-color: orange">
+        <a href="${pageContext.request.contextPath}/login" style="color: #2C93FF">Back to login</a>
+    </div>
+
 </div>
 
 </body>
