@@ -1,0 +1,14 @@
+version: '3'
+services:
+  payara:
+    build: images_docker/payara
+    environment:
+     - ADMIN_PASSWORD=adminadmin
+    ports:
+     - "8080:8080"
+     - "4848:4848"
+  wildfly:
+    build: images_docker/wildfly
+    ports:
+     - "9090:8080"
+     - "9990:9990"
