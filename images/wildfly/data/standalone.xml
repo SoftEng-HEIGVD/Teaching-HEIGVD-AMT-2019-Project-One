@@ -166,8 +166,8 @@
                          <password>sa</password>
                      </security>
                  </datasource>
-                 <datasource jta="true" jndi-name="java:/jdbc/sakila" pool-name="sakilaDS" enabled="true" use-ccm="true">
-                     <connection-url>jdbc:mysql://192.168.99.100:3306/sakila</connection-url>
+                 <datasource jta="true" jndi-name="java:/jdbc/chillout" pool-name="chilloutDS" enabled="true" use-ccm="true">
+                     <connection-url>jdbc:mysql://192.168.99.100:3306/chillout</connection-url>
                      <driver>com.mysql.jdbc.Driver</driver>
                      <security>
                          <user-name>root</user-name>
