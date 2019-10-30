@@ -19,12 +19,12 @@ public class CoachTest {
 
 
         Coach coach = Coach.builder()
-                .nom("Alic")
-                .prenom("Robel")
+                .lastName("Alic")
+                .firstName("Robel")
                 .team(team).build();
 
         assertNotNull(coach);
-        assertEquals("Alic",coach.getNom());
+        assertEquals("Alic",coach.getLastName());
     }
 
 }

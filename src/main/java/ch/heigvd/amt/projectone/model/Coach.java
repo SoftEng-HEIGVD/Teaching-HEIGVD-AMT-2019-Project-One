@@ -1,5 +1,6 @@
 package ch.heigvd.amt.projectone.model;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -9,6 +10,10 @@ import lombok.Getter;
 @Getter
 public class Coach {
     private Team team;
-    private String nom;
-    private String prenom;
+    private String lastName;
+    private String firstName;
+    private String username;
+    private String password;
+    private boolean isAdmin;
+    private int id;
 }
