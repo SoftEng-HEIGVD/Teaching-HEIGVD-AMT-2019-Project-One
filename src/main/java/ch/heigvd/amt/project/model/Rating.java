@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode
 public class Rating {
-    private final User user;
-    private final Film film;
-    private float rating;
+    private User user;
+    private Film film;
+    private int rating;
 }

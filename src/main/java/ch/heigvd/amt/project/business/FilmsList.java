@@ -9,7 +9,7 @@ import java.util.List;
 public class FilmsList {
     private static final List<Film> moviesList = new ArrayList<>();
 
-    private FilmsList(){
+    private FilmsList() {
 
     }
 

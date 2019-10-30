@@ -30,27 +30,6 @@
   <body>
 
     <header>
-      <div class="bg-dark collapse show" id="navbarHeader" style="">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-8 col-md-7 py-4">
-              <h4 class="text-white">About</h4>
-              <p class="text-muted">Add some information about the album
- below, the author, or any other background context. Make it a few 
-sentences long so folks can pick up some informative tidbits. Then, link
- them off to some social networking sites or contact information.</p>
-            </div>
-            <div class="col-sm-4 offset-md-1 py-4">
-              <h4 class="text-white">Contact</h4>
-              <ul class="list-unstyled">
-                <li><a href="#" class="text-white">Follow on Twitter</a></li>
-                <li><a href="#" class="text-white">Like on Facebook</a></li>
-                <li><a href="#" class="text-white">Email me</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="navbar navbar-dark bg-dark box-shadow">
         <div class="container d-flex justify-content-between">
           <a href="#" class="navbar-brand d-flex align-items-center">
@@ -83,9 +62,9 @@ sentences long so folks can pick up some informative tidbits. Then, link
           <div class="row">
 
             <c:forEach items="${films}" var="film">
-              <div class="col-md-4">
+              <div class="col-md-2">
                 <div class="card mb-4 box-shadow">
-                  <img class="card-img-top" alt="Thumbnail [100%x225]" style="height: 500px; width: 100%; display: block;" src="./assets/img/${film.moviePosterPath}" >
+                  <img class="card-img-top" alt="Thumbnail [100%x225]" style="height: 200px; width: 100%; display: block;" src="./assets/img/${film.moviePosterPath}" >
                   <div class="card-body">
                     <p class="card-text">${film.title}</p>
                     <div class="d-flex justify-content-between align-items-center">
@@ -93,7 +72,9 @@ sentences long so folks can pick up some informative tidbits. Then, link
                         <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                         <button type="button" class="btn btn-sm btn-outline-secondary">Like</button>
                       </div>
-                      <small class="text-muted">${film.runningTime} mins</small>
+                        <div>
+                            <small class="text-muted">${film.runningTime} mins</small>
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -110,8 +91,6 @@ sentences long so folks can pick up some informative tidbits. Then, link
         <p class="float-right">
           <a href="#">Back to top</a>
         </p>
-        <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
-        <p>New to Bootstrap? <a href="https://getbootstrap.com/docs/4.0/">Visit the homepage</a> or read our <a href="https://getbootstrap.com/docs/4.0/getting-started/">getting started guide</a>.</p>
       </div>
     </footer>
 
