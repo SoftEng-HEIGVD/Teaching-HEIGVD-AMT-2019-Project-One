@@ -1,0 +1,11 @@
+version: '3'
+services:
+  wildfly:
+    build: ../images/wildfly
+    ports:
+     - "9090:8080"
+     - "9990:9990"
+  tomee:
+    build: ../images/tomee
+    ports:
+     - "7070:8080"
