@@ -19,11 +19,10 @@ public class SessionFilter implements Filter {
             //filteredResp.sendRedirect(filteredReq.getContextPath() + "/home");
             chain.doFilter(req, resp);
         } else {
-            //filteredResp.sendRedirect(filteredReq.getContextPath() + "/login");
-            req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
+            filteredResp.sendRedirect(filteredReq.getContextPath() + "/login");
+            //req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
         }
 
-        return;
         //chain.doFilter(req, resp);
     }
 

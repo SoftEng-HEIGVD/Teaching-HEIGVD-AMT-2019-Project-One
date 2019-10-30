@@ -17,8 +17,8 @@
     <filter-mapping>
         <filter-name>SessionFilter</filter-name>
         <url-pattern>/characters</url-pattern>
-        <url-pattern>/class</url-pattern>
-        <url-pattern>/guild</url-pattern>
+        <url-pattern>/classes</url-pattern>
+        <url-pattern>/guilds</url-pattern>
         <url-pattern>/home</url-pattern>
         <url-pattern>/profile</url-pattern>
     </filter-mapping>
