@@ -32,7 +32,6 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         List<String> errors = new ArrayList<>();
-        Character user = characterManager.getCharacterByUsername(username);
 
         if (username == null || username.trim().equals("")) {
             errors.add("Username cannot be empty.");
@@ -40,11 +39,14 @@ public class LoginServlet extends HttpServlet {
         if (password == null || password.trim().equals("")) {
             errors.add("Password cannot be empty.");
         }
-        if (user == null) {
-            errors.add("User does not exist.");
+
+        if (errors.size() < 1 && (
+                characterManager.isUsernameFree(username) || !characterManager.checkPassword(username, password))) {
+            errors.add("Wrong username or password.");
         }
 
         if (errors.size() == 0) {
+            Character user = characterManager.getCharacterByUsername(username);
             HttpSession session = req.getSession();
             session.setAttribute("character", user);
             resp.sendRedirect(req.getContextPath() + "/home");

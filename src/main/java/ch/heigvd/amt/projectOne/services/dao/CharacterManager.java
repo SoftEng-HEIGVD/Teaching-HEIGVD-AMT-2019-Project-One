@@ -1,10 +1,12 @@
 package ch.heigvd.amt.projectOne.services.dao;
 
+import ch.heigvd.amt.projectOne.business.IAuthenticationService;
 import ch.heigvd.amt.projectOne.model.Character;
 import ch.heigvd.amt.projectOne.model.Class;
 import ch.heigvd.amt.projectOne.model.Mount;
 
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -22,6 +24,9 @@ public class CharacterManager implements CharacterManagerLocal {
 
     @Resource(lookup = "jdbc/amt")
     private DataSource dataSource;
+
+    @EJB
+    IAuthenticationService authenticationService;
 
     private int getRandomNumber(int from, int to) {
         Random r = new Random();
@@ -159,7 +164,7 @@ public class CharacterManager implements CharacterManagerLocal {
             PreparedStatement pstmt = connection.prepareStatement(
                     "INSERT INTO character (name, password, mount_id, class_id) VALUES (?, ?, ?, ?)");
             pstmt.setObject(1, username);
-            pstmt.setObject(2, password);
+            pstmt.setObject(2, authenticationService.hashPassword(password));
             pstmt.setObject(3, getRandomNumber(1, countRows("mount", "") + 1));
             pstmt.setObject(4, getRandomNumber(1, countRows("class", "") + 1));
 
@@ -175,6 +180,26 @@ public class CharacterManager implements CharacterManagerLocal {
         }
         return false;
 
+    }
+
+    @Override
+    public boolean checkPassword(String username, String password) {
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement("SELECT password FROM character WHERE name=?");
+            pstmt.setObject(1, username);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            rs.next();
+            String hashedPassword = rs.getString("password");
+            return authenticationService.checkPassword(password, hashedPassword);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return true;
     }
 
     @Override

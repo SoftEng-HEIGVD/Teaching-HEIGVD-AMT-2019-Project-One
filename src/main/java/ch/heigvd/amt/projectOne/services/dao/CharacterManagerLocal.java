@@ -22,4 +22,6 @@ public interface CharacterManagerLocal {
     Character getCharacterByUsername(String username);
 
     boolean isUsernameFree(String username);
+
+    boolean checkPassword(String username, String password);
 }
