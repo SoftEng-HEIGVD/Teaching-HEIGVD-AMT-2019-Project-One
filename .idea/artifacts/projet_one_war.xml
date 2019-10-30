@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="projet-one:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="manageFootball-WebApp.war">
-      <element id="artifact" artifact-name="projet-one:war exploded" />
-    </root>
-  </artifact>
-</component>
