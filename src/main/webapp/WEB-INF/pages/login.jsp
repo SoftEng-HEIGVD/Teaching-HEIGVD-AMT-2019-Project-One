@@ -45,8 +45,15 @@
                 <label for="passwordField">Password</label>
                 <input type="password" class="form-control" id="passwordField" name="password">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Sign in</button>
         </form>
+    </div>
+
+
+
+    <div class="container" style="background-color: orange">
+        New to Dungeons and Unicorns ?
+        <a href="${pageContext.request.contextPath}/register" style="color: #2C93FF">Sign up</a>
     </div>
 </div>
 
