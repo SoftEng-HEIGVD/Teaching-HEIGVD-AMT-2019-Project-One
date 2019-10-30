@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -47,6 +50,14 @@
             </div>
             <button type="submit" class="btn btn-primary">Sign in</button>
         </form>
+        <c:if test="${errors != null}">
+            Errors:
+            <ul>
+                <c:forEach items="${errors}" var="error">
+                    <li>${error}</li>
+                </c:forEach>
+            </ul>
+        </c:if>
     </div>
 
 
