@@ -2,14 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
   <head>
-    <title>Quotes</title>
+    <title>Football Manager</title>
   </head>
   <body>
-    <h2>Quotes</h2>
-    <ul>
-      <c:forEach items="${quotes}" var="quote">
-        <li>${quote.author} : "${quote.citation}"</li>
-      </c:forEach>
+    <h2>Welcome</h2>
     </ul>
   </body>
 </html>
