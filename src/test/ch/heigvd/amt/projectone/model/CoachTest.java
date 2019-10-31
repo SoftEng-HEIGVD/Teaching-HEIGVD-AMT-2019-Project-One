@@ -2,6 +2,7 @@ package ch.heigvd.amt.projectone.model;
 
 import org.junit.Test;
 
+import java.sql.Date;
 import java.util.LinkedList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +16,7 @@ public class CoachTest {
         players.add(new Player("Teklehaimanot", "Nair","AVG"));
         players.add(new Player("Alic","Robel","AVD"));
 
-        team = new Team("HEIG", players);
+        team = new Team("HEIG", "Yverdon",new Date(22051993));
 
 
         Coach coach = Coach.builder()
