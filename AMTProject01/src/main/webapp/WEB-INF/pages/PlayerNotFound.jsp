@@ -1,4 +1,15 @@
-<!doctype html>
+<%-- 
+    Document   : Player
+    Created on : 31 oct. 2019, 10:27:41
+    Author     : goturak
+--%>
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+
+
 <html>
 
 <head>
@@ -39,16 +50,16 @@
 </head>
 
 <body>
-	
+
 
 	<nav class="main-nav-outer" id="test">
 		<!--main-nav-start-->
 		<div class="container">
 			<ul class="main-nav">
 				<li><a href="matches.html">Matches</a></li>
-                                <li><a href="teams.html">Teams</a></li>                            
+        <li><a href="teams.html">Teams</a></li>
 				<li><a href="players">Players</a></li>
-				
+
 			</ul>
 			<a class="res-nav_click" href="#"><i class="fa fa-bars"></i></a>
 		</div>
@@ -57,53 +68,35 @@
 
 
 
-	<section class="main-section" id="teams">
+	<section class="main-section" id="players">
 		<!--main-section-start-->
-		<div class="container">
-			<h2>Teams</h2>
-			<h6>We offer exceptional service with complimentary hugs.</h6>
-			<div class="row">
-				<div class="col-lg-4 col-sm-6 wow fadeInLeft delay-05s">
-					<div class="service-list">
-						<div class="service-list-col1">
-							<i class="fa fa-paw"></i>
-						</div>
-						<div class="service-list-col2">
-							<h3>branding &amp; identity</h3>
-							<p>Proin iaculis purus digni consequat sem digni ssim. Donec entum digni ssim.</p>
-						</div>
-					</div>
-					<div class="service-list">
-						<div class="service-list-col1">
-							<i class="fa fa-gear"></i>
-						</div>
-						<div class="service-list-col2">
-							<h3>web development</h3>
-							<p>Proin iaculis purus consequat sem digni ssim. Digni ssim porttitora .</p>
-						</div>
-					</div>
-					<div class="service-list">
-						<div class="service-list-col1">
-							<i class="fa fa-apple"></i>
-						</div>
-						<div class="service-list-col2">
-							<h3>mobile design</h3>
-							<p>Proin iaculis purus consequat digni sem digni ssim. Purus donec porttitora entum.</p>
-						</div>
-					</div>
-					<div class="service-list">
-						<div class="service-list-col1">
-							<i class="fa fa-medkit"></i>
-						</div>
-						<div class="service-list-col2">
-							<h3>24/7 Support</h3>
-							<p>Proin iaculis purus consequat sem digni ssim. Sem porttitora entum.</p>
-						</div>
-					</div>
-				</div>
-				<figure class="col-lg-8 col-sm-6  text-right wow fadeInUp delay-02s">
-					<img src="img/macbook-pro.png" alt="">
-				</figure>
+		<div class="container Player-Box">
+                    <h2>not found</h2>
+			
+      <div class="row">
+          <!--
+	<div class="list-group col-lg-8 col-sm-8 wow fadeInLeft delay-05s ">
+
+        
+            <div class="service-list">
+  						<div class="service-list-col1">
+  							<i class="fa fa-paw"></i>
+  						</div>
+  						<div class="service-list-col2">
+  							
+  						</div>
+              <div class="float-right" >
+                <button type="button" data-toggle="collapse" data-target="#playerInfo" class="btn btn-primary">details</button>
+              </div>
+
+  					</div>
+          
+        </div>-->
+        <div id="playerInfo" class="collapse col-lg-8 col-sm-6  text-center">
+          <img src="img/UserNoImg.png" class="img-fluid float-mi" alt="">
+
+        </div>
+
 
 			</div>
 		</div>
@@ -112,7 +105,7 @@
 
 
 
-	
+
 	<footer class="footer">
 		<div class="container">
 			<div class="footer-logo"><a href="#"><img src="img/footer-logo.png" alt=""></a></div>
