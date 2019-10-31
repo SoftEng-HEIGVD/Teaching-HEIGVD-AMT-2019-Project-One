@@ -31,7 +31,7 @@ public class CoachDAO implements ICoachDAO {
             statement.setString(2, entity.getPassword());
             statement.setString(3, entity.getFirstName());
             statement.setString(4, entity.getLastName());
-            statement.setObject(5, entity.getTeam());
+            statement.setString(5, entity.getTeam().getName());
             statement.setBoolean(6, entity.isAdmin());
             statement.execute();
             return entity;
