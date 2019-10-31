@@ -1,6 +1,5 @@
 package ch.heigvd.amt.projectone.model;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

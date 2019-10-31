@@ -12,10 +12,10 @@ We have decided to develop a web application where we manage football teams. The
 
 ## Links
 
-- Follow [this link](./README_deployment) in order to **deploy** the web application on your machine.
-- Follow [this link](./README_usability) to know how to use the web application
-- Follow [this link](./README_tests) if you want to see **the tests** we've made.
-- Follow [this link](./README_usability) to see the actual knows bugs and limitations.
+- Follow [this link](./README_deployment.md) in order to **deploy** the web application on your machine.
+- Follow [this link](./README_usability.md) to know how to use the web application
+- Follow [this link](./README_tests.md) if you want to see **the tests** we've made.
+- Follow [this link](./README_usability.md) to see the actual knows bugs and limitations.
 
 
 
