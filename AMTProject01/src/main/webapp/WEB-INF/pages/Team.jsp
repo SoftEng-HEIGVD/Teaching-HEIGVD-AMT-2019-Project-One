@@ -1,5 +1,5 @@
 <%-- 
-    Document   : Player
+    Document   : Team
     Created on : 31 oct. 2019, 10:27:41
     Author     : goturak
 --%>
@@ -68,33 +68,59 @@
 	<!--main-nav-end-->
 
 
-
+        <section class="main-section" id="TeamName">
+    		<h2>${team.name}</h2>
+			
+	</section>
 	<section class="main-section" id="players">
 		<!--main-section-start-->
 		<div class="container Player-Box">
-			<h2>${thePlayer.userName}</h2>
-			
+			<h3>The Players:</h3>
                         <div class="row">
-                             
-                           
-                            
-                            <div class="col-lg-8 col-sm-6  text-left wow fadeInRight delay-02s">
-                                <h4>Real Name: ${thePlayer.name}</h4>
-                                <br>
-                                <c:if test="${empty thePlayer.team}">
-                                    <h4>No Team</h4>
-                                </c:if>
-                                <c:if test="${not empty thePlayer.team}">
-                                    <h4>Team:${thePlayer.team.name}</h4>
-                                </c:if>
+                            <div class="list-group wow fadeInLeft delay-05s ">
+                                <c:forEach items="${players}" var="item">
+                                     <a href="player?u=${item.userName}">
+                                        <div class="service-list">
+                                           
+                                            <div class="service-list-col2">
+                                               <h4>${item.userName}</h4>
+
+                                                  
+                                            </div>
+                                      
+
+                                        </div>
+                                    </a>
+                               </c:forEach>
                             </div>
-                                
-                                 <div class="col-lg-4 col-sm-6 wow fadeInLeft delay-05s ">
-                                <div class="list-group">
-                                    
-                                </div>
+			</div>
+		</div>
+	</section>
+                
+        <section class="main-section" id="players">
+		<!--main-section-start-->
+		<div class="container Player-Box">
+			<h3>Match History</h3>
+                        <div class="row">
+                            <div class="list-group wow fadeInLeft delay-05s ">
+                                <c:forEach items="${players}" var="item">
+                                    <div class="service-list">
+                                       <div class="service-list-col1">
+                                               <i class="fa fa-paw"></i>
+                                       </div>
+                                       <div class="service-list-col2">
+                                               <h4>${item.userName}</h4>
+
+                                               <p>Nom: ${item.name}</p>
+                                       </div>
+                                       <div class="float-right" >
+                                           <a href="player?u=${item.userName}" class="btn btn-primary">Details</a>
+
+                                       </div>
+
+                                   </div>
+                               </c:forEach>
                             </div>
-				
 			</div>
 		</div>
 	</section>

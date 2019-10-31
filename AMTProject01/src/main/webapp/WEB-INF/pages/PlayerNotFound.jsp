@@ -73,33 +73,7 @@
 		<div class="container Player-Box">
                     <h2>not found</h2>
 			
-      <div class="row">
-          <!--
-	<div class="list-group col-lg-8 col-sm-8 wow fadeInLeft delay-05s ">
 
-        
-            <div class="service-list">
-  						<div class="service-list-col1">
-  							<i class="fa fa-paw"></i>
-  						</div>
-  						<div class="service-list-col2">
-  							
-  						</div>
-              <div class="float-right" >
-                <button type="button" data-toggle="collapse" data-target="#playerInfo" class="btn btn-primary">details</button>
-              </div>
-
-  					</div>
-          
-        </div>-->
-        <div id="playerInfo" class="collapse col-lg-8 col-sm-6  text-center">
-          <img src="img/UserNoImg.png" class="img-fluid float-mi" alt="">
-
-        </div>
-
-
-			</div>
-		</div>
 	</section>
 	<!--main-section-end-->
 

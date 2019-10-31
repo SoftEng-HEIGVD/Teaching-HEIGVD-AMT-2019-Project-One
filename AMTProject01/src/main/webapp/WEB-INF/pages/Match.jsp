@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Player
-    Created on : 31 oct. 2019, 10:27:41
+    Document   : Match
+    Created on : 31 oct. 2019, 15:02:15
     Author     : goturak
 --%>
 
@@ -68,36 +68,82 @@
 	<!--main-nav-end-->
 
 
-
-	<section class="main-section" id="players">
-		<!--main-section-start-->
-		<div class="container Player-Box">
-			<h2>${thePlayer.userName}</h2>
+        <section class="main-section" id="TeamName">
+    		<h2>${team.name}</h2>
 			
-                        <div class="row">
-                             
-                           
-                            
-                            <div class="col-lg-8 col-sm-6  text-left wow fadeInRight delay-02s">
-                                <h4>Real Name: ${thePlayer.name}</h4>
-                                <br>
-                                <c:if test="${empty thePlayer.team}">
-                                    <h4>No Team</h4>
-                                </c:if>
-                                <c:if test="${not empty thePlayer.team}">
-                                    <h4>Team:${thePlayer.team.name}</h4>
-                                </c:if>
-                            </div>
-                                
-                                 <div class="col-lg-4 col-sm-6 wow fadeInLeft delay-05s ">
-                                <div class="list-group">
-                                    
-                                </div>
-                            </div>
-				
-			</div>
-		</div>
 	</section>
+	<section class="main-section" id="players">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 text-right wow fadeInRight delay-02s">
+
+                       <c:if test="${empty match.team1}">
+                                    <h2>No Team</h2>
+                        </c:if>
+                        <c:if test="${not empty match.team1}">
+                            <h2>${mtch.team1.name}</h2>
+                            <br>
+                        </c:if>
+                        <div class="">
+
+                                <c:forEach items="${match.team1Players}" var="item">
+                                    <a href="player?u=${item.userName}">
+                                        <div class="service-list">
+                                           
+                                            <div class="service-list-col2">
+                                               <h4>${item.userName}</h4>
+
+                                                  
+                                            </div>
+                                      
+
+                                        </div>
+                                    </a>
+                               </c:forEach>
+
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-2 text-Center wow fadeInUp delay-02s">
+                        <h2>${match.team1EndScore}-${match.team2EndScore}</h2>
+                       
+                    </div>
+                    
+                    <div class="col-lg-5 text-left wow fadeInRight delay-02s">
+
+                       <c:if test="${empty match.team1}">
+                                    <h2>No Team</h2>
+                        </c:if>
+                        <c:if test="${not empty match.team1}">
+                            <h2>${mtch.team2.name}</h2>
+                        </c:if>
+                        <div class="">
+
+                                <c:forEach items="${match.team2Players}" var="item">
+                                    <a href="player?u=${item.userName}">
+                                        <div class="service-list">
+                                           
+                                            <div class="service-list-col2">
+                                               <h4>${item.userName}</h4>
+
+                                                  
+                                            </div>
+                                      
+
+                                        </div>
+                                    </a>
+                               </c:forEach>
+
+                        </div>
+                    </div>
+                </div>
+                <!--main-section-start-->
+		
+            </div>
+		
+	</section>
+                
+       
 	<!--main-section-end-->
 
 

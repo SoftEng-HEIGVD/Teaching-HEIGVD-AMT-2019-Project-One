@@ -8,6 +8,14 @@
         <servlet-name>PlayerServlet</servlet-name>
         <servlet-class>Web.PlayerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TeamServlet</servlet-name>
+        <servlet-class>Web.TeamServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MatchServlet</servlet-name>
+        <servlet-class>Web.MatchServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PlayersServlet</servlet-name>
         <url-pattern>/players</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>PlayerServlet</servlet-name>
         <url-pattern>/player</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TeamServlet</servlet-name>
+        <url-pattern>/team</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MatchServlet</servlet-name>
+        <url-pattern>/match</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

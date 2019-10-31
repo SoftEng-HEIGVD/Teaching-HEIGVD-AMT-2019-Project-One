@@ -74,9 +74,20 @@ h2{
 h3{
 	font-family: 'Montserrat', sans-serif;
 	color:#222222;
-	font-size:16px;
+	font-size:16x;
 	margin:0 0 5px 0;
 	text-transform:uppercase;
+        text-align:center;
+	font-weight:400;
+}
+
+h4{
+	font-family: 'Montserrat', sans-serif;
+	color:#222222;
+	font-size:24px;
+	margin:0 0 5px 0;
+	text-transform:uppercase;
+        
 	font-weight:400;
 }
 h6{
@@ -231,16 +242,15 @@ color: #fff;
 
 }
 .service-list-col1 i{
-  	background:#fafa45;
+
 	font-style:normal;
 	font-size:38px;
-	
+
 	color:#222;
 	font-family: 'FontAwesome';
 	line-height:38px;
 }
 .service-list-col2{
-  	background:#fa34fa;
 
 }
 .main-section.alabaster{
@@ -251,7 +261,8 @@ color: #fff;
 .list-group{
   max-height: 450px;
 
-   overflow:scroll;
+   overflow-y:scroll;
+   overflow-x:hidden;
 
 }
 /* Featured Work
@@ -322,7 +333,7 @@ color: #fff;
 }
 
 .Player-Box{
-    background:#7cc576;
+
   	height:600px;
 }
 
