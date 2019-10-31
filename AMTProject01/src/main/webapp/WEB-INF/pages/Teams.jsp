@@ -56,7 +56,7 @@
 		<div class="container">
 			<ul class="main-nav">
 				<li><a href="matches.html">Matches</a></li>
-        <li><a href="teams.html">Teams</a></li>
+                                <li><a href="teams">Teams</a></li>
 				<li><a href="players">Players</a></li>
 
 			</ul>
@@ -70,23 +70,23 @@
 	<section class="main-section" id="players">
 		<!--main-section-start-->
 		<div class="container Player-Box">
-			<h2>All Players</h2>	
+			<h2>All Teams</h2>	
             <div class="row">
                             
              <div class="list-group">
-          <c:forEach items="${allPlayers}" var="item">
-            <a href="player?u=${item.userName}">
-                                        <div class="service-list">
-                                           
-                                            <div class="service-list-col2">
-                                               <h4>${item.userName}</h4>
+            <c:forEach items="${teams}" var="item">
+                    <a href="team?t=${item.name}">
+                            <div class="service-list">
 
-                                                  
-                                            </div>
-                                      
+                                <div class="service-list-col2">
+                                   <h4>${item.name}</h4>
 
-                                        </div>
-                                    </a>
+
+                                </div>
+
+
+                            </div>
+                     </a>
           </c:forEach>
         </div>
         <!--<div id="playerInfo" class="collapse col-lg-8 col-sm-6  text-center">

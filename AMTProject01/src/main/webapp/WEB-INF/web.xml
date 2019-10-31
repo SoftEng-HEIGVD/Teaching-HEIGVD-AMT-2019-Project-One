@@ -16,6 +16,10 @@
         <servlet-name>MatchServlet</servlet-name>
         <servlet-class>Web.MatchServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TeamsServlet</servlet-name>
+        <servlet-class>Web.TeamsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PlayersServlet</servlet-name>
         <url-pattern>/players</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>MatchServlet</servlet-name>
         <url-pattern>/match</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TeamsServlet</servlet-name>
+        <url-pattern>/teams</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
