@@ -158,37 +158,11 @@
                         <password>sa</password>
                     </security>
                 </datasource>
-		<datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}">
-                     <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
-                     <driver>h2</driver>
-                     <security>
-                         <user-name>sa</user-name>
-                         <password>sa</password>
-                     </security>
-                 </datasource>
-                 <datasource jndi-name="java:/jdbc/chill" pool-name="ChillDS">
-                    <connection-url>jdbc:mysql://localhost:3306/mysqldb</connection-url>
-                    <driver-class>com.mysql.jdbc.Driver</driver-class>
-                    <driver>mysql-connector-java-8.0.18.jar</driver>
-                    <security>
-                        <user-name>admin</user-name>
-                        <password>admin</password>
-                    </security>
-                    <validation>
-                        <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecke
-r"/>
-                        <background-validation>true</background-validation>
-                        <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter"/>
-                    </validation>
-                </datasource>
-                 <drivers>
+                <drivers>
                     <driver name="h2" module="com.h2database.h2">
                         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
                     </driver>
-		            <driver name="mysql" module="com.mysql">
-    			        <driver-class>com.mysql.jdbc.Driver</driver-class>
- 		            </driver>
-	    	    </drivers>
+                </drivers>
             </datasources>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:deployment-scanner:2.0">
@@ -553,10 +527,4 @@ r"/>
             <remote-destination host="localhost" port="25"/>
         </outbound-socket-binding>
     </socket-binding-group>
-    <deployments>
-        <deployment name="mysql-connector-java-5.1.48-bin.jar" runtime-name="mysql-connector-java-5.1.48-bin.jar">
-            <content sha1="95b5137f419f36c6eaaf8ed48ea1696239b1fb12"/>
-        </deployment>
-    </deployments>
 </server>
-

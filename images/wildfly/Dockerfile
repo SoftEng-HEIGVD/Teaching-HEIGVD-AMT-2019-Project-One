@@ -3,11 +3,11 @@ FROM jboss/wildfly:14.0.1.Final
 MAINTAINER Jeremy Zerbib <jeremy.zerbib@heig-vd.ch>
 MAINTAINER Adam Zouari <adam.zouari@heig-vd.ch>
 
-COPY data/standalone.xml /opt/wildfly/standalone/configuration/standalone.xml
+#COPY data/standalone.xml /opt/wildfly/standalone/configuration/standalone.xml
 
 RUN /opt/jboss/wildfly/bin/add-user.sh admin admin --silent
 
-#COPY target/projectone.war /opt/jboss/wildfly/standalone/deployments/
-
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
 
+
+#COPY target/projectone.war /opt/jboss/wildfly/standalone/deployments/
