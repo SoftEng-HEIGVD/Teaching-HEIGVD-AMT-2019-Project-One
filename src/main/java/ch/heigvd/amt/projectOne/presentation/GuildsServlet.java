@@ -1,7 +1,10 @@
 package ch.heigvd.amt.projectOne.presentation;
 
 import ch.heigvd.amt.projectOne.model.Class;
+import ch.heigvd.amt.projectOne.model.Guild;
 import ch.heigvd.amt.projectOne.services.dao.ClassManagerLocal;
+import ch.heigvd.amt.projectOne.services.dao.GuildManager;
+import ch.heigvd.amt.projectOne.services.dao.GuildManagerLocal;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -16,12 +19,13 @@ import java.util.List;
 public class GuildsServlet extends HttpServlet {
 
   @EJB
-  ClassManagerLocal classManager;
+  GuildManagerLocal guildManager;
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    List<Guild> guilds = guildManager.getAllGuilds();
+    req.setAttribute("guilds", guilds);
     req.getRequestDispatcher("/WEB-INF/pages/guilds.jsp").forward(req, resp);
-
 
   }
 
