@@ -157,16 +157,16 @@ ALTER TABLE ONLY public.character
 
 -- Fill mount table 
 
-INSERT INTO public.mount(name, speed) VALUES ('Sir Barton', 8);
-INSERT INTO public.mount(name, speed) VALUES ('Flame', 5);
-INSERT INTO public.mount(name, speed) VALUES ('Fury', 10);
-INSERT INTO public.mount(name, speed) VALUES ('Pegasus', 14);
-INSERT INTO public.mount(name, speed) VALUES ('Ringo', 7);
-INSERT INTO public.mount(name, speed) VALUES ('Rainbow Dash', 8);
-INSERT INTO public.mount(name, speed) VALUES ('White Hawk', 9);
-INSERT INTO public.mount(name, speed) VALUES ('Rusty Saddle', 12);
-INSERT INTO public.mount(name, speed) VALUES ('Artax', 6);
-INSERT INTO public.mount(name, speed) VALUES ('Lord Murphy', 11);
+INSERT INTO public.mount(name, speed) VALUES ('Demona', 5);
+INSERT INTO public.mount(name, speed) VALUES ('Flame', 10);
+INSERT INTO public.mount(name, speed) VALUES ('Kitty', 14);
+INSERT INTO public.mount(name, speed) VALUES ('Luna', 7);
+INSERT INTO public.mount(name, speed) VALUES ('Pegasus', 8);
+INSERT INTO public.mount(name, speed) VALUES ('Misty', 9);
+INSERT INTO public.mount(name, speed) VALUES ('Pony', 12);
+INSERT INTO public.mount(name, speed) VALUES ('Rainbow Trash', 2);
+INSERT INTO public.mount(name, speed) VALUES ('Uni', 18);
+INSERT INTO public.mount(name, speed) VALUES ('Whalee', 11);
 
 -- Fill guild table
 
