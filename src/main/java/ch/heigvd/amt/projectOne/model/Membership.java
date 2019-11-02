@@ -9,6 +9,7 @@ import lombok.Getter;
 @EqualsAndHashCode
 public class Membership {
 
+    private int id;
     private Character character;
     private Guild guild;
     private String rank;

@@ -81,7 +81,7 @@
                                 <h4>${membership.guild.name}</h4></br>
                                 <h4>Rank : ${membership.rank}</h4></br>
                                 <a class="btn btn-primary" href="${pageContext.request.contextPath}/guilds/info?id=${membership.guild.id}">Learn more</a></br>
-                                <a class="btn btn-danger" href="${pageContext.request.contextPath}/guilds/leave?id=${membership.guild.id}">Leave</a>
+                                <a class="btn btn-danger" href="${pageContext.request.contextPath}/guilds/leave?id=${membership.id}">Leave</a>
                             </td>
                         </tr>
                     </table>

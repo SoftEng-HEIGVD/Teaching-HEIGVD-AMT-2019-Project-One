@@ -18,7 +18,7 @@ public class GuildLeaveServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int guildId = Integer.parseInt(req.getParameter("id"));
+        int membershipId = Integer.parseInt(req.getParameter("id"));
 
 
 

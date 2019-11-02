@@ -9,4 +9,5 @@ import java.util.List;
 public interface MembershipManagerLocal {
 
     public List<Membership> getMembershipsByUserId(int id);
+    public boolean removeMembership(int id);
 }

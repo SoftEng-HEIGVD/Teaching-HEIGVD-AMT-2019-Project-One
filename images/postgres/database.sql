@@ -58,6 +58,7 @@ ALTER TABLE public.guild OWNER TO postgres;
 --
 
 CREATE TABLE public.membership (
+    id SERIAL,
     character_id integer NOT NULL,
     guild_id integer NOT NULL,
     rank varchar(64)

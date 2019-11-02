@@ -30,7 +30,7 @@ public class MembershipManager implements MembershipManagerLocal {
         try {
             Connection connection = dataSource.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(
-                    "SELECT guild_id, rank, name, character_id FROM membership INNER JOIN guild on membership.guild_id = guild.id WHERE character_id=?");
+                    "SELECT id, guild_id, rank, name, character_id FROM membership INNER JOIN guild on membership.guild_id = guild.id WHERE character_id=?");
             pstmt.setObject(1, id);
 
             ResultSet rs = pstmt.executeQuery();
@@ -57,5 +57,25 @@ public class MembershipManager implements MembershipManagerLocal {
             Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return memberships;
+    }
+
+    @Override
+    public boolean removeMembership(int id) {
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement("DELETE FROM membership WHERE id=?");
+            pstmt.setObject(1, username);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            rs.next();
+            String hashedPassword = rs.getString("password");
+            return authenticationService.checkPassword(password, hashedPassword);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return true;
     }
 }
