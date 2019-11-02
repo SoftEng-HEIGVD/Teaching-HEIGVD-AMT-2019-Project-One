@@ -18,7 +18,8 @@ CREATE TABLE public.character (
     mana integer NOT NULL DEFAULT 50,
     password varchar(64) NOT NULL,
     mount_id integer,
-    class_id integer
+    class_id integer,
+    isadmin boolean NOT NULL DEFAULT FALSE
 
 );
 

@@ -9,6 +9,20 @@
         <welcome-file>login</welcome-file>
     </welcome-file-list>
 
+<!--    <error-page>-->
+<!--        <error-code>404</error-code>-->
+<!--        <location>/AppExceptionHandler</location>-->
+<!--    </error-page>-->
+
+<!--    <error-page>-->
+<!--        <exception-type>javax.servlet.ServletException</exception-type>-->
+<!--        <location>/AppExceptionHandler</location>-->
+<!--    </error-page>-->
+<!--    <error-page>-->
+<!--        <exception-type>java.lang.Throwable</exception-type>-->
+<!--        <location>/AppExceptionHandler</location>-->
+<!--    </error-page>-->
+
     <filter>
         <filter-name>SessionFilter</filter-name>
         <filter-class>ch.heigvd.amt.projectOne.presentation.SessionFilter</filter-class>
@@ -21,6 +35,7 @@
         <url-pattern>/guilds</url-pattern>
         <url-pattern>/home</url-pattern>
         <url-pattern>/profile</url-pattern>
+        <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
 </web-app>
 
