@@ -17,6 +17,7 @@ public class Character {
     private int health;
     private int stamina;
     private int mana;
+    private boolean isadmin;
 
     private Mount mount;
     private Class myClass;
