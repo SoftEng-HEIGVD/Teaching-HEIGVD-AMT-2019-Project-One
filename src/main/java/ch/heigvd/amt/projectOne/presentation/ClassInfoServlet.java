@@ -20,8 +20,7 @@ public class ClassInfoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("id");
-        Class thisClass = classManager.getClassById(Integer.parseInt(id));
+        Class thisClass = classManager.getClassById(Integer.parseInt(req.getParameter("id")));
         req.setAttribute("class", thisClass);
         req.setAttribute("image", thisClass.getName().toLowerCase());
         req.getRequestDispatcher("/WEB-INF/pages/class_info.jsp").forward(req, resp);

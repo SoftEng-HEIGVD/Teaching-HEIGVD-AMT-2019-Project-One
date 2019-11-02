@@ -17,7 +17,7 @@ public class GuildLeaveServlet extends HttpServlet {
     MembershipManagerLocal membershipManager;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         membershipManager.removeMembership(Integer.parseInt(req.getParameter("id")));
 
         resp.sendRedirect(req.getContextPath() + "/profile");
