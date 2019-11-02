@@ -30,18 +30,20 @@ public class MembershipManager implements MembershipManagerLocal {
         try {
             Connection connection = dataSource.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(
-                    "SELECT id, guild_id, rank, name, character_id FROM membership INNER JOIN guild on membership.guild_id = guild.id WHERE character_id=?");
+                    "SELECT membership.id, guild_id, rank, name, character_id FROM membership INNER JOIN guild on membership.guild_id = guild.id WHERE character_id=?");
             pstmt.setObject(1, id);
 
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
+                int membershipId = rs.getInt("id");
                 int guildId = rs.getInt("guild_id");
                 int characterId = rs.getInt("character_id");
                 String rank = rs.getString("rank");
                 String guildName = rs.getString("name");
 
                 memberships.add(Membership.builder()
+                        .id(membershipId)
                         .character(Character.builder()
                                 .id(characterId)
                                 .build())
@@ -64,18 +66,16 @@ public class MembershipManager implements MembershipManagerLocal {
         try {
             Connection connection = dataSource.getConnection();
             PreparedStatement pstmt = connection.prepareStatement("DELETE FROM membership WHERE id=?");
-            pstmt.setObject(1, username);
+            pstmt.setObject(1, id);
 
-            ResultSet rs = pstmt.executeQuery();
-
-            rs.next();
-            String hashedPassword = rs.getString("password");
-            return authenticationService.checkPassword(password, hashedPassword);
+            int row = pstmt.executeUpdate();
+            connection.close();
+            return row > 0;
 
         } catch (SQLException ex) {
             Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return true;
+        return false;
     }
 }

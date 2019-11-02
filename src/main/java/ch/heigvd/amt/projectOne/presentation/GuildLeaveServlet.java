@@ -1,6 +1,6 @@
 package ch.heigvd.amt.projectOne.presentation;
 
-import ch.heigvd.amt.projectOne.services.dao.MembershipManager;
+import ch.heigvd.amt.projectOne.services.dao.MembershipManagerLocal;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -14,14 +14,13 @@ import java.io.IOException;
 public class GuildLeaveServlet extends HttpServlet {
 
     @EJB
-    MembershipManager membershipManager;
+    MembershipManagerLocal membershipManager;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int membershipId = Integer.parseInt(req.getParameter("id"));
+        membershipManager.removeMembership(Integer.parseInt(req.getParameter("id")));
 
-
-
+        resp.sendRedirect(req.getContextPath() + "/profile");
     }
 
     @Override
