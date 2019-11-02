@@ -13,7 +13,7 @@
             <td>
                 <table class="table text-center myProfile" >
                     <tr>
-                        <td colspan="2"><img class="mySlides" src="./images/mage.jpg" style="width:200px"></td>
+                        <td colspan="2"><img class="mySlides" src="./images/classes/${fn:replace(fn:toLowerCase(character.myClass.name), ' ','')}.gif" style="width:200px"></td>
                     </tr>
                     <tr>
                         <td colspan="2"><h1>${sessionScope.character.name}</h1></td>
@@ -45,7 +45,7 @@
             <td>
                 <table class="table text-center myProfile">
                     <tr>
-                        <td colspan="2"><img class="mySlides" src="./images/mounts/flame.gif" style="width:200px"></td>
+                        <td colspan="2"><img class="mySlides" src="./images/mounts/${fn:replace(fn:toLowerCase(character.mount.name), ' ','')}" style="width:200px"></td>
                     </tr>
                     <tr>
                         <td colspan="2"><h1>${sessionScope.character.mount.name}</h1></td>

@@ -48,7 +48,7 @@
                 <input type="password" class="form-control" id="passwordField" name="password">
             </div>
             <div class="form-group">
-                <label for="passwordFieldVerify">Password</label>
+                <label for="passwordFieldVerify">Repeat Password</label>
                 <input type="password" class="form-control" id="passwordFieldVerify" name="passwordVerify">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>

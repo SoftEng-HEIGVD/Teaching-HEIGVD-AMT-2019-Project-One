@@ -10,7 +10,7 @@
             <td>
             <a href="${pageContext.request.contextPath}/classInfo?id=${class.id}">
                 <button class="btn btn-outline-dark" style="width: 50%">
-                    <h2 style="color: white"><img src="./images/${fn:toLowerCase(class.name)}Icon.png" style="background-color: white; border-radius: 10px"> ${class.name}</h2>
+                    <h2 style="color: white"><img src="./images/icons/${fn:toLowerCase(class.name)}.jpeg" style="background-color: white; border-radius: 10px"> ${class.name}</h2>
                 </button>
             </a>
 
