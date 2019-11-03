@@ -1,6 +1,6 @@
 # Teaching-HEIGVD-AMT-2019-Project-One
 ## Introduction
-Our service is a film rating app service. Users should be able to view a list of films and rate them as they
+Our service is a film preference app service. Users should be able to view a list of films and rate them as they
 please.
 
 ## Work done

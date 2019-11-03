@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class RatingTest {
+public class PreferenceTest {
 
     @Test
-    void itShouldBePossibleToCreateUsers() {
+    void itShouldBePossibleToCreatePreferences() {
         User john = User.builder()
                 .id(0)
                 .firstName("John")
@@ -22,14 +22,13 @@ public class RatingTest {
                 .title("The Reckoning")
                 .build();
 
-        Rating rating = new Rating.RatingBuilder()
+        Preference preference = new Preference.PreferenceBuilder()
                 .user(john)
                 .film(movie)
-                .rating(0)
                 .build();
 
-        assertNotNull(rating);
-        assertEquals(movie, rating.getFilm());
-        assertEquals(john, rating.getUser());
+        assertNotNull(preference);
+        assertEquals(movie, preference.getFilm());
+        assertEquals(john, preference.getUser());
     }
 }

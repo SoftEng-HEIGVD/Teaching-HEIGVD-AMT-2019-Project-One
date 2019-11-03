@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+// TODO: We'd have to handle images as DAO
+
 @Builder
 @Getter
 @EqualsAndHashCode
