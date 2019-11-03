@@ -47,7 +47,14 @@
           <version>5.5.0-M1</version>
           <scope>test</scope>
       </dependency>
+    <!-- https://mvnrepository.com/artifact/org.mindrot/jbcrypt -->
+      <dependency>
+          <groupId>org.mindrot</groupId>
+          <artifactId>jbcrypt</artifactId>
+          <version>0.3m</version>
+      </dependency>
   </dependencies>
+
 
   <build>
     <finalName>manageFootball-WebApp</finalName>
