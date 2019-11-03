@@ -15,7 +15,7 @@ import java.sql.SQLException;
 
 public class PlayerDAO implements IPlayerDAO {
 
-    @Resource(lookup = "java:/jdbc/notes")
+    @Resource(lookup = "java:/jdbc/fmDS")
     DataSource dataSource;
 
     @EJB

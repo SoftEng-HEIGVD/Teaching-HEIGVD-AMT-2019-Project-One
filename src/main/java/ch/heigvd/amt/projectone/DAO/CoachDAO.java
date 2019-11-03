@@ -15,7 +15,7 @@ import java.sql.SQLException;
 
 public class CoachDAO implements ICoachDAO {
 
-    @Resource(lookup = "java:/jdbc/notes")
+    @Resource(lookup = "java:/jdbc/fmDS")
     DataSource dataSource;
 
     @EJB
@@ -28,7 +28,7 @@ public class CoachDAO implements ICoachDAO {
             con = dataSource.getConnection();
             PreparedStatement statement = con.prepareStatement("INSERT INTO amt_coaches (USERNAME, PASSWORD, FIRST_NAME, LAST_NAME, NAMETEAM, ISADMIN) VALUES (?, ?, ?, ?, ?,?)");
             statement.setString(1, entity.getUsername());
-            statement.setString(2, entity.getPassword());
+            statement.setString(2, authentification.hashPassword(entity.getPassword()));
             statement.setString(3, entity.getFirstName());
             statement.setString(4, entity.getLastName());
             statement.setString(5, entity.getTeam().getName());
