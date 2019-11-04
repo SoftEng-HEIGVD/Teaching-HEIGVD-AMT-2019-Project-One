@@ -128,7 +128,7 @@ ALTER TABLE ONLY public.mount
 --
 
 ALTER TABLE ONLY public.membership
-    ADD CONSTRAINT "Character_id_fkey" FOREIGN KEY (character_id) REFERENCES public.character (id) NOT VALID;
+    ADD CONSTRAINT "Character_id_fkey" FOREIGN KEY (character_id) REFERENCES public.character (id)  ON DELETE CASCADE NOT VALID;
 
 
 --
@@ -136,7 +136,7 @@ ALTER TABLE ONLY public.membership
 --
 
 ALTER TABLE ONLY public.character
-    ADD CONSTRAINT "Class_id_fkey" FOREIGN KEY (class_id) REFERENCES public.class(id) NOT VALID;
+    ADD CONSTRAINT "Class_id_fkey" FOREIGN KEY (class_id) REFERENCES public.class(id) NOT VALID ON DELETE SET NULL;
 
 
 --
@@ -144,7 +144,7 @@ ALTER TABLE ONLY public.character
 --
 
 ALTER TABLE ONLY public.membership
-    ADD CONSTRAINT "Guild_id_fkey" FOREIGN KEY (guild_id) REFERENCES public.guild(id) NOT VALID;
+    ADD CONSTRAINT "Guild_id_fkey" FOREIGN KEY (guild_id) REFERENCES public.guild(id) ON DELETE CASCADE NOT VALID;
 
 
 --
@@ -152,7 +152,7 @@ ALTER TABLE ONLY public.membership
 --
 
 ALTER TABLE ONLY public.character
-    ADD CONSTRAINT "Mount_id_fkey" FOREIGN KEY (mount_id) REFERENCES public.mount(id) NOT VALID;
+    ADD CONSTRAINT "Mount_id_fkey" FOREIGN KEY (mount_id) REFERENCES public.mount(id) ON DELETE SET NULL NOT VALID;
 
 
 -- Fill mount table 
