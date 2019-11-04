@@ -5,11 +5,12 @@
  */
 package Web;
 
-import Model.Player;
-import Services.MatchesManager;
+import Model.Team;
 import Services.PlayerManager;
+import Services.TeamManager;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,10 +20,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author goturak
  */
-public class PlayerServlet extends HttpServlet {
-   
-PlayerManager playerManager = new PlayerManager();
-MatchesManager mm= new MatchesManager();
+public class NewMatchServlet extends HttpServlet {
+
+    PlayerManager playerManager = new PlayerManager();
+    TeamManager teamManager= new TeamManager();
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -36,20 +37,32 @@ MatchesManager mm= new MatchesManager();
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
-         String requestedUser= request.getParameter("u");
-        Player p = playerManager.getPlayer(requestedUser);
         
-        if(p!=null){
-            request.setAttribute("thePlayer", p);
-            request.setAttribute("matches", mm.getMatchesPlayedBy(p));
-
-            request.getRequestDispatcher("WEB-INF/pages/Player.jsp").forward(request,response);
-        }else{
-            request.getRequestDispatcher("WEB-INF/pages/PlayerNotFound.jsp").forward(request,response);
-        }
-    
+        ArrayList<Team> ts= new ArrayList(teamManager.getAllTeams());
+        
+            request.setAttribute("teams", ts);
+            request.setAttribute("players",playerManager.getAllPLayers());
+        request.getRequestDispatcher("WEB-INF/pages/matchAdd.jsp").forward(request,response);
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+      
+           // read form fields
+        String username = req.getParameter("userName");     
+        String name = req.getParameter("name");
+        String team= req.getParameter("team");
+        
+        
+        
+            
+        ArrayList<Team> ts= new ArrayList(teamManager.getAllTeams());
+        
+        req.setAttribute("teams", ts);
+        req.getRequestDispatcher("WEB-INF/pages/matchAdd.jsp").forward(req,resp);
+    }
+
+    
     /**
      * Returns a short description of the servlet.
      *

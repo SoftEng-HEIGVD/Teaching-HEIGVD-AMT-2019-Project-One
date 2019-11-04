@@ -81,22 +81,22 @@
                                                                         <div class="row">
                                                                             <div class="col-lg-5 text-right wow fadeInRight delay-02s">
                                                                                 <c:if test="${empty match.team1}">
-                                                                                            <h2>Team 1</h2>
+                                                                                            <h3>Team 1</h3>
                                                                                 </c:if>
                                                                                 <c:if test="${not empty match.team1}">
-                                                                                    <h2>${match.team1.name}</h2>
+                                                                                    <h3>${match.team1.name}</h3>
 
                                                                                 </c:if>
                                                                             </div>
                                                                             <div class="col-lg-2 text-Center wow fadeInUp delay-02s">
-                                                                              <h2>${match.team1EndScore}-${match.team2EndScore}</h2>
+                                                                              <h3>${match.team1EndScore}-${match.team2EndScore}</h3>
                                                                             </div>
                                                                             <div class="col-lg-5 text-left wow fadeInLeft delay-02s">
                                                                                 <c:if test="${empty match.team1}">
-                                                                                            <h2>Team 2</h2>
+                                                                                            <h3>Team 2</h3>
                                                                                 </c:if>
                                                                                 <c:if test="${not empty match.team2}">
-                                                                                    <h2>${match.team2.name}</h2>
+                                                                                    <h3>${match.team2.name}</h3>
                                                                                 </c:if>
                                                                             </div>
                                                                         </div>	
@@ -108,7 +108,8 @@
                                    
                                  </div>
 
-                                                
+                                
+                        <a href="newMatch"><h3>Add match</h3></a>                 
      
 			
 		</div>

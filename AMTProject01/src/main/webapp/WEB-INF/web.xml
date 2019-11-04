@@ -24,6 +24,10 @@
         <servlet-name>PlayerAddServlet</servlet-name>
         <servlet-class>Web.PlayerAddServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NewMatchServlet</servlet-name>
+        <servlet-class>Web.NewMatchServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PlayersServlet</servlet-name>
         <url-pattern>/players</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>PlayerAddServlet</servlet-name>
         <url-pattern>/newPlayer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewMatchServlet</servlet-name>
+        <url-pattern>/newMatch</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

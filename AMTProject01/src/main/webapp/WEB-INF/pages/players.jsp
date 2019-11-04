@@ -77,19 +77,18 @@
           <c:forEach items="${allPlayers}" var="item">
            
                 <a href="player?u=${item.userName}">
-                    <div class="service-list">
+                    <div class="service-list wow fadeInRight delay-02s">
 
                         <div class="service-list-col2">
                            <h4>${item.userName}</h4>
-
-
                         </div>
-
-
                     </div>
                 </a>
           </c:forEach>
-        </div>
+                 
+              
+           </div>
+                <a href="newPlayer"><h3>Add player</h3></a> 
         <!--<div id="playerInfo" class="collapse col-lg-8 col-sm-6  text-center">
           <img src="img/UserNoImg.png" class="img-fluid float-mi" alt="">
 

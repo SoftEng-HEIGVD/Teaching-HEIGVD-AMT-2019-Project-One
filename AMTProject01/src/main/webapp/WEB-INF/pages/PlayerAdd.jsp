@@ -82,12 +82,12 @@
                                 <form method="post" action="newPlayer">
                                     <div class="form-group">
                                       <label for="inputUserName">User Name</label>
-                                      <input type="text" class="form-control" id="inputUserName" name="userName" placeholder="UserName">
+                                      <input type="text" class="form-control" id="inputUserName" name="userName" placeholder="NoobMaster69">
                                      
                                     </div>
                                     <div class="form-group">
                                       <label for="inputRealName">Real Name</label>
-                                      <input type="text" class="form-control" id="inputRealName" name="name" placeholder="Password">
+                                      <input type="text" class="form-control" id="inputRealName" name="name" placeholder="jean-michel dupont">
                                     </div>
                                       <div class="form-group">
                                         <label for="Team">Team</label>

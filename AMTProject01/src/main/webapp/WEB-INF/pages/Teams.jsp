@@ -76,9 +76,9 @@
              <div class="list-group">
             <c:forEach items="${teams}" var="item">
                     <a href="team?t=${item.name}">
-                            <div class="service-list">
+                            <div class="service-list wow fadeInRight delay-02s">
 
-                                <div class="service-list-col2">
+                                <div class="service-list-col2 ">
                                    <h4>${item.name}</h4>
 
 
