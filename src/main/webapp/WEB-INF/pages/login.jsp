@@ -38,7 +38,7 @@
     <div class="container-fluid">
         <img class="mySlides" src="./images/banner.jpg" style="width:100%">
     </div>
-    <div class="container" style="background-color: orange">
+    <div class="container">
         <form id="loginForm" method="post" action="${pageContext.request.contextPath}/login">
             <div class="form-group">
                 <label for="usernameField">Username</label>
@@ -62,9 +62,9 @@
 
 
 
-    <div class="container" style="background-color: orange">
+    <div class="container">
         New to Dungeons and Unicorns ?
-        <a href="${pageContext.request.contextPath}/register" style="color: #2C93FF">Sign up</a>
+        <a href="${pageContext.request.contextPath}/register" style="color: #2C93FF">Sign up !</a>
     </div>
 </div>
 
