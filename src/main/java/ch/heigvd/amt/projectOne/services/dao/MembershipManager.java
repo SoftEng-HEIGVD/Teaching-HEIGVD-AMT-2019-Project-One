@@ -100,4 +100,27 @@ public class MembershipManager implements MembershipManagerLocal {
 
         return false;
     }
+
+    @Override
+    public boolean checkCharacterMembership(Character character, Guild guild) {
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement("SELECT id FROM membership WHERE character_id=? AND guild_id=?");
+            pstmt.setObject(1, character.getId());
+            pstmt.setObject(2, guild.getId());
+
+            ResultSet rs = pstmt.executeQuery();
+
+            connection.close();
+
+            if (rs.next()) {
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
 }

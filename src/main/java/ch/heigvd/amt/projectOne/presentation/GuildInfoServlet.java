@@ -1,5 +1,6 @@
 package ch.heigvd.amt.projectOne.presentation;
 
+import ch.heigvd.amt.projectOne.model.Character;
 import ch.heigvd.amt.projectOne.model.Guild;
 import ch.heigvd.amt.projectOne.services.dao.GuildManagerLocal;
 import ch.heigvd.amt.projectOne.services.dao.MembershipManagerLocal;
@@ -17,10 +18,16 @@ public class GuildInfoServlet extends HttpServlet {
 
     @EJB
     GuildManagerLocal guildManager;
+    @EJB
+    MembershipManagerLocal membershipManager;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         Guild guild = guildManager.getGuildById(Integer.parseInt(req.getParameter("id")));
+        boolean isCharacterMemberOfThisGuild = membershipManager.checkCharacterMembership(
+                (Character) req.getSession().getAttribute("character"), guild);
+
+        req.setAttribute("currentCharMembership", isCharacterMemberOfThisGuild);
         req.setAttribute("guild", guild);
         req.getRequestDispatcher("/WEB-INF/pages/guild_info.jsp").forward(req, resp);
     }
