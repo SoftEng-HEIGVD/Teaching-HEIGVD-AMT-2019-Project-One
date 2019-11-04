@@ -136,7 +136,7 @@ ALTER TABLE ONLY public.membership
 --
 
 ALTER TABLE ONLY public.character
-    ADD CONSTRAINT "Class_id_fkey" FOREIGN KEY (class_id) REFERENCES public.class(id) NOT VALID ON DELETE SET NULL;
+    ADD CONSTRAINT "Class_id_fkey" FOREIGN KEY (class_id) REFERENCES public.class(id) ON DELETE SET NULL NOT VALID;
 
 
 --
