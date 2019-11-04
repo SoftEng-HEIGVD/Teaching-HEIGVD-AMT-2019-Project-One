@@ -1,8 +1,8 @@
 package ch.heigvd.amt.projectone.web;
 
-import ch.heigvd.amt.projectone.model.Product;
-import ch.heigvd.amt.projectone.services.ProductsManager;
+import ch.heigvd.amt.projectone.services.dao.ProductsManager;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +13,7 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/products")
 public class ProductsServlet extends HttpServlet {
 
+    @EJB
     ProductsManager productsManager = new ProductsManager();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -21,6 +22,8 @@ public class ProductsServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Product product = productsManager.getRandomProduct();
+        response.setContentType("text/html;charset=UTF-8");
+        request.setAttribute("products",productsManager.getAllProducts());
+        request.getRequestDispatcher("/WEB-INF/pages/products.jsp").forward(request, response);
     }
 }

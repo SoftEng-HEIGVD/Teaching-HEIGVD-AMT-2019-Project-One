@@ -4,16 +4,16 @@ public class Product {
 
     private int id;
     private String name;
-    private int unitPrice;
+    private double unitPrice;
 
 
-    public Product(int id, String name, int unitPrice) {
+    public Product(int id, String name, double unitPrice) {
         this.id = id;
         this.name = name;
         this.unitPrice = unitPrice;
     }
 
-    public int getId() {
+    public double getId() {
         return id;
     }
 
@@ -21,7 +21,7 @@ public class Product {
         return name;
     }
 
-    public int getUnitPrice() {
+    public double getUnitPrice() {
         return unitPrice;
     }
 

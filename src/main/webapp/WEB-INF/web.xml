@@ -4,12 +4,4 @@
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
   <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-    <servlet-name>ChilloutServlet</servlet-name>
-    <servlet-class>ch.heigvd.amt.projectone.web.ChilloutServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ChilloutServlet</servlet-name>
-    <url-pattern>/chill</url-pattern>
-  </servlet-mapping>
 </web-app>
