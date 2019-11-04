@@ -36,17 +36,17 @@
             <th>Actions</th>
         </tr>
         </thead>
-        <c:forEach items="${characters}" var="character" varStatus="loop">
+        <c:forEach items="${characters}" var="guild" varStatus="loop">
             <tr>
-                <td><h2 style="color: white">${character.name}</h2></td>
-                <td><i class="fas fa-${(character.isadmin ?  "check" : "times")}"></i></td>
+                <td><h2 style="color: white">${guild.name}</h2></td>
+                <td><i class="fas fa-${(guild.isadmin ?  "check" : "times")}"></i></td>
                 <td>
-                    <c:if test="${character.id != sessionScope.character.id}">
-                        <a href="${pageContext.request.contextPath}/admin/characters/delete?id=${character.id}"><i
+                    <c:if test="${guild.id != sessionScope.character.id}">
+                        <a href="${pageContext.request.contextPath}/admin/characters/delete?id=${guild.id}"><i
                                 class="fas fa-trash-alt"></i></a>
                     </c:if>
 
-                    <a href="${pageContext.request.contextPath}/admin/characters/update?id=${character.id}"><i
+                    <a href="${pageContext.request.contextPath}/admin/characters/update?id=${guild.id}"><i
                             class="fas fa-pen"></i></a>
                 </td>
             </tr>

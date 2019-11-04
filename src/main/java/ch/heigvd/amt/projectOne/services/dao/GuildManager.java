@@ -69,7 +69,6 @@ public class GuildManager implements GuildManagerLocal {
 
     @Override
     public boolean addGuild(Guild guild) {
-        ;
 
         try {
             Connection connection = dataSource.getConnection();

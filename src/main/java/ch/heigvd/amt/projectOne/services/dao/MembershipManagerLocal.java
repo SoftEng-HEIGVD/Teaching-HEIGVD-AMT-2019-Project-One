@@ -8,6 +8,9 @@ import java.util.List;
 @Local
 public interface MembershipManagerLocal {
 
+    public boolean addMembership(Membership membership);
+
     public List<Membership> getMembershipsByUserId(int id);
+
     public boolean removeMembership(int id);
 }

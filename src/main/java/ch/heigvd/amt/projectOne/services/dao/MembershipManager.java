@@ -24,6 +24,28 @@ public class MembershipManager implements MembershipManagerLocal {
 
 
     @Override
+    public boolean addMembership(Membership membership) {
+
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement("INSERT INTO membership(character_id, guild_id, rank) VALUES (?, ?, ?);");
+            pstmt.setObject(1, membership.getCharacter().getId());
+            pstmt.setObject(2, membership.getGuild().getId());
+            pstmt.setObject(3, "Apprentice");
+
+            int row = pstmt.executeUpdate();
+            connection.close();
+
+            return row > 0;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+
+    @Override
     public List<Membership> getMembershipsByUserId(int id) {
         List<Membership> memberships = new ArrayList<>();
 

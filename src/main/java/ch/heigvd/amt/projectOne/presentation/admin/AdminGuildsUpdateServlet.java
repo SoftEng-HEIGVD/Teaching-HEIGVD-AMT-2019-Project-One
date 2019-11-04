@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/admin/guilds")
-public class AdminGuildsServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/admin/guilds/update")
+public class AdminGuildsUpdateServlet extends HttpServlet {
 
     @EJB
     private GuildManagerLocal guildManager;
