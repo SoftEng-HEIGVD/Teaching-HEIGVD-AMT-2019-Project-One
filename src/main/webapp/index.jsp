@@ -54,7 +54,7 @@
 				</div>
 
 				<div class="text-center">
-					<a href="WEB-INF/pages/registration.jsp" class="txt2 hov1">
+					<a href="./registration" class="txt2 hov1">
 						Sign Up
 					</a>
 				</div>

@@ -15,7 +15,7 @@
 </head>
 <body>
 <h1>Football Manager Register Form</h1>
-<form action="footballManager_register" method="post">
+<form action="./registration" method="post">
     <table style="with: 50%">
         <tr>
             <td>First Name</td>

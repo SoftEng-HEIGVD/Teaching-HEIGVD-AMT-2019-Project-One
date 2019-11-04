@@ -6,19 +6,18 @@ import ch.heigvd.amt.projectone.model.Team;
 import javax.annotation.Resource;
 import javax.ejb.DuplicateKeyException;
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Stateless
 public class TeamDAO implements ITeamDAO {
 
     @Resource(lookup = "java:/jdbc/fmDS")
     DataSource dataSource;
-
-    @EJB
-    IAuthentification authentication;
 
     @Override
     public Team create(Team entity) throws DuplicateKeyException {

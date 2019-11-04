@@ -14,5 +14,4 @@ public class Coach {
     private String username;
     private String password;
     private boolean isAdmin;
-    private int id;
 }

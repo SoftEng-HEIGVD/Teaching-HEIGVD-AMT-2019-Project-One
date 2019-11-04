@@ -18,8 +18,8 @@ public class LoginDAO {
     @Resource(lookup = "java:/jdbc/fmDS")
     DataSource dataSource;
 
-    @EJB
-    IAuthentification authentification;
+
+    //IAuthentification authentification;
 
     public boolean authentificate(String username, String pwd) throws SQLException {
         Boolean isLogin = false;
@@ -32,7 +32,6 @@ public class LoginDAO {
 
             ResultSet result = statement.executeQuery();
             boolean hasRecord = result.next();
-            System.out.println(result.next());
 
             if (!hasRecord) {
             }

@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
 
         try {
             if(ld.authentificate(n, p)){
-                RequestDispatcher rd=request.getRequestDispatcher("view.jsp");
+                RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/pages/view.jsp");
                 rd.forward(request,response);
             }
             else{

@@ -7,19 +7,20 @@ import ch.heigvd.amt.projectone.model.Team;
 import javax.annotation.Resource;
 import javax.ejb.DuplicateKeyException;
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Stateless
 public class CoachDAO implements ICoachDAO {
 
     @Resource(lookup = "java:/jdbc/fmDS")
     DataSource dataSource;
 
-    @EJB
-    IAuthentification authentification;
+
 
     @Override
     public Coach create(Coach entity) throws DuplicateKeyException {
@@ -28,7 +29,7 @@ public class CoachDAO implements ICoachDAO {
             con = dataSource.getConnection();
             PreparedStatement statement = con.prepareStatement("INSERT INTO amt_coaches (USERNAME, PASSWORD, FIRST_NAME, LAST_NAME, NAMETEAM, ISADMIN) VALUES (?, ?, ?, ?, ?,?)");
             statement.setString(1, entity.getUsername());
-            statement.setString(2, authentification.hashPassword(entity.getPassword()));
+            statement.setString(2, entity.getPassword());
             statement.setString(3, entity.getFirstName());
             statement.setString(4, entity.getLastName());
             statement.setString(5, entity.getTeam().getName());
