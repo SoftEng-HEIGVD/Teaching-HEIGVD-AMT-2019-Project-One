@@ -37,13 +37,17 @@ The main objective of this project is to apply the patterns and techniques prese
 * **Testing**
   * **Unit testing**. In the report, you will document how you have tested the different types of components (model, EJBs, servlets). You will provide metrics for your test coverage.
   * **Performance and load testing**.
-  * **Automated User Acceptance** testing (with a tool like Selenium, which we will see soon)
+  * ~~**Automated User Acceptance** testing (with a tool like Selenium, which we will see soon)~~
 
 ## Organization
 
 **You will work in teams of 2 students**. For effective learning, it is important that each person works on every aspect (do not split code vs testing, because you will miss learning opportunities).
 
-**Deadline for submission: November 10th, 23h.**
+~~**Deadline for submission: November 10th, 23h.**~~
+
+**Deadline for submission: November 11th, 23h.**
+
+
 
 **Deliverables:**
 
