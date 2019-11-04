@@ -20,6 +20,10 @@
         <servlet-name>TeamsServlet</servlet-name>
         <servlet-class>Web.TeamsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PlayerAddServlet</servlet-name>
+        <servlet-class>Web.PlayerAddServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PlayersServlet</servlet-name>
         <url-pattern>/players</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>TeamsServlet</servlet-name>
         <url-pattern>/teams</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PlayerAddServlet</servlet-name>
+        <url-pattern>/newPlayer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

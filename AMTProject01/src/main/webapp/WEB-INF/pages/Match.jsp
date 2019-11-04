@@ -57,9 +57,9 @@
 		<!--main-nav-start-->
 		<div class="container">
 			<ul class="main-nav">
-				<li><a href="matches.html">Matches</a></li>
-                                <li><a href="teams.html">Teams</a></li>
-				<li><a href="playersHtml.html">Players</a></li>
+				<li><a href="matches">Matches</a></li>
+                                <li><a href="teams">Teams</a></li>
+				<li><a href="players">Players</a></li>
 
 			</ul>
 			<a class="res-nav_click" href="#"><i class="fa fa-bars"></i></a>
@@ -78,11 +78,11 @@
                     <div class="col-lg-5 text-right wow fadeInRight delay-02s">
 
                        <c:if test="${empty match.team1}">
-                                    <h2>No Team</h2>
+                                    <h2>Team 1</h2>
                         </c:if>
                         <c:if test="${not empty match.team1}">
-                            <h2>${mtch.team1.name}</h2>
-                            <br>
+                            <h2>${match.team1.name}</h2>
+                       
                         </c:if>
                         <div class="">
 
@@ -109,13 +109,13 @@
                        
                     </div>
                     
-                    <div class="col-lg-5 text-left wow fadeInRight delay-02s">
+                    <div class="col-lg-5 text-left wow fadeInLeft delay-02s">
 
-                       <c:if test="${empty match.team1}">
-                                    <h2>No Team</h2>
+                        <c:if test="${empty match.team1}">
+                                    <h2>Team 2</h2>
                         </c:if>
-                        <c:if test="${not empty match.team1}">
-                            <h2>${mtch.team2.name}</h2>
+                        <c:if test="${not empty match.team2}">
+                            <h2>${match.team2.name}</h2>
                         </c:if>
                         <div class="">
 

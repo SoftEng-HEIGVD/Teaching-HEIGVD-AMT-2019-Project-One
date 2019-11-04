@@ -41,6 +41,15 @@ public class Player {
     public Team getTeam() {
         return team;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Player)){
+            return false;
+        }
+        Player p= (Player)obj;
+        return p.getUserName().equals(this.userName); //To change body of generated methods, choose Tools | Templates.
+    }
     
        
 }

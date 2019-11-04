@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author goturak
  */
-@WebServlet(name = "MatchesServlet", urlPatterns = {"/Matches"})
+@WebServlet(name = "MatchesServlet", urlPatterns = {"/matches"})
 public class MatchesServlet extends HttpServlet {
      MatchesManager mm= new MatchesManager();
 /**
@@ -37,10 +37,8 @@ public class MatchesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
-        //Player p = playerManager.getRandomPlayer();
-       // request.setAttribute("thePlayer", p);
-        //.setAttribute("allPlayers", playerManager.getAllPLayers());
-        request.getRequestDispatcher("WEB-INF/pages/players.jsp").forward(request,response);
+        request.setAttribute("allMatches", mm.getAll());
+        request.getRequestDispatcher("WEB-INF/pages/matches.jsp").forward(request,response);
     }
 
     /**

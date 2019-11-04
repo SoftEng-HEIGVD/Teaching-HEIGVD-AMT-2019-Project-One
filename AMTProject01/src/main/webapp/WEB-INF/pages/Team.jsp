@@ -57,9 +57,9 @@
 		<!--main-nav-start-->
 		<div class="container">
 			<ul class="main-nav">
-				<li><a href="matches.html">Matches</a></li>
-                                <li><a href="teams.html">Teams</a></li>
-				<li><a href="playersHtml.html">Players</a></li>
+				<li><a href="matches">Matches</a></li>
+                                <li><a href="teams">Teams</a></li>
+				<li><a href="players">Players</a></li>
 
 			</ul>
 			<a class="res-nav_click" href="#"><i class="fa fa-bars"></i></a>
