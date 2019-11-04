@@ -11,49 +11,58 @@
         <tbody>
         <tr>
             <td>
-                <table class="table text-center myProfile" >
+                <table class="table text-center myProfile">
                     <tr>
-                        <td colspan="2"><img class="mySlides" src="./images/classes/${fn:replace(fn:toLowerCase(character.myClass.name), ' ','')}.gif" style="width:200px"></td>
+                        <td colspan="2"><img class="mySlides"
+                                             src="./images/classes/${fn:replace(fn:toLowerCase(character.myClass.name), ' ','')}.gif"
+                                             style="width:200px"></td>
                     </tr>
                     <tr>
                         <td colspan="2"><h1>${requestScope.character.name}</h1></td>
                     </tr>
                     <tr>
                         <td>
-                            Class :</td>
+                            Class :
+                        </td>
                         <td>${requestScope.character.myClass.name}</td>
                     </tr>
                     <tr>
                         <td>Level :</td>
                         <td>${requestScope.character.level}</td>
                     </tr>
-                    <tr>
-                        <td>Health :</td>
-                        <td>${requestScope.character.health}</td>
-                    </tr>
-                    <tr>
-                        <td>Stamina :</td>
-                        <td>${requestScope.character.stamina}</td>
-                    </tr>
-                    <tr>
-                        <td>Mana :</td>
-                        <td>${requestScope.character.mana}</td>
-                    </tr>
+                    <c:if test="${requestScope.character.id == sessionScope.character.id}">
+                        <tr>
+                            <td>Health :</td>
+                            <td>${requestScope.character.health}</td>
+                        </tr>
+                        <tr>
+                            <td>Stamina :</td>
+                            <td>${requestScope.character.stamina}</td>
+                        </tr>
+                        <tr>
+                            <td>Mana :</td>
+                            <td>${requestScope.character.mana}</td>
+                        </tr>
+                    </c:if>
                 </table>
 
             </td>
             <td>
                 <table class="table text-center myProfile">
                     <tr>
-                        <td colspan="2"><img class="mySlides" src="./images/mounts/${fn:replace(fn:toLowerCase(requestScope.character.mount.name), ' ','')}" style="width:200px"></td>
+                        <td colspan="2"><img class="mySlides"
+                                             src="./images/mounts/${fn:replace(fn:toLowerCase(requestScope.character.mount.name), ' ','')}"
+                                             style="width:200px"></td>
                     </tr>
                     <tr>
                         <td colspan="2"><h1>${requestScope.character.mount.name}</h1></td>
                     </tr>
-                    <tr>
-                        <td>Speed :</td>
-                        <td>${requestScope.character.mount.speed}</td>
-                    </tr>
+                    <c:if test="${requestScope.character.id == sessionScope.character.id}">
+                        <tr>
+                            <td>Speed :</td>
+                            <td>${requestScope.character.mount.speed}</td>
+                        </tr>
+                    </c:if>
                 </table>
             </td>
         </tr>
@@ -75,13 +84,18 @@
                     <table>
                         <tr>
                             <td>
-                                <img src="./images/${fn:replace(fn:toLowerCase(membership.guild.name), ' ', '')}.jpg" />
+                                <img src="./images/${fn:replace(fn:toLowerCase(membership.guild.name), ' ', '')}.jpg"/>
                             </td>
                             <td>
                                 <h4>${membership.guild.name}</h4></br>
                                 <h4>Rank : ${membership.rank}</h4></br>
-                                <a class="btn btn-primary" href="${pageContext.request.contextPath}/guilds/info?id=${membership.guild.id}">Learn more</a></br>
-                                <a class="btn btn-danger" href="${pageContext.request.contextPath}/guilds/leave?id=${membership.id}">Leave</a>
+                                <a class="btn btn-primary"
+                                   href="${pageContext.request.contextPath}/guilds/info?id=${membership.guild.id}">Learn
+                                    more</a></br>
+                                <c:if test="${requestScope.character.id == sessionScope.character.id}">
+                                <a class="btn btn-danger"
+                                   href="${pageContext.request.contextPath}/guilds/leave?id=${membership.id}">Leave</a>
+                                </c:if>
                             </td>
                         </tr>
                     </table>
