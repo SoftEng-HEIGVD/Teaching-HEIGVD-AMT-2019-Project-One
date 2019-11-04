@@ -3,10 +3,10 @@
 <%
     java.util.Enumeration params = request.getParameterNames();
     StringBuilder parameters = new StringBuilder();
-    while(params.hasMoreElements()) {
+    while (params.hasMoreElements()) {
         String paramName = (String) params.nextElement();
         String paramValue = request.getParameter(paramName);
-        if(!paramName.equals("page")) {
+        if (!paramName.equals("page")) {
             parameters.append(paramName).append("=").append(paramValue).append("&");
         }
     }
@@ -21,7 +21,7 @@
         </form>
 
         <a href="${pageContext.request.contextPath}/characters">All</a> /
-        <c:set var="alphabet" value="a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z" />
+        <c:set var="alphabet" value="a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z"/>
         <c:forTokens var="letter" items="${alphabet}" delims=",">
             <a href="${pageContext.request.contextPath}/characters?letter=${letter}">${letter}</a> /
         </c:forTokens>
@@ -34,10 +34,10 @@
                 <tr>
             </c:if>
             <td>
-                <a>
+                <a href="${pageContext.request.contextPath}/profile?id=${character.id}">
                     <button class="btn btn-outline-dark">
                         <h2 style="color: white">${character.name}</h2>
-                        <h6 style="color: white">${character.myClass.name} level: ${character.level}</h6>
+                        <h6 style="color: white">${character.myClass.name} level ${character.level}</h6>
                     </button>
                 </a>
 

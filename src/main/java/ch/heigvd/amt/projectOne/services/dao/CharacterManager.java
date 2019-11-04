@@ -117,7 +117,20 @@ public class CharacterManager implements CharacterManagerLocal {
                 int class_id = rs.getInt("class_id");
                 String class_name = rs.getString("class_name");
                 boolean isadmin = rs.getBoolean("isadmin");
-                characters.add(Character.builder().id(id).name(name).level(level).health(health).stamina(stamina).mana(mana).mount(Mount.builder().id(mount_id).name(mount_name).speed(mount_speed).build()).myClass(Class.builder().id(class_id).name(class_name).build()).isadmin(isadmin).build());
+
+                characters.add(Character.builder()
+                        .id(id)
+                        .name(name)
+                        .level(level)
+                        .health(health)
+                        .stamina(stamina)
+                        .mana(mana)
+                        .mount(Mount.builder()
+                                .id(mount_id)
+                                .name(mount_name)
+                                .speed(mount_speed)
+                                .build())
+                        .myClass(Class.builder().id(class_id).name(class_name).build()).isadmin(isadmin).build());
             }
             connection.close();
 
@@ -223,7 +236,7 @@ public class CharacterManager implements CharacterManagerLocal {
 
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM character WHERE id=?");
+            PreparedStatement pstmt = connection.prepareStatement("SELECT character.*, mount.name AS mount_name, mount.speed AS mount_speed, class.name AS class_name FROM character INNER JOIN mount ON character.mount_id = mount.id INNER JOIN class ON character.class_id = class.id WHERE character.id=?");
             pstmt.setObject(1, id);
 
             ResultSet rs = pstmt.executeQuery();
@@ -235,12 +248,32 @@ public class CharacterManager implements CharacterManagerLocal {
             int stamina = rs.getInt("stamina");
             int mana = rs.getInt("mana");
             int mount_id = rs.getInt("mount_id");
+            String mount_name = rs.getString("mount_name");
+            int mount_speed = rs.getInt("mount_speed");
             int class_id = rs.getInt("class_id");
+            String class_name = rs.getString("class_name");
             boolean isadmin = rs.getBoolean("isadmin");
 
             connection.close();
 
-            return Character.builder().id(id).name(name).level(level).health(health).stamina(stamina).mana(mana).isadmin(isadmin).build();
+            return Character.builder()
+                    .id(id)
+                    .name(name)
+                    .level(level)
+                    .health(health)
+                    .stamina(stamina)
+                    .mana(mana)
+                    .mount(Mount.builder()
+                            .id(mount_id)
+                            .name(mount_name)
+                            .speed(mount_speed)
+                            .build())
+                    .myClass(Class.builder()
+                            .id(class_id)
+                            .name(class_name)
+                            .build())
+                    .isadmin(isadmin)
+                    .build();
 
         } catch (SQLException ex) {
             Logger.getLogger(CharacterManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -272,7 +305,24 @@ public class CharacterManager implements CharacterManagerLocal {
                 int class_id = rs.getInt("class_id");
                 String class_name = rs.getString("class_name");
                 boolean isadmin = rs.getBoolean("isadmin");
-                character = Character.builder().id(id).name(name).level(level).health(health).stamina(stamina).mana(mana).mount(Mount.builder().id(mount_id).name(mount_name).speed(mount_speed).build()).myClass(Class.builder().id(class_id).name(class_name).build()).isadmin(isadmin).build();
+                character = Character.builder()
+                        .id(id)
+                        .name(name)
+                        .level(level)
+                        .health(health)
+                        .stamina(stamina)
+                        .mana(mana)
+                        .mount(Mount.builder()
+                                .id(mount_id)
+                                .name(mount_name)
+                                .speed(mount_speed)
+                                .build())
+                        .myClass(Class.builder()
+                                .id(class_id)
+                                .name(class_name)
+                                .build())
+                        .isadmin(isadmin)
+                        .build();
 
             }
             connection.close();

@@ -38,6 +38,7 @@ public class ProfileServlet extends HttpServlet {
 
     List<Membership> memberships = membershipManager.getMembershipsByUserId(character.getId());
 
+    req.setAttribute("character", character);
     req.setAttribute("memberships", memberships);
     req.getRequestDispatcher("/WEB-INF/pages/profile.jsp").forward(req, resp);
   }

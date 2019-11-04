@@ -23,7 +23,7 @@ public class CharactersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int pageNumberInt;
         int numberOfUser;
-        List<Character> characters = new ArrayList<>();
+        List<Character> characters;
 
         if (!req.getParameterMap().containsKey("page")) {
             pageNumberInt = 1;
@@ -32,12 +32,12 @@ public class CharactersServlet extends HttpServlet {
         }
 
         if (req.getParameterMap().containsKey("letter")) {
-            characters = characterManager.getCharactersByPattern(req.getParameter("letter"),pageNumberInt -1 );
+            characters = characterManager.getCharactersByPattern(req.getParameter("letter"), pageNumberInt - 1);
             numberOfUser = characterManager.countRows("character", "WHERE character.name ILIKE '" + req.getParameter("letter") + "%'");
-        } else if(req.getParameterMap().containsKey("searchBar")) {
-            characters = characterManager.getCharactersByPattern(req.getParameter("searchBar"),pageNumberInt -1 );
+        } else if (req.getParameterMap().containsKey("searchBar")) {
+            characters = characterManager.getCharactersByPattern(req.getParameter("searchBar"), pageNumberInt - 1);
             numberOfUser = characterManager.countRows("character", "WHERE character.name ILIKE '" + req.getParameter("searchBar") + "%'");
-        }else{
+        } else {
             numberOfUser = characterManager.countRows("character", "");
             characters = characterManager.getCharactersByPage(pageNumberInt - 1);
         }

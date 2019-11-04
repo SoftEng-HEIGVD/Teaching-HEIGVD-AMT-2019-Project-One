@@ -16,28 +16,28 @@
                         <td colspan="2"><img class="mySlides" src="./images/classes/${fn:replace(fn:toLowerCase(character.myClass.name), ' ','')}.gif" style="width:200px"></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><h1>${sessionScope.character.name}</h1></td>
+                        <td colspan="2"><h1>${requestScope.character.name}</h1></td>
                     </tr>
                     <tr>
                         <td>
                             Class :</td>
-                        <td>${sessionScope.character.myClass.name}</td>
+                        <td>${requestScope.character.myClass.name}</td>
                     </tr>
                     <tr>
                         <td>Level :</td>
-                        <td>${sessionScope.character.level}</td>
+                        <td>${requestScope.character.level}</td>
                     </tr>
                     <tr>
                         <td>Health :</td>
-                        <td>${sessionScope.character.health}</td>
+                        <td>${requestScope.character.health}</td>
                     </tr>
                     <tr>
                         <td>Stamina :</td>
-                        <td>${sessionScope.character.stamina}</td>
+                        <td>${requestScope.character.stamina}</td>
                     </tr>
                     <tr>
                         <td>Mana :</td>
-                        <td>${sessionScope.character.mana}</td>
+                        <td>${requestScope.character.mana}</td>
                     </tr>
                 </table>
 
@@ -45,14 +45,14 @@
             <td>
                 <table class="table text-center myProfile">
                     <tr>
-                        <td colspan="2"><img class="mySlides" src="./images/mounts/${fn:replace(fn:toLowerCase(character.mount.name), ' ','')}" style="width:200px"></td>
+                        <td colspan="2"><img class="mySlides" src="./images/mounts/${fn:replace(fn:toLowerCase(requestScope.character.mount.name), ' ','')}" style="width:200px"></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><h1>${sessionScope.character.mount.name}</h1></td>
+                        <td colspan="2"><h1>${requestScope.character.mount.name}</h1></td>
                     </tr>
                     <tr>
                         <td>Speed :</td>
-                        <td>${sessionScope.character.mount.speed}</td>
+                        <td>${requestScope.character.mount.speed}</td>
                     </tr>
                 </table>
             </td>
