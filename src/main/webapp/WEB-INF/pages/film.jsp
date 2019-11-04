@@ -43,46 +43,17 @@
     </header>
 
     <main role="main">
-
-      <section class="jumbotron text-center">
-        <div class="container">
-          <h1 class="jumbotron-heading">Movies Preferences Library</h1>
-          <p class="lead text-muted">Share your love of movies with others</p>
-          <p>
-            <a href="#" class="btn btn-primary my-2">Main call to action</a>
-            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-          </p>
-        </div>
+      <section style="height: 650px; background-color: black; background-size: 500px 100%; background-image: url('assets/img/spider_man.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-position: center;">
       </section>
 
-      <div class="album py-5 bg-light">
-        <div class="container">
-
-          <div class="row">
-
-            <c:forEach items="${films}" var="film">
-              <div class="col-md-3">
-                <div class="card mb-4 box-shadow">
-                  <img class="card-img-top" alt="Thumbnail [100%x225]" style="height: 400px; width: 100%; display: block;" src="./assets/img/${film.moviePosterPath}" >
-                  <div class="card-body" style="height: 130px">
-                    <p class="card-text">${film.title}</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Like</button>
-                      </div>
-                      <div>
-                        <small class="text-muted">${film.runningTime} mins</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </c:forEach>
-          </div>
-        </div>
+      <div class="container">
+        <h1 class="jumbotron-heading">Movies Preferences Library</h1>
+        <p class="lead text-muted">Share your love of movies with others</p>
+        <p>
+          <a href="#" class="btn btn-primary my-2">Main call to action</a>
+          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+        </p>
       </div>
-
     </main>
 
     <footer class="text-muted">
