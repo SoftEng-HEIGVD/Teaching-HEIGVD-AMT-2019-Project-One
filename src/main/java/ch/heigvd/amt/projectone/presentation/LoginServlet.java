@@ -3,6 +3,7 @@ package ch.heigvd.amt.projectone.presentation;
 
 import ch.heigvd.amt.projectone.DAO.LoginDAO;
 
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +17,9 @@ import java.sql.SQLException;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/loginpage"})
 public class LoginServlet extends HttpServlet {
 
+    @EJB
+    private LoginDAO ld;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html");
@@ -25,7 +29,7 @@ public class LoginServlet extends HttpServlet {
         String p=request.getParameter("pass");
 
         try {
-            if(LoginDAO.authentificate(n, p)){
+            if(ld.authentificate(n, p)){
                 RequestDispatcher rd=request.getRequestDispatcher("view.jsp");
                 rd.forward(request,response);
             }
