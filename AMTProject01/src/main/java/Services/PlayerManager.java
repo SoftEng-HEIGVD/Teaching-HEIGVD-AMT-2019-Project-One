@@ -48,6 +48,10 @@ public class PlayerManager {
         return players.get(userName);
     }
 
+    
+    public void Add(Player p){
+        
+    }
     public List<Player> getPlayersFrom(Team t) {
         List<Player> res= new ArrayList<Player>();
         for(Player p: players.values()){

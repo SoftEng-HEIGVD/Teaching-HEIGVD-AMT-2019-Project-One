@@ -55,8 +55,8 @@
 		<!--main-nav-start-->
 		<div class="container">
 			<ul class="main-nav">
-				<li><a href="matches.html">Matches</a></li>
-        <li><a href="teams.html">Teams</a></li>
+				<li><a href="matches">Matches</a></li>
+                                <li><a href="teams">Teams</a></li>
 				<li><a href="players">Players</a></li>
 
 			</ul>
@@ -72,27 +72,45 @@
 		<div class="container Player-Box">
 			<h2>Matches</h2>
 			
-      <div class="row">
-				<div class="list-group col-lg-4 col-sm-6 wow fadeInLeft delay-05s ">
+                        
+				<div class="list-group wow ">
+                                        <c:forEach items="${allMatches}" var="match">
 
-          <c:forEach items="${allMatches}" var="item">
-            <div class="service-list">
-  						<div class="service-list-col1">
-  							<i class="fa fa-paw"></i>
-  						</div>
-  						<div class="service-list-col2">
-  							<h3>${item.userName}</h3>
+                                                    <a href="match?id=${match.id}">
+                                                                    <div class="service-list">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-5 text-right wow fadeInRight delay-02s">
+                                                                                <c:if test="${empty match.team1}">
+                                                                                            <h2>Team 1</h2>
+                                                                                </c:if>
+                                                                                <c:if test="${not empty match.team1}">
+                                                                                    <h2>${match.team1.name}</h2>
 
-  							<p>Nom: ${item.name}</p>
-  						</div>
-  					</div>
-          </c:forEach>
-        </div>
-				<figure class="col-lg-8 col-sm-6  text-right wow fadeInUp delay-02s">
-					<img src="img/macbook-pro.png" alt="">
-				</figure>
+                                                                                </c:if>
+                                                                            </div>
+                                                                            <div class="col-lg-2 text-Center wow fadeInUp delay-02s">
+                                                                              <h2>${match.team1EndScore}-${match.team2EndScore}</h2>
+                                                                            </div>
+                                                                            <div class="col-lg-5 text-left wow fadeInLeft delay-02s">
+                                                                                <c:if test="${empty match.team1}">
+                                                                                            <h2>Team 2</h2>
+                                                                                </c:if>
+                                                                                <c:if test="${not empty match.team2}">
+                                                                                    <h2>${match.team2.name}</h2>
+                                                                                </c:if>
+                                                                            </div>
+                                                                        </div>	
+                                                                    </div>
+                                                    </a>    
+                                                                         
+                                      </c:forEach>
+      
+                                   
+                                 </div>
 
-			</div>
+                                                
+     
+			
 		</div>
 	</section>
 	<!--main-section-end-->

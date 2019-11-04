@@ -55,7 +55,7 @@
 		<!--main-nav-start-->
 		<div class="container">
 			<ul class="main-nav">
-				<li><a href="matches.html">Matches</a></li>
+				<li><a href="matches">Matches</a></li>
         <li><a href="teams">Teams</a></li>
 				<li><a href="players">Players</a></li>
 
@@ -75,18 +75,19 @@
                             
              <div class="list-group">
           <c:forEach items="${allPlayers}" var="item">
-            <a href="player?u=${item.userName}">
-                                        <div class="service-list">
-                                           
-                                            <div class="service-list-col2">
-                                               <h4>${item.userName}</h4>
+           
+                <a href="player?u=${item.userName}">
+                    <div class="service-list">
 
-                                                  
-                                            </div>
-                                      
+                        <div class="service-list-col2">
+                           <h4>${item.userName}</h4>
 
-                                        </div>
-                                    </a>
+
+                        </div>
+
+
+                    </div>
+                </a>
           </c:forEach>
         </div>
         <!--<div id="playerInfo" class="collapse col-lg-8 col-sm-6  text-center">

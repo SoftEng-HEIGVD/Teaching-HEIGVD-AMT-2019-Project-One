@@ -57,9 +57,9 @@
 		<!--main-nav-start-->
 		<div class="container">
 			<ul class="main-nav">
-				<li><a href="matches.html">Matches</a></li>
-                                <li><a href="teams.html">Teams</a></li>
-				<li><a href="playersHtml.html">Players</a></li>
+				<li><a href="matches">Matches</a></li>
+                                <li><a href="teams">Teams</a></li>
+				<li><a href="players">Players</a></li>
 
 			</ul>
 			<a class="res-nav_click" href="#"><i class="fa fa-bars"></i></a>
@@ -72,28 +72,38 @@
 	<section class="main-section" id="players">
 		<!--main-section-start-->
 		<div class="container Player-Box">
-			<h2>New Player:</h2>
+                        <h2> New Player:</h2>
 			
                         <div class="row">
                              
                            
                             
                             <div class="col-lg-8 col-sm-6  text-left wow fadeInRight delay-02s">
-                                <h4>Real Name: ${thePlayer.name}</h4>
-                                <br>
-                                <c:if test="${empty thePlayer.team}">
-                                    <h4>No Team</h4>
-                                </c:if>
-                                <c:if test="${not empty thePlayer.team}">
-                                    <h4>Team:${thePlayer.team.name}</h4>
-                                </c:if>
-                            </div>
-                                
-                                 <div class="col-lg-4 col-sm-6 wow fadeInLeft delay-05s ">
-                                <div class="list-group">
+                                <form method="post" action="newPlayer">
+                                    <div class="form-group">
+                                      <label for="inputUserName">User Name</label>
+                                      <input type="text" class="form-control" id="inputUserName" name="userName" placeholder="UserName">
+                                     
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="inputRealName">Real Name</label>
+                                      <input type="text" class="form-control" id="inputRealName" name="name" placeholder="Password">
+                                    </div>
+                                      <div class="form-group">
+                                        <label for="Team">Team</label>
+                                        <select class="form-control" id="Team" name="team">
+                                          <option>(no team)</option>   
+                                          <c:forEach items="${teams}" var="item">
+                                                <option>${item.name}</option>
+                                          </c:forEach>
+                                          
+                                        </select>
+                                      </div>
                                     
-                                </div>
-                            </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                  </form>
+                            
+                           
 				
 			</div>
 		</div>

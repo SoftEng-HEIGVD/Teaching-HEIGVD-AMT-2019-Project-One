@@ -56,8 +56,8 @@
 		<!--main-nav-start-->
 		<div class="container">
 			<ul class="main-nav">
-				<li><a href="matches.html">Matches</a></li>
-        <li><a href="teams.html">Teams</a></li>
+				<li><a href="matches">Matches</a></li>
+        <li><a href="teams">Teams</a></li>
 				<li><a href="players">Players</a></li>
 
 			</ul>

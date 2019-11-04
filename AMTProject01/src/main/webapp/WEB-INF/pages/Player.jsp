@@ -57,9 +57,9 @@
 		<!--main-nav-start-->
 		<div class="container">
 			<ul class="main-nav">
-				<li><a href="matches.html">Matches</a></li>
-                                <li><a href="teams.html">Teams</a></li>
-				<li><a href="playersHtml.html">Players</a></li>
+				<li><a href="matches">Matches</a></li>
+                                <li><a href="teams">Teams</a></li>
+				<li><a href="players">Players</a></li>
 
 			</ul>
 			<a class="res-nav_click" href="#"><i class="fa fa-bars"></i></a>
@@ -71,7 +71,7 @@
 
 	<section class="main-section" id="players">
 		<!--main-section-start-->
-		<div class="container Player-Box">
+		<div class="container">
 			<h2>${thePlayer.userName}</h2>
 			
                         <div class="row">
@@ -85,7 +85,9 @@
                                     <h4>No Team</h4>
                                 </c:if>
                                 <c:if test="${not empty thePlayer.team}">
-                                    <h4>Team:${thePlayer.team.name}</h4>
+                                   
+                                        <h4>Team:  <a href="team?t=${thePlayer.team.name}">${thePlayer.team.name}   </a></h4>
+                                 
                                 </c:if>
                             </div>
                                 
@@ -96,6 +98,53 @@
                             </div>
 				
 			</div>
+		</div>
+	</section>
+                                
+        <section class="main-section" id="matches">
+		<!--main-section-start-->
+		<div class="container Player-Box">
+			<h2>Match History</h2>
+			
+                        
+                            <div class="list-group wow ">
+                                <c:forEach items="${matches}" var="match">
+                                    
+                                    <a href="match?id=${match.id}">
+                                        <div class="service-list">
+                                            <div class="row">
+                                                <div class="col-lg-5 text-right wow fadeInRight delay-02s">
+                                                    <c:if test="${empty match.team1}">
+                                                                <h2>Team 1</h2>
+                                                    </c:if>
+                                                    <c:if test="${not empty match.team1}">
+                                                        <h2>${match.team1.name}</h2>
+
+                                                    </c:if>
+                                                </div>
+                                                <div class="col-lg-2 text-Center wow fadeInUp delay-02s">
+                                                  <h2>${match.team1EndScore}-${match.team2EndScore}</h2>
+                                                </div>
+                                                <div class="col-lg-5 text-left wow fadeInLeft delay-02s">
+                                                    <c:if test="${empty match.team1}">
+                                                                <h2>Team 2</h2>
+                                                    </c:if>
+                                                    <c:if test="${not empty match.team2}">
+                                                        <h2>${match.team2.name}</h2>
+                                                    </c:if>
+                                                </div>
+                                            </div>	
+                                        </div>
+                                    </a>    
+
+                                </c:forEach>
+
+
+                             </div>
+
+                                                
+     
+			
 		</div>
 	</section>
 	<!--main-section-end-->

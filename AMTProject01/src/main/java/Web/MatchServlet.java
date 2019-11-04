@@ -33,9 +33,14 @@ public class MatchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        //String requestedMatch= request.getParameter("m");
-        Match m= mm.getRandomMatch();
-     
+         Match m;
+        try{
+            long requestedMatch= Long.parseLong(request.getParameter("id"));
+            m=mm.getMatch(requestedMatch);
+        }catch(Exception e){
+            m=null;
+        }
+  
         if(m!=null){
             request.setAttribute("match", m);
            
