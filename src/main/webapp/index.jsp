@@ -38,7 +38,7 @@
 				</span>
 
 				<div class="wrap-input100 validate-input m-b-20" data-validate="Enter username or email">
-					<input class="input100" type="text" name="username" placeholder="robel" >
+					<input class="input100" type="text" name="username" placeholder="username" >
 					<span class="focus-input100"></span>
 				</div>
 
@@ -54,6 +54,7 @@
 				</div>
 
 				<div class="text-center">
+
 					<a href="./registration" class="txt2 hov1">
 						Sign Up
 					</a>

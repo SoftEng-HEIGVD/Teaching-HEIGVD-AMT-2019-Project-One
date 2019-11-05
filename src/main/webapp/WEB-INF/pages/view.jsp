@@ -5,7 +5,7 @@
     <title>Football Manager</title>
   </head>
   <body>
-    <h2>Welcome</h2>
+    <h2>Welcome to Football Manager</h2>
     </ul>
   </body>
 </html>
