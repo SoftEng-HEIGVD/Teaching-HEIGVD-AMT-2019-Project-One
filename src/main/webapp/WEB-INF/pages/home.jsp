@@ -44,14 +44,9 @@
 
     <main role="main">
 
-      <section class="jumbotron text-center">
+      <section class="jumbotron text-center" style="height: 300px;">
         <div class="container">
-          <h1 class="jumbotron-heading">Movies Preferences Library</h1>
-          <p class="lead text-muted">Share your love of movies with others</p>
-          <p>
-            <a href="#" class="btn btn-primary my-2">Main call to action</a>
-            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-          </p>
+          <h1 class="jumbotron-heading" style="color: black;">Film rating app</h1>
         </div>
       </section>
 
