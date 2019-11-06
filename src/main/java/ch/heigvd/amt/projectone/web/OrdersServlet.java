@@ -1,6 +1,6 @@
 package ch.heigvd.amt.projectone.web;
 
-import ch.heigvd.amt.projectone.services.dao.OrdersDAO;
+import ch.heigvd.amt.projectone.services.dao.OrdersManagerLocal;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/orders")
+@WebServlet(name="OrdersServlet", urlPatterns = "/orders")
 public class OrdersServlet extends HttpServlet {
 
     @EJB
-    OrdersDAO ordersDAO = new OrdersDAO();
+    private OrdersManagerLocal ordersManagerLocal;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         super.doPost(request, response);
@@ -22,7 +22,7 @@ public class OrdersServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ordersDAO.getAllOrders();
+        request.setAttribute("orders",ordersManagerLocal.getAllOrders());
         request.getRequestDispatcher("/WEB-INF/pages/orders.jsp").forward(request, response);
     }
 }

@@ -1,5 +1,6 @@
 package ch.heigvd.amt.projectone.services.dao;
 
+import ch.heigvd.amt.projectone.exceptions.DuplicateKeyException;
 import ch.heigvd.amt.projectone.exceptions.KeyNotFoundException;
 import ch.heigvd.amt.projectone.model.Product;
 
@@ -21,29 +22,28 @@ public class ProductsManager implements ProductsManagerLocal {
     @Resource(lookup = "jdbc/chillout")
     private DataSource dataSource;
 
-    public List<Product> getAllProducts(){
+    public List<Product> getAllProducts() {
 
         List<Product> products = new ArrayList<>();
 
-        try{
+        try {
             Connection connection = dataSource.getConnection();
-            System.out.println("Schema : "+connection.getSchema());
-            System.out.println("Catalog : "+connection.getCatalog());
+            System.out.println("Schema : " + connection.getSchema());
+            System.out.println("Catalog : " + connection.getCatalog());
 
-            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM Product");
+            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM `Product`");
             ResultSet rs = pstmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
                 Double unitPrice = rs.getDouble("unitPrice");
                 String description = rs.getString("description");
-                products.add(new Product(id,name,unitPrice,description));
+                products.add(new Product(id, name, unitPrice, description));
             }
 
             connection.close();
 
-        }
-        catch (SQLException ex){
+        } catch (SQLException ex) {
             Logger.getLogger(ProductsManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return products;
@@ -51,7 +51,12 @@ public class ProductsManager implements ProductsManagerLocal {
     }
 
     @Override
-    public Product findById(int id) throws KeyNotFoundException {
+    public Product create(Product entity) throws DuplicateKeyException {
+        return null;
+    }
+
+    @Override
+    public Product findById(Integer id) throws KeyNotFoundException {
         return null;
     }
 
@@ -61,7 +66,7 @@ public class ProductsManager implements ProductsManagerLocal {
     }
 
     @Override
-    public void deleteById(int id) throws KeyNotFoundException {
+    public void deleteById(Integer id) throws KeyNotFoundException {
 
     }
 }
