@@ -1,7 +1,9 @@
 package ch.heigvd.amt.projectone.presentation;
 
 
+import ch.heigvd.amt.projectone.DAO.ICoachDAO;
 import ch.heigvd.amt.projectone.DAO.LoginDAO;
+import ch.heigvd.amt.projectone.model.Coach;
 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -20,16 +22,23 @@ public class LoginServlet extends HttpServlet {
     @EJB
     private LoginDAO ld;
 
+    @EJB
+    private ICoachDAO cd;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        String n=request.getParameter("username");
-        String p=request.getParameter("pass");
+        String username=request.getParameter("username");
+        String pass=request.getParameter("pass");
+
 
         try {
-            if(ld.authentificate(n, p)){
+            if(ld.authentificate(username, pass)){
+                Coach coach = cd.findById(username);
+                request.getSession().setAttribute("coach",coach);
+                //response.sendRedirect(request.getContextPath() + "/");
                 RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/pages/dashboard.jsp");
                 rd.forward(request,response);
             }
@@ -47,3 +56,4 @@ public class LoginServlet extends HttpServlet {
     }
 
 }
+

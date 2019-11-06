@@ -101,7 +101,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="./logoutPage">
                                 <p>Log out</p>
                             </a>
                         </li>

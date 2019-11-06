@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -101,12 +103,12 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                           <a href="">
-                               <p>Account</p>
+                            <a href="">
+                                <p> ${coach.username}</p>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="./logoutPage">
                                 <p>Log out</p>
                             </a>
                         </li>
