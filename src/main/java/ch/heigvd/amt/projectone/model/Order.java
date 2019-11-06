@@ -14,9 +14,16 @@ public class Order {
 
     private int id;
     private int idClient;
-    private Map<Integer,Integer> command;       // key : idProduct , value : quantity
+//    private Map<Integer,Integer> command;       // key : idProduct , value : quantity
+    private String command;
 
-    public Order(int id, int idClient, Map<Integer,Integer> command){
+//    public Order(int id, int idClient, Map<Integer,Integer> command){
+//        this.id=id;
+//        this.idClient=idClient;
+//        this.command=command;
+//    }
+
+    public Order(int id, int idClient, String command){
         this.id=id;
         this.idClient=idClient;
         this.command=command;

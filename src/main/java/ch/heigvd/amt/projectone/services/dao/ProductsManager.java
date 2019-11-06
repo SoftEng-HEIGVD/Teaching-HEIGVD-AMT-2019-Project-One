@@ -1,6 +1,5 @@
 package ch.heigvd.amt.projectone.services.dao;
 
-import ch.heigvd.amt.projectone.exceptions.DuplicateKeyException;
 import ch.heigvd.amt.projectone.exceptions.KeyNotFoundException;
 import ch.heigvd.amt.projectone.model.Product;
 
