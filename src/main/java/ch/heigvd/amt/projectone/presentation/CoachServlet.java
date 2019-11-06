@@ -27,7 +27,13 @@ public class CoachServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        Coach coach = (Coach) request.getSession().getAttribute("coach");
+        request.setAttribute("coach",coach);
         request.getRequestDispatcher("/WEB-INF/pages/coach.jsp").forward(request, response);
+
+
+
 
 
     }

@@ -64,7 +64,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="tablePlayer.jsp">
+                    <a href="./tablePlayerPage">
                         <i class="pe-7s-note2"></i>
                         <p>Player List</p>
                     </a>

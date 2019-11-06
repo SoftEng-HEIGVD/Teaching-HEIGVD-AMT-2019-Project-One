@@ -7,12 +7,17 @@ import ch.heigvd.amt.projectone.model.Team;
 import javax.annotation.Resource;
 import javax.ejb.DuplicateKeyException;
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
+@Stateless
 public class PlayerDAO implements IPlayerDAO {
 
     @Resource(lookup = "java:/jdbc/fmDS")
@@ -67,6 +72,38 @@ public class PlayerDAO implements IPlayerDAO {
                             .build())
                     .build();
             return existingPlayer;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Error(e);
+        } finally {
+            closeConnection(con);
+        }
+    }
+
+    @Override
+    public List<Player> findAllPlayers() {
+        List<Player> players = new ArrayList<>();
+        Connection con = null;
+        try {
+            con = dataSource.getConnection();
+            PreparedStatement statement = con.prepareStatement("SELECT FIRST_NAME,LAST_NAME,POSITION,NUMBER,NAME_TEAMS,CREATIONDATE,LOCATION FROM amt_players INNER JOIN amt_teams ON amt_players.NAME_TEAMS = amt_teams.NAME");
+
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                Player existingPlayer = Player.builder()
+                        .firstName(rs.getString(1))
+                        .lastName(rs.getString(2))
+                        .position(rs.getString(3))
+                        .number(rs.getInt(4))
+                        .team(Team.builder()
+                                .name(rs.getString(5))
+                                .location(rs.getString(7))
+                                .dateCreation(rs.getDate(6))
+                                .build())
+                        .build();
+                players.add(existingPlayer);
+            }
+            return players;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new Error(e);

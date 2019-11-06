@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -96,8 +98,8 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                           <a href="">
-                               <p>Account</p>
+                            <a href="">
+                                <p> ${coach.username}</p>
                             </a>
                         </li>
                         <li>
@@ -126,13 +128,13 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Username</label>
-                                                <input type="text" class="form-control" placeholder="Username">
+                                                <input type="text" class="form-control" placeholder="Username" value="${coach.username}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Password</label>
-                                                <input type="text" class="form-control" placeholder="Password">
+                                                <input type="text" class="form-control" placeholder="Password" value="${coach.password}">
                                             </div>
                                         </div>
                                     </div>
@@ -141,13 +143,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>First Name</label>
-                                                <input type="text" class="form-control" placeholder="First Name">
+                                                <input type="text" class="form-control" placeholder="First Name" value="${coach.firstName}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Last Name</label>
-                                                <input type="text" class="form-control" placeholder="Last Name">
+                                                <input type="text" class="form-control" placeholder="Last Name" value="${coach.lastName}">
                                             </div>
                                         </div>
                                     </div>
@@ -155,13 +157,16 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Team</label>
-                                                <select name="teamOption"></select>
+                                                <select name="teamOption">
+
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>isAdmin</label>
-                                                <input type="checkbox" name="isAdmin">
+                                                <input type="checkbox" name="isAdmin" checked>
+
                                             </div>
                                         </div>
                                     </div>
@@ -181,14 +186,12 @@
                                      <a href="#">
                                     <img class="avatar border-gray" src="assets/img/faces/face-3.jpg" alt="..."/>
 
-                                      <h4 class="title">Mike Andrew<br />
-                                         <small>michael24</small>
+                                      <h4 class="title">${coach.firstName} ${coach.lastName}<br />
+                                         <small>${coach.username}</small>
                                       </h4>
                                     </a>
                                 </div>
-                                <p class="description text-center"> "Lamborghini Mercy <br>
-                                                    Your chick she so thirsty <br>
-                                                    I'm in that two seat Lambo"
+                                <p class="description text-center"> Robel is the best <br>
                                 </p>
                             </div>
                             <hr>
