@@ -1,5 +1,7 @@
 package ch.heigvd.amt.projectone.services.dao;
 
+import ch.heigvd.amt.projectone.exceptions.DuplicateKeyException;
+import ch.heigvd.amt.projectone.exceptions.KeyNotFoundException;
 import ch.heigvd.amt.projectone.model.Product;
 
 import javax.annotation.Resource;
@@ -15,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Stateless
-public class ProductsManager {
+public class ProductsDAO implements IProductsDAO{
 
     @Resource(lookup = "jdbc/chillout")
     private DataSource dataSource;
@@ -35,16 +37,38 @@ public class ProductsManager {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
                 Double unitPrice = rs.getDouble("unitPrice");
-                products.add(new Product(id,name,unitPrice));
+                String description = rs.getString("description");
+                products.add(new Product(id,name,unitPrice,description));
             }
 
             connection.close();
 
         }
         catch (SQLException ex){
-            Logger.getLogger(ProductsManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return products;
+
+    }
+
+    @Override
+    public Product create(Product entity) throws DuplicateKeyException {
+        Connection connection = null;
+        return null;
+    }
+
+    @Override
+    public Product findById(Integer id) throws KeyNotFoundException {
+        return null;
+    }
+
+    @Override
+    public void update(Product entity) throws KeyNotFoundException {
+
+    }
+
+    @Override
+    public void deleteById(Integer id) throws KeyNotFoundException {
 
     }
 }

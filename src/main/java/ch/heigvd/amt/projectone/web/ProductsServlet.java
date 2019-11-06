@@ -1,6 +1,6 @@
 package ch.heigvd.amt.projectone.web;
 
-import ch.heigvd.amt.projectone.services.dao.ProductsManager;
+import ch.heigvd.amt.projectone.services.dao.ProductsDAO;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -14,7 +14,7 @@ import java.io.IOException;
 public class ProductsServlet extends HttpServlet {
 
     @EJB
-    ProductsManager productsManager = new ProductsManager();
+    ProductsDAO productsDAO = new ProductsDAO();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         super.doPost(request, response);
@@ -23,7 +23,7 @@ public class ProductsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setAttribute("products",productsManager.getAllProducts());
+        request.setAttribute("products", productsDAO.getAllProducts());
         request.getRequestDispatcher("/WEB-INF/pages/products.jsp").forward(request, response);
     }
 }
