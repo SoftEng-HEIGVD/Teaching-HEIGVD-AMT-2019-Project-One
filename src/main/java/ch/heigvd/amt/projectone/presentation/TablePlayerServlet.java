@@ -25,7 +25,18 @@ public class TablePlayerServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Coach coach = (Coach) request.getSession().getAttribute("coach");
-        request.setAttribute("players", pd.findAllPlayers());
+        String id = request.getParameter("key");
+
+        System.out.println(id);
+        if(coach.getIsAdmin() && id == "myPlayer") {
+            request.setAttribute("players", pd.findMyTeamPlayers(coach.getTeam()));
+        }
+        else if(coach.getIsAdmin()){
+            request.setAttribute("players", pd.findAllPlayers());
+        }
+        else{
+            request.setAttribute("players", pd.findMyTeamPlayers(coach.getTeam()));
+        }
         request.setAttribute("coach", coach);
         request.getRequestDispatcher("/WEB-INF/pages/tablePlayer.jsp").forward(request, response);
 

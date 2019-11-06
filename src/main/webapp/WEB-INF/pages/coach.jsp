@@ -59,11 +59,37 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./tablePlayerPage">
+                    <a href="" id="myTeam">
                         <i class="pe-7s-note2"></i>
-                        <p>Player List</p>
+                        <p>My team List</p>
                     </a>
                 </li>
+                <li>
+                    <a href="./tablePlayerPage" id="myPlayer">
+                        <i class="pe-7s-note2"></i>
+                        <p>My players List</p>
+                    </a>
+                </li>
+                <c:if test = "${coach.isAdmin == true}">
+                    <li>
+                        <a href="">
+                            <i class="pe-7s-note2"></i>
+                            <p>All teams List</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./tablePlayerPage">
+                            <i class="pe-7s-note2"></i>
+                            <p>All players List</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="pe-7s-note2"></i>
+                            <p>All coaches List</p>
+                        </a>
+                    </li>
+                </c:if>
             </ul>
     	</div>
     </div>
@@ -164,8 +190,16 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>isAdmin</label>
-                                                <input type="checkbox" name="isAdmin" checked>
+                                                <label>Admin</label>
+                                                <c:choose>
+                                                    <c:when test = "${coach.isAdmin == false}">
+                                                        <input type="checkbox" disabled>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <input type="checkbox" checked>
+                                                    </c:otherwise>
+                                                </c:choose>
+
 
                                             </div>
                                         </div>

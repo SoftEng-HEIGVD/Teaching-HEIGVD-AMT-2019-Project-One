@@ -58,37 +58,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" id="myTeam">
+                    <a href="./tablePlayerPage">
                         <i class="pe-7s-note2"></i>
-                        <p>My team List</p>
+                        <p>Player List</p>
                     </a>
                 </li>
-                <li>
-                    <a href="./tablePlayerPage" name="key">
-                        <i class="pe-7s-note2"></i>
-                        <p>My players List</p>
-                    </a>
-                </li>
-                <c:if test = "${coach.isAdmin == true}">
-                    <li>
-                        <a href="">
-                            <i class="pe-7s-note2"></i>
-                            <p>All teams List</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./tablePlayerPage">
-                            <i class="pe-7s-note2"></i>
-                            <p>All players List</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="pe-7s-note2"></i>
-                            <p>All coaches List</p>
-                        </a>
-                    </li>
-                </c:if>
             </ul>
     	</div>
     </div>

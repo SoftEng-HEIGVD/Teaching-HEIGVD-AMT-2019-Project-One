@@ -33,7 +33,7 @@ public class CoachDAO implements ICoachDAO {
             statement.setString(3, entity.getFirstName());
             statement.setString(4, entity.getLastName());
             statement.setString(5, entity.getTeam().getName());
-            statement.setBoolean(6, entity.isAdmin());
+            statement.setBoolean(6, entity.getIsAdmin());
             statement.execute();
             return entity;
         } catch (SQLException e) {
@@ -67,6 +67,7 @@ public class CoachDAO implements ICoachDAO {
                             .location(rs.getString(6))
                             .dateCreation(rs.getDate(7))
                             .build())
+                    .isAdmin(rs.getBoolean(8))
                     .build();
             return existingCoach;
         } catch (SQLException e) {
@@ -89,7 +90,7 @@ public class CoachDAO implements ICoachDAO {
             statement.setString(3, entity.getFirstName());
             statement.setString(4, entity.getLastName());
             statement.setObject(5, entity.getTeam());
-            statement.setBoolean(6, entity.isAdmin());
+            statement.setBoolean(6, entity.getIsAdmin());
             int numberOfUpdatedUsers = statement.executeUpdate();
             if (numberOfUpdatedUsers != 1) {
                 // erreur

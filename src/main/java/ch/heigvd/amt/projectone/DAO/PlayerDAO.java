@@ -81,12 +81,43 @@ public class PlayerDAO implements IPlayerDAO {
     }
 
     @Override
+    public List<Player> findMyTeamPlayers(Team team){
+        List<Player> players = new ArrayList<>();
+        Connection con = null;
+        try{
+            con = dataSource.getConnection();
+            PreparedStatement statement = con.prepareStatement("SELECT FIRST_NAME,LAST_NAME,POSITION,NUMBER,NAME_TEAMS FROM amt_players WHERE NAME_TEAMS = ?");
+            statement.setString(1,team.getName());
+
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+                Player player = Player.builder()
+                        .firstName(rs.getString(1))
+                        .lastName(rs.getString(2))
+                        .position(rs.getString(3))
+                        .number(rs.getInt(4))
+                        .team(team)
+                        .build();
+                players.add(player);
+            }
+            return players;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Error(e);
+        }finally {
+            closeConnection(con);
+        }
+    }
+
+
+    @Override
     public List<Player> findAllPlayers() {
         List<Player> players = new ArrayList<>();
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("SELECT FIRST_NAME,LAST_NAME,POSITION,NUMBER,NAME_TEAMS,CREATIONDATE,LOCATION FROM amt_players INNER JOIN amt_teams ON amt_players.NAME_TEAMS = amt_teams.NAME");
+            PreparedStatement statement = con.prepareStatement("SELECT FIRST_NAME,LAST_NAME,POSITION,NUMBER,NAME_TEAMS,CREATIONDATE,LOCATION FROM amt_players,amt_teams");
 
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
