@@ -7,5 +7,15 @@
   <body>
     <h2>Welcome to Football Manager</h2>
     </ul>
+
+
+
+    <ul>
+      <c:forEach items="${quotes}" var="quote">
+        <li>${quote.author} : "${quote.citation}"</li>
+      </c:forEach>
+    </ul>
+    </body>
+    </html>
   </body>
 </html>
