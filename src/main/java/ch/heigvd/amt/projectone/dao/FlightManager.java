@@ -16,7 +16,7 @@ public class FlightManager
     @Resource(lookup = "java:/jdbc/FlightCompany")
     private DataSource dataSource;
 
-    public Flight getCustomer(long id)
+    public Flight getFlight(long id)
     {
         Flight flight = null;
         try {
@@ -31,14 +31,14 @@ public class FlightManager
             {
 
                 String name = result.getString("name");
-                int departureTime = result.getInt("departure_time");
-                int arrivalTime = result.getInt("arrival_time");
+                long departureTime = result.getLong("departure_time");
+                long arrivalTime = result.getLong("arrival_time");
                 String startPoint = result.getString("start_point");
                 String endPoint = result.getString("end_point");
                 int price = result.getInt("price");
 
                 //To create timestamp convert, peut etre proposé deux getter dans le model ??
-                flight = new Flight(id, pseudo, firstname, lastname, age, passwd);
+                flight = new Flight(id, name, departureTime, arrivalTime, startPoint, endPoint, price);
 
 
 
@@ -51,24 +51,26 @@ public class FlightManager
         return flight;
     }
 
-    public boolean createCustomer(Flight customer)
+    public boolean createFlight(Flight flight)
     {
-        return createCustomer(customer.getCustomer_pseudo(),customer.getFirstname(), customer.getLastname(), customer.getAge(), customer.getCustomer_pw());
+        return createFlight(flight.getName(),flight.getDepartureTime(), flight.getArrivalTime(), flight.getStartPoint(), flight.getEndPoint(), flight.getPrice());
     }
-    public boolean createCustomer(String pseudo, String firstname, String lastname, int age, String passwd)
+
+    public boolean createFlight(String name, long departureTime, long arrivalTime, String startPoint, String endPoint, int price)
     {
         boolean success = false;
         int nbRow;
         try{
             Connection connection = dataSource.getConnection();
 
-            PreparedStatement sql = connection.prepareStatement("INSERT INTO flight (customer_pseudo, firstname, lastname, age, customer_pw) VALUES (?,?,?,?,?)");
+            PreparedStatement sql = connection.prepareStatement("INSERT INTO flight (name, departure_time, arrival_time, start_point, end_point, price) VALUES (?,?,?,?,?,?)");
 
-            sql.setObject(1,pseudo);
-            sql.setObject(2, firstname);
-            sql.setObject(3, lastname);
-            sql.setObject(4, age);
-            sql.setObject(5, passwd);
+            sql.setObject(1, name);
+            sql.setObject(2, departureTime);
+            sql.setObject(3, arrivalTime);
+            sql.setObject(4, startPoint);
+            sql.setObject(5, endPoint);
+            sql.setObject(6, price);
 
             nbRow = sql.executeUpdate();
             connection.close();
@@ -84,14 +86,14 @@ public class FlightManager
         return success;
     }
 
-    public boolean deleteCustomer(long id)
+    public boolean deleteFlight(long id)
     {
         boolean success = false;
         int nbRow;
         try{
             Connection connection = dataSource.getConnection();
 
-            PreparedStatement sql = connection.prepareStatement("DELETE FROM customer WHERE customer_id = ?");
+            PreparedStatement sql = connection.prepareStatement("DELETE FROM flight WHERE flight_id = ?");
 
             sql.setLong(1, id);
             nbRow = sql.executeUpdate();
@@ -105,26 +107,26 @@ public class FlightManager
             ex.printStackTrace();
         }
         return success;
-
     }
 
-    public boolean updateCustomer(Flight customer)
+    public boolean updateFlight(Flight flight)
     {
         boolean success = false;
-        if(customer != null)
+        if(flight != null)
         {
             int nbRow;
             try{
                 Connection connection = dataSource.getConnection();
 
-                PreparedStatement sql = connection.prepareStatement("UPDATE Flight SET customer_pseudo = ?, firstname = ?, lastname = ?, age = ?, customer_pw = ? WHERE customer_id = ?");
+                PreparedStatement sql = connection.prepareStatement("UPDATE Flight SET name = ?, departure_time = ?, arrival_time = ?, start_point = ?, end_point = ?, price = ? WHERE flight_id = ?");
 
-                sql.setObject(1, customer.getCustomer_pseudo());
-                sql.setObject(2, customer.getFirstname());
-                sql.setObject(3, customer.getLastname());
-                sql.setObject(4, customer.getAge());
-                sql.setObject(5, customer.getCustomer_pw());
-                sql.setObject(6, customer.getCustomer_id());
+                sql.setObject(1, flight.getName());
+                sql.setObject(2, flight.getDepartureTime());
+                sql.setObject(3, flight.getArrivalTime());
+                sql.setObject(4, flight.getStartPoint());
+                sql.setObject(5, flight.getEndPoint());
+                sql.setObject(6, flight.getPrice());
+                sql.setObject(7, flight.getFlight_id());
 
                 nbRow = sql.executeUpdate();
                 connection.close();
@@ -140,27 +142,5 @@ public class FlightManager
         return success;
     }
 
-    public Flight Connection(String pseudo, String passwd)
-    {
-        Flight customer = null;
-        try{
-            Connection connection = dataSource.getConnection();
 
-            PreparedStatement sql = connection.prepareStatement("SELECT * FROM customer WHERE customer_pseudo = ? AND customer_pw = ?");
-
-            sql.setObject(1,pseudo);
-            sql.setObject(2,passwd);
-
-            ResultSet result = sql.executeQuery();
-            if(result.next())
-            {
-                customer = getCustomer(result.getLong("customer_id"));
-            }
-
-            connection.close();
-        }catch(SQLException ex) {
-            ex.printStackTrace();
-        }
-        return customer;
-    }
 }

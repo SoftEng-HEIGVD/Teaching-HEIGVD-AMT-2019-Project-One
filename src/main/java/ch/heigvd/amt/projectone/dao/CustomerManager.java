@@ -51,6 +51,7 @@ public class CustomerManager
     {
         return createCustomer(customer.getCustomer_pseudo(),customer.getFirstname(), customer.getLastname(), customer.getAge(), customer.getCustomer_pw());
     }
+
     public boolean createCustomer(String pseudo, String firstname, String lastname, int age, String passwd)
     {
         boolean success = false;
@@ -60,11 +61,11 @@ public class CustomerManager
 
             PreparedStatement sql = connection.prepareStatement("INSERT INTO customer (customer_pseudo, firstname, lastname, age, customer_pw) VALUES (?,?,?,?,?)");
 
-            sql.setObject(1,pseudo);
-            sql.setObject(2, firstname);
-            sql.setObject(3, lastname);
-            sql.setObject(4, age);
-            sql.setObject(5, passwd);
+            sql.setString(1, pseudo);
+            sql.setString(2, firstname);
+            sql.setString(3, lastname);
+            sql.setInt(4, age);
+            sql.setString(5, passwd);
 
             nbRow = sql.executeUpdate();
             connection.close();
@@ -89,7 +90,7 @@ public class CustomerManager
 
             PreparedStatement sql = connection.prepareStatement("DELETE FROM customer WHERE customer_id = ?");
 
-            sql.setLong(1, id);
+            sql.setObject(1, id);
             nbRow = sql.executeUpdate();
             connection.close();
 

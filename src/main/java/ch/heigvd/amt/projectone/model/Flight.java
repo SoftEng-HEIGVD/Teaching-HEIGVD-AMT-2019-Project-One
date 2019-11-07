@@ -4,13 +4,13 @@ public class Flight
 {
     private long flight_id;
     private String name;
-    private String departureTime;
-    private String arrivalTime;
+    private long departureTime;
+    private long arrivalTime;
     private String startPoint;
     private String endPoint;
     private int price;
 
-    public Flight(long flight_id, String name, String departureTime, String arrivalTime, String startPoint, String endPoint, int price)
+    public Flight(long flight_id, String name, long departureTime, long arrivalTime, String startPoint, String endPoint, int price)
     {
         this.flight_id = flight_id;
         this.name = name;
@@ -31,12 +31,12 @@ public class Flight
         return name;
     }
 
-    public String getDepartureTime()
+    public long getDepartureTime()
     {
         return departureTime;
     }
 
-    public String getArrivalTime()
+    public long getArrivalTime()
     {
         return arrivalTime;
     }
