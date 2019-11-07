@@ -17,7 +17,7 @@ import java.util.Map;
  * @author goturak
  */
 public class MatchesManager {
-    PlayerManager pm= new PlayerManager();
+    PlayerManagerSQL pm= new PlayerManagerSQL();
     Map<Long,Match> matches= new HashMap<Long, Match>();
 
     public MatchesManager() {       ArrayList<Player> ps=new ArrayList(pm.getAllPLayers());
