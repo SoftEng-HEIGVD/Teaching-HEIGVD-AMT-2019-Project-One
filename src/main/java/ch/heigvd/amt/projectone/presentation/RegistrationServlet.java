@@ -47,6 +47,7 @@ public class RegistrationServlet extends HttpServlet {
 
         try {
             cd.create(c);
+            response.getWriter().println("coach created");
             RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
             rd.forward(request,response);
         } catch (DuplicateKeyException e) {
