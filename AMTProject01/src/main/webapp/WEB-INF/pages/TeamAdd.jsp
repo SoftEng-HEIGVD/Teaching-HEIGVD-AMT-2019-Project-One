@@ -17,7 +17,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, maximum-scale=1">
 
-	<title>New Player</title>
+	<title>New Team</title>
 	<link rel="icon" href="favicon.png" type="image/png">
 	<link rel="shortcut icon" href="favicon.ico" type="img/x-icon">
 
@@ -72,7 +72,7 @@
 	<section class="main-section" id="players">
 		<!--main-section-start-->
 		<div class="container Player-Box">
-                        <h2> New Player:</h2>
+                        <h2> New Team:</h2>
 			
                         <div class="row">
                              
@@ -81,25 +81,11 @@
                             <div class="col-lg-8 col-sm-6  text-left wow fadeInRight delay-02s">
                                 <form method="post" action="newPlayer">
                                     <div class="form-group">
-                                      <label for="inputUserName">User Name</label>
-                                      <input type="text" class="form-control" id="inputUserName" name="userName" placeholder="NoobMaster69">
+                                      <label for="inputUserName">Team Name</label>
+                                      <input type="text" class="form-control" id="inputUserName" name="teamName" placeholder="NoobMaster69">
                                      
                                     </div>
-                                    <div class="form-group">
-                                      <label for="inputRealName">Real Name</label>
-                                      <input type="text" class="form-control" id="inputRealName" name="name" placeholder="jean-michel dupont">
-                                    </div>
-                                      <div class="form-group">
-                                        <label for="Team">Team</label>
-                                        <select class="form-control" id="Team" name="team">
-                                          <option>(no team)</option>   
-                                          <c:forEach items="${teams}" var="item">
-                                                <option>${item.name}</option>
-                                          </c:forEach>
-                                          
-                                        </select>
-                                      </div>
-                                    
+                                                                    
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                   </form>
                             

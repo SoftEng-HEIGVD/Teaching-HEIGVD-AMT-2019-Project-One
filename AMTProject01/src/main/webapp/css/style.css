@@ -256,13 +256,11 @@ color: #fff;
 .main-section.alabaster{
 	background:#fafafa;
 }
-
+.custom-clickable-row {
+	cursor: pointer;
+}
 
 .list-group{
-  max-height: 450px;
-
-   overflow-y:scroll;
-   overflow-x:hidden;
 
 }
 /* Featured Work

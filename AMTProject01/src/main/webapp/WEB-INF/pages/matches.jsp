@@ -15,7 +15,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, maximum-scale=1">
 
-	<title>Homepage</title>
+	<title>Matches</title>
 	<link rel="icon" href="favicon.png" type="image/png">
 	<link rel="shortcut icon" href="favicon.ico" type="img/x-icon">
 
@@ -28,6 +28,7 @@
 	<link href="css/responsive.css" rel="stylesheet" type="text/css">
 	<link href="css/magnific-popup.css" rel="stylesheet" type="text/css">
 	<link href="css/animate.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="DataTables-1.10.20/css/jquery.dataTables.min.css"/>
 
 	<script type="text/javascript" src="js/jquery.1.8.3.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
@@ -37,6 +38,8 @@
 	<script type="text/javascript" src="js/wow.js"></script>
 	<script type="text/javascript" src="js/classie.js"></script>
 	<script type="text/javascript" src="js/magnific-popup.js"></script>
+        <script type="text/javascript" src="DataTables-1.10.20/js/jquery.dataTables.min.js"></script>
+
 	<script src="contactform/contactform.js"></script>
 
 	<!-- =======================================================
@@ -69,44 +72,50 @@
 
 	<section class="main-section" id="matches">
 		<!--main-section-start-->
-		<div class="container Player-Box">
+		<div class="container">
 			<h2>Matches</h2>
 			
-                        
-				<div class="list-group wow ">
-                                        <c:forEach items="${allMatches}" var="match">
+                        <table id="matchesTable" class="display">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>Team 1</th>
+                                    <th>Score</th>
+                                    <th>Team 2</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                                                    <a href="match?id=${match.id}">
-                                                                    <div class="service-list">
-                                                                        <div class="row">
-                                                                            <div class="col-lg-5 text-right wow fadeInRight delay-02s">
-                                                                                <c:if test="${empty match.team1}">
-                                                                                            <h3>Team 1</h3>
-                                                                                </c:if>
-                                                                                <c:if test="${not empty match.team1}">
-                                                                                    <h3>${match.team1.name}</h3>
-
-                                                                                </c:if>
-                                                                            </div>
-                                                                            <div class="col-lg-2 text-Center wow fadeInUp delay-02s">
-                                                                              <h3>${match.team1EndScore}-${match.team2EndScore}</h3>
-                                                                            </div>
-                                                                            <div class="col-lg-5 text-left wow fadeInLeft delay-02s">
-                                                                                <c:if test="${empty match.team1}">
-                                                                                            <h3>Team 2</h3>
-                                                                                </c:if>
-                                                                                <c:if test="${not empty match.team2}">
-                                                                                    <h3>${match.team2.name}</h3>
-                                                                                </c:if>
-                                                                            </div>
-                                                                        </div>	
-                                                                    </div>
-                                                    </a>    
-                                                                         
-                                      </c:forEach>
-      
-                                   
-                                 </div>
+                                <c:forEach items="${allMatches}" var="match">
+                             
+                                    <tr class="custom-clickable-row" data-href="match?id=${match.id}">
+                                        <td> 
+                                            
+                                                <c:if test="${empty match.team1}">
+                                                           no Team
+                                                </c:if>
+                                                <c:if test="${not empty match.team1}">
+                                                   ${match.team1.name}
+                                                </c:if>
+                                           
+                                        </td>
+                                        <td>${match.team1EndScore}-${match.team2EndScore}</td>
+                                         <td> 
+                                            
+                                                <c:if test="${empty match.team2}">
+                                                           no Team
+                                                </c:if>
+                                                <c:if test="${not empty match.team2}">
+                                                   ${match.team2.name}
+                                                </c:if>
+                                           
+                                        </td>
+                                    </tr>                                                
+                               
+                                      
+                                </c:forEach>
+                            </tbody>
+                         </table>
 
                                 
                         <a href="newMatch"><h3>Add match</h3></a>                 
@@ -138,7 +147,7 @@
 
 	<script type="text/javascript">
 		$(document).ready(function(e) {
-
+                        $('#matchesTable').DataTable();
 			$('#test').scrollToFixed();
 			$('.res-nav_click').click(function() {
 				$('.main-nav').slideToggle();
@@ -146,12 +155,17 @@
 
 			});
 
-      $('.Portfolio-box').magnificPopup({
-        delegate: 'a',
-        type: 'image'
-      });
+                $('.Portfolio-box').magnificPopup({
+                  delegate: 'a',
+                  type: 'image'
+                });
 
 		});
+                $(document).on('click', '.custom-clickable-row', function(e){
+                        var url = $(this).data('href');
+
+                        window.location = url;
+                });
 	</script>
 
 	<script>

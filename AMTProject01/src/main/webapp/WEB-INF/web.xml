@@ -28,6 +28,10 @@
         <servlet-name>NewMatchServlet</servlet-name>
         <servlet-class>Web.NewMatchServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TeamAddServlet</servlet-name>
+        <servlet-class>Web.TeamAddServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PlayersServlet</servlet-name>
         <url-pattern>/players</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>NewMatchServlet</servlet-name>
         <url-pattern>/newMatch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TeamAddServlet</servlet-name>
+        <url-pattern>/teamAdd</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

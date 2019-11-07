@@ -15,7 +15,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, maximum-scale=1">
 
-	<title>Homepage</title>
+	<title>Players</title>
 	<link rel="icon" href="favicon.png" type="image/png">
 	<link rel="shortcut icon" href="favicon.ico" type="img/x-icon">
 
@@ -28,7 +28,9 @@
 	<link href="css/responsive.css" rel="stylesheet" type="text/css">
 	<link href="css/magnific-popup.css" rel="stylesheet" type="text/css">
 	<link href="css/animate.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="DataTables-1.10.20/css/jquery.dataTables.min.css"/>
 
+        
 	<script type="text/javascript" src="js/jquery.1.8.3.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<script type="text/javascript" src="js/jquery-scrolltofixed.js"></script>
@@ -37,6 +39,7 @@
 	<script type="text/javascript" src="js/wow.js"></script>
 	<script type="text/javascript" src="js/classie.js"></script>
 	<script type="text/javascript" src="js/magnific-popup.js"></script>
+        <script type="text/javascript" src="DataTables-1.10.20/js/jquery.dataTables.min.js"></script>
 	<script src="contactform/contactform.js"></script>
 
 	<!-- =======================================================
@@ -69,26 +72,63 @@
 
 	<section class="main-section" id="players">
 		<!--main-section-start-->
-		<div class="container Player-Box">
-			<h2>All Players</h2>	
+            <div class="container">
+                <div class="row">
+                    
+                <div class="col-sm-8">
+                    <h2>All Players</h2>
+                </div>
+                <div class="col-sm-4 float-right">
+                   <a href="newPlayer"><h3>Add player</h3></a> 
+
+                </div>
+
+                </div>
+				
             <div class="row">
                             
              <div class="list-group">
-          <c:forEach items="${allPlayers}" var="item">
-           
-                <a href="player?u=${item.userName}">
-                    <div class="service-list wow fadeInRight delay-02s">
+                <table id="playersTable" class="display">
+                   <thead>
+                       <tr>
+                           <th>Username</th>
+                           <th>Name</th>
+                           <th>Team</th>                        
+                       </tr>
+                   </thead>
+                   <tbody>
+                       
+                       <c:forEach items="${allPlayers}" var="item">
+                           <tr>
+                               <td> <a href="player?u=${item.userName}">${item.userName}</a></td>
+                               <td>${item.name}</td>
+                                 <c:if test="${empty item.team}">
+                                    <td>No Team</td>
+                                </c:if>
+                                <c:if test="${not empty item.team}">
+                                   
+                                        <td> <a href="team?t=${item.team.name}">${item.team.name}</a></td>
+                                 
+                                </c:if>
+                              
+                           </tr>
+                       </c:forEach>
+                   </tbody>
+                </table>
+               
 
-                        <div class="service-list-col2">
-                           <h4>${item.userName}</h4>
-                        </div>
-                    </div>
-                </a>
-          </c:forEach>
-                 
               
-           </div>
-                <a href="newPlayer"><h3>Add player</h3></a> 
+            </div>
+              
+            <div >
+                 <ul class="pagination firstLast1-links">
+                <li class="page-item first">
+                        <a href="#" class="page-link">First</a>
+                </li>
+                                <li class="page-item prev"><a href="#" class="page-link">Prev</a></li><li class="page-item"><a href="#" class="page-link">2</a></li><li class="page-item"><a href="#" class="page-link">3</a></li><li class="page-item"><a href="#" class="page-link">4</a></li><li class="page-item active"><a href="#" class="page-link">5</a></li><li class="page-item next disabled"><a href="#" class="page-link">Next</a></li><li class="page-item last disabled"><a href="#" class="page-link">Last</a></li></ul>
+ 
+            </div>
+            
         <!--<div id="playerInfo" class="collapse col-lg-8 col-sm-6  text-center">
           <img src="img/UserNoImg.png" class="img-fluid float-mi" alt="">
 
@@ -123,6 +163,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(e) {
 
+                        $('#playersTable').DataTable();
 			$('#test').scrollToFixed();
 			$('.res-nav_click').click(function() {
 				$('.main-nav').slideToggle();
@@ -145,7 +186,14 @@
 		});
 		wow.init();
 	</script>
+<script type="text/javascript">
+    $(document).on('click', '.custom-clickable-row', function(e){
+	var url = $(this).data('href');
 
+	window.location = url;
+    });
+    </script>
+    
 
 	<script type="text/javascript">
 		$(window).load(function() {
