@@ -11,14 +11,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import javafx.util.Pair;
 
 /**
  *
  * @author goturak
  */
 public class MatchesManager {
-    PlayerManager pm= new PlayerManager();
+    PlayerManagerSQL pm= new PlayerManagerSQL();
     Map<Long,Match> matches= new HashMap<Long, Match>();
 
     public MatchesManager() {       ArrayList<Player> ps=new ArrayList(pm.getAllPLayers());

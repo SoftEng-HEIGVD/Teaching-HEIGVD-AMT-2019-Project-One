@@ -7,6 +7,7 @@ package Web;
 
 import Model.Player;
 import Services.PlayerManager;
+import Services.PlayerManagerSQL;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -21,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 public class PlayersServlet extends HttpServlet {
 
    
-PlayerManager playerManager = new PlayerManager();
+PlayerManager playerManager = new PlayerManagerSQL();
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
