@@ -1,5 +1,5 @@
-FROM mysql:8.0.17
+FROM mysql:5.7.15
 
 MAINTAINER Baptiste Hardrick <baptiste.hardrick@heig-vd.ch>
 
-ADD dtb/ /docker-entrypoint-initdb.d/
+ADD data/ /docker-entrypoint-initdb.d/

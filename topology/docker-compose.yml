@@ -1,17 +1,23 @@
 version: '3'
 services:
-  payara:
-    build: ../images/payara
-    environment:
-      - ADMIN_PASSWORD=adminadmin
+  wildfly:
+    build: ../images/wildfly
     links:
       - mysql:db
     ports:
-      - "8080:8080"
-      - "4848:4848"
+      - "9090:8080"
+      - "9990:9990"
   mysql:
-    image: mysql:8.0.17
+    build: ../images/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_ROOT_PASSWORD=adminpw
     ports:
       - "3306:3306"
+  phpmyadmin:
+    build: ../images/phpmyadmin
+    environment:
+      - MYSQL_ROOT_PASSWORD=adminpw
+    ports:
+      - "6060:80"
+    links:
+      - mysql:db

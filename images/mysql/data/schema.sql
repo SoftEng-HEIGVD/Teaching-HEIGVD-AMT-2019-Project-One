@@ -16,6 +16,9 @@ USE FlightCompany;
 CREATE TABLE customer (
   customer_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
   customer_pseudo VARCHAR(45) NOT NULL,
+  firstname VARCHAR(20) NOT NULL,
+  lastname VARCHAR(20) NOT NULL,
+  age SMALLINT NOT NULL,
   customer_pw VARCHAR(45) NOT NULL,
   PRIMARY KEY  (customer_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -31,6 +34,7 @@ CREATE TABLE flight (
   arrival_time INT NOT NULL,
   start_point VARCHAR(20) NOT NULL,
   end_point_point VARCHAR(20) NOT NULL,
+  price INT NOT NULL,
   PRIMARY KEY  (product_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
