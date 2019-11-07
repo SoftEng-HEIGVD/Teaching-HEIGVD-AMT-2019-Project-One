@@ -2,7 +2,6 @@ package ch.heigvd.amt.projectone.web;
 
 import ch.heigvd.amt.projectone.model.Client;
 import ch.heigvd.amt.projectone.services.dao.ClientsManagerLocal;
-import jdk.internal.jline.internal.Log;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -11,9 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.logging.Logger;
 
 @WebServlet(urlPatterns = "/login")
 public class ChilloutServlet extends HttpServlet {
