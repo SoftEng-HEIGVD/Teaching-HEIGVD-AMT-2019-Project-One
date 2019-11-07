@@ -95,13 +95,14 @@ public class PlayerManagerSQL implements PlayerManager{
         
         try {
         Connection connection = dataSource.getConnection();
-        PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM Player");
+        PreparedStatement pstmt = connection.prepareStatement("SELECT Player.pseudo AS pseudo, Player.name AS name, Team.name AS team "
+                                                            + "FROM Player JOIN Team ON Player.team_id = Team.team_id WHERE team= '"+t.getName()+"'");
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
           String name = rs.getString("name");
           String pseudo = rs.getString("pseudo");
           //long id = rs.getLong("actor_id");
-          players.add(new Player(pseudo,name,new Team("Solary")));
+          players.add(new Player(pseudo,name,new Team(t.getName())));
         }
         pstmt.close();
       
