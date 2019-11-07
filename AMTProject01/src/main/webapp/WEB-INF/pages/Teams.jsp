@@ -28,6 +28,7 @@
 	<link href="css/responsive.css" rel="stylesheet" type="text/css">
 	<link href="css/magnific-popup.css" rel="stylesheet" type="text/css">
 	<link href="css/animate.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="DataTables-1.10.20/css/jquery.dataTables.min.css"/>
 
 	<script type="text/javascript" src="js/jquery.1.8.3.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
@@ -37,6 +38,9 @@
 	<script type="text/javascript" src="js/wow.js"></script>
 	<script type="text/javascript" src="js/classie.js"></script>
 	<script type="text/javascript" src="js/magnific-popup.js"></script>
+        .
+        <script type="text/javascript" src="DataTables-1.10.20/js/jquery.dataTables.min.js"></script>
+
 	<script src="contactform/contactform.js"></script>
 
 	<!-- =======================================================
@@ -71,9 +75,32 @@
 		<!--main-section-start-->
 		<div class="container Player-Box">
 			<h2>All Teams</h2>	
-            <div class="row">
+            
+                        
+            
+            <table id="teamsTable" class="display">
+                   <thead>
+                       <tr>
+                           <th>Name</th>                                            
+                       </tr>
+                   </thead>
+                   <tbody>
+                       
+                       <c:forEach items="${teams}" var="item">
+                           <tr class="custom-clickable-row" data-href="team?t=${item.name}">
+                               <td> ${item.name}</td>
+                                 
+                           </tr>
+                       </c:forEach>
+                   </tbody>
+                </table>
+               
+
+              
+          
                             
              <div class="list-group">
+                 
             <c:forEach items="${teams}" var="item">
                     <a href="team?t=${item.name}">
                             <div class="service-list wow fadeInRight delay-02s">
@@ -95,7 +122,7 @@
         </div>
 -->
 
-			</div>
+			
 		</div>
 	</section>
 	<!--main-section-end-->
@@ -122,7 +149,7 @@
 
 	<script type="text/javascript">
 		$(document).ready(function(e) {
-
+                        $('#teamsTable').DataTable();
 			$('#test').scrollToFixed();
 			$('.res-nav_click').click(function() {
 				$('.main-nav').slideToggle();
@@ -136,6 +163,11 @@
       });
 
 		});
+                 $(document).on('click', '.custom-clickable-row', function(e){
+                        var url = $(this).data('href');
+
+                        window.location = url;
+                });
 	</script>
 
 	<script>
