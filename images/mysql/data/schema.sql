@@ -35,7 +35,7 @@ CREATE TABLE flight (
   start_point VARCHAR(20) NOT NULL,
   end_point_point VARCHAR(20) NOT NULL,
   price INT NOT NULL,
-  PRIMARY KEY  (product_id)
+  PRIMARY KEY  (flight_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
