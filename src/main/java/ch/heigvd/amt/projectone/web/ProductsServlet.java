@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="ProductsServlet", urlPatterns = "/products")
+@WebServlet(name="ProductsServlet", urlPatterns = "/chill/products")
 public class ProductsServlet extends HttpServlet {
 
    @EJB
