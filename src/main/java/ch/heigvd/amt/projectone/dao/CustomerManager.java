@@ -47,9 +47,37 @@ public class CustomerManager
         return customer;
     }
 
-    public boolean createCustomer()
+    public boolean createCustomer(Customer customer)
     {
+        return createCustomer(customer.getCustomer_pseudo(),customer.getFirstname(), customer.getLastname(), customer.getAge(), customer.getCustomer_pw());
+    }
+    public boolean createCustomer(String pseudo, String firstname, String lastname, int age, String passwd)
+    {
+        boolean success = false;
+        int nbRow;
+        try{
+            Connection connection = dataSource.getConnection();
 
+            PreparedStatement sql = connection.prepareStatement("INSERT INTO customer (customer_pseudo, firstname, lastname, age, customer_pw) VALUES (?,?,?,?,?)");
+
+            sql.setObject(1,pseudo);
+            sql.setObject(2, firstname);
+            sql.setObject(3, lastname);
+            sql.setObject(4, age);
+            sql.setObject(5, passwd);
+
+            nbRow = sql.executeUpdate();
+            connection.close();
+
+            if(nbRow > 0)//if row are created, return true
+            {
+                success = true;
+            }
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+
+        return success;
     }
 
     public boolean deleteCustomer(long id)
@@ -65,7 +93,7 @@ public class CustomerManager
             nbRow = sql.executeUpdate();
             connection.close();
 
-            if(nbRow > 0)//if row are updated, return true
+            if(nbRow > 0)//if row are deleted, return true
             {
                 success = true;
             }
@@ -110,6 +138,25 @@ public class CustomerManager
 
     public Customer Connection(String pseudo, String passwd)
     {
+        Customer customer = null;
+        try{
+            Connection connection = dataSource.getConnection();
 
+            PreparedStatement sql = connection.prepareStatement("SELECT * FROM customer WHERE customer_pseudo = ? AND customer_pw = ?");
+
+            sql.setObject(1,pseudo);
+            sql.setObject(2,passwd);
+
+            ResultSet result = sql.executeQuery();
+            if(result.next())
+            {
+                customer = getCustomer(result.getLong("customer_id"));
+            }
+
+            connection.close();
+        }catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        return customer;
     }
 }
