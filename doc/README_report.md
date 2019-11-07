@@ -8,7 +8,15 @@ The main objective of this project is to apply the patterns and techniques prese
 
 #### What we have implemented 
 
-We have decided to develop a web application where we manage football teams. There are two type of users: a simple coach, which can only manages the team his attributed. A team is made of players. He will be ables to add, delete, modify his players. And there are coaches which are administrators, they can manage whole teams and the coaches itself.
+We have decided to develop a web application where we can manage football teams. There are two type of users: a simple coach, which can only manages the teams he's attributed. A team is made of players. A coach will be able to add, delete, modify his players. There are coaches which are administrators, they can manage every teams and the simple coaches also. They can add, delete or modify teams. They can list all the teams or players.
+
+We have only three entities.. Image to be added.
+
+#### How we have implemented
+
+To be completed...
+
+
 
 ## Links
 

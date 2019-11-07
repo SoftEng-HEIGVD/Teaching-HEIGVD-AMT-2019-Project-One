@@ -46,7 +46,7 @@
 
             <ul class="nav">
                 <li class="active">
-                    <a href="dashboard.jsp">
+                    <a href="./loginpage">
                         <i class="pe-7s-graph"></i>
                         <p>Dashboard</p>
                     </a>
