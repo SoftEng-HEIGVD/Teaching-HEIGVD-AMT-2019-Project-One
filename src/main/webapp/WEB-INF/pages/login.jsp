@@ -47,27 +47,11 @@ Licensed under MIT (https://github.com/creativetimofficial/material-kit/blob/mas
                         <div class="card-header card-header-primary text-center">
                             <h4 class="card-title">Login</h4>
                         </div>
-                        <div class="card-body">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                  <i class="material-icons">mail</i>
-                                </span>
-                                </div>
-                                <input name="username" type="text" placeholder="Username">
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                              <span class="input-group-text">
-                                <i class="material-icons">lock_outline</i>
-                              </span>
-                                </div>
-                                <input name="password" type="password" placeholder="Password">
-                            </div>
-                            <div class="input-group">
-                                <input type="submit" placeholder="Submit">
-                            </div>
-                        </div>
+                        <label>Username</label>
+                        <input name="username" type="text" class="form-control" placeholder="Username">
+                        <label>Password</label>
+                        <input name="password" type="password" class="form-control" placeholder="Password">
+                        <button class="btn btn-danger btn-block">Login</button>
                     </form>
                 </div>
             </div>

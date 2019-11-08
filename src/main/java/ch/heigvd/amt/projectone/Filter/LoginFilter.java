@@ -17,7 +17,7 @@ public class LoginFilter implements Filter {
 
         HttpSession session = req.getSession();
 
-        if (session.getAttribute("client") == null){
+        if (session.getAttribute("client") != null){
             req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
