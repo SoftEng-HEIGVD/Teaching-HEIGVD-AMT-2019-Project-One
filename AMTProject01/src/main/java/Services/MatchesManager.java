@@ -67,43 +67,20 @@ public class MatchesManager {
           int score_team1 = rs.getInt("score_team1");
           int score_team2 = rs.getInt("score_team2");
           int team1_id = rs.getInt("team1_id");
-          int team2_id = rs.getInt("team1_id");
+          int team2_id = rs.getInt("team2_id");
           String team1  = rs.getString("team1");
           String team2  = rs.getString("team2");
           
-          ArrayList<Integer> playerTeam1 = new ArrayList();
-          ArrayList<Integer> playerTeam2 = new ArrayList();
-          
-          PreparedStatement pstmt2 = connection.prepareStatement("SELECT * FROM Matches_Player WHERE match_id ="+match_id);
-          ResultSet rs2 = pstmt2.executeQuery();
-          while(rs2.next()){
-             
-              int team_id = rs.getInt("team_id");
-               int player_id = rs.getInt("player_id");
-              
-              if(team_id ==1){
-                  playerTeam1.add(player_id);
-              }
-              else{
-                  playerTeam2.add(player_id);
-              }
-              
-          }
-          pstmt2.close();
-          matches.add(new Match(match_id,playerTeam1,playerTeam2,new Team(team1_id,team1),new Team(team2_id,team2),score_team1,score_team2));
-          
-          
+         
+          matches.add(new Match(match_id,new Team(team1_id,team1),new Team(team2_id,team2),score_team1,score_team2));
+                  
         }
         pstmt.close();
       
     } catch (SQLException ex) {
       Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }
-        
-        
-        
-        
-        
+  
         return matches;
     }
           
@@ -125,23 +102,8 @@ public class MatchesManager {
           String team1  = rs.getString("team1");
           String team2  = rs.getString("team2");
           
-          ArrayList<Integer> playerTeam1 = new ArrayList();
-          ArrayList<Integer> playerTeam2 = new ArrayList();
-          
-          PreparedStatement pstmt2 = connection.prepareStatement("SELECT * FROM `Matches_Player WHERE match_id =`"+match_id);
-          ResultSet rs2 = pstmt2.executeQuery();
-          while(rs2.next()){
-              int player_id = rs.getInt("player_id");
-              int team_id = rs.getInt("team_id");
-              
-              if(team_id ==1){
-                  playerTeam1.add(player_id);
-              }
-              else{
-                  playerTeam2.add(player_id);
-              }  
-          }
-          match = new Match(match_id,playerTeam1,playerTeam2,new Team(team1_id,team1),new Team(team2_id,team2),score_team1,score_team2);
+         
+          match = new Match(match_id,new Team(team1_id,team1),new Team(team2_id,team2),score_team1,score_team2);
           
         }
         pstmt.close();
@@ -159,16 +121,31 @@ public class MatchesManager {
     }
     
     public  ArrayList<Match>  getMatchesPlayedBy(Player p){
-        ArrayList<Match> res=new ArrayList<>();
-        for(Match m: getAll()){
-            if(Arrays.asList(m.getTeam1Players()).contains(p)){
-                res.add(m);
-            }else if( Arrays.asList(m.getTeam2Players()).contains(p)){
-                res.add(m);
-            
-            }
+        ArrayList<Match> matches=new ArrayList<>();
+        try {
+        Connection connection = dataSource.getConnection();
+        PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM `MatchWithTeam`JOIN Matches_Player "
+                + "ON MatchWithTeam.match_id = Matches_Player.match_id WHERE Matches_Player.player_id="+p.getId());
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+          int match_id = rs.getInt("match_id");
+          int score_team1 = rs.getInt("score_team1");
+          int score_team2 = rs.getInt("score_team2");
+          int team1_id = rs.getInt("team1_id");
+          int team2_id = rs.getInt("team1_id");
+          String team1  = rs.getString("team1");
+          String team2  = rs.getString("team2");
+          
+         
+          matches.add(new Match(match_id,new Team(team1_id,team1),new Team(team2_id,team2),score_team1,score_team2));
+                  
         }
+        pstmt.close();
+      
+    } catch (SQLException ex) {
+      Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+    }
         
-        return res;
+        return matches;
     }
 }
