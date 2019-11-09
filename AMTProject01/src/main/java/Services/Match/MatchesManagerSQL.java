@@ -8,6 +8,7 @@ package Services.Match;
 import Model.Match;
 import Model.Player;
 import Model.Team;
+import Services.Player.PlayerManagerSQL;
 import Services.Team.TeamManagerSQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -145,5 +146,54 @@ public class MatchesManagerSQL implements MatchesManager {
     }
         
         return matches;
+    }
+    
+    @Override
+    public void addMatch(Match match,ArrayList<Player>team1,ArrayList<Player>team2){
+        
+    }
+    
+    
+    @Override
+    public void addMatch(Match match,int[] team1,int[]team2){
+        
+            try {
+        Connection connection = dataSource.getConnection();
+        PreparedStatement pstmt = connection.prepareStatement("INSERT INTO `Matches`(`score_team1`,`score_team2`,`team1_id`,`team2_id`) "
+                + "VALUES ("+match.getTeam1EndScore()+","+match.getTeam2EndScore()+","+match.getTeam1().getId()+","+match.getTeam2().getId()+")");
+         pstmt.execute();
+       
+        pstmt.close();
+      
+    } catch (SQLException ex) {
+      Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+    }
+            
+            addPlayerToMatch(team1,1,match.getId());
+             addPlayerToMatch(team2,2,match.getId());
+        
+    }
+    
+    
+    private void addPlayerToMatch(int[] team,int teamNumber,long match_id){
+        
+        try {
+        Connection connection = dataSource.getConnection();
+        
+        
+        for(int i : team){
+        
+        PreparedStatement pstmt = connection.prepareStatement("INSERT INTO `Matches_Player`(`match_id`,`team_id`,`player_id`) "
+                + "VALUES ("+match_id+","+teamNumber+","+i+")");
+         pstmt.execute();
+       
+        pstmt.close();
+        }
+      
+    } catch (SQLException ex) {
+      Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+    } 
+        
+        
     }
 }

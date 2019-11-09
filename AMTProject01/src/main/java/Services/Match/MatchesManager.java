@@ -20,4 +20,8 @@ public interface MatchesManager {
     public Match getMatch(long id);
     
     public  ArrayList<Match>  getMatchesPlayedBy(Player p);
+    
+    public void addMatch(Match match,ArrayList<Player>team1,ArrayList<Player>team2);
+    
+    public void addMatch(Match match,int[] team1,int[]team2);
 }
