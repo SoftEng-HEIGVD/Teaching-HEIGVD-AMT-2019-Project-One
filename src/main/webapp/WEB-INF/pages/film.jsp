@@ -43,16 +43,37 @@
     </header>
 
     <main role="main">
-      <section style="height: 650px; background-color: black; background-size: 500px 100%; background-image: url('assets/img/spider_man.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-position: center;">
-      </section>
+      <div class="album py-5 bg-light">
+        <div class="container">
 
-      <div class="container">
-        <h1 class="jumbotron-heading">Movies Preferences Library</h1>
-        <p class="lead text-muted">Share your love of movies with others</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-        </p>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" alt="Thumbnail [100%x225]" style="height: 100%; width: 100%; display: block;" src="./assets/img/${film.moviePosterPath}">
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="card mb-4 box-shadow">
+                <div class="card-body" style="height: 100%">
+
+                  <div style="display: inline-block; width:80%">
+                    <p class="card-text" style="font-size: 2em;">${film.title}</p>
+                  </div>
+                  <div style="display: inline-block; float: right;">
+                    <p class="card-text" style="font-size: 1.3em; margin-top: 20px;">
+                      ${film.rating} <img style="height: 30px; width: 30px;" src="./assets/img/star.png">
+                    </p>
+                  </div>
+                  <div style="margin-bottom: 20px;">
+                    <small class="text-muted">${film.runningTime} mins</small>
+                  </div>
+                  <p class="card-text" style="font-size: 1.5em;">Director : ${film.director}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
 

@@ -43,15 +43,9 @@
     </header>
 
     <main role="main">
-
-      <section class="jumbotron text-center">
+      <section class="jumbotron text-center" style="height: 300px;">
         <div class="container">
-          <h1 class="jumbotron-heading">Movies Preferences Library</h1>
-          <p class="lead text-muted">Share your love of movies with others</p>
-          <p>
-            <a href="#" class="btn btn-primary my-2">Main call to action</a>
-            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-          </p>
+          <h1 class="jumbotron-heading" style="color: black;">Film rating app</h1>
         </div>
       </section>
 
@@ -61,6 +55,10 @@
           <div class="row">
 
             <c:forEach items="${films}" var="film">
+              <!--
+              TODO : modulo (8, 12, or 16) for max films per page
+                    + display right set of films depending on page selected in pagination
+              -->
               <div class="col-md-3">
                 <div class="card mb-4 box-shadow">
                   <img class="card-img-top" alt="Thumbnail [100%x225]" style="height: 400px; width: 100%; display: block;" src="./assets/img/${film.moviePosterPath}" >
@@ -82,11 +80,39 @@
           </div>
         </div>
       </div>
-
     </main>
 
     <footer class="text-muted">
-      <div class="container">
+      <div class="container" style="margin-left: 40%;"> <!-- TODO : center nav in container -->
+        <nav>
+          <ul class="pagination">
+            <!--
+            TODO : Goal with i = currPage :
+            [<<] [<] [i - 2] [i - 1] [i] [i + 1] [i + 2] [>] [>>]
+            -->
+            <li class="page-item">
+              <a href="#">«</a> <!-- Go to first page -->
+            </li>
+            <li class="page-item">
+              <a href="#">‹</a> <!-- Go to previous page -->
+            </li>
+            <li class="page-item">
+              <a href="#">1</a>
+            </li>
+            <li class="page-item">
+              <a href="#">2</a>
+            </li>
+            <li class="page-item">
+              <a href="#">3</a>
+            </li>
+            <li class="page-item">
+              <a href="#">›</a> <!-- Go to next page -->
+            </li>
+            <li class="page-item">
+              <a href="#">»</a> <!-- Go to last page -->
+            </li>
+          </ul>
+        </nav>
         <p class="float-right">
           <a href="#">Back to top</a>
         </p>

@@ -7,7 +7,7 @@
   padding-bottom: var(--jumbotron-padding-y);
   margin-bottom: 0;
   background-color: #fff;
-  background-image: url("img/vintage_camera.jpg");
+  background-image: url("img/seamless-background.jpg");
 }
 @media (min-width: 768px) {
   .jumbotron {
