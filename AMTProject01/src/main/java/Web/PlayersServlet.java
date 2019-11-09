@@ -6,8 +6,9 @@
 package Web;
 
 import Model.Player;
-import Services.PlayerManager;
-import Services.PlayerManagerSQL;
+import Model.Team;
+import Services.Player.PlayerManager;
+import Services.Player.PlayerManagerSQL;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -42,8 +43,7 @@ PlayerManager playerManager = new PlayerManagerSQL();
         response.setContentType("text/html;charset=UTF-8");
         
      
-        
-        request.setAttribute("allPlayers", playerManager.getAllPlayers());
+
         request.getRequestDispatcher("WEB-INF/pages/players.jsp").forward(request,response);
     }
 

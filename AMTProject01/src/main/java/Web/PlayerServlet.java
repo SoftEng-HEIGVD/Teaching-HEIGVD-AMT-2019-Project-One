@@ -6,9 +6,9 @@
 package Web;
 
 import Model.Player;
-import Services.MatchesManager;
-import Services.PlayerManager;
-import Services.PlayerManagerSQL;
+import Services.Match.MatchesManagerSQL;
+import Services.Player.PlayerManager;
+import Services.Player.PlayerManagerSQL;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public class PlayerServlet extends HttpServlet {
    
 PlayerManager playerManager = new PlayerManagerSQL();
-MatchesManager mm= new MatchesManager();
+MatchesManagerSQL mm= new MatchesManagerSQL();
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

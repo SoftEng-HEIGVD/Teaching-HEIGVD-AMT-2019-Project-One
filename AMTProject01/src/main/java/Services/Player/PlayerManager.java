@@ -3,23 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Services;
+package Services.Player;
 
 import Model.Player;
 import Model.Team;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.annotation.Resource;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
+
 
 
 /**
@@ -39,5 +28,7 @@ public interface PlayerManager {
     public void Add(Player p);
     public List<Player> getPlayersFrom(Team t) ;
     
+    public List<Player> getPlayersFromMatchTeam1(int match_id) ;
+    public List<Player> getPlayersFromMatchTeam2(int match_id) ;
     
 }

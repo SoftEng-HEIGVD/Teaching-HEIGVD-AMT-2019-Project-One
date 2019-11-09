@@ -7,9 +7,9 @@ package Web;
 
 import Model.Player;
 import Model.Team;
-import Services.PlayerManager;
-import Services.PlayerManagerSQL;
-import Services.TeamManager;
+import Services.Player.PlayerManager;
+import Services.Player.PlayerManagerSQL;
+import Services.Team.TeamManagerSQL;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author goturak
  */
 public class TeamServlet extends HttpServlet {
-    TeamManager teamManager= new TeamManager();
+    TeamManagerSQL teamManager= new TeamManagerSQL();
     PlayerManager playerManager = new PlayerManagerSQL();
     /**
      * Handles the HTTP <code>GET</code> method.

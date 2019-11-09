@@ -7,9 +7,9 @@ package Web;
 
 import Model.Player;
 import Model.Team;
-import Services.PlayerManager;
-import Services.PlayerManagerSQL;
-import Services.TeamManager;
+import Services.Player.PlayerManager;
+import Services.Player.PlayerManagerSQL;
+import Services.Team.TeamManagerSQL;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 public class PlayerAddServlet extends HttpServlet {
   
 PlayerManager playerManager = new PlayerManagerSQL();
-    TeamManager teamManager= new TeamManager();
+    TeamManagerSQL teamManager= new TeamManagerSQL();
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
