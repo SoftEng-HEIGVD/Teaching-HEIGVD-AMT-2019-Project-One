@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(urlPatterns = "/login")
-public class ChilloutServlet extends HttpServlet {
+@WebServlet(name="LoginServlet",urlPatterns = "/login")
+public class LoginServlet extends HttpServlet {
 
     @EJB
     ClientsManagerLocal clientsManagerLocal;
@@ -23,35 +23,27 @@ public class ChilloutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String error;
 
-        Client client = null;
-
         String username = req.getParameter("username");
-//        String username = "jzerbib";
-        Logger.getLogger(ChilloutServlet.class.getName()).log(Level.INFO, "Username is : " + username);
-//        String password = req.getParameter("password");
-        String password = "jzerbib";
+        String password = req.getParameter("password");
+
         resp.setContentType("text/html;charset=UTF-8");
 
         if (username.isEmpty()|| password.isEmpty()){
                 error = "Mot de passe ou username vide !";
                 req.setAttribute("error", error);
-                req.setAttribute("user", username);
                 req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
             } else {
-                if (clientsManagerLocal.validConnection(username, password)) {
-                    client = clientsManagerLocal.findClientByUsername(username);
-                    req.getSession().setAttribute("client", client);
-                    req.setAttribute("user", username);
-                    //String path = req.getContextPath() + "/login/products";
-                    req.getRequestDispatcher("/WEB-INF/pages/products.jsp").forward(req, resp);
+                int id = clientsManagerLocal.getIdByUsername(username);
+                if (id != -1) {
+                    resp.sendRedirect(req.getContextPath()+"/home"+"?id="+id);
                 } else {
                     error = "Le mot de passe ou le username n'est pas valable";
                     req.setAttribute("error", error);
-                    req.setAttribute("user", username);
                     req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
                 }
             }
     }
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
