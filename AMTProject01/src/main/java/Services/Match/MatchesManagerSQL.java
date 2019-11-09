@@ -12,6 +12,7 @@ import Services.Player.PlayerManagerSQL;
 import Services.Team.TeamManagerSQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -157,11 +158,19 @@ public class MatchesManagerSQL implements MatchesManager {
     @Override
     public void addMatch(Match match,int[] team1,int[]team2){
         
+        int id = 0;
             try {
         Connection connection = dataSource.getConnection();
         PreparedStatement pstmt = connection.prepareStatement("INSERT INTO `Matches`(`score_team1`,`score_team2`,`team1_id`,`team2_id`) "
-                + "VALUES ("+match.getTeam1EndScore()+","+match.getTeam2EndScore()+","+match.getTeam1().getId()+","+match.getTeam2().getId()+")");
-         pstmt.execute();
+                + "VALUES ("+match.getTeam1EndScore()+","+match.getTeam2EndScore()+","+match.getTeam1().getId()+","+match.getTeam2().getId()+")",Statement.RETURN_GENERATED_KEYS);
+         pstmt.executeUpdate();
+         
+         ResultSet rs=pstmt.getGeneratedKeys();
+			
+	if(rs.next()){
+		id=rs.getInt(1);
+	}
+         
        
         pstmt.close();
       
@@ -169,8 +178,8 @@ public class MatchesManagerSQL implements MatchesManager {
       Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }
             
-            addPlayerToMatch(team1,1,match.getId());
-             addPlayerToMatch(team2,2,match.getId());
+            addPlayerToMatch(team1,1,id);
+             addPlayerToMatch(team2,2,id);
         
     }
     
