@@ -6,12 +6,12 @@ import lombok.Getter;
 
 // TODO: We'd have to handle images as DAO
 
-@Builder
+@Builder(toBuilder = true)
 @Getter
 @EqualsAndHashCode
 public class Film {
-    private int id;
-    private String title;
-    private int runningTime;
-    private String moviePosterPath;
+    private final long id;
+    private final String title;
+    private final int runningTime;
+    private final String moviePosterPath;
 }
