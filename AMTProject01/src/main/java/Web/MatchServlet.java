@@ -7,7 +7,7 @@ package Web;
 
 
 import Model.Match;
-import Services.MatchesManager;
+import Services.Match.MatchesManagerSQL;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author goturak
  */
 public class MatchServlet extends HttpServlet {
-    MatchesManager mm= new MatchesManager();
+    MatchesManagerSQL mm= new MatchesManagerSQL();
 /**
      * Handles the HTTP <code>GET</code> method.
      *

@@ -6,7 +6,7 @@
 package Web;
 
 import Model.Player;
-import Services.MatchesManager;
+import Services.Match.MatchesManagerSQL;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "MatchesServlet", urlPatterns = {"/matches"})
 public class MatchesServlet extends HttpServlet {
-     MatchesManager mm= new MatchesManager();
+     MatchesManagerSQL mm= new MatchesManagerSQL();
 /**
  * 
  */

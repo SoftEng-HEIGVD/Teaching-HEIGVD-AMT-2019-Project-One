@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Services;
+package Services.Match;
 
-import Services.Player.PlayerManagerSQL;
 import Model.Match;
 import Model.Player;
 import Model.Team;
@@ -15,9 +14,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -28,14 +24,14 @@ import javax.sql.DataSource;
  *
  * @author goturak
  */
-public class MatchesManager {
+public class MatchesManagerSQL implements MatchesManager {
     
     @Resource(lookup = "jdbc/TeamEsport")
     private DataSource dataSource;   
 //    PlayerManagerSQL pm= new PlayerManagerSQL();
 //    Map<Long,Match> matches= new HashMap<Long, Match>();
 
-    public MatchesManager() {       //
+    public MatchesManagerSQL() {       //
         //ArrayList<Player> ps=new ArrayList(pm.getAllPLayers());
 //        Player[] tp1={ps.get(0),ps.get(1),ps.get(2),ps.get(3),ps.get(4)};
 //        Player[] tp2={ps.get(5),ps.get(6),ps.get(7),ps.get(8),ps.get(9)};
@@ -54,6 +50,7 @@ public class MatchesManager {
 
     }
     
+    @Override
     public ArrayList<Match> getAll(){
         
         ArrayList<Match> matches = new ArrayList();
@@ -84,7 +81,7 @@ public class MatchesManager {
         return matches;
     }
           
-    
+    @Override
     public Match getMatch(long id){
         
         Match match = null;
@@ -120,6 +117,7 @@ public class MatchesManager {
         return match;
     }
     
+    @Override
     public  ArrayList<Match>  getMatchesPlayedBy(Player p){
         ArrayList<Match> matches=new ArrayList<>();
         try {

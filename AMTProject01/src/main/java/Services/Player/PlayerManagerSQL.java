@@ -99,7 +99,7 @@ public class PlayerManagerSQL implements PlayerManager{
     @Override
     public List<Player> getPlayersFrom(Team t){
     
-          ArrayList<Player> players = new ArrayList();
+        ArrayList<Player> players = new ArrayList();
         
         try {
         Connection connection = dataSource.getConnection();
@@ -118,6 +118,62 @@ public class PlayerManagerSQL implements PlayerManager{
     }        
           return players;
         
+    }
+    @Override
+    public List<Player> getPlayersFromMatchTeam1(int match_id){
+        
+        ArrayList<Player> players = new ArrayList();
+        
+        try {
+        Connection connection = dataSource.getConnection();
+        PreparedStatement pstmt = connection.prepareStatement("SELECT  PlayerWithTeam.player_id,pseudo,name, PlayerWithTeam.team_id as team_id,team FROM PlayerWithTeam\n" +
+"                INNER JOIN Matches_Player ON PlayerWithTeam.player_id = Matches_Player.player_id WHERE Matches_Player.team_id=1 AND Matches_Player.match_id ="+match_id);
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+          String name = rs.getString("name");
+          String pseudo = rs.getString("pseudo");
+          int player_id = rs.getInt("player_id");
+          int team_id = rs.getInt("team_id");
+          String team = rs.getString("team");
+          players.add(new Player(player_id,pseudo,name,new Team(team_id,team)));
+        }
+        pstmt.close();
+      
+    } catch (SQLException ex) {
+      Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+    }        
+          return players;
+        
+        
+        
+        
+        
+    }
+    @Override
+    public List<Player> getPlayersFromMatchTeam2(int match_id) {
+        
+        
+         ArrayList<Player> players = new ArrayList();
+        
+        try {
+        Connection connection = dataSource.getConnection();
+        PreparedStatement pstmt = connection.prepareStatement("SELECT  PlayerWithTeam.player_id,pseudo,name, PlayerWithTeam.team_id as team_id,team FROM PlayerWithTeam\n" +
+"                INNER JOIN Matches_Player ON PlayerWithTeam.player_id = Matches_Player.player_id WHERE Matches_Player.team_id=2 AND Matches_Player.match_id ="+match_id);
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+          String name = rs.getString("name");
+          String pseudo = rs.getString("pseudo");
+          int player_id = rs.getInt("player_id");
+          int team_id = rs.getInt("team_id");
+          String team = rs.getString("team");
+          players.add(new Player(player_id,pseudo,name,new Team(team_id,team)));
+        }
+        pstmt.close();
+      
+    } catch (SQLException ex) {
+      Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+    }        
+          return players;
     }
 
 
