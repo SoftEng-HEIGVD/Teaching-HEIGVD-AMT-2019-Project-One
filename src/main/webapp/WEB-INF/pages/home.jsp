@@ -13,17 +13,10 @@
 </head>
 <body>
 
-<ch1>Products ${requestScope.session.user}</ch1>
-<table>
-    <c:forEach items="${products}" var="product">
-        <tr>
-            <td>${product.id}</td>
-            <td>${product.name}</td>
-            <td>${product.unitPrice}</td>
-
-        </tr>
-    </c:forEach>
-</table>
+<ch1>Home</ch1>
+<p>
+    ${requestScope.user.username}
+</p>
 
 </body>
 </html>
