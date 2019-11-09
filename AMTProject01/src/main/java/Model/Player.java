@@ -11,20 +11,22 @@ package Model;
  */
 public class Player {
     
+    private int id;
     private String userName;
     private String name;
     private Team team;
 
     public Player(String userName){
-        this(userName,null,null);
+        this(0,userName,null,null);
     }
     
     public Player(String userName, String name) {
-        this(userName,name,null);
+        this(0,userName,name,null);
     }
 
     
-    public Player(String userName, String name, Team team) {
+    public Player(int id,String userName, String name, Team team) {
+        this.id = id;
         this.userName = userName;
         this.name = name;
         this.team = team;
@@ -41,6 +43,10 @@ public class Player {
     public Team getTeam() {
         return team;
     }
+    
+   public int getId(){
+       return id;
+   }
 
     @Override
     public boolean equals(Object obj) {

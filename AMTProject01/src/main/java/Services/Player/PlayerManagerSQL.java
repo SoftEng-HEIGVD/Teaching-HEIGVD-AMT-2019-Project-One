@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Services;
+package Services.Player;
 
 import Model.Player;
 import Model.Team;
+import Services.Team.TeamManagerSQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,47 +46,54 @@ public class PlayerManagerSQL implements PlayerManager{
         
         ArrayList<Player> players = new ArrayList();
         
+        
         try {
         Connection connection = dataSource.getConnection();
-        PreparedStatement pstmt = connection.prepareStatement("SELECT Player.pseudo AS pseudo, Player.name AS name, Team.name AS team "
-                                                            + "FROM Player JOIN Team ON Player.team_id = Team.team_id");
+//        PreparedStatement pstmt = connection.prepareStatement("SELECT Player.pseudo AS pseudo, Player.name AS name, Team.name AS team "
+//                                                            + "FROM Player JOIN Team ON Player.team_id = Team.team_id");
+        PreparedStatement pstmt = connection.prepareStatement("SELECT player_id,pseudo,name,team,team_id FROM PlayerWithTeam");
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
           String name = rs.getString("name");
           String pseudo = rs.getString("pseudo");
           String team = rs.getString("team");
-          players.add(new Player(pseudo,name,new Team(team)));
+          int player_id = rs.getInt("player_id");
+          int team_id = rs.getInt("team_id");
+          players.add(new Player(player_id,pseudo,name,new Team(team_id,team)));
         }
         pstmt.close();
       
     } catch (SQLException ex) {
-      Logger.getLogger(TeamManager.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }        
           return players;
     }
     @Override
     public Player getPlayer(String userName){
         
+        int player_id =0;
+        int team_id = 0;
         String name ="";
         String pseudo="";
         String team = "";
         
         try {
         Connection connection = dataSource.getConnection();
-        PreparedStatement pstmt = connection.prepareStatement("SELECT Player.pseudo AS pseudo, Player.name AS name, Team.name AS team "
-                                                            + "FROM Player JOIN Team ON Player.team_id = Team.team_id WHERE pseudo= '"+userName+"'");
+        PreparedStatement pstmt = connection.prepareStatement("SELECT player_id,pseudo,name,team,team_id FROM PlayerWithTeam WHERE pseudo='"+userName+"'");
         ResultSet rs = pstmt.executeQuery();
         while(rs.next()){
            name = rs.getString("name");
            pseudo = rs.getString("pseudo"); 
            team = rs.getString("team");
+           player_id = rs.getInt("player_id");
+           team_id = rs.getInt("team_id");
         }
         pstmt.close();
       
     } catch (SQLException ex) {
-      Logger.getLogger(TeamManager.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }        
-        return  new Player(pseudo,name,new Team(team));
+        return  new Player(player_id,pseudo,name,new Team(team_id,team));
     }
     
     @Override
@@ -95,19 +103,18 @@ public class PlayerManagerSQL implements PlayerManager{
         
         try {
         Connection connection = dataSource.getConnection();
-        PreparedStatement pstmt = connection.prepareStatement("SELECT Player.pseudo AS pseudo, Player.name AS name, Team.name AS team "
-                                                            + "FROM Player JOIN Team ON Player.team_id = Team.team_id WHERE team= '"+t.getName()+"'");
+        PreparedStatement pstmt = connection.prepareStatement("SELECT player_id,pseudo,name FROM PlayerWithTeam WHERE team_id = "+t.getId());
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
           String name = rs.getString("name");
           String pseudo = rs.getString("pseudo");
-          //long id = rs.getLong("actor_id");
-          players.add(new Player(pseudo,name,new Team(t.getName())));
+          int id = rs.getInt("player_id");
+          players.add(new Player(id,pseudo,name,new Team(t.getId(),t.getName())));
         }
         pstmt.close();
       
     } catch (SQLException ex) {
-      Logger.getLogger(TeamManager.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }        
           return players;
         
@@ -116,17 +123,18 @@ public class PlayerManagerSQL implements PlayerManager{
 
     @Override
     public void Add(Player p){
-//        
-//    }
-//    public List<Player> getPlayersFrom(Team t) {
-//        List<Player> res= new ArrayList<Player>();
-//        for(Player p: players.values()){
-//            if(p.getTeam()!=null&& p.getTeam().getName()==t.getName()){
-//                res.add(p);
-//            }
-//        }
-//        
-//        return res;
+        
+//    try {
+//        Connection connection = dataSource.getConnection();
+//        PreparedStatement pstmt = connection.prepareStatement("SELECT Player.pseudo AS pseudo, Player.name AS name, Team.name AS team "
+//                                                            + "FROM Player JOIN Team ON Player.team_id = Team.team_id WHERE Team.name = '"+t.getName()+"'");
+//        ResultSet rs = pstmt.executeQuery();
+//       
+//        pstmt.close();
+//      
+//    } catch (SQLException ex) {
+//      Logger.getLogger(TeamManager.class.getName()).log(Level.SEVERE, null, ex);
+//    }        
     }
     
     

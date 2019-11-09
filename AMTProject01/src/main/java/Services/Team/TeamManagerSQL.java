@@ -3,11 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Services;
+package Services.Team;
 
 import Model.Team;
-import java.util.HashMap;
-import java.util.Map;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +15,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
-import javax.ejb.Stateless;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
@@ -25,43 +22,63 @@ import javax.sql.DataSource;
  *
  * @author goturak
  */
-public class TeamManager {
+public class TeamManagerSQL implements TeamManager{
     
     @Resource(lookup = "jdbc/TeamEsport")
     private DataSource dataSource;   
-    private Map<String,Team>teams= new HashMap<String,Team>();
-
-    public TeamManager() {
+    
+    
+    
+    public TeamManagerSQL() {
         
         try{InitialContext ctx = new InitialContext();
         dataSource =(DataSource)ctx.lookup("jdbc/TeamEsport");
         }catch(Exception e){}
-        //teams.put("Solary",new Team("Solary"));
     }
     
-    
+    @Override
     public List<Team> getAllTeams(){
         
+            ArrayList<Team> teams = new ArrayList();
+
         try {
         Connection connection = dataSource.getConnection();
         PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM `Team`");
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
+          int id = rs.getInt("team_id");
           String name = rs.getString("name");
-          //String lastName = rs.getString("last_name");
-          //long id = rs.getLong("actor_id");
-          teams.put(name, new Team(name));
+          teams.add(new Team(id,name));
         }
         pstmt.close();
       
     } catch (SQLException ex) {
-      Logger.getLogger(TeamManager.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }
-    return  new ArrayList<Team>(teams.values());
+    return  teams;
   }
-           
+       
+    @Override
     public Team getTeam(String name){
-        return teams.get(name);
+        
+        int id = 0;
+        String team ="";
+        
+         try {
+        Connection connection = dataSource.getConnection();
+        PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM Team WHERE name = '"+name+"'");
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+          id = rs.getInt("team_id");
+          team = rs.getString("name");
+        }
+        pstmt.close();
+      
+    } catch (SQLException ex) {
+      Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return  new Team(id,team);
+
     }
     
     

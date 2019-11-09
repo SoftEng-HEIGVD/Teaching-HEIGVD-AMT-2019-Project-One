@@ -33,6 +33,29 @@ CREATE TABLE IF NOT EXISTS Player (
   CONSTRAINT fk_player_team FOREIGN KEY (team_id) REFERENCES Team (team_id) ON DELETE RESTRICT ON UPDATE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS Matches (
+  match_id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  score_team1 SMALLINT UNSIGNED NOT NULL,
+  score_team2 SMALLINT UNSIGNED NOT NULL,
+  team1_id SMALLINT UNSIGNED NOT NULL,
+  team2_id SMALLINT UNSIGNED NOT NULL,
+  PRIMARY KEY  (match_id),
+  CONSTRAINT fk_match_team1 FOREIGN KEY (team1_id) REFERENCES Team (team_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+   CONSTRAINT fk_match_team2 FOREIGN KEY (team2_id) REFERENCES Team (team_id) ON DELETE RESTRICT ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `Match_player`
+--
+CREATE TABLE IF NOT EXISTS Matches_Player (
+  match_id SMALLINT UNSIGNED NOT NULL ,
+  team_id SMALLINT UNSIGNED NOT NULL,
+  player_id SMALLINT UNSIGNED NOT NULL,
+  PRIMARY KEY  (player_id,match_id),
+  CONSTRAINT fk_match_player FOREIGN KEY (player_id) REFERENCES Player (player_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+   CONSTRAINT fk_match_team FOREIGN KEY (team_id) REFERENCES Team (team_id) ON DELETE RESTRICT ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- View structure for view `customer_list`
 --
@@ -80,15 +103,98 @@ INSERT INTO `Team`(`team_id`,`name`) VALUES
     (3,'fnatic'),
     (4,'Liquid'),
     (5,'Vitality');
+
+SET AUTOCOMMIT=0;
+INSERT INTO `Matches`(`match_id`,`score_team1`,`score_team2`,`team1_id`,`team2_id`) VALUES
+    (1,15,9,1,2),
+    (2,15,2,2,4),
+    (3,3,9,5,1),
+    (4,7,12,2,3),
+    (5,0,5,3,4);
     
+
+INSERT INTO `Matches_Player`(`match_id`,`team_id`,`player_id`) VALUES
+    (1,1,1),
+    (1,1,2),
+    (1,1,3),
+    (1,1,4),
+    (1,1,5),
+    (1,2,6),
+    (1,2,7),
+    (1,2,8),
+    (1,2,9),
+    (1,2,10),
     
-CREATE VIEW PSeudo
+    (2,1,6),
+    (2,1,7),
+    (2,1,8),
+    (2,1,9),
+    (2,1,10),
+    (2,2,16),
+    (2,2,17),
+    (2,2,18),
+    (2,2,19),
+    (2,2,20),
+    
+    (3,1,21),
+    (3,1,22),
+    (3,1,23),
+    (3,1,24),
+    (3,1,25),
+    (3,2,1),
+    (3,2,2),
+    (3,2,3),
+    (3,2,4),
+    (3,2,5),
+    
+    (4,1,6),
+    (4,1,7),
+    (4,1,8),
+    (4,1,9),
+    (4,1,10),
+    (4,2,11),
+    (4,2,12),
+    (4,2,13),
+    (4,2,14),
+    (4,2,15),
+    
+    (5,1,11),
+    (5,1,12),
+    (5,1,13),
+    (5,1,14),
+    (5,1,15),
+    (5,2,16),
+    (5,2,17),
+    (5,2,18),
+    (5,2,19),
+    (5,2,20);
+    
+CREATE VIEW MatchWithTeam
+AS
+SELECT
+Matches.match_id as match_id,
+ Matches.score_team1 as score_team1 ,
+ Matches.score_team2 as score_team2,
+ Matches.team1_id as team1_id,
+ Matches.team2_id as team2_id,
+ t1.name as team1 ,
+ t2.name as team2
+ from Matches 
+inner join Team t1 on Matches.team1_id = t1.team_id
+inner join Team t2 on  Matches.team2_id = t2.team_id; 
+
+   
+CREATE VIEW PlayerWithTeam
 AS 
 SELECT 
-    pseudo, 
-    name
+	Player.player_id AS player_id,
+    Player.pseudo AS pseudo, 
+    Player.name AS name,
+    Team.name AS team,
+    Team.team_id AS team_id
 FROM
-    Player;
+    Player JOIN Team WHERE Player.team_id = Team.team_id;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

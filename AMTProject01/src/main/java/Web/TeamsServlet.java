@@ -6,7 +6,7 @@
 package Web;
 
 import Model.Team;
-import Services.TeamManager;
+import Services.Team.TeamManagerSQL;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author goturak
  */
 public class TeamsServlet extends HttpServlet {
-    TeamManager teamManager= new TeamManager();
+    TeamManagerSQL teamManager= new TeamManagerSQL();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

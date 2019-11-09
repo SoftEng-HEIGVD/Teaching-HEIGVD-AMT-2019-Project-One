@@ -7,8 +7,8 @@ package Web;
 
 import Model.Player;
 import Services.MatchesManager;
-import Services.PlayerManager;
-import Services.PlayerManagerSQL;
+import Services.Player.PlayerManager;
+import Services.Player.PlayerManagerSQL;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
