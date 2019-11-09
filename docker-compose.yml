@@ -3,7 +3,7 @@ services:
   payara:
     build: images_docker/payara
     environment:
-     - ADMIN_PASSWORD=adminadmin
+      PAYARA_ARGS: "--debug"
     ports:
      - "8080:8080"
      - "4848:4848"
@@ -12,3 +12,22 @@ services:
     ports:
      - "9090:8080"
      - "9990:9990"
+  mysql:
+    build: images_docker/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: amt_project_one
+      MYSQL_ROOT_PASSWORD: mypassword
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST=db
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+       - 8888:80
+
