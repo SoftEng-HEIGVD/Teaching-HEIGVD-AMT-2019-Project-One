@@ -14,7 +14,6 @@ public class Product {
     private double unitPrice;
     private String description;
 
-
     public Product(int id, String name, double unitPrice, String description) {
         this.id = id;
         this.name = name;
