@@ -6,6 +6,7 @@
 package Web;
 
 import Model.Player;
+import Model.Team;
 import Services.Player.PlayerManager;
 import Services.Player.PlayerManagerSQL;
 import java.io.IOException;
@@ -39,6 +40,7 @@ PlayerManager playerManager = new PlayerManagerSQL();
         
         String page= request.getParameter("p");
         
+        playerManager.Add(new Player(1,"benji","ben",new Team(1,"Astralis")));
         request.setAttribute("allPlayers", playerManager.getAllPLayers());
         request.getRequestDispatcher("WEB-INF/pages/players.jsp").forward(request,response);
     }
