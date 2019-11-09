@@ -31,7 +31,7 @@ public interface PlayerManager {
     
     public Player getRandomPlayer();
     
-    public List<Player> getAllPLayers();
+    public List<Player> getAllPlayers();
     
     public Player getPlayer(String userName);
 
