@@ -1,6 +1,8 @@
 package ch.heigvd.amt.project.presentation;
 
 import ch.heigvd.amt.project.business.FilmsManagerLocal;
+import ch.heigvd.amt.project.datastore.exceptions.KeyNotFoundException;
+import ch.heigvd.amt.project.integration.FilmsDAO;
 import ch.heigvd.amt.project.model.Film;
 
 import javax.ejb.EJB;
@@ -25,8 +27,28 @@ public class ServletHome extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        /*
         List<Film> films = filmsManager.getAllFilms();
+        */
+        int page = 1;
+        int nbFilmsPerPage = 12;
+        if(request.getParameter("page") != null) {
+            page = Integer.parseInt(request.getParameter("page"));
+        }
+        FilmsDAO dao = new FilmsDAO();
+        List<Film> films = null;
+        int nbFilms = 0;
+        try {
+            films = dao.findBetween(Integer.toString((page - 1) * nbFilmsPerPage), Integer.toString(page * nbFilmsPerPage));
+            nbFilms = dao.findAll().size();
+        } catch (KeyNotFoundException e) {
+            e.printStackTrace();
+        }
+        int nbPages = (int) Math.ceil(nbFilms * 1.0 / nbFilmsPerPage);
+
         request.setAttribute("films", films);
+        request.setAttribute("nbPages", nbPages);
+        request.setAttribute("currentPage", page);
         request.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(request, response);
     }
 }

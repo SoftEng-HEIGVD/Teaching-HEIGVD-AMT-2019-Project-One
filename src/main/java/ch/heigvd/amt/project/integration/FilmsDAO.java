@@ -145,6 +145,40 @@ public class FilmsDAO implements IFilmsDao {
         }
     }
 
+    @Override
+    public List<Film> findBetween(String id1, String id2) throws KeyNotFoundException {
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM amt_films WHERE ID >= ? AND ID <= ?");
+            statement.setString(1, id1);
+            statement.setString(2, id2);
+            ResultSet rs = statement.executeQuery();
+            boolean hasRecord = rs.next();
+            if (!hasRecord) {
+                throw new KeyNotFoundException("Could not find any film!");
+            }
+            List<Film> requestedFilms = new LinkedList<>();
+
+            while (rs.next()) {
+                Film existingFilm = Film.builder()
+                        .id(Long.parseLong(rs.getString("ID")))
+                        .title(rs.getString("TITLE"))
+                        .runningTime(Integer.parseInt(rs.getString("RUNNING_TIME")))
+                        .moviePosterPath(rs.getString("PATH_TO_MOVIE_POSTER"))
+                        .director(rs.getString("DIRECTOR"))
+                        .build();
+                requestedFilms.add(existingFilm);
+            }
+            return requestedFilms;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Error(e);
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
     private void closeConnection(Connection connection) {
         try {
             connection.close();
