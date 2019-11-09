@@ -4,7 +4,10 @@ import ch.heigvd.amt.projectone.model.Client;
 
 public interface ClientsManagerLocal {
 
-    public boolean create(String username, String password);
-    public boolean validConnection(String username, String password);
-    public Client findClientByUsername(String username);
+    boolean create(String username, String password);
+    boolean validConnection(String username, String password);
+    Client findClientByUsername(String username);
+    int getIdByUsername(String username);
+    Client getClientById(int id);
+
 }

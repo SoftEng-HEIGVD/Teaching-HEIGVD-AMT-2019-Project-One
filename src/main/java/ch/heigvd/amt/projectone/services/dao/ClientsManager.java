@@ -53,11 +53,11 @@ public class ClientsManager implements ClientsManagerLocal {
 
     @Override
     public Client findClientByUsername(String username) {
-        Client client = new Client();
+        Client client = null;
 
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Client WHERE username=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `Client` WHERE username = ?");
             preparedStatement.setString(1, username);
             ResultSet result = preparedStatement.executeQuery();
 
@@ -66,8 +66,9 @@ public class ClientsManager implements ClientsManagerLocal {
                 String name = result.getString("name");
                 String userDB = result.getString("username");
                 String passDB = result.getString("password");
+                boolean isAdmin = result.getBoolean("isAdmin");
 
-                client = new Client(id, name, userDB, passDB);
+                client = new Client(id, name, userDB, passDB, isAdmin);
             }
 
             preparedStatement.close();
@@ -77,6 +78,57 @@ public class ClientsManager implements ClientsManagerLocal {
             e.printStackTrace();
         }
         LOG.log(Level.INFO, "Client is : " + client);
+        return client;
+    }
+
+    public int getIdByUsername(String username){
+
+        int id = -1;
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM `Client` WHERE username = ?");
+            preparedStatement.setString(1, username);
+            ResultSet result = preparedStatement.executeQuery();
+
+            if (result.next()){
+                id = result.getInt("id");
+            }
+            preparedStatement.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return id;
+    }
+
+    public Client getClientById(int id){
+
+        Client client = null;
+
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `Client` WHERE id = ?");
+            preparedStatement.setInt(1, id);
+            ResultSet result = preparedStatement.executeQuery();
+
+            if (result.next()){
+                int idDB = result.getInt("id");
+                String name = result.getString("name");
+                String userDB = result.getString("username");
+                String passDB = result.getString("password");
+                boolean isAdmin = result.getBoolean("isAdmin");
+
+                client = new Client(id, name, userDB, passDB, isAdmin);
+            }
+
+            preparedStatement.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return client;
     }
 }
