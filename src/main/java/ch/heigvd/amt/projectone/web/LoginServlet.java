@@ -42,8 +42,8 @@ public class ChilloutServlet extends HttpServlet {
                     client = clientsManagerLocal.findClientByUsername(username);
                     req.getSession().setAttribute("client", client);
                     req.setAttribute("user", username);
-                    String path = req.getContextPath() + "/login/products";
-                    resp.sendRedirect(path);
+                    //String path = req.getContextPath() + "/login/products";
+                    req.getRequestDispatcher("/WEB-INF/pages/products.jsp").forward(req, resp);
                 } else {
                     error = "Le mot de passe ou le username n'est pas valable";
                     req.setAttribute("error", error);
