@@ -3,3 +3,5 @@
 create-jdbc-connection-pool --restype javax.sql.DataSource --datasourceclassname com.mysql.cj.jdbc.MysqlXADataSource --property 'user=root:password=mypassword:url=jdbc\:mysql\://db\:3306/amt_project_one:useSSL=false' amt_project_one
 
 create-jdbc-resource --connectionpoolid amt_project_one jdbc/film_library
+
+deploy /opt/payara/deployments/filmratingapp.war
