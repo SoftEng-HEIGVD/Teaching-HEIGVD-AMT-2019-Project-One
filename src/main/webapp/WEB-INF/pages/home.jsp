@@ -62,7 +62,7 @@
                     <p class="card-text">${film.title}</p>
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" href="film?id=${film.id}">View</button>
                         <button type="button" class="btn btn-sm btn-outline-secondary">Like</button>
                       </div>
                       <div>

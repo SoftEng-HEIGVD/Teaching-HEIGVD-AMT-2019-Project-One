@@ -31,7 +31,7 @@ public class ServletHome extends HttpServlet {
         List<Film> films = filmsManager.getAllFilms();
         */
         int page = 1;
-        int nbFilmsPerPage = 12;
+        int nbFilmsPerPage = 8;
         if(request.getParameter("page") != null) {
             page = Integer.parseInt(request.getParameter("page"));
         }
