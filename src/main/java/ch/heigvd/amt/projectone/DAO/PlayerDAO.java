@@ -1,6 +1,7 @@
 package ch.heigvd.amt.projectone.DAO;
 
 import ch.heigvd.amt.projectone.business.IAuthentification;
+import ch.heigvd.amt.projectone.model.Coach;
 import ch.heigvd.amt.projectone.model.Player;
 import ch.heigvd.amt.projectone.model.Team;
 
@@ -81,13 +82,14 @@ public class PlayerDAO implements IPlayerDAO {
     }
 
     @Override
-    public List<Player> findMyTeamPlayers(Team team){
+    public List<Player> findMyTeamPlayers(Coach coach){
         List<Player> players = new ArrayList<>();
         Connection con = null;
         try{
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("SELECT FIRST_NAME,LAST_NAME,POSITION,NUMBER,NAME_TEAMS FROM amt_players WHERE NAME_TEAMS = ?");
-            statement.setString(1,team.getName());
+            PreparedStatement statement = con.prepareStatement("SELECT FIRST_NAME,LAST_NAME,POSITION,NUMBER,NAME_TEAMS,CREATIONDATE,LOCATION FROM amt_players " +
+                    "INNER JOIN amt_teams ON amt_players.name_teams = amt_teams.name INNER JOIN amt_teams_coach ON amt_players.name_teams = amt_teams_coach.team_id  WHERE amt_teams_coach.coach_id = ?;");
+            statement.setString(1,coach.getUsername());
 
             ResultSet rs = statement.executeQuery();
             while(rs.next()){
@@ -96,7 +98,11 @@ public class PlayerDAO implements IPlayerDAO {
                         .lastName(rs.getString(2))
                         .position(rs.getString(3))
                         .number(rs.getInt(4))
-                        .team(team)
+                        .team(Team.builder()
+                                .name(rs.getString(5))
+                                .location(rs.getString(7))
+                                .dateCreation(rs.getDate(6))
+                                .build())
                         .build();
                 players.add(player);
             }

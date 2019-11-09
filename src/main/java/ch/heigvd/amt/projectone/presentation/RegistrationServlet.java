@@ -41,7 +41,6 @@ public class RegistrationServlet extends HttpServlet {
                 .lastName(lastName)
                 .username(userName)
                 .password(password)
-                .team(t)
                 .isAdmin(isAdmin)
                 .build();
 

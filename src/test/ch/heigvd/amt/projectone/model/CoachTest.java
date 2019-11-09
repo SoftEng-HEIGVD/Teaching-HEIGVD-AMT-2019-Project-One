@@ -22,9 +22,7 @@ public class CoachTest {
 
         Coach coach = Coach.builder()
                 .lastName("Alic")
-                .firstName("Robel")
-                .team(team).build();
-
+                .firstName("Robel").build();
         assertNotNull(coach);
         assertEquals("Alic",coach.getLastName());
     }

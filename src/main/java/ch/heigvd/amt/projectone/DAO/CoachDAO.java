@@ -27,13 +27,12 @@ public class CoachDAO implements ICoachDAO {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("INSERT INTO amt_coaches (USERNAME, PASSWORD, FIRST_NAME, LAST_NAME, NAMETEAM, ISADMIN) VALUES (?, ?, ?, ?, ?,?)");
+            PreparedStatement statement = con.prepareStatement("INSERT INTO amt_coaches (USERNAME, PASSWORD, FIRST_NAME, LAST_NAME, ISADMIN) VALUES (?, ?, ?, ?,?)");
             statement.setString(1, entity.getUsername());
             statement.setString(2, entity.getPassword());
             statement.setString(3, entity.getFirstName());
             statement.setString(4, entity.getLastName());
-            statement.setString(5, entity.getTeam().getName());
-            statement.setBoolean(6, entity.getIsAdmin());
+            statement.setBoolean(5, entity.getIsAdmin());
             statement.execute();
             return entity;
         } catch (SQLException e) {
@@ -49,7 +48,7 @@ public class CoachDAO implements ICoachDAO {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("SELECT USERNAME, PASSWORD, FIRST_NAME, LAST_NAME, NAMETEAM, LOCATION, CREATIONDATE, ISADMIN FROM amt_coaches,amt_teams WHERE USERNAME = ?");
+            PreparedStatement statement = con.prepareStatement("SELECT USERNAME, PASSWORD, FIRST_NAME, LAST_NAME,ISADMIN FROM amt_coaches WHERE USERNAME = ?");
 
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
@@ -62,12 +61,7 @@ public class CoachDAO implements ICoachDAO {
                     .password(rs.getString(2))
                     .firstName(rs.getString(3))
                     .lastName(rs.getString(4))
-                    .team(Team.builder()
-                            .name(rs.getString(5))
-                            .location(rs.getString(6))
-                            .dateCreation(rs.getDate(7))
-                            .build())
-                    .isAdmin(rs.getBoolean(8))
+                    .isAdmin(rs.getBoolean(5))
                     .build();
             return existingCoach;
         } catch (SQLException e) {
@@ -84,13 +78,12 @@ public class CoachDAO implements ICoachDAO {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("UPDATE amt_coaches SET USERNAME=?, PASSWORD=?, FIRST_NAME=?, LAST_NAME=?, NAMETEAM=?, ISADMIN=? WHERE USERNAME = ?");
+            PreparedStatement statement = con.prepareStatement("UPDATE amt_coaches SET USERNAME=?, PASSWORD=?, FIRST_NAME=?, LAST_NAME=?, ISADMIN=? WHERE USERNAME = ?");
             statement.setString(1, entity.getUsername());
             statement.setString(2, entity.getPassword());
             statement.setString(3, entity.getFirstName());
             statement.setString(4, entity.getLastName());
-            statement.setObject(5, entity.getTeam());
-            statement.setBoolean(6, entity.getIsAdmin());
+            statement.setBoolean(5, entity.getIsAdmin());
             int numberOfUpdatedUsers = statement.executeUpdate();
             if (numberOfUpdatedUsers != 1) {
                 // erreur

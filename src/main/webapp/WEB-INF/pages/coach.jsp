@@ -65,7 +65,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./tablePlayerPage" id="myPlayer">
+                    <a href="./tablePlayerPage/myPlayers">
                         <i class="pe-7s-note2"></i>
                         <p>My players List</p>
                     </a>
@@ -78,7 +78,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="./tablePlayerPage">
+                        <a href="./tablePlayerPage/allPlayers">
                             <i class="pe-7s-note2"></i>
                             <p>All players List</p>
                         </a>

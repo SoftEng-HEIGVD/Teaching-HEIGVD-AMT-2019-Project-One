@@ -4,11 +4,12 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+import java.util.List;
+
 @Builder
 @EqualsAndHashCode
 @Getter
 public class Coach {
-    private Team team;
     private String lastName;
     private String firstName;
     private String username;

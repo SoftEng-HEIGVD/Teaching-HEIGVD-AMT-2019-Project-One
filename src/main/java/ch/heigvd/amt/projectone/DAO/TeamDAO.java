@@ -1,6 +1,7 @@
 package ch.heigvd.amt.projectone.DAO;
 
 import ch.heigvd.amt.projectone.business.IAuthentification;
+import ch.heigvd.amt.projectone.model.Coach;
 import ch.heigvd.amt.projectone.model.Team;
 
 import javax.annotation.Resource;
@@ -12,6 +13,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Stateless
 public class TeamDAO implements ITeamDAO {
@@ -65,6 +68,58 @@ public class TeamDAO implements ITeamDAO {
             closeConnection(con);
         }
 
+    }
+
+    @Override
+    public List<Team> findMyTeam(String coach) {
+        List<Team> teams = new ArrayList<>();
+        Connection con = null;
+        try {
+            con = dataSource.getConnection();
+            PreparedStatement statement = con.prepareStatement("SELECT NAME, CREATIONDATE, LOCATION FROM amt_teams INNER JOIN amt_teams_coach ON amt_teams.name = amt_teams_coach.team_id WHERE amt_teams_coach.coach_id = ?");
+            statement.setString(1, coach);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                Team existingTeam = Team.builder()
+                        .name(rs.getString(1))
+                        .dateCreation(rs.getDate(2))
+                        .location(rs.getString(3))
+                        .build();
+                teams.add(existingTeam);
+            }
+            return teams;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Error(e);
+        } finally {
+            closeConnection(con);
+        }
+    }
+
+    @Override
+    public List<Team> findAllTeam() {
+        List<Team> teams = new ArrayList<>();
+        Connection con = null;
+        try {
+            con = dataSource.getConnection();
+            PreparedStatement statement = con.prepareStatement("SELECT NAME, CREATIONDATE, LOCATION FROM amt_teams");
+           // statement.setString(1, coach);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                Team existingTeam = Team.builder()
+                        .name(rs.getString(1))
+                        .dateCreation(rs.getDate(2))
+                        .location(rs.getString(3))
+                        .build();
+                teams.add(existingTeam);
+            }
+            return teams;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Error(e);
+        } finally {
+            closeConnection(con);
+        }
     }
 
     @Override

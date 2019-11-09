@@ -1,5 +1,6 @@
 package ch.heigvd.amt.projectone.DAO;
 
+import ch.heigvd.amt.projectone.model.Coach;
 import ch.heigvd.amt.projectone.model.Player;
 import ch.heigvd.amt.projectone.model.Team;
 
@@ -9,6 +10,6 @@ import java.util.List;
 @Local
 public interface IPlayerDAO extends IDAO<Integer, Player>  {
     List<Player> findAllPlayers();
-    List<Player> findMyTeamPlayers(Team team);
+    List<Player> findMyTeamPlayers(Coach coach);
 
 }
