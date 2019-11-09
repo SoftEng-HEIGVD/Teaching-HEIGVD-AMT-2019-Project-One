@@ -14,4 +14,5 @@ public class Film {
     private String title;
     private int runningTime;
     private String moviePosterPath;
+    private String director;
 }

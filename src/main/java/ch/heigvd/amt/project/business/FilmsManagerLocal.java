@@ -13,4 +13,10 @@ public interface FilmsManagerLocal {
      * @return all films in the DB
      */
     List<Film> getAllFilms();
+
+    /**
+     * Get a specific film in the DB.
+     * @return a specific film in the DB
+     */
+    Film getFilm(int idFilm);
 }
