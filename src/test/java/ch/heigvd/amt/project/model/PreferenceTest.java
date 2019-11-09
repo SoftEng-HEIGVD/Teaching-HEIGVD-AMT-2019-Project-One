@@ -10,7 +10,7 @@ public class PreferenceTest {
     @Test
     void itShouldBePossibleToCreatePreferences() {
         User john = User.builder()
-                .id(0)
+                .username("John_Doe")
                 .firstName("John")
                 .lastName("Doe")
                 .email("John.Doe@email.com")

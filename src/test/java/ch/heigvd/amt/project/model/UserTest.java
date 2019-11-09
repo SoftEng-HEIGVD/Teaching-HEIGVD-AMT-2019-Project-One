@@ -9,7 +9,7 @@ class UserTest {
   @Test
   void itShouldBePossibleToCreateUsers() {
     User john = User.builder()
-            .id(0)
+            .username("John_Doe")
             .firstName("John")
             .lastName("Doe")
             .email("John.Doe@email.com")
@@ -17,6 +17,7 @@ class UserTest {
             .build();
 
     assertNotNull(john);
+    assertEquals("John_Doe", john.getUsername());
     assertEquals("John", john.getFirstName());
     assertEquals("Doe", john.getLastName());
     assertEquals("mypassword", john.getPassword());
