@@ -2,6 +2,7 @@ package ch.heigvd.amt.projectone.DAO;
 
 import ch.heigvd.amt.projectone.business.IAuthentification;
 import ch.heigvd.amt.projectone.model.Coach;
+import ch.heigvd.amt.projectone.model.Player;
 import ch.heigvd.amt.projectone.model.Team;
 
 import javax.annotation.Resource;
@@ -13,6 +14,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Stateless
 public class CoachDAO implements ICoachDAO {
@@ -71,6 +74,34 @@ public class CoachDAO implements ICoachDAO {
             closeConnection(con);
         }
 
+    }
+
+    @Override
+    public List<Coach> findAllCoach() {
+        List<Coach> coaches = new ArrayList<>();
+        Connection con = null;
+        try {
+            con = dataSource.getConnection();
+            PreparedStatement statement = con.prepareStatement("SELECT USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,ISADMIN FROM amt_coaches");
+
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                Coach existingCoach = Coach.builder()
+                        .username(rs.getString(1))
+                        .password(rs.getString(2))
+                        .firstName(rs.getString(3))
+                        .lastName(rs.getString(4))
+                        .isAdmin(rs.getBoolean(5))
+                        .build();
+                coaches.add(existingCoach);
+            }
+            return coaches;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Error(e);
+        } finally {
+            closeConnection(con);
+        }
     }
 
     @Override

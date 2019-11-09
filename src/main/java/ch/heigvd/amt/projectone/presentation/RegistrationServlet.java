@@ -32,11 +32,9 @@ public class RegistrationServlet extends HttpServlet {
         String lastName  =request.getParameter("last_name");
         String userName  =request.getParameter("username");
         String password  =request.getParameter("password");
-        String team  =request.getParameter("team");
         boolean isAdmin  = false;
 
-        System.out.println(team);
-        Team t = td.findById(team);
+
         Coach c = Coach.builder().firstName(firstName)
                 .lastName(lastName)
                 .username(userName)

@@ -58,7 +58,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" id="myTeam">
+                    <a href="../tableTeamPage/myTeams">
                         <i class="pe-7s-note2"></i>
                         <p>My team List</p>
                     </a>
@@ -71,7 +71,7 @@
                 </li>
                 <c:if test="${coach.isAdmin == true}">
                     <li>
-                        <a href="">
+                        <a href="../tableTeamPage/allTeams">
                             <i class="pe-7s-note2"></i>
                             <p>All teams List</p>
                         </a>
@@ -83,7 +83,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="../tableCoachPage">
                             <i class="pe-7s-note2"></i>
                             <p>All coaches List</p>
                         </a>
@@ -145,8 +145,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Striped Table with Hover</h4>
-                                <p class="category">Here is a subtitle for this table</p>
+                                <h4 class="title">Players</h4>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
@@ -167,7 +166,6 @@
                                     </c:forEach>
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>

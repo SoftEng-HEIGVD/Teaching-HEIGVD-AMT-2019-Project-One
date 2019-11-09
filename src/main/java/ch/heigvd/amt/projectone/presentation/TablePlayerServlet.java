@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "TablePlayerServlet", urlPatterns = {"/tablePlayerPage/allPlayers","/tablePlayerPage/myPlayers"})
+@WebServlet(name = "TablePlayerServlet", urlPatterns = {"/tablePlayerPage/allPlayers","/tablePlayerPage/myPlayers","/tableTeamPage/myTeams","/tableTeamPage/allTeams","/tableCoachPage"})
 public class TablePlayerServlet extends HttpServlet {
 
     @EJB
@@ -38,32 +38,34 @@ public class TablePlayerServlet extends HttpServlet {
 
 
         if(path.contains("/tablePlayerPage/")) {
-            if (request.getServletPath().equals("/tablePlayerPage/myPlayers")) {
+            if (path.equals("/tablePlayerPage/myPlayers")) {
                 request.setAttribute("players", pd.findMyTeamPlayers(coach));
             }
 
-            if (request.getServletPath().equals("/tablePlayerPage/allPlayers")) {
+            if (path.equals("/tablePlayerPage/allPlayers")) {
                 request.setAttribute("players", pd.findAllPlayers());
             }
 
             request.getRequestDispatcher("/WEB-INF/pages/tablePlayer.jsp").forward(request, response);
         }
-        /*if(path.contains("/tableTeamPage/")) {
-            if (request.getServletPath().equals("/tableTeamPage/myTeams")) {
-                request.setAttribute("teams", td.findById(coach.getTeam()));
+
+        if(path.contains("/tableTeamPage/")) {
+            if (path.equals("/tableTeamPage/myTeams")) {
+                request.setAttribute("teams", td.findMyTeam(coach.getUsername()));
             }
 
-            if (request.getServletPath().equals("/tableTeamPage/allTeams")) {
-                request.setAttribute("teams", pd.findAllPlayers());
+            if (path.equals("/tableTeamPage/allTeams")) {
+                request.setAttribute("teams", td.findAllTeam());
             }
 
-            request.getRequestDispatcher("/WEB-INF/pages/tablePlayer.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/pages/tableTeam.jsp").forward(request, response);
         }
-        if(path.contains("/tableCoachPage/")) {
-                request.setAttribute("coaches", pd.findMyTeamPlayers(coach.getTeam()));
 
-                request.getRequestDispatcher("/WEB-INF/pages/tablePlayer.jsp").forward(request, response);
-        }*/
+        if(path.equals("/tableCoachPage")) {
+                request.setAttribute("coaches", cd.findAllCoach());
+
+                request.getRequestDispatcher("/WEB-INF/pages/tableCoach.jsp").forward(request, response);
+        }
 
     }
 }

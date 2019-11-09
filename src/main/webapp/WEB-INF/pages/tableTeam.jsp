@@ -58,7 +58,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" id="myTeam">
+                    <a href="../tableTeamPage/myTeams">
                         <i class="pe-7s-note2"></i>
                         <p>My team List</p>
                     </a>
@@ -71,7 +71,7 @@
                 </li>
                 <c:if test="${coach.isAdmin == true}">
                     <li>
-                        <a href="">
+                        <a href="../tableTeamPage/allTeams">
                             <i class="pe-7s-note2"></i>
                             <p>All teams List</p>
                         </a>
@@ -83,7 +83,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="../tableCoachPage">
                             <i class="pe-7s-note2"></i>
                             <p>All coaches List</p>
                         </a>
@@ -145,24 +145,21 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Striped Table with Hover</h4>
-                                <p class="category">Here is a subtitle for this table</p>
+                                <h4 class="title">Team(s)</h4>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Position</th>
-                                    <th>Number</th>
+                                    <th>Name</th>
+                                    <th>Location</th>
+                                    <th>Creation date</th>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${players}" var="players">
+                                    <c:forEach items="${teams}" var="teams">
                                         <tr>
-                                            <td>${players.firstName}</td>
-                                            <td>${players.lastName}</td>
-                                            <td>${players.position}</td>
-                                            <td>${players.number}</td>
+                                            <td>${teams.name}</td>
+                                            <td>${teams.location}</td>
+                                            <td>${teams.dateCreation}</td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>

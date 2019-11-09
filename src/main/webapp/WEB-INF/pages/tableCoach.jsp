@@ -2,18 +2,18 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8"/>
+    <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
-	<title>Light Bootstrap Dashboard by Creative Tim</title>
+    <title>Light Bootstrap Dashboard by Creative Tim</title>
 
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="viewport" content="width=device-width"/>
 
 
     <!-- Bootstrap core CSS     -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
 
     <!-- Animation library for notifications   -->
     <link href="assets/css/animate.min.css" rel="stylesheet"/>
@@ -23,25 +23,25 @@
 
 
     <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="assets/css/demo.css" rel="stylesheet" />
+    <link href="assets/css/demo.css" rel="stylesheet"/>
 
 
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-    <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet"/>
 </head>
 <body>
 
 <div class="wrapper">
     <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
 
-    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+        <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
 
 
-    	<div class="sidebar-wrapper">
+        <div class="sidebar-wrapper">
             <div class="logo">
-                    Football Management
+                Football Management
             </div>
 
             <ul class="nav">
@@ -58,7 +58,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" id="myTeam">
+                    <a href="./tableTeamPage/myTeams">
                         <i class="pe-7s-note2"></i>
                         <p>My team List</p>
                     </a>
@@ -69,9 +69,9 @@
                         <p>My players List</p>
                     </a>
                 </li>
-                <c:if test = "${coach.isAdmin == true}">
+                <c:if test="${coach.isAdmin == true}">
                     <li>
-                        <a href="">
+                        <a href="./tableTeamPage/allTeams">
                             <i class="pe-7s-note2"></i>
                             <p>All teams List</p>
                         </a>
@@ -83,21 +83,22 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="./tableCoachPage">
                             <i class="pe-7s-note2"></i>
                             <p>All coaches List</p>
                         </a>
                     </li>
                 </c:if>
             </ul>
-    	</div>
+        </div>
     </div>
 
     <div class="main-panel">
-		<nav class="navbar navbar-default navbar-fixed">
+        <nav class="navbar navbar-default navbar-fixed">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#navigation-example-2">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -110,13 +111,13 @@
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-dashboard"></i>
-								<p class="hidden-lg hidden-md">Dashboard</p>
+                                <p class="hidden-lg hidden-md">Dashboard</p>
                             </a>
                         </li>
                         <li>
-                           <a href="">
+                            <a href="">
                                 <i class="fa fa-search"></i>
-								<p class="hidden-lg hidden-md">Search</p>
+                                <p class="hidden-lg hidden-md">Search</p>
                             </a>
                         </li>
                     </ul>
@@ -132,7 +133,7 @@
                                 <p>Log out</p>
                             </a>
                         </li>
-						<li class="separator hidden-lg hidden-md"></li>
+                        <li class="separator hidden-lg hidden-md"></li>
                     </ul>
                 </div>
             </div>
@@ -144,24 +145,25 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Striped Table with Hover</h4>
-                                <p class="category">Here is a subtitle for this table</p>
+                                <h4 class="title">Coach(es)</h4>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
-                                    	<th>First Name</th>
-                                    	<th>Last Name</th>
-                                    	<th>Position</th>
-                                    	<th>Number</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Username</th>
+                                    <th>Password</th>
+                                    <th>Is Admin</th>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${players}" var="players">
+                                    <c:forEach items="${coaches}" var="coaches">
                                         <tr>
-                                            <td>${players.firstName}</td>
-                                            <td>${players.lastName}</td>
-                                            <td>${players.position}</td>
-                                            <td>${players.number}</td>
+                                            <td>${coaches.firstName}</td>
+                                            <td>${coaches.lastName}</td>
+                                            <td>${coaches.username}</td>
+                                            <td>${coaches.password}</td>
+                                            <td>${coaches.isAdmin}</td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -177,7 +179,9 @@
         <footer class="footer">
             <div class="container-fluid">
                 <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script> Teklehaimanot Robel, made with love for a better web
+                    &copy;
+                    <script>document.write(new Date().getFullYear())</script>
+                    Teklehaimanot Robel, made with love for a better web
                 </p>
             </div>
         </footer>
@@ -189,24 +193,24 @@
 
 </body>
 
-    <!--   Core JS Files   -->
-    <script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
-	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+<!--   Core JS Files   -->
+<script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 
-	<!--  Charts Plugin -->
-	<script src="assets/js/chartist.min.js"></script>
+<!--  Charts Plugin -->
+<script src="assets/js/chartist.min.js"></script>
 
-    <!--  Notifications Plugin    -->
-    <script src="assets/js/bootstrap-notify.js"></script>
+<!--  Notifications Plugin    -->
+<script src="assets/js/bootstrap-notify.js"></script>
 
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!--  Google Maps Plugin    -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 
-    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-	<script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
+<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+<script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
 
-	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-	<script src="assets/js/demo.js"></script>
+<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+<script src="assets/js/demo.js"></script>
 
 
 </html>

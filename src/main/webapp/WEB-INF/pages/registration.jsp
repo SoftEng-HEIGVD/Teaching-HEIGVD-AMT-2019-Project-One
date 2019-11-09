@@ -56,10 +56,6 @@
             <td>Password</td>
             <td><input type="password" name="password" /></td>
         </tr>
-        <tr>
-            <td>Team</td>
-            <td><input type="text" name="team" /></td>
-        </tr>
         </table>
     <input type="submit" value="Submit" /></form>
 </body>
