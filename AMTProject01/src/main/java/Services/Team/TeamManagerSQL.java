@@ -6,6 +6,7 @@
 package Services.Team;
 
 import Model.Team;
+import Services.Player.PlayerManagerSQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -81,6 +82,21 @@ public class TeamManagerSQL implements TeamManager{
 
     }
     
-    
+    @Override
+    public void addTeam(Team t){
+        
+       try {
+        Connection connection = dataSource.getConnection();
+        PreparedStatement pstmt = connection.prepareStatement("INSERT INTO `Team`(`name`) VALUES\n" +
+                                                              "('"+t.getName()+"')");
+         pstmt.execute();
+       
+        pstmt.close();
+      
+    } catch (SQLException ex) {
+      Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+    }        
+    } 
+          
     
 }

@@ -17,4 +17,6 @@ public interface TeamManager {
     public List<Team> getAllTeams();
     public Team getTeam(String name);
     
+    public void addTeam(Team t);
+    
 }

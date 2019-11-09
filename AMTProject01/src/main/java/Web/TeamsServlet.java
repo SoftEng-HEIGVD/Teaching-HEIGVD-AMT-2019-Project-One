@@ -34,6 +34,8 @@ public class TeamsServlet extends HttpServlet {
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
         
+         
+         teamManager.addTeam(new Team(0,"kaerdhalis"));
         ArrayList<Team> ts= new ArrayList(teamManager.getAllTeams());
         
             request.setAttribute("teams", ts);
