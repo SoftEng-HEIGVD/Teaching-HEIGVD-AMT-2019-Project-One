@@ -32,6 +32,7 @@ public class RegisterServlet extends HttpServlet {
         if (name.isEmpty() || username.isEmpty()|| password.isEmpty() || password_confirm.isEmpty()){
             error = "Mot de passe, username ou name vide !";
             request.setAttribute("error", error);
+            request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
 
         } else if (password.equals(password_confirm)){
             try {

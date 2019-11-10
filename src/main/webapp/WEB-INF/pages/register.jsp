@@ -37,8 +37,7 @@ Licensed under MIT (https://github.com/creativetimofficial/material-kit/blob/mas
 
 <body class="login-page sidebar-collapse">
 
-<div class="page-header header-filter"
-     style="background-image: url('./assets/img/bg7.jpg'); background-size: cover; background-position: top center;">
+<div class="page-header header-filter">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-6 ml-auto mr-auto">

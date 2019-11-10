@@ -1,3 +1,8 @@
+body {
+  background-image: url("../img/bg8.jpg");
+  background-size: 100%;
+}
+
 .tim-row {
   margin-bottom: 20px;
 }
