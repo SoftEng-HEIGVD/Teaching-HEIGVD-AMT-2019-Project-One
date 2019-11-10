@@ -43,9 +43,9 @@ Licensed under MIT (https://github.com/creativetimofficial/material-kit/blob/mas
         <div class="row">
             <div class="col-lg-4 col-md-6 ml-auto mr-auto">
                 <div class="card card-login">
-                    <form class="form" method="post" action="./login">
+                    <form class="form" method="post" action="./register">
                         <div class="card-header card-header-primary text-center">
-                            <h4 class="card-title">Login</h4>
+                            <h4 class="card-title">Register</h4>
                         </div>
                         <label>
                             Name
@@ -60,7 +60,7 @@ Licensed under MIT (https://github.com/creativetimofficial/material-kit/blob/mas
                             <input name="password" type="password" class="form-control" placeholder="Password">
                         </label>
                         <label>
-                            Password
+                            Confirm Password
                             <input name="password_repeat" type="password" class="form-control" placeholder="Password">
                         </label>
                         <button class="btn btn-danger btn-block">Register</button>

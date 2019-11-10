@@ -56,6 +56,7 @@ Licensed under MIT (https://github.com/creativetimofficial/material-kit/blob/mas
                             ${requestScope.error}
                         </p>
                     </form>
+                    <button href="./register">Register</button>
                 </div>
             </div>
         </div>

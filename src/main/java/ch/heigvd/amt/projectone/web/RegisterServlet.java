@@ -18,7 +18,7 @@ public class RegisterServlet extends HttpServlet {
     ClientsManagerLocal clientsManagerLocal;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String error;
+        String error = "";
 
         String name = request.getParameter("name");
         String username = request.getParameter("username");
@@ -29,13 +29,16 @@ public class RegisterServlet extends HttpServlet {
 
         if (name.isEmpty() || username.isEmpty()|| password.isEmpty() || password_confirm.isEmpty()){
             error = "Mot de passe, username ou name vide !";
+        }
+        if (!error.isEmpty()){
             request.setAttribute("error", error);
             request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
         } else {
-            clientsManagerLocal.create(name, username, password, password_confirm);
-            request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
-
+            if (clientsManagerLocal.create(name, username, password, password_confirm)){
+                response.sendRedirect(request.getContextPath() + "/login");
+            }
         }
+
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

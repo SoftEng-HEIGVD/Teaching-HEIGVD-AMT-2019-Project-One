@@ -6,37 +6,40 @@ import javax.annotation.Resource;
 import javax.ejb.PrePassivate;
 import javax.ejb.Stateless;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 @Stateless
 public class ClientsManager implements ClientsManagerLocal {
-
     @Resource(lookup = "jdbc/chillout")
     private DataSource dataSource;
 
 
     @Override
     public boolean create(String name, String username, String password, String password_confirm) {
+        boolean created = false;
 
-        if (password.equals(password_confirm)){
+        if (password.equals(password_confirm)) {
+            int id = -1;
             try {
                 Connection connection = dataSource.getConnection();
-                PreparedStatement ps = connection.prepareStatement("SELECT TOP 1 * FROM Client ORDER BY Id DESC");
-                ResultSet interRes = ps.executeQuery();
 
-                while (interRes.next()){
-                    PreparedStatement statement = connection.prepareStatement("INSERT INTO Client (id, name, username, password, isAdmin) VALUES(3, ?, ?, ?, false )");
-                    statement.setString(1, name);
-                    statement.setString(2, username);
-                    statement.setString(3, password);
-                    statement.executeQuery();
-                    statement.close();
+                PreparedStatement statement = connection.prepareStatement("INSERT INTO `Client` (name, username, password, isAdmin) VALUES(?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
+                statement.setString(1, name);
+                statement.setString(2, username);
+                statement.setString(3, password);
+                statement.setBoolean(4, false);
+                statement.executeUpdate();
+
+                ResultSet rs = statement.getGeneratedKeys();
+                if (rs.next()){
+                    id = rs.getInt(1);
                 }
 
-                ps.close();
+                if (id != -1){
+                    created = true;
+                }
+
+                statement.close();
                 connection.close();
 
             } catch (SQLException e) {
@@ -46,7 +49,7 @@ public class ClientsManager implements ClientsManagerLocal {
             return false;
         }
 
-        return true;
+        return created;
     }
 
     @Override
@@ -58,9 +61,9 @@ public class ClientsManager implements ClientsManagerLocal {
             preparedStatement.setString(1, username);
             ResultSet result = preparedStatement.executeQuery();
 
-            while (result.next()){
+            while (result.next()) {
                 String passwordDB = result.getString("password");
-                if (password.equals(passwordDB)){
+                if (password.equals(passwordDB)) {
                     valid = true;
                 }
             }
@@ -83,7 +86,7 @@ public class ClientsManager implements ClientsManagerLocal {
             preparedStatement.setString(1, username);
             ResultSet result = preparedStatement.executeQuery();
 
-            if (result.next()){
+            if (result.next()) {
                 int id = result.getInt("id");
                 String name = result.getString("name");
                 String userDB = result.getString("username");
@@ -102,7 +105,7 @@ public class ClientsManager implements ClientsManagerLocal {
         return client;
     }
 
-    public int getIdByUsername(String username){
+    public int getIdByUsername(String username) {
 
         int id = -1;
         try {
@@ -111,7 +114,7 @@ public class ClientsManager implements ClientsManagerLocal {
             preparedStatement.setString(1, username);
             ResultSet result = preparedStatement.executeQuery();
 
-            if (result.next()){
+            if (result.next()) {
                 id = result.getInt("id");
             }
             preparedStatement.close();
@@ -124,7 +127,7 @@ public class ClientsManager implements ClientsManagerLocal {
         return id;
     }
 
-    public Client getClientById(int id){
+    public Client getClientById(int id) {
 
         Client client = null;
 
@@ -134,7 +137,7 @@ public class ClientsManager implements ClientsManagerLocal {
             preparedStatement.setInt(1, id);
             ResultSet result = preparedStatement.executeQuery();
 
-            if (result.next()){
+            if (result.next()) {
                 int idDB = result.getInt("id");
                 String name = result.getString("name");
                 String userDB = result.getString("username");
