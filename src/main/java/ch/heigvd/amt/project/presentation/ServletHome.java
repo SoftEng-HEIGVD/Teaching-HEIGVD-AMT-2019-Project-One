@@ -1,6 +1,9 @@
 package ch.heigvd.amt.project.presentation;
 
 import ch.heigvd.amt.project.business.FilmsManagerLocal;
+import ch.heigvd.amt.project.datastore.exceptions.DuplicateKeyException;
+import ch.heigvd.amt.project.integration.FilmsDAO;
+import ch.heigvd.amt.project.integration.IFilmsDao;
 import ch.heigvd.amt.project.model.Film;
 
 import javax.ejb.EJB;
@@ -20,12 +23,23 @@ public class ServletHome extends HttpServlet {
     @EJB
     FilmsManagerLocal filmsManager;
 
+    @EJB
+    IFilmsDao filmsDAO;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Film> films = filmsManager.getAllFilms();
+        // TODO: to remove and replace with findAll
+        for(Film film: films) {
+            try {
+                filmsDAO.create(film);
+            } catch (DuplicateKeyException e) {
+                e.printStackTrace();
+            }
+        }
         request.setAttribute("films", films);
         request.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(request, response);
     }

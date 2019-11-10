@@ -5,6 +5,7 @@ import ch.heigvd.amt.project.datastore.exceptions.KeyNotFoundException;
 import ch.heigvd.amt.project.model.Film;
 
 import javax.annotation.Resource;
+import javax.ejb.Stateless;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,6 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 // TODO:  save Error messages
+@Stateless
 public class FilmsDAO implements IFilmsDao {
 
     // For Payara (see http://mjremijan.blogspot.com/2015/11/payaraglassfish-datasource-reference.html)
@@ -29,7 +31,7 @@ public class FilmsDAO implements IFilmsDao {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO amt_films (ID, TITLE, RUNNING_TIME, PATH_TO_MOVIE_POSTER) VALUES (?,?,?,?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO amt_films (ID, TITLE, RUNNING_TIME, PATH_TO_POSTER) VALUES (?,?,?,?)");
             statement.setString(1, String.valueOf(entity.getId()));
             statement.setString(2, entity.getTitle());
             statement.setString(3, String.valueOf(entity.getRunningTime()));
@@ -49,7 +51,7 @@ public class FilmsDAO implements IFilmsDao {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT ID, TITLE, RUNNING_TIME, PATH_TO_MOVIE_POSTER FROM amt_films WHERE ID = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT ID, TITLE, RUNNING_TIME, PATH_TO_POSTER FROM amt_films WHERE ID = ?");
             statement.setString(1, id);
             ResultSet rs = statement.executeQuery();
             boolean hasRecord = rs.next();
@@ -76,7 +78,7 @@ public class FilmsDAO implements IFilmsDao {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement("UPDATE amt_films SET TITLE=?, RUNNING_TIME=?, PATH_TO_MOVIE_POSTER=? WHERE ID = ?");
+            PreparedStatement statement = connection.prepareStatement("UPDATE amt_films SET TITLE=?, RUNNING_TIME=?, PATH_TO_POSTER=? WHERE ID = ?");
             statement.setString(1, entity.getTitle());
             statement.setString(2, String.valueOf(entity.getRunningTime()));
             statement.setString(3, entity.getMoviePosterPath());
@@ -88,9 +90,12 @@ public class FilmsDAO implements IFilmsDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new Error(e);
+        } finally {
+            closeConnection(connection);
         }
     }
 
+    // TODO: delete in preferences too
     @Override
     public void deleteById(String id) throws KeyNotFoundException {
         Connection connection = null;
@@ -128,7 +133,7 @@ public class FilmsDAO implements IFilmsDao {
                         .id(Long.parseLong(rs.getString("ID")))
                         .title(rs.getString("TITLE"))
                         .runningTime(Integer.parseInt(rs.getString("RUNNING_TIME")))
-                        .moviePosterPath(rs.getString("PATH_TO_MOVIE_POSTER"))
+                        .moviePosterPath(rs.getString("PATH_TO_POSTER"))
                         .build();
                 existingFilms.add(existingFilm);
             }

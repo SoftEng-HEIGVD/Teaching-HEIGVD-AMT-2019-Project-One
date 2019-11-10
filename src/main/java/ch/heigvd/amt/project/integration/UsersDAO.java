@@ -76,6 +76,7 @@ public class UsersDAO implements IUsersDAO {
         }
     }
 
+    // TODO: delete in preferences too
     @Override
     public void deleteById(String username) throws KeyNotFoundException {
         Connection con = null;
