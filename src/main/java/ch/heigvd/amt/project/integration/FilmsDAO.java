@@ -31,12 +31,11 @@ public class FilmsDAO implements IFilmsDao {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO amt_films (ID, TITLE, RUNNING_TIME, PATH_TO_POSTER, DIRECTOR) VALUES (?,?,?,?,?)");
-            statement.setString(1, String.valueOf(entity.getId()));
-            statement.setString(2, entity.getTitle());
-            statement.setString(3, String.valueOf(entity.getRunningTime()));
-            statement.setString(4, entity.getMoviePosterPath());
-            statement.setString(5, entity.getDirector());
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO amt_films (TITLE, RUNNING_TIME, PATH_TO_POSTER, DIRECTOR) VALUES (?,?,?,?)");
+            statement.setString(1, entity.getTitle());
+            statement.setString(2, String.valueOf(entity.getRunningTime()));
+            statement.setString(3, entity.getMoviePosterPath());
+            statement.setString(4, entity.getDirector());
             statement.execute();
             return entity;
         } catch (SQLException e) {
@@ -48,12 +47,33 @@ public class FilmsDAO implements IFilmsDao {
     }
 
     @Override
-    public Film findById(String id) throws KeyNotFoundException {
+    public Film createAndSpecifyId(Film film) throws DuplicateKeyException {
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO amt_films (ID, TITLE, RUNNING_TIME, PATH_TO_POSTER, DIRECTOR) VALUES (?,?,?,?,?)");
+            statement.setString(1, String.valueOf(film.getId()));
+            statement.setString(2, film.getTitle());
+            statement.setString(3, String.valueOf(film.getRunningTime()));
+            statement.setString(4, film.getMoviePosterPath());
+            statement.setString(5, film.getDirector());
+            statement.execute();
+            return film;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Error(e);
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
+    @Override
+    public Film findById(Long id) throws KeyNotFoundException {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT ID, TITLE, RUNNING_TIME, PATH_TO_POSTER, DIRECTOR FROM amt_films WHERE ID = ?");
-            statement.setString(1, id);
+            statement.setString(1, id.toString());
             ResultSet rs = statement.executeQuery();
             boolean hasRecord = rs.next();
             if (!hasRecord) {
@@ -100,12 +120,12 @@ public class FilmsDAO implements IFilmsDao {
 
     // TODO: delete in preferences too
     @Override
-    public void deleteById(String id) throws KeyNotFoundException {
+    public void deleteById(Long id) throws KeyNotFoundException {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement("DELETE FROM amt_films WHERE ID=?");
-            statement.setString(1, id);
+            statement.setString(1, id.toString());
             int deletedFilms = statement.executeUpdate();
             if (deletedFilms != 1) {
                 throw new KeyNotFoundException("Could not find film with film_id = " + id);
@@ -151,13 +171,13 @@ public class FilmsDAO implements IFilmsDao {
     }
 
     @Override
-    public List<Film> findBetween(String id1, String id2) throws KeyNotFoundException {
+    public List<Film> findBetween(long id1, long id2) throws KeyNotFoundException {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM amt_films WHERE ID >= ? AND ID <= ?");
-            statement.setString(1, id1);
-            statement.setString(2, id2);
+            statement.setString(1, String.valueOf(id1));
+            statement.setString(2, String.valueOf(id2));
             ResultSet rs = statement.executeQuery();
             boolean hasRecord = rs.next();
             if (!hasRecord) {

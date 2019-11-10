@@ -62,7 +62,7 @@ public class PreferencesDAO implements IPreferencesDAO {
 
             FilmsDAO filmsDAO = new FilmsDAO();
             UsersDAO usersDAO = new UsersDAO();
-            Film film = filmsDAO.findById(rs.getString("FILM_ID"));
+            Film film = filmsDAO.findById(Long.parseLong(rs.getString("FILM_ID")));
             User user = usersDAO.findById(rs.getString("USERNAME"));
 
             Preference fetchedPreference = Preference.builder()
@@ -115,7 +115,7 @@ public class PreferencesDAO implements IPreferencesDAO {
             FilmsDAO filmsDAO = new FilmsDAO();
 
             while (rs.next()) {
-                Film film = filmsDAO.findById(rs.getString("FILM_ID"));
+                Film film = filmsDAO.findById(Long.parseLong(rs.getString("FILM_ID")));
                 films.add(film);
             }
             return films;

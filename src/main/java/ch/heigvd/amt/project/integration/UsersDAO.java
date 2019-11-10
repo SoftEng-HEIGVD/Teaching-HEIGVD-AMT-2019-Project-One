@@ -54,7 +54,7 @@ public class UsersDAO implements IUsersDAO {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("SELECT USERNAME, FIRST_NAME, LAST_NAME, EMAIL FROM amt_users WHERE USERNAME = ?");
+            PreparedStatement statement = con.prepareStatement("SELECT USERNAME, FIRST_NAME, LAST_NAME, EMAIL, HASHED_PW FROM amt_users WHERE USERNAME = ?");
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
             boolean hasRecord = rs.next();
@@ -66,6 +66,7 @@ public class UsersDAO implements IUsersDAO {
                     .firstName(rs.getString(2))
                     .lastName(rs.getString(3))
                     .email(rs.getString(4))
+                    .password(rs.getString(5))
                     .build();
             return existingUser;
         } catch (SQLException e) {
@@ -96,6 +97,7 @@ public class UsersDAO implements IUsersDAO {
         }
     }
 
+    // TODO:
     @Override
     public List<User> findAll() throws KeyNotFoundException {
         return null;
@@ -106,11 +108,12 @@ public class UsersDAO implements IUsersDAO {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("UPDATE amt_users SET FIRST_NAME=?, LAST_NAME=?, EMAIL=? WHERE USERNAME = ?");
+            PreparedStatement statement = con.prepareStatement("UPDATE amt_users SET FIRST_NAME=?, LAST_NAME=?, EMAIL=?, HASHED_PW=? WHERE USERNAME = ?");
             statement.setString(1, entity.getFirstName());
             statement.setString(2, entity.getLastName());
             statement.setString(3, entity.getEmail());
-            statement.setString(4, entity.getUsername());
+            statement.setString(4, entity.getPassword());
+            statement.setString(5, entity.getUsername());
             int numberOfUpdatedUsers = statement.executeUpdate();
             if (numberOfUpdatedUsers != 1) {
                 throw new KeyNotFoundException("Could not find user with username = " + entity.getUsername());
