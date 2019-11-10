@@ -26,20 +26,18 @@ public class ServletFilm extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = "0";
-        if(request.getParameter("film") != null) {
-            id = request.getParameter("film");
+        if(request.getParameter("id") != null) {
+            id = request.getParameter("id");
         }
-        /*
-        Film film = filmsManager.getFilm(id);
-         */
-        FilmsDAO dao = new FilmsDAO();
+
+        /*FilmsDAO dao = new FilmsDAO();
         Film film = null;
         try {
             film = dao.findById(Long.parseLong(id));
         } catch (KeyNotFoundException e) {
             e.printStackTrace();
-        }
-
+        }*/
+        Film film = filmsManager.getFilm(Integer.parseInt(id));
         request.setAttribute("film", film);
         request.getRequestDispatcher("/WEB-INF/pages/film.jsp").forward(request, response);
     }

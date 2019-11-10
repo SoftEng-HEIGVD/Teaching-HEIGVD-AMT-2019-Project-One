@@ -19,4 +19,10 @@ public interface FilmsManagerLocal {
      * @return a specific film in the DB
      */
     Film getFilm(int idFilm);
+
+    /**
+     * Get films between 2 ids
+     * @return films between 2 ids
+     */
+    List<Film> getFilmsBetween(int idFilm1, int idFilm2);
 }

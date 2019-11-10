@@ -32,7 +32,7 @@
 <header>
     <div class="navbar navbar-dark bg-dark box-shadow">
         <div class="container d-flex justify-content-between">
-            <a href="#" class="navbar-brand d-flex align-items-center">
+            <a href="home" class="navbar-brand d-flex align-items-center">
                 <strong>Film rating app</strong>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="true" aria-label="Toggle navigation">
@@ -63,8 +63,8 @@
                                 <p class="card-text">${film.title}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Like</button>
+                                        <a class="btn btn-sm btn-outline-secondary" href="film?id=${film.id}">View</a>
+                                        <a class="btn btn-sm btn-outline-secondary">Like</a>
                                     </div>
                                     <div>
                                         <small class="text-muted">${film.runningTime} mins</small>
@@ -81,7 +81,43 @@
 </main>
 
 <footer class="text-muted">
-    <div class="container">
+    <div class="container" style="margin-left: 40%;">
+        <nav>
+            <ul class="pagination">
+                <!-- First page -->
+                <li class="page-item">
+                    <a class="page-link" href="home"><<</a>
+                </li>
+                <!-- Previous page -->
+                <c:if test="${currentPage > 1}">
+                    <li class="page-item">
+                        <a class="page-link" href="home?page=${currentPage - 1}"><</a>
+                    </li>
+                </c:if>
+                <!-- 2 prev pages, curr page, 2 next pages -->
+                <c:set var="begin" scope="request" value="${currentPage - 2}"/>
+                <c:if test="${begin < 0}">
+                    <c:set var="begin" scope="request" value="${0}"/>
+                </c:if>
+                <c:forEach begin="${begin}" end="${currentPage + 2}" var="i">
+                    <c:if test="${i >= 1 && i <= nbPages}">
+                        <li class="page-item">
+                            <a class="page-link" href="home?page=${i}">${i}</a>
+                        </li>
+                    </c:if>
+                </c:forEach>
+                <!-- Next page -->
+                <c:if test="${currentPage < nbPages}">
+                    <li class="page-item">
+                        <a class="page-link" href="home?page=${currentPage + 1}">></a>
+                    </li>
+                </c:if>
+                <!-- Last page -->
+                <li class="page-item">
+                    <a class="page-link" href="home?page=${nbPages}">>></a>
+                </li>
+            </ul>
+        </nav>
         <p class="float-right">
             <a href="#">Back to top</a>
         </p>
