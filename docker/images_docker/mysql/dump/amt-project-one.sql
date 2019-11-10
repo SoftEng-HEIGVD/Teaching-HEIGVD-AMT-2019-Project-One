@@ -8,9 +8,9 @@ CREATE DATABASE IF NOT EXISTS `amt_project_one`;
 DROP TABLE IF EXISTS `amt_users`;
 CREATE TABLE `amt_users` (
     `USERNAME` varchar(255) NOT NULL,
-    `FIRST_NAME` varchar(255) NOT NULL,
+    `FIRST_NAME` varchar(255) DEFAULT NULL,
     `LAST_NAME` varchar(255) NOT NULL,
-    `EMAIL` varchar(255) DEFAULT NULL,
+    `EMAIL` varchar(255) NOT NULL,
     `HASHED_PW` char(128) NOT NULL,
     PRIMARY KEY (`USERNAME`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -19,15 +19,15 @@ DROP TABLE IF EXISTS `amt_films`;
 CREATE TABLE `amt_films` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `TITLE` varchar(255) NOT NULL,
-  `RUNNING_TIME` smallint NOT NULL,
+  `RUNNING_TIME` smallint,
   `PATH_TO_POSTER` varchar(255) NOT NULL,
-  `DIRECTOR` varchar(255) NOT NULL,
+  `DIRECTOR` varchar(255),
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `amt_preferences`;
 CREATE TABLE `amt_preferences` (
-    `FILM_ID` int(11),
+    `FILM_ID` int(11) NOT NULL,
     `USERNAME` varchar (255) NOT NULL,
     PRIMARY KEY (`FILM_ID`, `USERNAME`),
     KEY `FK_FILM_ID_idx` (`FILM_ID`),
