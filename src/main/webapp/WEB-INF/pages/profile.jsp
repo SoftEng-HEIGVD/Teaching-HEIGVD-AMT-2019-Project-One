@@ -45,10 +45,10 @@
                     <input class="form-control" type="password" placeholder="${sessionScope.user.password}" readonly>
                 </label>
             </form>
-            <label>
-                Admin
-                <input class="form-control" type="text" placeholder="${sessionScope.user.isAdmin}" readonly>
-            </label>
+<%--            <label>--%>
+<%--                Admin--%>
+<%--                <input class="form-control" type="text" placeholder="${sessionScope.user.isAdmin}" readonly>--%>
+<%--            </label>--%>
         </div>
         <div class="text-center">
             <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Change
