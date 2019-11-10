@@ -42,7 +42,7 @@ public class PlayerManagerSQL implements PlayerManager{
         return new Player("Goturak","Luca");
     }
     @Override
-    public List<Player> getAllPLayers(){  
+    public List<Player> getAllPlayers(){  
         
         ArrayList<Player> players = new ArrayList();
         
@@ -120,7 +120,7 @@ public class PlayerManagerSQL implements PlayerManager{
         
     }
     @Override
-    public List<Player> getPlayersFromMatchTeam1(int match_id){
+    public List<Player> getPlayersFromMatchTeam1(long match_id){
         
         ArrayList<Player> players = new ArrayList();
         
@@ -150,7 +150,7 @@ public class PlayerManagerSQL implements PlayerManager{
         
     }
     @Override
-    public List<Player> getPlayersFromMatchTeam2(int match_id) {
+    public List<Player> getPlayersFromMatchTeam2(long match_id) {
         
         
          ArrayList<Player> players = new ArrayList();

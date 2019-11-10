@@ -8,6 +8,7 @@ package Web;
 
 import Model.Match;
 import Services.Match.MatchesManagerSQL;
+import Services.Player.PlayerManagerSQL;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class MatchServlet extends HttpServlet {
     MatchesManagerSQL mm= new MatchesManagerSQL();
+    PlayerManagerSQL pm= new PlayerManagerSQL();
 /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -43,7 +45,8 @@ public class MatchServlet extends HttpServlet {
   
         if(m!=null){
             request.setAttribute("match", m);
-           
+            request.setAttribute("team1Players", pm.getPlayersFromMatchTeam1(m.getId()));
+            request.setAttribute("team2Players", pm.getPlayersFromMatchTeam2(m.getId()));
             request.getRequestDispatcher("WEB-INF/pages/Match.jsp").forward(request,response);
         }else{
             request.getRequestDispatcher("WEB-INF/pages/PlayerNotFound.jsp").forward(request,response);

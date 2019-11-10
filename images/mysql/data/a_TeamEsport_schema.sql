@@ -92,6 +92,8 @@ INSERT INTO `Player`(`player_id`,`pseudo`,`name`,`team_id`) VALUES
     (24,'ALEX','Alex McMeekin',5),
     (25,'ZywOo','Mathieu Herbaut',5);
 
+
+
 --
 -- Dumping data for table Team
 --

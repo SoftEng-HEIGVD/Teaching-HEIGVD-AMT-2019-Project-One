@@ -42,12 +42,8 @@ public class MatchesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
-         
-         int[] team1 = {1, 2, 3, 4,5};
-         int[] team2 = {6, 7, 8, 9,10};
-         
-         mm.addMatch(new Match(0,new Team(1,"ben"),new Team(2,"benji"),100,100), team1, team2);
-        request.setAttribute("allMatches", mm.getAll());
+        
+   
         request.getRequestDispatcher("WEB-INF/pages/matches.jsp").forward(request,response);
     }
 
@@ -75,7 +71,7 @@ public class MatchesServlet extends HttpServlet {
                 }else{
                     mArray.add("no team");
                 }
-                mArray.add("<a href=\"match?="+m.getId()+"\">"+m.getTeam1EndScore()+"-"+m.getTeam2EndScore()+"</a>");
+                mArray.add("<a href=\"match?id="+m.getId()+"\">"+m.getTeam1EndScore()+"-"+m.getTeam2EndScore()+"</a>");
               
                 if(m.getTeam2()!=null){
                     mArray.add("<a href=\"team?t="+m.getTeam2().getName()+"\">"+m.getTeam2().getName()+"</a>");

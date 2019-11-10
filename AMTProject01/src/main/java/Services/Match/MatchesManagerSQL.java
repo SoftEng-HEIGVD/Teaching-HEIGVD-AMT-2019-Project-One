@@ -149,6 +149,37 @@ public class MatchesManagerSQL implements MatchesManager {
         return matches;
     }
     
+    
+    @Override
+    public  ArrayList<Match>  getMatchesPlayedBy(Team p){
+        ArrayList<Match> matches=new ArrayList<>();
+        try {
+        Connection connection = dataSource.getConnection();
+        PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM `MatchWithTeam`JOIN Matches_Player "
+                + "ON MatchWithTeam.match_id = Matches_Player.match_id WHERE Matches_Player.player_id="+p.getId());
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+          int match_id = rs.getInt("match_id");
+          int score_team1 = rs.getInt("score_team1");
+          int score_team2 = rs.getInt("score_team2");
+          int team1_id = rs.getInt("team1_id");
+          int team2_id = rs.getInt("team1_id");
+          String team1  = rs.getString("team1");
+          String team2  = rs.getString("team2");
+          
+         
+          matches.add(new Match(match_id,new Team(team1_id,team1),new Team(team2_id,team2),score_team1,score_team2));
+                  
+        }
+        pstmt.close();
+      
+    } catch (SQLException ex) {
+      Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+        return matches;
+    }
+    
     @Override
     public void addMatch(Match match,ArrayList<Player>team1,ArrayList<Player>team2){
         
