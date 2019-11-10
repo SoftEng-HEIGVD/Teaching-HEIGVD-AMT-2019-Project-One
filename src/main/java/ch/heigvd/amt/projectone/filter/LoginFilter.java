@@ -21,8 +21,7 @@ public class LoginFilter implements Filter {
         HttpSession session = httpServletRequest.getSession();
 
         if (session.getAttribute("user") == null){
-
-            ((HttpServletResponse) resp).sendRedirect(httpServletRequest.getContextPath() + "/login");
+            httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/login");
         } else {
             chain.doFilter(httpServletRequest, httpServletResponse);
         }

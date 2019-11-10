@@ -27,7 +27,7 @@
     <link href="./assets/demo/demo.css" rel="stylesheet"/>
 </head>
 <div class="page-header header-filter"
-     style="background-image: url('assets/img/bg8.jpg'); background-size: cover; background-position: top center;">
+     style="background-image: url('../../assets/img/bg8.jpg'); background-size: cover; background-position: top center;">
     <div class="container">
 
         <div class="row">
@@ -60,7 +60,7 @@
                 <div class="modal-content">
                     <div class="card card-signup card-plain">
                         <div class="modal-body">
-                            <form class="form" method="post" action="./update_user">
+                            <form class="form" method="post" action="./profile?action=update_user">
                                 <p class="description text-center">Change Username</p>
                                 <div class="card-body">
 
@@ -84,7 +84,7 @@
                                             </div>
                                             <label>
                                                 <input name="new_user" type="text" class="form-control"
-                                                       placeholder="New Usernme">
+                                                       placeholder="New Username">
                                                 New Username
                                             </label>
                                         </div>
@@ -116,13 +116,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="modal-footer justify-content-center">
+                                    <button type="submit" class="btn btn-primary btn-link btn-wd btn-lg">Update</button>
+                                    <button type="button" class="btn btn-outline-info waves-effect ml-auto"
+                                            data-dismiss="modal">Close
+                                    </button>
+                                </div>
                             </form>
-                        </div>
-                        <div class="modal-footer justify-content-center">
-                            <button type="submit" class="btn btn-primary btn-link btn-wd btn-lg">Update</button>
-                            <button type="button" class="btn btn-outline-info waves-effect ml-auto"
-                                    data-dismiss="modal">Close
-                            </button>
                         </div>
                     </div>
                 </div>

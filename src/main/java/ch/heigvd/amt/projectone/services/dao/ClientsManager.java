@@ -76,7 +76,7 @@ public class ClientsManager implements ClientsManagerLocal {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Client SET name = ?, username = ?, password = ?, isAdmin = ? WHERE id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `Client` SET name = ?, username = ?, password = ?, isAdmin = ? WHERE id = ?;");
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setString(2, entity.getUsername());
             preparedStatement.setString(3, entity.getPassword());
