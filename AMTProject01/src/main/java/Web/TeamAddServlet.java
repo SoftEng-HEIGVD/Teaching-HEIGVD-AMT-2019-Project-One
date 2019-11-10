@@ -7,6 +7,7 @@ package Web;
 
 import Model.Team;
 import Services.PlayerManager;
+import Services.PlayerManagerSQL;
 import Services.TeamManager;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class TeamAddServlet extends HttpServlet {
   
-PlayerManager playerManager = new PlayerManager();
+PlayerManager playerManager = new PlayerManagerSQL();
     TeamManager teamManager= new TeamManager();
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -78,44 +78,28 @@
             
                         
             
-            <table id="teamsTable" class="display">
-                   <thead>
-                       <tr>
-                           <th>Name</th>                                            
-                       </tr>
-                   </thead>
-                   <tbody>
-                       
-                       <c:forEach items="${teams}" var="item">
-                           <tr class="custom-clickable-row" data-href="team?t=${item.name}">
-                               <td> ${item.name}</td>
-                                 
-                           </tr>
-                       </c:forEach>
-                   </tbody>
+                <table id="teamsTable" class="display">
+                    <thead>
+                        <tr>
+                            <th>Name</th>                                            
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <c:forEach items="${teams}" var="item">
+                            <tr class="custom-clickable-row" data-href="team?t=${item.name}">
+                                <td> ${item.name}</td>
+
+                            </tr>
+                        </c:forEach>
+                    </tbody>
                 </table>
                
 
               
           
                             
-             <div class="list-group">
-                 
-            <c:forEach items="${teams}" var="item">
-                    <a href="team?t=${item.name}">
-                            <div class="service-list wow fadeInRight delay-02s">
-
-                                <div class="service-list-col2 ">
-                                   <h4>${item.name}</h4>
-
-
-                                </div>
-
-
-                            </div>
-                     </a>
-          </c:forEach>
-        </div>
+            
         <!--<div id="playerInfo" class="collapse col-lg-8 col-sm-6  text-center">
           <img src="img/UserNoImg.png" class="img-fluid float-mi" alt="">
 

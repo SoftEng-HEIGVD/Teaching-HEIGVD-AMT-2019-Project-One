@@ -8,6 +8,7 @@ package Web;
 import Model.Player;
 import Services.MatchesManager;
 import Services.PlayerManager;
+import Services.PlayerManagerSQL;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -21,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class PlayerServlet extends HttpServlet {
    
-PlayerManager playerManager = new PlayerManager();
+PlayerManager playerManager = new PlayerManagerSQL();
 MatchesManager mm= new MatchesManager();
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

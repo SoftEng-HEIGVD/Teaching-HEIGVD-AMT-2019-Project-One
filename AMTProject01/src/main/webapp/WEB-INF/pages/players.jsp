@@ -98,36 +98,14 @@
                    </thead>
                    <tbody>
                        
-                       <c:forEach items="${allPlayers}" var="item">
-                           <tr>
-                               <td> <a href="player?u=${item.userName}">${item.userName}</a></td>
-                               <td>${item.name}</td>
-                                 <c:if test="${empty item.team}">
-                                    <td>No Team</td>
-                                </c:if>
-                                <c:if test="${not empty item.team}">
-                                   
-                                        <td> <a href="team?t=${item.team.name}">${item.team.name}</a></td>
-                                 
-                                </c:if>
-                              
-                           </tr>
-                       </c:forEach>
+                       
                    </tbody>
                 </table>
                
 
               
             </div>
-              
-            <div >
-                 <ul class="pagination firstLast1-links">
-                <li class="page-item first">
-                        <a href="#" class="page-link">First</a>
-                </li>
-                                <li class="page-item prev"><a href="#" class="page-link">Prev</a></li><li class="page-item"><a href="#" class="page-link">2</a></li><li class="page-item"><a href="#" class="page-link">3</a></li><li class="page-item"><a href="#" class="page-link">4</a></li><li class="page-item active"><a href="#" class="page-link">5</a></li><li class="page-item next disabled"><a href="#" class="page-link">Next</a></li><li class="page-item last disabled"><a href="#" class="page-link">Last</a></li></ul>
- 
-            </div>
+          
             
         <!--<div id="playerInfo" class="collapse col-lg-8 col-sm-6  text-center">
           <img src="img/UserNoImg.png" class="img-fluid float-mi" alt="">
@@ -163,7 +141,18 @@
 	<script type="text/javascript">
 		$(document).ready(function(e) {
 
-                        $('#playersTable').DataTable();
+                        $('#playersTable').DataTable({
+                            "processing": true,
+                            "serverSide": true,
+                            "ajax": {
+                                "url": "players",
+                                "type": "POST"
+                            }
+                                                       
+                        });
+                       
+                        
+
 			$('#test').scrollToFixed();
 			$('.res-nav_click').click(function() {
 				$('.main-nav').slideToggle();
@@ -186,7 +175,7 @@
 		});
 		wow.init();
 	</script>
-<script type="text/javascript">
+    <script type="text/javascript">
     $(document).on('click', '.custom-clickable-row', function(e){
 	var url = $(this).data('href');
 
