@@ -55,10 +55,6 @@
           <div class="row">
 
             <c:forEach items="${films}" var="film">
-              <!--
-              TODO : modulo (8, 12, or 16) for max films per page
-                    + display right set of films depending on page selected in pagination
-              -->
               <div class="col-md-3">
                 <div class="card mb-4 box-shadow">
                   <img class="card-img-top" alt="Thumbnail [100%x225]" style="height: 400px; width: 100%; display: block;" src="./assets/img/${film.moviePosterPath}" >
@@ -66,7 +62,7 @@
                     <p class="card-text">${film.title}</p>
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" href="film?id=${film.id}">View</button>
                         <button type="button" class="btn btn-sm btn-outline-secondary">Like</button>
                       </div>
                       <div>
@@ -86,30 +82,40 @@
       <div class="container" style="margin-left: 40%;"> <!-- TODO : center nav in container -->
         <nav>
           <ul class="pagination">
-            <!--
-            TODO : Goal with i = currPage :
-            [<<] [<] [i - 2] [i - 1] [i] [i + 1] [i + 2] [>] [>>]
-            -->
+            <!-- First page -->
             <li class="page-item">
-              <a href="#">«</a> <!-- Go to first page -->
+              <a href="home">«</a>
             </li>
+            <!-- Previous page -->
+            <c:if test="${currentPage > 1}">
+              <li class="page-item">
+                <a href="home?page=${currentPage - 1}">‹</a>
+              </li>
+            </c:if>
+            <!-- 2 prev pages, curr page, 2 next pages -->
+            <c:forEach begin="${currentPage - 2}" end="${currentPage + 2}" var="i">
+              <c:if test="${i >= 1 && i <= nbPages}">
+                <c:choose>
+                  <c:when test="${currentPage eq i}">
+                    <li class="page-item">${i}</li>
+                  </c:when>
+                  <c:otherwise>
+                    <li class="page-item">
+                      <a href="home?page=${i}">${i}</a>
+                    </li>
+                  </c:otherwise>
+                </c:choose>
+              </c:if>
+            </c:forEach>
+            <!-- Next page -->
+            <c:if test="${currentPage < nbPages}">
+              <li class="page-item">
+                <a href="home?page=${currentPage + 1}">></a>
+              </li>
+            </c:if>
+            <!-- Last page -->
             <li class="page-item">
-              <a href="#">‹</a> <!-- Go to previous page -->
-            </li>
-            <li class="page-item">
-              <a href="#">1</a>
-            </li>
-            <li class="page-item">
-              <a href="#">2</a>
-            </li>
-            <li class="page-item">
-              <a href="#">3</a>
-            </li>
-            <li class="page-item">
-              <a href="#">›</a> <!-- Go to next page -->
-            </li>
-            <li class="page-item">
-              <a href="#">»</a> <!-- Go to last page -->
+              <a href="home?page=${nbPages}">»</a>
             </li>
           </ul>
         </nav>

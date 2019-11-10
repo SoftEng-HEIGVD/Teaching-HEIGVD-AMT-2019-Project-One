@@ -1,6 +1,8 @@
 package ch.heigvd.amt.project.presentation;
 
 import ch.heigvd.amt.project.business.FilmsManagerLocal;
+import ch.heigvd.amt.project.datastore.exceptions.KeyNotFoundException;
+import ch.heigvd.amt.project.integration.FilmsDAO;
 import ch.heigvd.amt.project.model.Film;
 
 import javax.ejb.EJB;
@@ -10,8 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
-@WebServlet(name = "ServletFilm")
+@WebServlet(name = "ServletFilm", urlPatterns = "/film")
 public class ServletFilm extends HttpServlet {
 
     @EJB
@@ -22,8 +25,21 @@ public class ServletFilm extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int idFilm = Integer.parseInt(request.getParameter("film"));
-        Film film = filmsManager.getFilm(idFilm);
+        String id = "0";
+        if(request.getParameter("film") != null) {
+            id = request.getParameter("film");
+        }
+        /*
+        Film film = filmsManager.getFilm(id);
+         */
+        FilmsDAO dao = new FilmsDAO();
+        Film film = null;
+        try {
+            film = dao.findById(id);
+        } catch (KeyNotFoundException e) {
+            e.printStackTrace();
+        }
+
         request.setAttribute("film", film);
         request.getRequestDispatcher("/WEB-INF/pages/film.jsp").forward(request, response);
     }

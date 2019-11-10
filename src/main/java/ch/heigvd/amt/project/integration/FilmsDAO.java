@@ -31,11 +31,12 @@ public class FilmsDAO implements IFilmsDao {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO amt_films (ID, TITLE, RUNNING_TIME, PATH_TO_POSTER) VALUES (?,?,?,?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO amt_films (ID, TITLE, RUNNING_TIME, PATH_TO_POSTER, DIRECTOR) VALUES (?,?,?,?,?)");
             statement.setString(1, String.valueOf(entity.getId()));
             statement.setString(2, entity.getTitle());
             statement.setString(3, String.valueOf(entity.getRunningTime()));
             statement.setString(4, entity.getMoviePosterPath());
+            statement.setString(5, entity.getDirector());
             statement.execute();
             return entity;
         } catch (SQLException e) {
@@ -51,7 +52,7 @@ public class FilmsDAO implements IFilmsDao {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT ID, TITLE, RUNNING_TIME, PATH_TO_POSTER FROM amt_films WHERE ID = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT ID, TITLE, RUNNING_TIME, PATH_TO_POSTER, DIRECTOR FROM amt_films WHERE ID = ?");
             statement.setString(1, id);
             ResultSet rs = statement.executeQuery();
             boolean hasRecord = rs.next();
@@ -63,6 +64,7 @@ public class FilmsDAO implements IFilmsDao {
                     .title(rs.getString(2))
                     .runningTime(Integer.parseInt(rs.getString(3)))
                     .moviePosterPath(rs.getString(4))
+                    .director(rs.getString(5))
                     .build();
             return existingFilm;
         } catch (SQLException e) {
@@ -78,11 +80,12 @@ public class FilmsDAO implements IFilmsDao {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement("UPDATE amt_films SET TITLE=?, RUNNING_TIME=?, PATH_TO_POSTER=? WHERE ID = ?");
+            PreparedStatement statement = connection.prepareStatement("UPDATE amt_films SET TITLE=?, RUNNING_TIME=?, PATH_TO_POSTER=?, DIRECTOR=? WHERE ID = ?");
             statement.setString(1, entity.getTitle());
             statement.setString(2, String.valueOf(entity.getRunningTime()));
             statement.setString(3, entity.getMoviePosterPath());
-            statement.setString(4, String.valueOf(entity.getId()));
+            statement.setString(4, entity.getDirector());
+            statement.setString(5, String.valueOf(entity.getId()));
             int updatedFilms = statement.executeUpdate();
             if(updatedFilms != 1) {
                 throw new KeyNotFoundException("Could not find film with film_id = " + entity.getId());
@@ -134,11 +137,45 @@ public class FilmsDAO implements IFilmsDao {
                         .title(rs.getString("TITLE"))
                         .runningTime(Integer.parseInt(rs.getString("RUNNING_TIME")))
                         .moviePosterPath(rs.getString("PATH_TO_POSTER"))
+                        .director(rs.getString("DIRECTOR"))
                         .build();
                 existingFilms.add(existingFilm);
             }
             return  existingFilms;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Error(e);
+        } finally {
+            closeConnection(connection);
+        }
+    }
 
+    @Override
+    public List<Film> findBetween(String id1, String id2) throws KeyNotFoundException {
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM amt_films WHERE ID >= ? AND ID <= ?");
+            statement.setString(1, id1);
+            statement.setString(2, id2);
+            ResultSet rs = statement.executeQuery();
+            boolean hasRecord = rs.next();
+            if (!hasRecord) {
+                throw new KeyNotFoundException("Could not find any film!");
+            }
+            List<Film> requestedFilms = new LinkedList<>();
+
+            while (rs.next()) {
+                Film existingFilm = Film.builder()
+                        .id(Long.parseLong(rs.getString("ID")))
+                        .title(rs.getString("TITLE"))
+                        .runningTime(Integer.parseInt(rs.getString("RUNNING_TIME")))
+                        .moviePosterPath(rs.getString("PATH_TO_MOVIE_POSTER"))
+                        .director(rs.getString("DIRECTOR"))
+                        .build();
+                requestedFilms.add(existingFilm);
+            }
+            return requestedFilms;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new Error(e);

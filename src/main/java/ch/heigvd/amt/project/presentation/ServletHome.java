@@ -42,5 +42,26 @@ public class ServletHome extends HttpServlet {
         }
         request.setAttribute("films", films);
         request.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(request, response);
+
+        /*int page = 1;
+        int nbFilmsPerPage = 8;
+        if(request.getParameter("page") != null) {
+            page = Integer.parseInt(request.getParameter("page"));
+        }
+        FilmsDAO dao = new FilmsDAO();
+        List<Film> films = null;
+        int nbFilms = 0;
+        try {
+            films = dao.findBetween(Integer.toString((page - 1) * nbFilmsPerPage), Integer.toString(page * nbFilmsPerPage));
+            nbFilms = dao.findAll().size();
+        } catch (KeyNotFoundException e) {
+            e.printStackTrace();
+        }
+        int nbPages = (int) Math.ceil(nbFilms * 1.0 / nbFilmsPerPage);
+
+        request.setAttribute("films", films);
+        request.setAttribute("nbPages", nbPages);
+        request.setAttribute("currentPage", page);
+        request.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(request, response);*/
     }
 }

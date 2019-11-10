@@ -60,11 +60,6 @@
                   <div style="display: inline-block; width:80%">
                     <p class="card-text" style="font-size: 2em;">${film.title}</p>
                   </div>
-                  <div style="display: inline-block; float: right;">
-                    <p class="card-text" style="font-size: 1.3em; margin-top: 20px;">
-                      ${film.rating} <img style="height: 30px; width: 30px;" src="./assets/img/star.png">
-                    </p>
-                  </div>
                   <div style="margin-bottom: 20px;">
                     <small class="text-muted">${film.runningTime} mins</small>
                   </div>
