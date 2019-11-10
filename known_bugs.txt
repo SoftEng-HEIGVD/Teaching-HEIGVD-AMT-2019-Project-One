@@ -1,1 +1,3 @@
 - First film inserted is not displayed on home
+- Have to execute arquilian twice to make it work!
+- Maven build arquilian before docker-compose?
