@@ -69,13 +69,13 @@
                         <p>My players List</p>
                     </a>
                 </li>
-                <c:if test="${coach.isAdmin == true}">
                     <li>
                         <a href="./tableTeamPage/allTeams">
                             <i class="pe-7s-note2"></i>
                             <p>All teams List</p>
                         </a>
                     </li>
+                <c:if test="${coach.isAdmin == true}">
                     <li>
                         <a href="./tablePlayerPage/allPlayers">
                             <i class="pe-7s-note2"></i>

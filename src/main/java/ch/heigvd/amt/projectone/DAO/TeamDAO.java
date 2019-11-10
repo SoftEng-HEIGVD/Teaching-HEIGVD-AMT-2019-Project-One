@@ -42,6 +42,23 @@ public class TeamDAO implements ITeamDAO {
     }
 
     @Override
+    public void addCoach(String c,String t){
+        Connection con = null;
+        try{
+            con = dataSource.getConnection();
+            PreparedStatement statement = con.prepareStatement("INSERT INTO amt_teams_coach VALUES (?,?);");
+            statement.setString(1,c);
+            statement.setString(2,t);
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            closeConnection(con);
+        }
+    }
+
+
+    @Override
     public Team findById(String name) {
 
         Connection con = null;

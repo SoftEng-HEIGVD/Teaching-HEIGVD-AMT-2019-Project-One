@@ -9,5 +9,6 @@ import java.util.List;
 public interface ITeamDAO extends IDAO<String, Team> {
     List<Team> findAllTeam();
     List<Team> findMyTeam(String coach);
+    public void addCoach(String c,String t);
 }
 

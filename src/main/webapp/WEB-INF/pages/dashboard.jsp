@@ -75,14 +75,14 @@
                         <p>My players List</p>
                     </a>
                 </li>
-                <c:if test = "${coach.isAdmin == true}">
                     <li>
                         <a href="./tableTeamPage/allTeams">
                             <i class="pe-7s-note2"></i>
                             <p>All teams List</p>
                         </a>
                     </li>
-                    <li>
+                <c:if test = "${coach.isAdmin == true}">
+                <li>
                         <a href="./tablePlayerPage/allPlayers">
                             <i class="pe-7s-note2"></i>
                             <p>All players List</p>
@@ -146,6 +146,28 @@
 
 
         <div class="content">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Light Bootstrap Table Heading</h4>
+                        <p class="card-category">Created using Montserrat Font Family</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="typography-line">
+                            <h1>
+                                Welcome to Football Management
+                            </h1>
+                        </div>
+                        <div class="typography-line">
+                            <p>
+                                This website is created for managing players and coaching
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
 

@@ -69,13 +69,14 @@
                         <p>My players List</p>
                     </a>
                 </li>
-                <c:if test="${coach.isAdmin == true}">
+
                     <li>
                         <a href="../tableTeamPage/allTeams">
                             <i class="pe-7s-note2"></i>
                             <p>All teams List</p>
                         </a>
                     </li>
+                <c:if test="${coach.isAdmin == true}">
                     <li>
                         <a href="../tablePlayerPage/allPlayers">
                             <i class="pe-7s-note2"></i>
@@ -146,22 +147,37 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Team(s)</h4>
+                                <c:if test="${coach.isAdmin == true}">
+                                    <p><a href="../adding">Add a Team</a></p>
+                                </c:if>
+
                             </div>
                             <div class="content table-responsive table-full-width">
-                                <table class="table table-hover table-striped">
+                                <table class="table table-hover table-striped" id="teamTab">
                                     <thead>
                                     <th>Name</th>
                                     <th>Location</th>
                                     <th>Creation date</th>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${teams}" var="teams">
-                                        <tr>
-                                            <td>${teams.name}</td>
-                                            <td>${teams.location}</td>
-                                            <td>${teams.dateCreation}</td>
-                                        </tr>
-                                    </c:forEach>
+                                        <c:forEach items="${teams}" var="teams">
+                                            <tr>
+                                              <!--  <input type="text" disabled style="border: none;background: none;" name="name" value="-->
+                                                <td>${teams.name}</td>
+                                                <td>${teams.location}</td>
+                                                <td>${teams.dateCreation}</td>
+                                                <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/tableTeamPage/allTeams'}">
+                                                <form action="../addingCoach" method="post">
+                                                    <td>
+                                                        <input type="submit" value="coach this team" name="addTeam">
+                                                        <input type="hidden" name="tname" value="${teams.name}"/>
+                                                    </td>
+                                                </form>
+                                                </c:if>
+                                            </tr>
+                                        </c:forEach>
+                                    </form>
+
                                     </tbody>
                                 </table>
 
