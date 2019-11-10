@@ -27,7 +27,7 @@ public class ServletFilm extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = "0";
         if(request.getParameter("id") != null) {
-            id = request.getParameter("id")
+            id = request.getParameter("id");
         }
         Film film = filmsManager.getFilm(Integer.parseInt(id));
         request.setAttribute("film", film);
