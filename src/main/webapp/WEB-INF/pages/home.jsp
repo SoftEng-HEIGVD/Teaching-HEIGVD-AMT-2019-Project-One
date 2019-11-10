@@ -65,7 +65,12 @@ Licensed under MIT (https://github.com/creativetimofficial/material-kit/blob/mas
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./profile">
-                        <i class="material-icons">profile</i> Profile
+                        <i class="material-icons">face</i> Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./logout">
+                        <i class="material-icons">logout</i> Logout
                     </a>
                 </li>
             </ul>

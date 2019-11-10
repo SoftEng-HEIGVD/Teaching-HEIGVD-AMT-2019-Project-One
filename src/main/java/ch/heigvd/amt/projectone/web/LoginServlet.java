@@ -40,6 +40,7 @@ public class LoginServlet extends HttpServlet {
                     HttpSession session = req.getSession();
                     session.setAttribute("user", client);
                     resp.sendRedirect(req.getContextPath() + "/home?id=" + id);
+                    return;
                 }
             }
             error = "Le mot de passe ou le username n'est pas valable";
