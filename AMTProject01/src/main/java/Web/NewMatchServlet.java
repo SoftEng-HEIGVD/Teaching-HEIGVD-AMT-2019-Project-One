@@ -6,9 +6,11 @@
 package Web;
 
 import Model.Team;
+<<<<<<< HEAD
 import Services.Player.PlayerManagerSQL;
 import Services.Player.PlayerManager;
 import Services.Team.TeamManagerSQL;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -41,7 +43,7 @@ public class NewMatchServlet extends HttpServlet {
         ArrayList<Team> ts= new ArrayList(teamManager.getAllTeams());
         
             request.setAttribute("teams", ts);
-            request.setAttribute("players",playerManager.getAllPLayers());
+            request.setAttribute("players",playerManager.getAllPlayers());
         request.getRequestDispatcher("WEB-INF/pages/matchAdd.jsp").forward(request,response);
     }
 

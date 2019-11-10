@@ -32,6 +32,10 @@
         <servlet-name>TeamAddServlet</servlet-name>
         <servlet-class>Web.TeamAddServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>playersDataSource</servlet-name>
+        <servlet-class>Web.playersDataSource</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PlayersServlet</servlet-name>
         <url-pattern>/players</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>TeamAddServlet</servlet-name>
         <url-pattern>/teamAdd</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>playersDataSource</servlet-name>
+        <url-pattern>/playersDataSource</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

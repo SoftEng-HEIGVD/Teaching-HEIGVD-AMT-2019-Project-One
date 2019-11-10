@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 public class TeamAddServlet extends HttpServlet {
   
 PlayerManager playerManager = new PlayerManagerSQL();
+
     TeamManagerSQL teamManager= new TeamManagerSQL();
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

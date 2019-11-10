@@ -11,10 +11,14 @@ import Services.Player.PlayerManager;
 import Services.Player.PlayerManagerSQL;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -38,13 +42,52 @@ PlayerManager playerManager = new PlayerManagerSQL();
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        String page= request.getParameter("p");
+     
         
-        playerManager.Add(new Player(1,"benji","ben",new Team(1,"Astralis")));
-        request.setAttribute("allPlayers", playerManager.getAllPLayers());
+
+        request.setAttribute("allPlayers", playerManager.getAllPlayers());
+
         request.getRequestDispatcher("WEB-INF/pages/players.jsp").forward(request,response);
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       //To change body of generated methods, choose Tools | Templates.
+       JSONObject json = new JSONObject();
+       int draw= Integer.parseInt(req.getParameter("draw"));
+       int start=Integer.parseInt(req.getParameter("start"));
+       int length=Integer.parseInt(req.getParameter("length"));
+       json.put("draw", draw);
+        JSONArray data = new JSONArray();
+     
+        
+        List<Player> players=playerManager.getAllPlayers();     
+        json.put("recordsTotal",players.size());
+        json.put("recordsFiltered",players.size());
+
+        for(int i=start;i< start+length;i++){
+            if(i<players.size()){
+                Player p= players.get(i);
+                JSONArray pl= new JSONArray();
+                pl.add("<a href=\"player?u="+p.getUserName()+"\">"+p.getUserName()+"</a>");
+                pl.add(p.getName());
+                if(p.getTeam()!=null){
+                    pl.add("<a href=\"team?t="+p.getTeam().getName()+"\">"+p.getTeam().getName()+"</a>");
+                  
+                }else{
+                    pl.add("no team");
+                }
+
+                data.add(pl);
+             
+            }
+            
+        }
+        json.put("data", data);
+        resp.getWriter().write(json.toString());
+    }   
+
+    
     /**
      * Returns a short description of the servlet.
      *
@@ -55,4 +98,5 @@ PlayerManager playerManager = new PlayerManagerSQL();
         return "Short description";
     }// </editor-fold>
 
+    
 }

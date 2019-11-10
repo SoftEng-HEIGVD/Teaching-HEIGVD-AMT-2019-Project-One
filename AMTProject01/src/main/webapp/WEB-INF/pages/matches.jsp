@@ -73,7 +73,21 @@
 	<section class="main-section" id="matches">
 		<!--main-section-start-->
 		<div class="container">
-			<h2>Matches</h2>
+                    <div class="row">
+                    
+                        <div class="col-sm-8">
+                            <h2>Matches</h2>
+                        </div>
+                        <div class="col-sm-4 float-right">
+                            <a href="newMatch"><h3>Add match</h3></a> 
+
+                        </div>
+
+                    </div>
+			
+			         
+                                       
+     
 			
                         <table id="matchesTable" class="display">
                             <thead>
@@ -117,10 +131,7 @@
                             </tbody>
                          </table>
 
-                                
-                        <a href="newMatch"><h3>Add match</h3></a>                 
-     
-			
+                       
 		</div>
 	</section>
 	<!--main-section-end-->
@@ -147,7 +158,14 @@
 
 	<script type="text/javascript">
 		$(document).ready(function(e) {
-                        $('#matchesTable').DataTable();
+                        $('#matchesTable').DataTable({
+                            "processing": true,
+                            "serverSide": true,
+                            "ajax": {
+                                "url": "matches",
+                                "type": "POST"
+                            }
+                        });
 			$('#test').scrollToFixed();
 			$('.res-nav_click').click(function() {
 				$('.main-nav').slideToggle();
