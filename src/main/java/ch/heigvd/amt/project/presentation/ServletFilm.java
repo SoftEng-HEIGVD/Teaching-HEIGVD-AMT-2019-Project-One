@@ -35,7 +35,7 @@ public class ServletFilm extends HttpServlet {
         FilmsDAO dao = new FilmsDAO();
         Film film = null;
         try {
-            film = dao.findById(id);
+            film = dao.findById(Long.parseLong(id));
         } catch (KeyNotFoundException e) {
             e.printStackTrace();
         }
