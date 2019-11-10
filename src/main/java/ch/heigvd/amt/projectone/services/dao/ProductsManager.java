@@ -2,15 +2,13 @@ package ch.heigvd.amt.projectone.services.dao;
 
 import ch.heigvd.amt.projectone.exceptions.DuplicateKeyException;
 import ch.heigvd.amt.projectone.exceptions.KeyNotFoundException;
+import ch.heigvd.amt.projectone.model.Client;
 import ch.heigvd.amt.projectone.model.Product;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,10 +22,11 @@ public class ProductsManager implements ProductsManagerLocal {
 
     public List<Product> getAllProducts() {
 
+        Connection connection = null;
         List<Product> products = new ArrayList<>();
 
         try {
-            Connection connection = dataSource.getConnection();
+            connection = dataSource.getConnection();
             System.out.println("Schema : " + connection.getSchema());
             System.out.println("Catalog : " + connection.getCatalog());
 
@@ -41,32 +40,103 @@ public class ProductsManager implements ProductsManagerLocal {
                 products.add(new Product(id, name, unitPrice, description));
             }
 
-            connection.close();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductsManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection(connection);
         }
         return products;
-
     }
 
     @Override
     public Product create(Product entity) throws DuplicateKeyException {
-        return null;
+        Connection connection = null;
+
+        try {
+            connection = dataSource.getConnection();
+
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO `Product` (name, unitPrice, description) VALUES(?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, entity.getName());
+            statement.setDouble(2, entity.getUnitPrice());
+            statement.setString(3, entity.getDescription());
+            statement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+        return entity;
     }
 
     @Override
-    public Product findById(Integer id) throws KeyNotFoundException {
-        return null;
+    public Product findById(int id) throws KeyNotFoundException {
+        Product product = null;
+        Connection connection = null;
+
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `Product` WHERE id = ?");
+            preparedStatement.setInt(1, id);
+            ResultSet result = preparedStatement.executeQuery();
+
+            if (result.next()) {
+                int idDB = result.getInt("id");
+                String name = result.getString("name");
+                Double unitPrice = result.getDouble("unitPrice");
+                String description = result.getString("description");
+
+                product = new Product(idDB, name, unitPrice, description);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+        return product;
     }
+
 
     @Override
     public void update(Product entity) throws KeyNotFoundException {
 
+
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Product SET name = ?, unitPrice = ?, description = ? WHERE id = ?");
+            preparedStatement.setString(1, entity.getName());
+            preparedStatement.setDouble(2, entity.getUnitPrice());
+            preparedStatement.setString(3, entity.getDescription());
+            preparedStatement.setInt(4, entity.getId());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+
     }
 
     @Override
-    public void deleteById(Integer id) throws KeyNotFoundException {
+    public void deleteById(int id) throws KeyNotFoundException {
+
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(" DELETE Product WHERE id = ?");
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
 
     }
+
+
 }

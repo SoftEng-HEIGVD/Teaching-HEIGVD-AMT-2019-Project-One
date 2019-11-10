@@ -6,7 +6,8 @@ import javax.ejb.Local;
 import java.util.List;
 
 @Local
-public interface OrdersManagerLocal extends IDAO<Integer, Order>{
+public interface OrdersManagerLocal extends IDAO<Order>{
 
     List<Order> getAllOrders();
+    List<Order> findOrdersByClientId(int idClient);
 }

@@ -6,7 +6,7 @@ import javax.ejb.Local;
 import java.util.List;
 
 @Local
-public interface ProductsManagerLocal extends IDAO<Integer,Product> {
+public interface ProductsManagerLocal extends IDAO<Product> {
     List<Product> getAllProducts();
 
 }
