@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/home",  "/products", "/orders", "/profile"} )
+@WebFilter(urlPatterns = {"/", "/home",  "/products", "/orders", "/profile"} )
 public class LoginFilter implements Filter {
     public void destroy() {
     }
