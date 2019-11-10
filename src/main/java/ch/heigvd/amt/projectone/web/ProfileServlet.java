@@ -2,7 +2,6 @@ package ch.heigvd.amt.projectone.web;
 
 import ch.heigvd.amt.projectone.exceptions.KeyNotFoundException;
 import ch.heigvd.amt.projectone.model.Client;
-import ch.heigvd.amt.projectone.services.dao.ClientsManager;
 import ch.heigvd.amt.projectone.services.dao.ClientsManagerLocal;
 
 import javax.ejb.EJB;
@@ -13,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @WebServlet(name = "ProfileServlet", urlPatterns = "/profile")
 public class ProfileServlet extends HttpServlet {
@@ -25,7 +22,6 @@ public class ProfileServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Logger LOG = Logger.getLogger(ClientsManager.class.getName());
 
         String username_old = request.getParameter("old_user");
         String username = request.getParameter("new_user");
@@ -34,10 +30,6 @@ public class ProfileServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         int id = clientsManagerLocal.getIdByUsername(username_old);
-
-
-        LOG.log(Level.WARNING, username);
-        LOG.log(Level.WARNING, Integer.toString(id));
 
         if (id != -1) {
             Client client = clientsManagerLocal.getClientById(id);
