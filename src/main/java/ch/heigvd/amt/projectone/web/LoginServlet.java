@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +36,9 @@ public class LoginServlet extends HttpServlet {
             } else {
                 int id = clientsManagerLocal.getIdByUsername(username);
                 if (id != -1) {
-                    resp.sendRedirect(req.getContextPath()+"/home"+"?id="+id);
+                    HttpSession session = req.getSession();
+                    session.setAttribute("user", clientsManagerLocal.getClientById(id));
+                    resp.sendRedirect(req.getContextPath()+"/logged/home?id="+id);
                 } else {
                     error = "Le mot de passe ou le username n'est pas valable";
                     req.setAttribute("error", error);
