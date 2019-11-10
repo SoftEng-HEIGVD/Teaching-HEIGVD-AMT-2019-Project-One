@@ -11,7 +11,6 @@ CREATE TABLE `amt_users` (
     `FIRST_NAME` varchar(255) NOT NULL,
     `LAST_NAME` varchar(255) NOT NULL,
     `EMAIL` varchar(255) DEFAULT NULL,
-    'DIRECTOR' varchar(255) NOT NULL,
     `HASHED_PW` char(128) NOT NULL,
     PRIMARY KEY (`USERNAME`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -22,6 +21,7 @@ CREATE TABLE `amt_films` (
   `TITLE` varchar(255) NOT NULL,
   `RUNNING_TIME` smallint NOT NULL,
   `PATH_TO_POSTER` varchar(255) NOT NULL,
+  `DIRECTOR` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

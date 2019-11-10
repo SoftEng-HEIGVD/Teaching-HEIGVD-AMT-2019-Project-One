@@ -11,6 +11,5 @@ public interface IDAO<PK, E> {
     void update(E entity) throws KeyNotFoundException;
     void deleteById(PK id) throws KeyNotFoundException;
     List<E> findAll() throws KeyNotFoundException;
-    List<E> findBetween(PK id1, PK id2) throws KeyNotFoundException;
 }
 

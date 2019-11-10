@@ -43,7 +43,6 @@
 </header>
 
 <main role="main">
-
     <section class="jumbotron text-center" style="height: 300px;">
         <div class="container">
             <h1 class="jumbotron-heading" style="color: black;">Film rating app</h1>
@@ -63,7 +62,7 @@
                                 <p class="card-text">${film.title}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" href="film?id=${film.id}">View</button>
                                         <button type="button" class="btn btn-sm btn-outline-secondary">Like</button>
                                     </div>
                                     <div>
@@ -77,11 +76,49 @@
             </div>
         </div>
     </div>
-
 </main>
 
 <footer class="text-muted">
-    <div class="container">
+    <div class="container" style="margin-left: 40%;"> <!-- TODO : center nav in container -->
+        <nav>
+            <ul class="pagination">
+                <!-- First page -->
+                <li class="page-item">
+                    <a href="home">«</a>
+                </li>
+                <!-- Previous page -->
+                <c:if test="${currentPage > 1}">
+                    <li class="page-item">
+                        <a href="home?page=${currentPage - 1}">‹</a>
+                    </li>
+                </c:if>
+                <!-- 2 prev pages, curr page, 2 next pages -->
+                <c:forEach begin="${currentPage - 2}" end="${currentPage + 2}" var="i">
+                    <c:if test="${i >= 1 && i <= nbPages}">
+                        <c:choose>
+                            <c:when test="${currentPage eq i}">
+                                <li class="page-item">${i}</li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item">
+                                    <a href="home?page=${i}">${i}</a>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:if>
+                </c:forEach>
+                <!-- Next page -->
+                <c:if test="${currentPage < nbPages}">
+                    <li class="page-item">
+                        <a href="home?page=${currentPage + 1}">></a>
+                    </li>
+                </c:if>
+                <!-- Last page -->
+                <li class="page-item">
+                    <a href="home?page=${nbPages}">»</a>
+                </li>
+            </ul>
+        </nav>
         <p class="float-right">
             <a href="#">Back to top</a>
         </p>
