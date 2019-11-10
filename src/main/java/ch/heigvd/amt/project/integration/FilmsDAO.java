@@ -155,7 +155,7 @@ public class FilmsDAO implements IFilmsDao {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM amt_films WHERE ID >= ? AND ID <= ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM amt_films WHERE ID >= ? AND ID < ?");
             statement.setString(1, id1);
             statement.setString(2, id2);
             ResultSet rs = statement.executeQuery();
