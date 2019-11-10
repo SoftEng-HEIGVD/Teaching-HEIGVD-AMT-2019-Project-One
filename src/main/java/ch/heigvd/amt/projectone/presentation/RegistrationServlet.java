@@ -2,7 +2,6 @@ package ch.heigvd.amt.projectone.presentation;
 
 import ch.heigvd.amt.projectone.DAO.*;
 import ch.heigvd.amt.projectone.model.Coach;
-import ch.heigvd.amt.projectone.model.Team;
 
 import javax.ejb.DuplicateKeyException;
 import javax.ejb.EJB;
@@ -20,9 +19,6 @@ public class RegistrationServlet extends HttpServlet {
 
     @EJB
     ICoachDAO cd;
-
-    @EJB
-    ITeamDAO td;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
