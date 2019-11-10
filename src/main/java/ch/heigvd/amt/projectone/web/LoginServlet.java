@@ -1,6 +1,5 @@
 package ch.heigvd.amt.projectone.web;
 
-import ch.heigvd.amt.projectone.model.Client;
 import ch.heigvd.amt.projectone.services.dao.ClientsManagerLocal;
 
 import javax.ejb.EJB;
@@ -11,8 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 @WebServlet(name="LoginServlet",urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {

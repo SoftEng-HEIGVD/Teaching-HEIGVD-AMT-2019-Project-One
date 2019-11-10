@@ -1,5 +1,7 @@
 package ch.heigvd.amt.projectone.web;
 
+import ch.heigvd.amt.projectone.exceptions.DuplicateKeyException;
+import ch.heigvd.amt.projectone.model.Client;
 import ch.heigvd.amt.projectone.services.dao.ClientsManagerLocal;
 
 import javax.ejb.EJB;
@@ -18,7 +20,7 @@ public class RegisterServlet extends HttpServlet {
     ClientsManagerLocal clientsManagerLocal;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String error = "";
+        String error;
 
         String name = request.getParameter("name");
         String username = request.getParameter("username");
@@ -29,14 +31,21 @@ public class RegisterServlet extends HttpServlet {
 
         if (name.isEmpty() || username.isEmpty()|| password.isEmpty() || password_confirm.isEmpty()){
             error = "Mot de passe, username ou name vide !";
-        }
-        if (!error.isEmpty()){
+            request.setAttribute("error", error);
+
+        } else if (password.equals(password_confirm)){
+            try {
+                clientsManagerLocal.create(new Client(name,username,password));
+                response.sendRedirect(request.getContextPath() + "/login");
+
+            } catch (DuplicateKeyException e) {
+                e.printStackTrace();
+            }
+        } else{
+            error = "Les deux passwords ne correspondent pas";
             request.setAttribute("error", error);
             request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
-        } else {
-            if (clientsManagerLocal.create(name, username, password, password_confirm)){
-                response.sendRedirect(request.getContextPath() + "/login");
-            }
+
         }
 
     }
