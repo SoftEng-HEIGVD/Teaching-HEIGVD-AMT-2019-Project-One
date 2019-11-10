@@ -5,7 +5,6 @@ import ch.heigvd.amt.projectone.exceptions.KeyNotFoundException;
 import ch.heigvd.amt.projectone.model.Client;
 
 import javax.annotation.Resource;
-import javax.ejb.PrePassivate;
 import javax.ejb.Stateless;
 import javax.sql.DataSource;
 import java.sql.*;
@@ -76,12 +75,13 @@ public class ClientsManager implements ClientsManagerLocal {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `Client` SET name = ?, username = ?, password = ?, isAdmin = ? WHERE id = ?;");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `Client` SET name=?, username=?, password=?, isAdmin=? WHERE id=?;");
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setString(2, entity.getUsername());
             preparedStatement.setString(3, entity.getPassword());
             preparedStatement.setBoolean(4, entity.isAdmin());
             preparedStatement.setInt(5, entity.getId());
+
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

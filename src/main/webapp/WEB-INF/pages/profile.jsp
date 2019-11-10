@@ -40,10 +40,6 @@
                     Username
                     <input class="form-control" type="text" placeholder="${sessionScope.user.username}" readonly>
                 </label>
-                <label>
-                    Password
-                    <input class="form-control" type="password" placeholder="${sessionScope.user.password}" readonly>
-                </label>
             </form>
 <%--            <label>--%>
 <%--                Admin--%>
@@ -60,32 +56,18 @@
                 <div class="modal-content">
                     <div class="card card-signup card-plain">
                         <div class="modal-body">
-                            <form class="form" method="post" action="./profile?action=update_user">
-                                <p class="description text-center">Change Username</p>
+                            <form class="form" method="post" action="./profile">
+                                <p class="description text-center">Edit profile</p>
                                 <div class="card-body">
-
                                     <div class="form-group bmd-form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text"><i class="material-icons">face</i></div>
                                             </div>
                                             <label>
-                                                <input name="old_user" type="text" class="form-control"
-                                                       placeholder="Old Username">
-                                                Old Username
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group bmd-form-group">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="material-icons">face</i></div>
-                                            </div>
-                                            <label>
-                                                <input name="new_user" type="text" class="form-control"
-                                                       placeholder="New Username">
                                                 New Username
+                                                <input name="new_user" type="text" class="form-control"
+                                                       value="${sessionScope.user.username}">
                                             </label>
                                         </div>
                                     </div>
@@ -96,9 +78,9 @@
                                                 <div class="input-group-text"><i class="material-icons">face</i></div>
                                             </div>
                                             <label>
-                                                <input name="new_user_confirm" type="text"
-                                                       placeholder="Confirm New Username" class="form-control">
-                                                Confirm new username
+                                                Old Username
+                                                <input name="old_user" type="text" class="form-control"
+                                                       value="${sessionScope.user.username}" readonly>
                                             </label>
                                         </div>
                                     </div>
@@ -106,12 +88,12 @@
                                     <div class="form-group bmd-form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="material-icons">lock</i></div>
+                                                <div class="input-group-text"><i class="material-icons">face</i></div>
                                             </div>
                                             <label>
-                                                <input name="password" type="password" placeholder="Password"
-                                                       class="form-control">
-                                                Password
+                                                Name
+                                                <input name="name" type="text"
+                                                       value="${sessionScope.user.name}" class="form-control">
                                             </label>
                                         </div>
                                     </div>
