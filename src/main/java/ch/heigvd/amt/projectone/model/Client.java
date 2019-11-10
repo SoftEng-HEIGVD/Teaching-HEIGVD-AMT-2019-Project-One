@@ -22,6 +22,10 @@ public class Client {
         this.password = password;
         this.isAdmin = isAdmin;
     }
+
+    public Client(String name, String username, String password) {
+        this(-1,name,username,password,false);
+    }
 }
 
 
