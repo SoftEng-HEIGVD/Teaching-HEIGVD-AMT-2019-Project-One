@@ -27,7 +27,7 @@ class LogoutServletTest {
     HttpSession session;
 
     @Mock
-    RequestDispatcher requestDispatcher;
+    RequestDispatcher rd;
 
     LogoutServlet lgServlet;
 
@@ -45,7 +45,7 @@ class LogoutServletTest {
 
         verify(request, atLeastOnce()).getSession();
         verify(session,atLeastOnce()).invalidate();
-        verify(response, atLeastOnce()).sendRedirect("test/index.jsp");
+        verify(rd, atLeastOnce()).forward(request, response);
 
     }
 }

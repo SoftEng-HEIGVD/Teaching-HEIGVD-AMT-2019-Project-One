@@ -15,6 +15,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <version.arquillian_universe>1.2.0.2</version.arquillian_universe>
+        <version.arquillian.chameleon>1.0.0.CR6</version.arquillian.chameleon>
+        <version.arquillian>1.5.0.Final</version.arquillian>
     </properties>
 
     <dependencies>
@@ -63,6 +66,29 @@
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-standalone</artifactId>
             <version>1.5.0.Final</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.arquillian.container</groupId>
+            <artifactId>arquillian-chameleon-junit-container-starter</artifactId>
+            <version>${version.arquillian.chameleon}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-transaction-jta</artifactId>
+            <version>1.0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.arquillian.container</groupId>
+            <artifactId>arquillian-container-chameleon-runner</artifactId>
+            <version>${version.arquillian.chameleon}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.arquillian.container</groupId>
+            <artifactId>arquillian-chameleon-maven-build-deployment</artifactId>
+            <version>${version.arquillian.chameleon}</version>
             <scope>test</scope>
         </dependency>
 

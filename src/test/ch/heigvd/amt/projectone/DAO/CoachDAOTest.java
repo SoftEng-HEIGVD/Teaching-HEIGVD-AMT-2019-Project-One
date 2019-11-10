@@ -1,0 +1,72 @@
+package ch.heigvd.amt.projectone.DAO;
+
+import ch.heigvd.amt.projectone.model.Coach;
+import org.arquillian.container.chameleon.deployment.api.DeploymentParameters;
+import org.arquillian.container.chameleon.deployment.maven.MavenBuild;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
+import org.jboss.arquillian.transaction.api.annotation.Transactional;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+
+import javax.ejb.DuplicateKeyException;
+import javax.ejb.EJB;
+import java.sql.SQLException;
+
+import static org.junit.Assert.*;
+
+
+@RunWith(Arquillian.class)
+@MavenBuild
+@DeploymentParameters(testable = true)
+public class CoachDAOTest {
+
+    @EJB
+    ICoachDAO coachD;
+
+    @Deployment
+    public static JavaArchive createDeployment() {
+        return ShrinkWrap.create(JavaArchive.class)
+                .addAsManifestResource(EmptyAsset.INSTANCE, "resources.arquillian.xml");
+    }
+
+    @Test
+    @Transactional(TransactionMode.COMMIT)
+    void itShouldBePossibleToCreateACoach() throws DuplicateKeyException, SQLException {
+        Coach nair = Coach.builder()
+                .username("nairA")
+                .lastName("Alic")
+                .firstName("Nair")
+                .password("test")
+                .isAdmin(true)
+                .build();
+        coachD.create(nair);
+    }
+
+    @Test
+    @Transactional(TransactionMode.COMMIT)
+    void itShouldBePossibleToCreateAndRetrieveACoach() throws DuplicateKeyException, SQLException {
+        Coach nair = Coach.builder()
+                .username("nairA")
+                .lastName("Alic")
+                .firstName("Nair")
+                .password("test")
+                .isAdmin(true)
+                .build();
+        Coach nairCreated = coachD.create(nair);
+
+        Coach nairAdded = coachD.findById(nairCreated.getUsername());
+        assertEquals(nair, nairCreated);
+        assertEquals(nair, nairAdded);
+        assertSame(nair, nairCreated);
+        assertNotSame(nair, nairAdded);
+    }
+
+    @Test
+    void deleteById() {
+    }
+}

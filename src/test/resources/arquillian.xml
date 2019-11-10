@@ -1,0 +1,15 @@
+<arquillian xmlns="http://jboss.org/schema/arquillian" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="
+        http://jboss.org/schema/arquillian
+        http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+
+    <container qualifier="wildfly17-remote" default="true">
+        <configuration>
+            <property name="chameleonTarget">wildfly:17.0.1.Final:remote</property>
+            <property name="managementAddress">192.168.99.100</property>
+            <property name="managementPort">9990</property>
+            <property name="username">admin</property>
+            <property name="password">admin</property>
+        </configuration>
+    </container>
+</arquillian>
