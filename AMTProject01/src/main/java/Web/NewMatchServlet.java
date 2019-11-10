@@ -6,7 +6,6 @@
 package Web;
 
 import Model.Team;
-<<<<<<< HEAD
 import Services.Player.PlayerManagerSQL;
 import Services.Player.PlayerManager;
 import Services.Team.TeamManagerSQL;

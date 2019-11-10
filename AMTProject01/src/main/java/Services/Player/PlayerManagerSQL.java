@@ -42,7 +42,7 @@ public class PlayerManagerSQL implements PlayerManager{
         return new Player("Goturak","Luca");
     }
     @Override
-    public List<Player> getAllPLayers(){  
+    public List<Player> getAllPlayers(){  
         
         ArrayList<Player> players = new ArrayList();
         
