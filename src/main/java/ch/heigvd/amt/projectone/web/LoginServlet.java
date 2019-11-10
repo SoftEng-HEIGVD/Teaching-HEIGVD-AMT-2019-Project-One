@@ -1,5 +1,6 @@
 package ch.heigvd.amt.projectone.web;
 
+import ch.heigvd.amt.projectone.model.Client;
 import ch.heigvd.amt.projectone.services.dao.ClientsManagerLocal;
 
 import javax.ejb.EJB;
@@ -34,14 +35,22 @@ public class LoginServlet extends HttpServlet {
             } else {
                 int id = clientsManagerLocal.getIdByUsername(username);
                 if (id != -1) {
-                    HttpSession session = req.getSession();
-                    session.setAttribute("user", clientsManagerLocal.getClientById(id));
-                    resp.sendRedirect(req.getContextPath()+"/home?id="+id);
-                } else {
-                    error = "Le mot de passe ou le username n'est pas valable";
-                    req.setAttribute("error", error);
-                    req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
+                    Client client = clientsManagerLocal.getClientById(id);
+                    if (client.getPassword().equals(password)) {
+                        HttpSession session = req.getSession();
+                        session.setAttribute("user", client);
+                        resp.sendRedirect(req.getContextPath() + "/home?id=" + id);
+                    }
+                    else{
+
+                        error = "Le mot de passe ou le username n'est pas valable";
+                        req.setAttribute("error", error);
+                        req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
+
+                    }
                 }
+
+
             }
     }
 
