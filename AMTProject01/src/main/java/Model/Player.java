@@ -16,12 +16,9 @@ public class Player {
     private String name;
     private Team team;
 
-    public Player(String userName){
-        this(0,userName,null,null);
-    }
     
     public Player(String userName, String name) {
-        this(0,userName,name,null);
+        this(0,userName,name,new Team(1,"no_team"));
     }
 
     
