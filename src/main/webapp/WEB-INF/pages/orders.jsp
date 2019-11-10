@@ -32,8 +32,8 @@
 </head>
 <body class="sidebar-collapse">
 
-<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100"
-     id="sectionsNav">
+<<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100"
+      id="sectionsNav">
     <div class="container">
         <div class="navbar-translate">
             <a class="navbar-brand" href="./home?id=${sessionScope.user.id}" >
@@ -56,6 +56,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="./orders">
                         <i class="material-icons">shopping_cart</i> Orders
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./profile">
+                        <i class="material-icons">profile</i> Profile
                     </a>
                 </li>
             </ul>
