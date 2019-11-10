@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebServlet(name="LoginServlet",urlPatterns = "/login")
+@WebServlet(name = "LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
 
     @EJB
@@ -28,30 +28,24 @@ public class LoginServlet extends HttpServlet {
 
         resp.setContentType("text/html;charset=UTF-8");
 
-        if (username.isEmpty()|| password.isEmpty()){
-                error = "Mot de passe ou username vide !";
-                req.setAttribute("error", error);
-                req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
-            } else {
-                int id = clientsManagerLocal.getIdByUsername(username);
-                if (id != -1) {
-                    Client client = clientsManagerLocal.getClientById(id);
-                    if (client.getPassword().equals(password)) {
-                        HttpSession session = req.getSession();
-                        session.setAttribute("user", client);
-                        resp.sendRedirect(req.getContextPath() + "/home?id=" + id);
-                    }
-                    else{
-
-                        error = "Le mot de passe ou le username n'est pas valable";
-                        req.setAttribute("error", error);
-                        req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
-
-                    }
+        if (username.isEmpty() || password.isEmpty()) {
+            error = "Mot de passe ou username vide !";
+            req.setAttribute("error", error);
+            req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
+        } else {
+            int id = clientsManagerLocal.getIdByUsername(username);
+            if (id != -1) {
+                Client client = clientsManagerLocal.getClientById(id);
+                if (client.getPassword().equals(password)) {
+                    HttpSession session = req.getSession();
+                    session.setAttribute("user", client);
+                    resp.sendRedirect(req.getContextPath() + "/home?id=" + id);
                 }
-
-
             }
+            error = "Le mot de passe ou le username n'est pas valable";
+            req.setAttribute("error", error);
+            req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
+        }
     }
 
 
@@ -60,7 +54,6 @@ public class LoginServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
     }
-
 
 
 }
