@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>JSP Page</title>
+    <title>Chillout - Products</title>
 </head>
 <body>
 

@@ -1,17 +1,15 @@
 package ch.heigvd.amt.projectone.services.dao;
 
 import ch.heigvd.amt.projectone.model.Client;
-import sun.rmi.runtime.Log;
 
 import javax.annotation.Resource;
+import javax.ejb.PrePassivate;
 import javax.ejb.Stateless;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Stateless
 public class ClientsManager implements ClientsManagerLocal {
@@ -19,11 +17,36 @@ public class ClientsManager implements ClientsManagerLocal {
     @Resource(lookup = "jdbc/chillout")
     private DataSource dataSource;
 
-    private static final Logger LOG = Logger.getLogger(ClientsManager.class.getName());
 
     @Override
-    public boolean create(String username, String password) {
-        return false;
+    public boolean create(String name, String username, String password, String password_confirm) {
+
+        if (password.equals(password_confirm)){
+            try {
+                Connection connection = dataSource.getConnection();
+                PreparedStatement ps = connection.prepareStatement("SELECT TOP 1 * FROM Client ORDER BY Id DESC");
+                ResultSet interRes = ps.executeQuery();
+
+                while (interRes.next()){
+                    PreparedStatement statement = connection.prepareStatement("INSERT INTO Client (id, name, username, password, isAdmin) VALUES(3, ?, ?, ?, false )");
+                    statement.setString(1, name);
+                    statement.setString(2, username);
+                    statement.setString(3, password);
+                    statement.executeQuery();
+                    statement.close();
+                }
+
+                ps.close();
+                connection.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            return false;
+        }
+
+        return true;
     }
 
     @Override
@@ -37,7 +60,6 @@ public class ClientsManager implements ClientsManagerLocal {
 
             while (result.next()){
                 String passwordDB = result.getString("password");
-                LOG.log(Level.INFO, "Password is : " + passwordDB);
                 if (password.equals(passwordDB)){
                     valid = true;
                 }
@@ -77,7 +99,6 @@ public class ClientsManager implements ClientsManagerLocal {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        LOG.log(Level.INFO, "Client is : " + client);
         return client;
     }
 
