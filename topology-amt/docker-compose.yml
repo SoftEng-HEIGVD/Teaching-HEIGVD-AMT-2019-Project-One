@@ -7,8 +7,8 @@ services:
     environment:
       PAYARA_ARGS: "--debug"
     ports:
-      - 8080:8080
-      - 4848:4848
+      - 9090:8080
+      - 3838:4848
       - 9009:9009
 
   db:
