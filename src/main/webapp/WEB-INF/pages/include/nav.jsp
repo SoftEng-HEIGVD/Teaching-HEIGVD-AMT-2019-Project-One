@@ -1,8 +1,10 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100"
      id="sectionsNav">
     <div class="container">
         <div class="navbar-translate">
-            <a class="navbar-brand" href="./home?id=${sessionScope.user.id}" >
+            <a class="navbar-brand" href="./home?id=${sessionScope.user.id}">
                 Chillout </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -34,6 +36,25 @@
                         <i class="material-icons">logout</i> Logout
                     </a>
                 </li>
+<%--                <c:if test="${(sessionScope.user.isAdmin == false)}">--%>
+<%--                    <li class="nav-item">--%>
+<%--                        <a class="nav-link" href="mailto:test@test.com" data-toggle="modal" data-target="#modalAdmin">--%>
+<%--                            <i class="material-icons">key</i> Become Admin--%>
+<%--                        </a>--%>
+<%--                    </li>--%>
+
+<%--                    <div class="modal fade" id="modalAdmin" tabindex="-1" data-backdrop="false">--%>
+<%--                        <div class="modal-dialog modal-login" role="document">--%>
+<%--                            <div class="modal-content">--%>
+<%--                                <div class="card card-signup card-plain">--%>
+<%--                                    <div class="modal-body">--%>
+<%--                                        <p>Mail sent to the admin for your request</p>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </c:if>--%>
             </ul>
         </div>
     </div>

@@ -4,6 +4,7 @@ import ch.heigvd.amt.projectone.exceptions.DuplicateKeyException;
 import ch.heigvd.amt.projectone.exceptions.KeyNotFoundException;
 import ch.heigvd.amt.projectone.model.Client;
 import ch.heigvd.amt.projectone.model.Product;
+import ch.heigvd.amt.projectone.web.ProfileServlet;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
@@ -96,7 +97,6 @@ public class ProductsManager implements ProductsManagerLocal {
         }
         return product;
     }
-
 
     @Override
     public void update(Product entity) throws KeyNotFoundException {

@@ -1,4 +1,3 @@
-<%@ page import="ch.heigvd.amt.projectone.model.Client" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -32,21 +31,59 @@
 </head>
 <body class="sidebar-collapse">
 
-<jsp:include page="include/nav.jsp" />
+<jsp:include page="include/nav.jsp"/>
 
-<h1>Orders</h1>
-<table>
-    <c:forEach items="${orders}" var="order">
-        <c:if test="${(order.idClient == sessionScope.user.id)}">
-        <tr>
-            <td>${order.id}</td>
-            <td>${order.idClient}</td>
-            <td>${order.command}</td>
 
-        </tr>
-        </c:if>
-    </c:forEach>
-</table>
+<div class="container">
+    <div class="row">
+        <h1>Orders</h1>
+        <c:forEach items="${orders}" var="order">
+            <c:if test="${(order.idClient == sessionScope.user.id)}">
+                <div class="card" style="width: 20rem;">
+                    <div class="card-body">
+                        <h1 class="card-text">${order.id}</h1>
+                        <p class="card-text">Order was made by : ${sessionScope.user.name}</p>
+                        <button class="btn btn-round" data-toggle="modal" data-target="#orderModal">
+                            <i class="material-icons">shopping_cart</i>
+                            Show more
+                        </button>
+
+                        <div class="modal fade" id="orderModal" tabindex="-1" role="dialog">
+                            <div class="modal-dialog modal-signup" role="document">
+                                <div class="modal-content">
+                                    <div class="card card-plain">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title card-title">More info</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <i class="material-icons">clear</i>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div>
+                                                    <p>
+                                                        ${order.idClient}
+                                                    </p>
+                                                    <p>
+                                                        <c:forEach items="${sessionScope.products}" var="product">
+                                                            <c:if test="${(order.command.idProduit == sessionScope.products.id)}">
+                                                                product.name
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:if>
+        </c:forEach>
+    </div>
+</div>
 
 <!--   Core JS Files   -->
 <script src="assets/js/core/jquery.min.js" type="text/javascript"></script>
