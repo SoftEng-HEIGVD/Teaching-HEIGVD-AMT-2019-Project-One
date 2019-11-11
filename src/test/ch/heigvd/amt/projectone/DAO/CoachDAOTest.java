@@ -3,15 +3,18 @@ package ch.heigvd.amt.projectone.DAO;
 import ch.heigvd.amt.projectone.model.Coach;
 import org.arquillian.container.chameleon.deployment.api.DeploymentParameters;
 import org.arquillian.container.chameleon.deployment.maven.MavenBuild;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
 import org.jboss.arquillian.transaction.api.annotation.Transactional;
+
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.jupiter.api.Test;
+
 import org.junit.runner.RunWith;
+import org.junit.Test;
 
 import javax.ejb.DuplicateKeyException;
 import javax.ejb.EJB;
@@ -31,12 +34,12 @@ public class CoachDAOTest {
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "resources.arquillian.xml");
+                .addAsManifestResource(EmptyAsset.INSTANCE, "arquillian.xml");
     }
 
     @Test
     @Transactional(TransactionMode.COMMIT)
-    void itShouldBePossibleToCreateACoach() throws DuplicateKeyException, SQLException {
+    public void itShouldBePossibleToCreateACoach() throws DuplicateKeyException, SQLException {
         Coach nair = Coach.builder()
                 .username("nairA")
                 .lastName("Alic")
@@ -49,7 +52,7 @@ public class CoachDAOTest {
 
     @Test
     @Transactional(TransactionMode.COMMIT)
-    void itShouldBePossibleToCreateAndRetrieveACoach() throws DuplicateKeyException, SQLException {
+    public void itShouldBePossibleToCreateAndRetrieveACoach() throws DuplicateKeyException, SQLException {
         Coach nair = Coach.builder()
                 .username("nairA")
                 .lastName("Alic")
@@ -66,7 +69,7 @@ public class CoachDAOTest {
         assertNotSame(nair, nairAdded);
     }
 
-    @Test
-    void deleteById() {
-    }
+//    @Test
+//    public void deleteById() {
+//    }
 }
