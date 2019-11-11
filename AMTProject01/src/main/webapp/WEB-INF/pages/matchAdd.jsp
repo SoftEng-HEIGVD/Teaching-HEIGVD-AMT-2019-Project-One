@@ -56,10 +56,19 @@
 	<nav class="main-nav-outer" id="test">
 		<!--main-nav-start-->
 		<div class="container">
-			<ul class="main-nav">
+				<ul class="main-nav">
 				<li><a href="matches">Matches</a></li>
                                 <li><a href="teams">Teams</a></li>
 				<li><a href="players">Players</a></li>
+                                
+                                <c:if test="${empty sessionScope.name}">
+                                    <li><a href="login">Login</a></li>
+                                </c:if>
+                                <c:if test="${not empty sessionScope.name}">
+                                    <li><a href="login">${sessionScope.name}</a></li>
+                       
+                                </c:if>
+                                
 
 			</ul>
 			<a class="res-nav_click" href="#"><i class="fa fa-bars"></i></a>
