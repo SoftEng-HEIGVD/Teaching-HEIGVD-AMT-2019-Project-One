@@ -217,6 +217,50 @@ public class MatchesManagerSQL implements MatchesManager {
     }
     
     
+    
+    @Override
+    public int getNumberOfMatch(){
+        
+        int number = 0;
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) AS count FROM Matches");
+              ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+           number = rs.getInt("count");
+        }
+            pstmt.close();
+            connection.close();
+
+        } catch (SQLException ex) {
+          Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+        
+        return number;
+    }
+    
+    @Override
+    public void DeleteMatch(long id){
+        
+        try {
+        Connection connection = dataSource.getConnection();
+        
+        
+        PreparedStatement pstmt = connection.prepareStatement("DELETE FROM Matches WHERE match_id="+id);
+         pstmt.execute();
+       
+        pstmt.close();
+        
+      
+    } catch (SQLException ex) {
+      Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+    } 
+        
+        
+        
+    }
+    
+    
     private void addPlayerToMatch(int[] team,int teamNumber,long match_id){
         
         try {
