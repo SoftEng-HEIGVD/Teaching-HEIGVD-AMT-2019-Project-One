@@ -92,7 +92,7 @@
                                       <div class="form-group">
                                         <label for="Team">Team</label>
                                         <select class="form-control" id="Team" name="team">
-                                          <option>(no team)</option>   
+                                         
                                           <c:forEach items="${teams}" var="item">
                                                 <option>${item.name}</option>
                                           </c:forEach>

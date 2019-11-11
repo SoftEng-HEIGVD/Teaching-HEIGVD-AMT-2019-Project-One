@@ -54,12 +54,11 @@ PlayerManager playerManager = new PlayerManagerSQL();
         String name = req.getParameter("name");
         String team= req.getParameter("team");
         
+        Player np = new Player(0,username,name,teamManager.getTeam(team));
         
         
-            
-        ArrayList<Team> ts= new ArrayList(teamManager.getAllTeams());
-        
-        req.setAttribute("teams", ts);
+        playerManager.Add(np);
+        req.setAttribute("teams", teamManager.getAllTeams());
         req.getRequestDispatcher("WEB-INF/pages/PlayerAdd.jsp").forward(req,resp);
     }
 
