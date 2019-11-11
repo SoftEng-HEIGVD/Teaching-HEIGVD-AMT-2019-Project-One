@@ -1,21 +1,32 @@
 version: '3'
+
 services:
-  wildfly:
-    build: ../images/wildfly
+  
+  payara:
+    build: ../images/payara
+    environment:
+      PAYARA_ARGS: "--debug"
     ports:
-     - "9090:8080"
-     - "9990:9990"
-  mysql:
+      - 9090:8080
+      - 3838:4848
+      - 9009:9009
+
+  db:
     build: ../images/mysql
-    environment:
-     - MYSQL_ROOT_PASSWORD=root
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
     ports:
-     - "3306:3306"
+     - 3306:3306
+    environment:
+      MYSQL_DATABASE: root
+      MYSQL_ROOT_PASSWORD: root
+
   phpmyadmin:
-    build: ../images/phpmyadmin
+    image: phpmyadmin/phpmyadmin
     environment:
-     - MYSQL_ROOT_PASSWORD=root
+     - PMA_HOST=db
+    restart: always
+    depends_on:
+     - db
     ports:
-     - "6060:80"
-    links:
-     - mysql:db
+     - 8888:80
