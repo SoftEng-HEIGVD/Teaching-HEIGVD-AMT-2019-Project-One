@@ -57,10 +57,11 @@ PlayerManager playerManager = new PlayerManagerSQL();
        json.put("draw", draw);
         JSONArray data = new JSONArray();
      
-
+        
         List<Player> players=playerManager.getAllPlayers();  
-
+      
         json.put("recordsTotal",players.size());
+       
         json.put("recordsFiltered",players.size());
 
         for(int i=start;i< start+length;i++){

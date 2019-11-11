@@ -62,7 +62,7 @@ public class PlayerManagerSQL implements PlayerManager{
           players.add(new Player(player_id,pseudo,name,new Team(team_id,team)));
         }
         pstmt.close();
-         connection.close();
+        connection.close();
      
     } catch (SQLException ex) {
       Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
