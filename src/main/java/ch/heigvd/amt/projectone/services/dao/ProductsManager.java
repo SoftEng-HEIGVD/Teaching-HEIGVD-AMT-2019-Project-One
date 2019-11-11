@@ -2,7 +2,8 @@ package ch.heigvd.amt.projectone.services.dao;
 
 import ch.heigvd.amt.projectone.exceptions.DuplicateKeyException;
 import ch.heigvd.amt.projectone.exceptions.KeyNotFoundException;
-import ch.heigvd.amt.projectone.Product;
+
+import ch.heigvd.amt.projectone.model.Product;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
@@ -93,7 +94,6 @@ public class ProductsManager implements ProductsManagerLocal {
         }
         return product;
     }
-
 
     @Override
     public void update(Product entity) throws KeyNotFoundException {

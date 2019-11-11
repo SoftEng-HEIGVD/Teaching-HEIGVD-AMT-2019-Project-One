@@ -2,7 +2,7 @@ package ch.heigvd.amt.projectone.services.dao;
 
 import ch.heigvd.amt.projectone.exceptions.DuplicateKeyException;
 import ch.heigvd.amt.projectone.exceptions.KeyNotFoundException;
-import ch.heigvd.amt.projectone.Client;
+import ch.heigvd.amt.projectone.model.Client;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
@@ -48,17 +48,8 @@ public class ClientsManager implements ClientsManagerLocal {
             connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `Client` WHERE id = ?");
             preparedStatement.setInt(1, id);
-            ResultSet result = preparedStatement.executeQuery();
 
-            if (result.next()) {
-                int idDB = result.getInt("id");
-                String name = result.getString("name");
-                String userDB = result.getString("username");
-                String passDB = result.getString("password");
-                boolean isAdmin = result.getBoolean("isAdmin");
-
-                client = new Client(id, name, userDB, passDB, isAdmin);
-            }
+            client = getClient(preparedStatement);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -118,17 +109,8 @@ public class ClientsManager implements ClientsManagerLocal {
             connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `Client` WHERE username = ?");
             preparedStatement.setString(1, username);
-            ResultSet result = preparedStatement.executeQuery();
 
-            if (result.next()) {
-                int id = result.getInt("id");
-                String name = result.getString("name");
-                String userDB = result.getString("username");
-                String passDB = result.getString("password");
-                boolean isAdmin = result.getBoolean("isAdmin");
-
-                client = new Client(id, name, userDB, passDB, isAdmin);
-            }
+            client = getClient(preparedStatement);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -172,17 +154,8 @@ public class ClientsManager implements ClientsManagerLocal {
             connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `Client` WHERE id = ?");
             preparedStatement.setInt(1, id);
-            ResultSet result = preparedStatement.executeQuery();
 
-            if (result.next()){
-                int idDB = result.getInt("id");
-                String name = result.getString("name");
-                String userDB = result.getString("username");
-                String passDB = result.getString("password");
-                boolean isAdmin = result.getBoolean("isAdmin");
-
-                client = new Client(id, name, userDB, passDB, isAdmin);
-            }
+            client = getClient(preparedStatement);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -191,5 +164,23 @@ public class ClientsManager implements ClientsManagerLocal {
         }
         return client;
 
+    }
+
+    private Client getClient(PreparedStatement ps){
+        try {
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String userDB = resultSet.getString("username");
+                String passDB = resultSet.getString("password");
+                boolean isAdmin = resultSet.getBoolean("isAdmin");
+
+                return new Client(id, name, userDB, passDB, isAdmin);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

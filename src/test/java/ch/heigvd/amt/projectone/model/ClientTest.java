@@ -1,6 +1,5 @@
 package ch.heigvd.amt.projectone.model;
 
-import ch.heigvd.amt.projectone.Client;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

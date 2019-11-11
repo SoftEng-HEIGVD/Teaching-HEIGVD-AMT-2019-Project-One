@@ -1,6 +1,6 @@
 package ch.heigvd.amt.projectone.web;
 
-import ch.heigvd.amt.projectone.Client;
+import ch.heigvd.amt.projectone.model.Client;
 import ch.heigvd.amt.projectone.services.dao.ClientsManagerLocal;
 
 import javax.ejb.EJB;

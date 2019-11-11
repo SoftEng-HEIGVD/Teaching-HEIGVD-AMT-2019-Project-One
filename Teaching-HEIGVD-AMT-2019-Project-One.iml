@@ -27,6 +27,30 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Arquillian JUnit:Release" level="project" />
     <orderEntry type="library" name="Maven: org.mindrot:jbcrypt:0.4" level="project" />
+    <orderEntry type="library" name="Maven: org.junit.jupiter:junit-jupiter-api:5.6.0-M1" level="project" />
+    <orderEntry type="library" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />
+    <orderEntry type="library" name="Maven: org.junit.platform:junit-platform-commons:1.6.0-M1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.arquillian.container:arquillian-chameleon-junit-container-starter:${version.arquillian.chameleon}" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.arquillian.extension:arquillian-transaction-jta:1.0.5" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.arquillian.extension:arquillian-transaction-api:1.0.5" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.arquillian.extension:arquillian-transaction-spi:1.0.5" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.arquillian.test:arquillian-test-spi:1.1.13.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.arquillian.test:arquillian-test-api:1.1.13.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.arquillian.extension:arquillian-transaction-impl-base:1.0.5" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.arquillian.core:arquillian-core-spi:1.1.13.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.arquillian.core:arquillian-core-api:1.1.13.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.arquillian.container:arquillian-container-spi:1.1.13.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.arquillian.config:arquillian-config-api:1.1.13.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.arquillian.config:arquillian-config-impl-base:1.1.13.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-spi:2.0.0-alpha-10" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.shrinkwrap:shrinkwrap-api:1.2.6" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-api-base:2.0.0-alpha-10" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.arquillian.container:arquillian-container-test-spi:1.1.13.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.arquillian.container:arquillian-container-test-api:1.1.13.Final" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.arquillian.container:arquillian-container-chameleon-runner:${version.arquillian.chameleon}" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.arquillian.container:arquillian-chameleon-maven-build-deployment:${version.arquillian.chameleon}" level="project" />
+    <orderEntry type="library" name="Maven: org.mindrot:jbcrypt:0.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax:javaee-api:8.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.sun.mail:javax.mail:1.6.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.activation:activation:1.1" level="project" />

@@ -1,6 +1,6 @@
 package ch.heigvd.amt.projectone.services.dao;
 
-import ch.heigvd.amt.projectone.Product;
+import ch.heigvd.amt.projectone.model.Product;
 
 import javax.ejb.Local;
 import java.util.List;

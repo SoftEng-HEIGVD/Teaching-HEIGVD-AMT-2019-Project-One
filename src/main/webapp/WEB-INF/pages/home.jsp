@@ -39,7 +39,7 @@ Licensed under MIT (https://github.com/creativetimofficial/material-kit/blob/mas
 <body class="index-page sidebar-collapse">
 <jsp:include page="include/nav.jsp" />
 
-<div class="page-header header-filter clear-filter purple-filter" data-parallax="true">
+<div class="page-header header-filter clear-filter black-filter" data-parallax="true">
     <div class="container">
         <div class="row">
             <div class="col-md-8 ml-auto mr-auto">

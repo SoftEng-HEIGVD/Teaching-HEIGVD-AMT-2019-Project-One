@@ -28,19 +28,91 @@
     <link href="./assets/demo/demo.css" rel="stylesheet"/>
 </head>
 <body>
-<jsp:include page="include/nav.jsp" />
+<jsp:include page="include/nav.jsp"/>
 
-<h1>Products ${requestScope.session.user}</h1>
-<table>
-    <c:forEach items="${products}" var="product">
-        <tr>
-            <td>${product.id}</td>
-            <td>${product.name}</td>
-            <td>${product.unitPrice}</td>
 
-        </tr>
-    </c:forEach>
-</table>
+<div class="container">
+    <div class="row">
+        <div class="brand">
+            <h1>Products</h1>
+        </div>
+
+<%--        <c:forEach items="${products}" var="product">--%>
+<%--            <div class="card" style="width: 20rem;">--%>
+<%--                <img class="card-img-top"--%>
+<%--                     src="./assets/img/photo_not_found.gif"--%>
+<%--                     alt="${product.name}">--%>
+<%--                <div class="card-body">--%>
+<%--                    <h1 class="card-text">${product.name}</h1>--%>
+<%--                    <p class="card-text">${product.description}</p>--%>
+<%--                    <h3 class="card-text">Unit price : ${product.unitPrice}</h3>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </c:forEach>--%>
+    </div>
+
+
+    <%--        <c:if test="${sessionScope.user.isAdmin == true}">--%>
+    <div class="text-center">
+        <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalProduct">Add product</a>
+    </div>
+
+    <div class="modal fade" id="modalProduct" tabindex="-1" data-backdrop="false">
+        <div class="modal-dialog modal-login" role="document">
+            <div class="modal-content">
+                <div class="card card-signup card-plain">
+                    <div class="modal-body">
+                        <form class="form" method="post" action="./products">
+                            <p class="description text-center">Add product</p>
+                            <div class="card-body">
+                                <div class="form-group bmd-form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="material-icons">face</i></div>
+                                        </div>
+                                        <label>
+                                            Name
+                                            <input name="name" type="text" class="form-control" placeholder="Name">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group bmd-form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="material-icons">face</i></div>
+                                        </div>
+                                        <label>
+                                            Unit Price
+                                            <input name="price" type="text" class="form-control" placeholder="Unit Price">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group bmd-form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="material-icons">face</i></div>
+                                        </div>
+                                        <label>
+                                            Description
+                                            <input name="desc" type="text" placeholder="Description" class="form-control">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="submit" class="btn btn-primary btn-link btn-wd btn-lg">Update</button>
+                                <button type="button" class="btn btn-outline-info waves-effect ml-auto"
+                                        data-dismiss="modal">Close
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%--        </c:if>--%>
+</div>
 
 
 <!--   Core JS Files   -->

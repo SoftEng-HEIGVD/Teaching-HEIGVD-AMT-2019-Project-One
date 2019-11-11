@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: jeremy
@@ -29,8 +30,7 @@
 
 <jsp:include page="include/nav.jsp" />
 
-<div class="page-header header-filter"
-     style="background-image: url('../../assets/img/bg8.jpg'); background-size: cover; background-position: top center;">
+<div class="page-header header-filter" style="background-image: url('./assets/img/bg8.jpg'); background-size: cover; background-position: top center;">
     <div class="container">
 
         <div class="row">
@@ -43,11 +43,11 @@
                     Username
                     <input class="form-control" type="text" placeholder="${sessionScope.user.username}" readonly>
                 </label>
+<%--                <label>--%>
+<%--                    Is Admin ?--%>
+<%--                    <input class="form-control" type="text" placeholder="${sessionScope.user.isadmin}" readonly>--%>
+<%--                </label>--%>
             </form>
-<%--            <label>--%>
-<%--                Admin--%>
-<%--                <input class="form-control" type="text" placeholder="${sessionScope.user.isAdmin}" readonly>--%>
-<%--            </label>--%>
         </div>
         <div class="text-center">
             <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Change
@@ -74,7 +74,6 @@
                                             </label>
                                         </div>
                                     </div>
-
                                     <div class="form-group bmd-form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -87,7 +86,6 @@
                                             </label>
                                         </div>
                                     </div>
-
                                     <div class="form-group bmd-form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -100,6 +98,20 @@
                                             </label>
                                         </div>
                                     </div>
+<%--                                    <c:if test="(${sessionScope.user.isAdmin == true}">--%>
+<%--                                        <div class="form-group bmd-form-group">--%>
+<%--                                            <div class="input-group">--%>
+<%--                                                <div class="input-group-prepend">--%>
+<%--                                                    <div class="input-group-text"><i class="material-icons">face</i></div>--%>
+<%--                                                </div>--%>
+<%--                                                <label>--%>
+<%--                                                    Is Admin ?--%>
+<%--                                                    <input name="name" type="text"--%>
+<%--                                                           value="${sessionScope.user.isAdmin}" class="form-control">--%>
+<%--                                                </label>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </c:if>--%>
                                 </div>
                                 <div class="modal-footer justify-content-center">
                                     <button type="submit" class="btn btn-primary btn-link btn-wd btn-lg">Update</button>

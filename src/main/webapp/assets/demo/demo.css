@@ -865,3 +865,8 @@ body {
 .flash {
   animation-name: flash;
 }
+
+.black-filter:after{
+  background: rgba(52, 53, 53, 0.45);
+}
+
