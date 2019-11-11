@@ -15,7 +15,7 @@ public class CoachTest {
     public void createCoach(){
 
 
-        team = new Team("HEIG", "Yverdon",new Date(22051993));
+        team = new Team("HEIG", "Yverdon", new Date(22051993));
         players.add(new Player("Teklehaimanot", "Nair","AVG",22,team));
         players.add(new Player("Alic","Robel","AVD",33,team));
 
@@ -25,6 +25,7 @@ public class CoachTest {
                 .firstName("Robel").build();
         assertNotNull(coach);
         assertEquals("Alic",coach.getLastName());
+        assertEquals("Robel", coach.getFirstName());
     }
 
 }

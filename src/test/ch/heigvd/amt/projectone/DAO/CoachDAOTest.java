@@ -4,20 +4,16 @@ import ch.heigvd.amt.projectone.model.Coach;
 import org.arquillian.container.chameleon.deployment.api.DeploymentParameters;
 import org.arquillian.container.chameleon.deployment.maven.MavenBuild;
 
-import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
 import org.jboss.arquillian.transaction.api.annotation.Transactional;
 
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
-
-import org.junit.runner.RunWith;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import javax.ejb.DuplicateKeyException;
 import javax.ejb.EJB;
+import javax.websocket.DeploymentException;
 import java.sql.SQLException;
 
 import static org.junit.Assert.*;
@@ -31,15 +27,9 @@ public class CoachDAOTest {
     @EJB
     ICoachDAO coachD;
 
-    @Deployment
-    public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "arquillian.xml");
-    }
-
     @Test
     @Transactional(TransactionMode.COMMIT)
-    public void itShouldBePossibleToCreateACoach() throws DuplicateKeyException, SQLException {
+    public void itShouldBePossibleToCreateACoach() throws DuplicateKeyException, SQLException, DeploymentException {
         Coach nair = Coach.builder()
                 .username("nairA")
                 .lastName("Alic")
@@ -52,7 +42,7 @@ public class CoachDAOTest {
 
     @Test
     @Transactional(TransactionMode.COMMIT)
-    public void itShouldBePossibleToCreateAndRetrieveACoach() throws DuplicateKeyException, SQLException {
+    public void itShouldBePossibleToCreateAndRetrieveACoach() throws DuplicateKeyException, SQLException, DeploymentException {
         Coach nair = Coach.builder()
                 .username("nairA")
                 .lastName("Alic")
