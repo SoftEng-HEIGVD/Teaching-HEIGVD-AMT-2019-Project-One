@@ -137,8 +137,8 @@ public class TeamManagerSQL implements TeamManager{
         
        try {
         Connection connection = dataSource.getConnection();
-        PreparedStatement pstmt = connection.prepareStatement("INSERT INTO `Team`(`name`) VALUES\n" +
-                                                              "('"+t.getName()+"')");
+        PreparedStatement pstmt = connection.prepareStatement("INSERT INTO `Team`(`name`,`creator_id`) VALUES\n" +
+                                                              "('"+t.getName()+"',"+t.getCreatorId()+")");
          pstmt.execute();
        
         pstmt.close();
