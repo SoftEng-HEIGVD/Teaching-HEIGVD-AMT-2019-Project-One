@@ -5,7 +5,10 @@
  */
 package Web;
 
+import Model.Match;
+import Model.Player;
 import Model.Team;
+import Services.Match.MatchesManagerSQL;
 
 import Services.Player.PlayerManagerSQL;
 import Services.Player.PlayerManager;
@@ -29,7 +32,7 @@ public class NewMatchServlet extends HttpServlet {
 
     TeamManagerSQL teamManager= new TeamManagerSQL();
 
-
+    MatchesManagerSQL mm= new MatchesManagerSQL();
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -55,17 +58,29 @@ public class NewMatchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       
            // read form fields
-        String username = req.getParameter("userName");     
-        String name = req.getParameter("name");
-        String team= req.getParameter("team");
-        
-        
+        Match nm= new Match(0,
+                teamManager.getTeam(req.getParameter("team1"), (int)req.getSession().getAttribute("id")),
+                teamManager.getTeam(req.getParameter("team2"), (int)req.getSession().getAttribute("id")),
+                Integer.parseInt( req.getParameter("scoreTeam1")),
+                 Integer.parseInt(  req.getParameter("scoreTeam2")));
+        nm.setCreator((int)req.getSession().getAttribute("id"));
+        Player t1p1= playerManager.getPlayer(req.getParameter("t1player1"), (int) req.getSession().getAttribute("id"));
+        Player t1p2= playerManager.getPlayer(req.getParameter("t1player2"), (int) req.getSession().getAttribute("id"));
+        Player t1p3= playerManager.getPlayer(req.getParameter("t1player3"), (int) req.getSession().getAttribute("id"));
+        Player t1p4= playerManager.getPlayer(req.getParameter("t1player4"), (int) req.getSession().getAttribute("id"));
+        Player t1p5= playerManager.getPlayer(req.getParameter("t1player5"), (int) req.getSession().getAttribute("id"));
+        Player t2p1= playerManager.getPlayer(req.getParameter("t2player1"), (int) req.getSession().getAttribute("id"));
+        Player t2p2= playerManager.getPlayer(req.getParameter("t2player2"), (int) req.getSession().getAttribute("id"));
+        Player t2p3= playerManager.getPlayer(req.getParameter("t2player3"), (int) req.getSession().getAttribute("id"));
+        Player t2p4= playerManager.getPlayer(req.getParameter("t2player4"), (int) req.getSession().getAttribute("id"));
+        Player t2p5= playerManager.getPlayer(req.getParameter("t2player5"), (int) req.getSession().getAttribute("id"));
+
+        int [] team1={t1p1.getId(),t1p2.getId(),t1p3.getId(),t1p4.getId(),t1p5.getId()};
+                int [] team2={t2p1.getId(),t2p2.getId(),t2p3.getId(),t2p4.getId(),t2p5.getId()};
+
+        mm.addMatch(nm, team1, team2);
             
-            
-        ArrayList<Team> ts= new ArrayList(teamManager.getAllTeams((int) req.getSession().getAttribute("id")));
-        
-        req.setAttribute("teams", ts);
-        req.getRequestDispatcher("WEB-INF/pages/matchAdd.jsp").forward(req,resp);
+      resp.sendRedirect("matches");
     }
 
     
