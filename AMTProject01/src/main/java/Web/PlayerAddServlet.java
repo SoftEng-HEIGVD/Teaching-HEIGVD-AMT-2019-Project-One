@@ -40,7 +40,7 @@ PlayerManager playerManager = new PlayerManagerSQL();
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
         
-        ArrayList<Team> ts= new ArrayList(teamManager.getAllTeams());
+        ArrayList<Team> ts= new ArrayList(teamManager.getAllTeams((int) request.getSession().getAttribute("id")));
         
             request.setAttribute("teams", ts);
         request.getRequestDispatcher("WEB-INF/pages/PlayerAdd.jsp").forward(request,response);
@@ -54,11 +54,11 @@ PlayerManager playerManager = new PlayerManagerSQL();
         String name = req.getParameter("name");
         String team= req.getParameter("team");
         
-        Player np = new Player(0,username,name,teamManager.getTeam(team));
+        Player np = new Player(0,username,name,teamManager.getTeam(team,(int) req.getSession().getAttribute("id")), (int) req.getSession().getAttribute("id"));
         
         
         playerManager.Add(np);
-        req.setAttribute("teams", teamManager.getAllTeams());
+        req.setAttribute("teams", teamManager.getAllTeams((int) req.getSession().getAttribute("id")));
         req.getRequestDispatcher("WEB-INF/pages/PlayerAdd.jsp").forward(req,resp);
     }
 

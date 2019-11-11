@@ -53,13 +53,13 @@ public class MatchesManagerSQL implements MatchesManager {
     }
     
     @Override
-    public ArrayList<Match> getAll(){
+    public ArrayList<Match> getAll(int creator){
         
         ArrayList<Match> matches = new ArrayList();
         
          try {
         Connection connection = dataSource.getConnection();
-        PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM `MatchWithTeam`");
+        PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM `MatchWithTeam` WHERE creator_id="+creator);
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
           int match_id = rs.getInt("match_id");
@@ -84,13 +84,13 @@ public class MatchesManagerSQL implements MatchesManager {
     }
           
     @Override
-    public Match getMatch(long id){
+    public Match getMatch(long id, int creator){
         
         Match match = null;
         
          try {
         Connection connection = dataSource.getConnection();
-        PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM `MatchWithTeam` WHERE match_id ="+id);
+        PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM `MatchWithTeam` WHERE creator_id="+creator+" AND match_id ="+id);
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
           int match_id = rs.getInt("match_id");
@@ -120,13 +120,13 @@ public class MatchesManagerSQL implements MatchesManager {
     }
     
     @Override
-     public ArrayList<Match> getMatchesPlayedbyTeam(Team t){
+     public ArrayList<Match> getMatchesPlayedbyTeam(Team t,int creator){
          
          ArrayList<Match> matches=new ArrayList<>();
         try {
         Connection connection = dataSource.getConnection();
         PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM `MatchWithTeam` "
-                + "WHERE team1_id = "+t.getId()+" OR team2_id = "+t.getId());
+                + "WHERE creator_id="+creator+" AND (team1_id = "+t.getId()+" OR team2_id = "+t.getId()+")");
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
           int match_id = rs.getInt("match_id");
@@ -153,12 +153,12 @@ public class MatchesManagerSQL implements MatchesManager {
      }
     
     @Override
-    public  ArrayList<Match>  getMatchesPlayedBy(Player p){
+    public  ArrayList<Match>  getMatchesPlayedBy(Player p,int creator){
         ArrayList<Match> matches=new ArrayList<>();
         try {
         Connection connection = dataSource.getConnection();
         PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM `MatchWithTeam`JOIN Matches_Player "
-                + "ON MatchWithTeam.match_id = Matches_Player.match_id WHERE Matches_Player.player_id="+p.getId());
+                + "ON MatchWithTeam.match_id = Matches_Player.match_id WHERE creator_id="+creator+" AND Matches_Player.player_id="+p.getId());
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
           int match_id = rs.getInt("match_id");
@@ -174,7 +174,8 @@ public class MatchesManagerSQL implements MatchesManager {
                   
         }
         pstmt.close();
-      
+              connection.close();
+
     } catch (SQLException ex) {
       Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -182,37 +183,7 @@ public class MatchesManagerSQL implements MatchesManager {
         return matches;
     }
     
-    
-    @Override
-    public  ArrayList<Match>  getMatchesPlayedBy(Team p){
-        ArrayList<Match> matches=new ArrayList<>();
-        try {
-        Connection connection = dataSource.getConnection();
-        PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM `MatchWithTeam`JOIN Matches_Player "
-                + "ON MatchWithTeam.match_id = Matches_Player.match_id WHERE Matches_Player.player_id="+p.getId());
-        ResultSet rs = pstmt.executeQuery();
-        while (rs.next()) {
-          int match_id = rs.getInt("match_id");
-          int score_team1 = rs.getInt("score_team1");
-          int score_team2 = rs.getInt("score_team2");
-          int team1_id = rs.getInt("team1_id");
-          int team2_id = rs.getInt("team1_id");
-          String team1  = rs.getString("team1");
-          String team2  = rs.getString("team2");
-          
-         
-          matches.add(new Match(match_id,new Team(team1_id,team1),new Team(team2_id,team2),score_team1,score_team2));
-                  
-        }
-        pstmt.close();
-         connection.close();
-     
-    } catch (SQLException ex) {
-      Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
-    }
-        
-        return matches;
-    }
+
     
     @Override
     public void addMatch(Match match,ArrayList<Player>team1,ArrayList<Player>team2){
@@ -226,8 +197,8 @@ public class MatchesManagerSQL implements MatchesManager {
         int id = 0;
             try {
         Connection connection = dataSource.getConnection();
-        PreparedStatement pstmt = connection.prepareStatement("INSERT INTO `Matches`(`score_team1`,`score_team2`,`team1_id`,`team2_id`) "
-                + "VALUES ("+match.getTeam1EndScore()+","+match.getTeam2EndScore()+","+match.getTeam1().getId()+","+match.getTeam2().getId()+")",Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement pstmt = connection.prepareStatement("INSERT INTO `Matches`(`score_team1`,`score_team2`,`team1_id`,`team2_id`,`creator_id`) "
+                + "VALUES ("+match.getTeam1EndScore()+","+match.getTeam2EndScore()+","+match.getTeam1().getId()+","+match.getTeam2().getId()+","+match.getCreator()+")",Statement.RETURN_GENERATED_KEYS);
          pstmt.executeUpdate();
          
          ResultSet rs=pstmt.getGeneratedKeys();
@@ -252,12 +223,12 @@ public class MatchesManagerSQL implements MatchesManager {
     
     
     @Override
-    public int getNumberOfMatch(){
+    public int getNumberOfMatch(int creator){
         
         int number = 0;
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) AS count FROM Matches");
+            PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) AS count FROM Matches WHERE creator_id="+creator);
               ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
            number = rs.getInt("count");

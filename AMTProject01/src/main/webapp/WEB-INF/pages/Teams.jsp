@@ -74,9 +74,14 @@
 	<section class="main-section" id="players">
 		<!--main-section-start-->
 		<div class="container Player-Box">
-			<h2>All Teams</h2>	
-            
-                        
+		
+                         <div class="col-sm-8">
+                    <h2>All Teams</h2>
+                </div>
+                <div class="col-sm-4 float-right">
+                   <a href="newTeam"><h3>Add Team</h3></a> 
+
+                </div>
             
                 <table id="teamsTable" class="display">
                     <thead>

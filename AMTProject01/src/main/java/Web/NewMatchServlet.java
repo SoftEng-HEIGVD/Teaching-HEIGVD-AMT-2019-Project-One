@@ -44,10 +44,10 @@ public class NewMatchServlet extends HttpServlet {
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
         
-        ArrayList<Team> ts= new ArrayList(teamManager.getAllTeams());
+        ArrayList<Team> ts= new ArrayList(teamManager.getAllTeams((int) request.getSession().getAttribute("id")));
         
             request.setAttribute("teams", ts);
-            request.setAttribute("players",playerManager.getAllPlayers());
+            request.setAttribute("players",playerManager.getAllPlayers((int) request.getSession().getAttribute("id")));
         request.getRequestDispatcher("WEB-INF/pages/matchAdd.jsp").forward(request,response);
     }
 
@@ -60,9 +60,9 @@ public class NewMatchServlet extends HttpServlet {
         String team= req.getParameter("team");
         
         
-        
             
-        ArrayList<Team> ts= new ArrayList(teamManager.getAllTeams());
+            
+        ArrayList<Team> ts= new ArrayList(teamManager.getAllTeams((int) req.getSession().getAttribute("id")));
         
         req.setAttribute("teams", ts);
         req.getRequestDispatcher("WEB-INF/pages/matchAdd.jsp").forward(req,resp);

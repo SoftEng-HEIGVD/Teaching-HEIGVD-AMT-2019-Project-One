@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS Player (
   pseudo VARCHAR(45) NOT NULL,
   name VARCHAR(45) NOT NULL,
   team_id INT UNSIGNED NOT NULL,
-creator_id INT UNSIGNED NOT NULL,
+  creator_id INT UNSIGNED NOT NULL,
   PRIMARY KEY  (player_id),
   CONSTRAINT fk_player_team FOREIGN KEY (team_id) REFERENCES Team (team_id) ON DELETE RESTRICT ON UPDATE CASCADE,
 	CONSTRAINT fk_creator_player FOREIGN KEY (creator_id) REFERENCES User (user_id) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -441,7 +441,8 @@ Matches.match_id as match_id,
  Matches.team1_id as team1_id,
  Matches.team2_id as team2_id,
  t1.name as team1 ,
- t2.name as team2
+ t2.name as team2,
+ Matches.creator_id as creator_id
  from Matches 
 inner join Team t1 on Matches.team1_id = t1.team_id
 inner join Team t2 on  Matches.team2_id = t2.team_id;
@@ -452,8 +453,10 @@ SELECT
 	Player.player_id AS player_id,
     Player.pseudo AS pseudo, 
     Player.name AS name,
+    Player.creator_id as creator_id,
     Team.name AS team,
     Team.team_id as team_id
+    
 FROM
     Player JOIN Team ON Player.team_id = Team.team_id;    
 

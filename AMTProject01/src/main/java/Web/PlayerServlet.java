@@ -48,11 +48,11 @@ MatchesManager mm= new MatchesManagerSQL();
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
          String requestedUser= request.getParameter("u");
-        Player p = playerManager.getPlayer(requestedUser);
+        Player p = playerManager.getPlayer(requestedUser,(int) request.getSession().getAttribute("id"));
         
         if(p!=null){
             request.setAttribute("thePlayer", p);
-            request.setAttribute("matches", mm.getMatchesPlayedBy(p));
+            request.setAttribute("matches", mm.getMatchesPlayedBy(p,(int) request.getSession().getAttribute("id")));
 
             request.getRequestDispatcher("WEB-INF/pages/Player.jsp").forward(request,response);
         }else{
@@ -66,7 +66,7 @@ MatchesManager mm= new MatchesManagerSQL();
        //To change body of generated methods, choose Tools | Templates.
        JSONObject json = new JSONObject();
         String requestedUser= req.getParameter("u");
-        Player p = playerManager.getPlayer(requestedUser);
+        Player p = playerManager.getPlayer(requestedUser, (int) req.getSession().getAttribute("id"));
        int draw= Integer.parseInt(req.getParameter("draw"));
        int start=Integer.parseInt(req.getParameter("start"));
        int length=Integer.parseInt(req.getParameter("length"));
@@ -74,7 +74,7 @@ MatchesManager mm= new MatchesManagerSQL();
         JSONArray data = new JSONArray();
      
         
-        List<Match> matches=mm.getMatchesPlayedBy(p);     
+        List<Match> matches=mm.getMatchesPlayedBy(p,(int) req.getSession().getAttribute("id"));     
         json.put("recordsTotal",matches.size());
         json.put("recordsFiltered",matches.size());
 

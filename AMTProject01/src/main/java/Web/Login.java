@@ -6,6 +6,8 @@
 package Web;
 
 import Model.Team;
+import Model.User;
+import Services.User.UserManagerSQL;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Login", urlPatterns = {"/login"})
 public class Login extends HttpServlet {
-
+    UserManagerSQL userManager= new UserManagerSQL();
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
@@ -37,11 +39,13 @@ public class Login extends HttpServlet {
            // read form fields
         String username = req.getParameter("username");     
         String pwd = req.getParameter("pwd");
-        if(username.equals("goturak")&&pwd.equals("1234")){
-            req.getSession().setAttribute("id", 1);
+        User u= userManager.get(username);
+        System.out.println("my pwd:"+pwd+" theirs:"+u.getPwd());
+        if(u!=null&& u.getPwd().equals(pwd)){
+            req.getSession().setAttribute("id", u.getId());
             resp.sendRedirect("players");
         }else{
-        req.getRequestDispatcher("WEB-INF/pages/Login.jsp").forward(req,resp);
+            req.getRequestDispatcher("WEB-INF/pages/Login.jsp").forward(req,resp);
             
         }
     }
