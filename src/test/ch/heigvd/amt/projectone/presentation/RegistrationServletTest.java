@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 
 import javax.ejb.DuplicateKeyException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +36,9 @@ class RegistrationServletTest {
     PrintWriter responseWriter;
 
     @Mock
+    RequestDispatcher rd;
+
+    @Mock
     Coach coach;
 
     RegistrationServlet regServlet;
@@ -44,12 +48,14 @@ class RegistrationServletTest {
         regServlet = new RegistrationServlet();
         regServlet.cd = coachDAO;
         when(response.getWriter()).thenReturn(responseWriter);
+
     }
 
     @Test
-    void doPost() throws ServletException, IOException, DuplicateKeyException, SQLException {
+    void doPostRegistration() throws ServletException, IOException, DuplicateKeyException, SQLException {
         when(request.getParameter(anyString())).thenReturn("test");
         when(coachDAO.create(any())).thenReturn(coach);
+        when(request.getRequestDispatcher("index.jsp")).thenReturn(rd);
 
         regServlet.doPost(request, response);
 
