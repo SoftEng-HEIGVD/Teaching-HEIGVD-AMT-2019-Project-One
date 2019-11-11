@@ -10,9 +10,7 @@
         <url-pattern>/teams</url-pattern>
         <url-pattern>/matches</url-pattern>
         <url-pattern>/newMatch</url-pattern>
-
         <url-pattern>/newPlayer</url-pattern>
-
     </filter-mapping>
     <servlet>
         <servlet-name>PlayersServlet</servlet-name>
@@ -46,10 +44,6 @@
         <servlet-name>TeamAddServlet</servlet-name>
         <servlet-class>Web.TeamAddServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>playersDataSource</servlet-name>
-        <servlet-class>Web.playersDataSource</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>PlayersServlet</servlet-name>
         <url-pattern>/players</url-pattern>
@@ -81,10 +75,6 @@
     <servlet-mapping>
         <servlet-name>TeamAddServlet</servlet-name>
         <url-pattern>/newTeam</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>playersDataSource</servlet-name>
-        <url-pattern>/playersDataSource</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

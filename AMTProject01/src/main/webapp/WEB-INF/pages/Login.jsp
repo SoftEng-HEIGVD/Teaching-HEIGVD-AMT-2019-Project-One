@@ -17,7 +17,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, maximum-scale=1">
 
-	<title>New Player</title>
+	<title>Login</title>
 	<link rel="icon" href="favicon.png" type="image/png">
 	<link rel="shortcut icon" href="favicon.ico" type="img/x-icon">
 
@@ -56,10 +56,19 @@
 	<nav class="main-nav-outer" id="test">
 		<!--main-nav-start-->
 		<div class="container">
-			<ul class="main-nav">
+                    <ul class="main-nav">
 				<li><a href="matches">Matches</a></li>
                                 <li><a href="teams">Teams</a></li>
 				<li><a href="players">Players</a></li>
+                                
+                                <c:if test="${empty sessionScope.name}">
+                                    <li><a href="login">Login</a></li>
+                                </c:if>
+                                <c:if test="${not empty sessionScope.name}">
+                                    <li><a href="login">${sessionScope.name}</a></li>
+                       
+                                </c:if>
+                                
 
 			</ul>
 			<a class="res-nav_click" href="#"><i class="fa fa-bars"></i></a>
@@ -72,32 +81,49 @@
 	<section class="main-section" id="players">
 		<!--main-section-start-->
 		<div class="container Player-Box">
-                        <h2> Login</h2>
+                     <c:if test="${empty sessionScope.name}">
+                                    <h2> Login</h2>
 			
-                        <div class="row">
-                             
-                           
-                            
-                            <div class="col-lg-8 col-sm-6  text-left wow fadeInRight delay-02s">
-                                <form method="post" action="login">
-                                    <div class="form-group">
-                                      <label for="inputUserName">User Name</label>
-                                      <input type="text" class="form-control" id="inputUserName" name="username" placeholder="NoobMaster69">
-                                     
+                                    <div class="row">
+
+
+
+                                        <div class="col-lg-8 col-sm-6  text-left wow fadeInRight delay-02s">
+                                            <form method="post" action="login">
+                                                <div class="form-group">
+                                                  <label for="inputUserName">User Name</label>
+                                                  <input type="text" class="form-control" id="inputUserName" name="username" placeholder="NoobMaster69">
+
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="inputRealName">Password</label>
+                                                  <input type="password" class="form-control" id="inputpwd" name="pwd" placeholder="pwd">
+                                                </div>
+
+
+                                                <button type="submit" name="loginButton" value="Login" class="btn btn-primary">Login</button>
+                                                <button type="submit" name="regButton" value="Register" class="btn btn-primary">Register</button>
+                                              </form>
+
+
+
                                     </div>
-                                    <div class="form-group">
-                                      <label for="inputRealName">Password</label>
-                                      <input type="password" class="form-control" id="inputpwd" name="pwd" placeholder="pwd">
-                                    </div>
-                                     
-                                    
-                                    <button type="submit" name="loginButton" value="Login" class="btn btn-primary">Login</button>
-                                    <button type="submit" name="regButton" value="Register" class="btn btn-primary">Register</button>
-                                  </form>
-                            
-                           
-				
-			</div>
+                                </c:if>
+                                <c:if test="${not empty sessionScope.name}">
+                                    <h2>${sessionScope.name}</h2>
+                                    <div class="col-lg-8 col-sm-6  text-left wow fadeInRight delay-02s">
+                                             <form method="post" action="login">
+                                                 
+
+                                                 <button type="submit" name="logout" value="Logout" class="btn btn-primary">Logout</button>
+                                        
+                                               </form>
+
+
+
+                                     </div>
+                                </c:if>
+             
 		</div>
 	</section>
 	<!--main-section-end-->
