@@ -178,12 +178,30 @@ public class PlayerManagerSQL implements PlayerManager{
 
 
     @Override
+    public void changePlayerTeam(Player p, Team t){
+        
+         try {
+        Connection connection = dataSource.getConnection();
+        PreparedStatement pstmt = connection.prepareStatement("UPDATE `Player` SET team_id ="+t.getId()+ "WHERE player_id ="+p.getId());
+         pstmt.execute();
+       
+        pstmt.close();
+      
+    } catch (SQLException ex) {
+      Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+        
+        
+    }
+    
+    @Override
     public void Add(Player p){
         
     try {
         Connection connection = dataSource.getConnection();
         PreparedStatement pstmt = connection.prepareStatement("INSERT INTO `Player`(`pseudo`,`name`,`team_id`) VALUES\n" +
-"    ('"+p.getUserName()+"','"+p.getName()+"',"+p.getTeam().getId()+")");
+                                                           "('"+p.getUserName()+"','"+p.getName()+"',"+p.getTeam().getId()+")");
          pstmt.execute();
        
         pstmt.close();

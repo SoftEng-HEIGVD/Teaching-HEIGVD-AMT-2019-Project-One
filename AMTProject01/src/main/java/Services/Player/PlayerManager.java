@@ -31,4 +31,6 @@ public interface PlayerManager {
     public List<Player> getPlayersFromMatchTeam1(int match_id) ;
     public List<Player> getPlayersFromMatchTeam2(int match_id) ;
     
+    public void changePlayerTeam(Player p, Team t);
+    
 }
