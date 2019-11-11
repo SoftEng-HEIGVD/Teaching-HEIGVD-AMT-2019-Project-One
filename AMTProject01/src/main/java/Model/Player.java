@@ -15,20 +15,27 @@ public class Player {
     private String userName;
     private String name;
     private Team team;
+    private int creatorId;
 
     
-    public Player(String userName, String name) {
-        this(0,userName,name,new Team(1,"no_team"));
+    public Player(String userName, String name,int creatorId) {
+        this(0,userName,name,new Team(1,"no_team"),creatorId);
     }
 
     
-    public Player(int id,String userName, String name, Team team) {
+    public Player(int id,String userName, String name, Team team, int creatorId) {
         this.id = id;
         this.userName = userName;
         this.name = name;
         this.team = team;
+        this.creatorId=creatorId;
     }
 
+    public int getCreatorId() {
+        return creatorId;
+    }
+
+    
     public String getUserName() {
         return userName;
     }

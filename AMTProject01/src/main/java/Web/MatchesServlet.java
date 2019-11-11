@@ -58,7 +58,7 @@ public class MatchesServlet extends HttpServlet {
         JSONArray data = new JSONArray();
      
         
-        List<Match> matches=mm.getAll();     
+        List<Match> matches=mm.getAll((int) req.getSession().getAttribute("id"));     
         json.put("recordsTotal",matches.size());
         json.put("recordsFiltered",matches.size());
 

@@ -7,6 +7,7 @@ package Web;
 
 import Model.Team;
 
+
 import Services.Player.PlayerManagerSQL;
 import Services.Player.PlayerManager;
 import Services.Team.TeamManagerSQL;
@@ -42,10 +43,7 @@ PlayerManager playerManager = new PlayerManagerSQL();
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
-        
-        ArrayList<Team> ts= new ArrayList(teamManager.getAllTeams());
-        
-            request.setAttribute("teams", ts);
+
         request.getRequestDispatcher("WEB-INF/pages/TeamAdd.jsp").forward(request,response);
     }
 
@@ -59,9 +57,7 @@ PlayerManager playerManager = new PlayerManagerSQL();
         
         
             
-        ArrayList<Team> ts= new ArrayList(teamManager.getAllTeams());
-        
-        req.setAttribute("teams", ts);
+      
         req.getRequestDispatcher("WEB-INF/pages/TeamAdd.jsp").forward(req,resp);
     }
 

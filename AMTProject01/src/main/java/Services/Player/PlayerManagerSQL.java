@@ -28,7 +28,7 @@ public class PlayerManagerSQL implements PlayerManager{
     
     @Resource(lookup = "jdbc/TeamEsport")
     private DataSource dataSource;   
-    
+
      
     public PlayerManagerSQL() {
         
@@ -39,10 +39,10 @@ public class PlayerManagerSQL implements PlayerManager{
     
     @Override
     public Player getRandomPlayer(){
-        return new Player("Goturak","Luca");
+        return new Player("Goturak","Luca",1);
     }
     @Override
-    public List<Player> getAllPlayers(){  
+    public List<Player> getAllPlayers(int creator){  
         
         ArrayList<Player> players = new ArrayList();
         
@@ -51,7 +51,7 @@ public class PlayerManagerSQL implements PlayerManager{
         Connection connection = dataSource.getConnection();
 //        PreparedStatement pstmt = connection.prepareStatement("SELECT Player.pseudo AS pseudo, Player.name AS name, Team.name AS team "
 //                                                            + "FROM Player JOIN Team ON Player.team_id = Team.team_id");
-        PreparedStatement pstmt = connection.prepareStatement("SELECT player_id,pseudo,name,team,team_id FROM PlayerWithTeam");
+        PreparedStatement pstmt = connection.prepareStatement("SELECT player_id,pseudo,name,team,team_id,creator_id FROM PlayerWithTeam WHERE creator_id="+creator);
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
           String name = rs.getString("name");
@@ -59,7 +59,8 @@ public class PlayerManagerSQL implements PlayerManager{
           String team = rs.getString("team");
           int player_id = rs.getInt("player_id");
           int team_id = rs.getInt("team_id");
-          players.add(new Player(player_id,pseudo,name,new Team(team_id,team)));
+          
+          players.add(new Player(player_id,pseudo,name,new Team(team_id,team),0));
         }
         pstmt.close();
         connection.close();
@@ -70,17 +71,17 @@ public class PlayerManagerSQL implements PlayerManager{
           return players;
     }
     @Override
-    public Player getPlayer(String userName){
+    public Player getPlayer(String userName,int creator){
         
         int player_id =0;
         int team_id = 0;
         String name ="";
         String pseudo="";
         String team = "";
-        
+        int creatorId=0;
         try {
         Connection connection = dataSource.getConnection();
-        PreparedStatement pstmt = connection.prepareStatement("SELECT player_id,pseudo,name,team,team_id FROM PlayerWithTeam WHERE pseudo='"+userName+"'");
+        PreparedStatement pstmt = connection.prepareStatement("SELECT player_id,pseudo,name,team,team_id,creator_id FROM PlayerWithTeam WHERE creator_id="+creator+" AND pseudo='"+userName+"'");
         ResultSet rs = pstmt.executeQuery();
         while(rs.next()){
            name = rs.getString("name");
@@ -88,6 +89,8 @@ public class PlayerManagerSQL implements PlayerManager{
            team = rs.getString("team");
            player_id = rs.getInt("player_id");
            team_id = rs.getInt("team_id");
+           creatorId = rs.getInt("creator_id");
+
         }
         pstmt.close();
           connection.close();
@@ -95,11 +98,11 @@ public class PlayerManagerSQL implements PlayerManager{
     } catch (SQLException ex) {
       Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }        
-        return  new Player(player_id,pseudo,name,new Team(team_id,team));
+        return  new Player(player_id,pseudo,name,new Team(team_id,team),creatorId);
     }
     
     @Override
-    public ArrayList<Player> getPlayerPartial(String userName){
+    public ArrayList<Player> getPlayerPartial(String userName,int creator){
         
         
         ArrayList<Player> players = new ArrayList();
@@ -107,7 +110,7 @@ public class PlayerManagerSQL implements PlayerManager{
         
         try {
         Connection connection = dataSource.getConnection();
-        PreparedStatement pstmt = connection.prepareStatement("SELECT player_id,pseudo,name,team,team_id FROM PlayerWithTeam WHERE pseudo LIKE'"+userName+"%'");
+        PreparedStatement pstmt = connection.prepareStatement("SELECT player_id,pseudo,name,team,team_id,creator_id FROM PlayerWithTeam WHERE creator_id="+creator+" AND pseudo LIKE'"+userName+"%'");
         ResultSet rs = pstmt.executeQuery();
         while(rs.next()){
           String name = rs.getString("name");
@@ -115,10 +118,11 @@ public class PlayerManagerSQL implements PlayerManager{
           String team = rs.getString("team");
            int player_id = rs.getInt("player_id");
           int team_id = rs.getInt("team_id");
-           players.add(new Player(player_id,pseudo,name,new Team(team_id,team)));
+           int creatorId = rs.getInt("creator_id");
+           players.add(new Player(player_id,pseudo,name,new Team(team_id,team),creatorId));
         }
         pstmt.close();
-      
+      connection.close();
     } catch (SQLException ex) {
       Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }        
@@ -126,19 +130,21 @@ public class PlayerManagerSQL implements PlayerManager{
     }
     
     @Override
-    public List<Player> getPlayersFrom(Team t){
+    public List<Player> getPlayersFrom(Team t,int creator){
     
         ArrayList<Player> players = new ArrayList();
         
         try {
         Connection connection = dataSource.getConnection();
-        PreparedStatement pstmt = connection.prepareStatement("SELECT player_id,pseudo,name FROM PlayerWithTeam WHERE team_id = "+t.getId());
+        PreparedStatement pstmt = connection.prepareStatement("SELECT player_id,pseudo,name,creator_id FROM PlayerWithTeam WHERE creator_id="+creator+" AND team_id = "+t.getId());
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
           String name = rs.getString("name");
           String pseudo = rs.getString("pseudo");
           int id = rs.getInt("player_id");
-          players.add(new Player(id,pseudo,name,new Team(t.getId(),t.getName())));
+                    int creatorId = rs.getInt("creator_id");
+
+          players.add(new Player(id,pseudo,name,new Team(t.getId(),t.getName()),creatorId));
         }
         pstmt.close();
         connection.close();
@@ -165,7 +171,8 @@ public class PlayerManagerSQL implements PlayerManager{
           int player_id = rs.getInt("player_id");
           int team_id = rs.getInt("team_id");
           String team = rs.getString("team");
-          players.add(new Player(player_id,pseudo,name,new Team(team_id,team)));
+          int creatorId = rs.getInt("creator_id");
+          players.add(new Player(player_id,pseudo,name,new Team(team_id,team),creatorId));
         }
         pstmt.close();
         connection.close();
@@ -193,7 +200,8 @@ public class PlayerManagerSQL implements PlayerManager{
           int player_id = rs.getInt("player_id");
           int team_id = rs.getInt("team_id");
           String team = rs.getString("team");
-          players.add(new Player(player_id,pseudo,name,new Team(team_id,team)));
+           int creatorId = rs.getInt("creator_id");
+          players.add(new Player(player_id,pseudo,name,new Team(team_id,team),creatorId));
         }
         pstmt.close();
         connection.close();
@@ -229,24 +237,24 @@ public class PlayerManagerSQL implements PlayerManager{
         
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement pstmt = connection.prepareStatement("INSERT INTO `Player`(`pseudo`,`name`,`team_id`) VALUES\n" +
-                                                               "('"+p.getUserName()+"','"+p.getName()+"',"+p.getTeam().getId()+")");
+            PreparedStatement pstmt = connection.prepareStatement("INSERT INTO `Player`(`pseudo`,`name`,`team_id`,`creator_id`) VALUES\n" +
+                                                               "('"+p.getUserName()+"','"+p.getName()+"',"+p.getTeam().getId()+","+p.getCreatorId()+")");
              pstmt.execute();
 
             pstmt.close();
-
+connection.close();
         } catch (SQLException ex) {
           Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
         }        
     }
     
     @Override
-    public int getNumberOfPlayers(){
+    public int getNumberOfPlayers(int creator){
         
         int number = 0;
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) AS count FROM Player");
+            PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) AS count FROM Player WHERE creator_id="+creator);
               ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
            number = rs.getInt("count");
@@ -272,7 +280,8 @@ public class PlayerManagerSQL implements PlayerManager{
          pstmt.execute();
        
         pstmt.close();
-        
+        connection.close();
+
       
     } catch (SQLException ex) {
       Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);

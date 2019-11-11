@@ -38,7 +38,7 @@ public class MatchServlet extends HttpServlet {
          Match m;
         try{
             long requestedMatch= Long.parseLong(request.getParameter("id"));
-            m=mm.getMatch(requestedMatch);
+            m=mm.getMatch(requestedMatch,(int) request.getSession().getAttribute("id"));
         }catch(Exception e){
             m=null;
         }

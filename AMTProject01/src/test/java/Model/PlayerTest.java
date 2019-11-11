@@ -21,7 +21,7 @@ public class PlayerTest {
     public void shouldHaveATeam(){
         
         
-        Player player = new Player("kaerdhalis","benji");
+        Player player = new Player("kaerdhalis","benji",1);
         assertEquals(player.getTeam().getId(),1);
         assertEquals(player.getTeam().getName(),"no_team");
     }
@@ -30,12 +30,12 @@ public class PlayerTest {
     @Test
     public void shouldCreateCorrectPlayer(){
     
-    Player player = new Player("kaerdhalis","benji");
+    Player player = new Player("kaerdhalis","benji",1);
     
     assertEquals(player.getUserName(),"kaerdhalis");
     assertEquals(player.getName(),"benji");
     
-    player = new Player(1,"kaerdhalis","benji",new Team(1,"amt"));
+    player = new Player(1,"kaerdhalis","benji",new Team(1,"amt"),1);
     
     assertEquals(player.getId(),1);
     assertEquals(player.getTeam().getId(),1);

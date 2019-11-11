@@ -44,10 +44,10 @@ public class TeamServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String requestedUser= request.getParameter("t");
         Team t;
-        t= teamManager.getTeam(requestedUser);
+        t= teamManager.getTeam(requestedUser, (int) request.getSession().getAttribute("id"));
         if(t!=null){
             request.setAttribute("team", t);
-            request.setAttribute("players",playerManager.getPlayersFrom(t));
+            request.setAttribute("players",playerManager.getPlayersFrom(t,(int) request.getSession().getAttribute("id")));
             request.getRequestDispatcher("WEB-INF/pages/Team.jsp").forward(request,response);
         }else{
             request.getRequestDispatcher("WEB-INF/pages/PlayerNotFound.jsp").forward(request,response);
@@ -66,7 +66,7 @@ public class TeamServlet extends HttpServlet {
         JSONArray data = new JSONArray();
      
         
-        List<Match> matches=matchManager.getAll();     
+        List<Match> matches=matchManager.getAll((int) req.getSession().getAttribute("id"));     
         json.put("recordsTotal",matches.size());
         json.put("recordsFiltered",matches.size());
 
