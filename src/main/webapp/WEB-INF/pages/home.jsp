@@ -1,52 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Stephane
-  Date: 27.10.19
-  Time: 21:00
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<html lang="en"><head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">
-
-    <title>Film rating app</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
-
-    <!-- Bootstrap core CSS -->
-    <link href="./assets/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="./assets/album.css" rel="stylesheet">
-</head>
-
-<body>
-
-<header>
-    <div class="navbar navbar-dark bg-dark box-shadow">
-        <div class="container d-flex justify-content-between">
-            <a href="home" class="navbar-brand d-flex align-items-center">
-                <strong>Film rating app</strong>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="true" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-    </div>
-</header>
+<%@include file="includes/header.jsp" %>
 
 <main role="main">
 
     <section class="jumbotron text-center" style="height: 300px;">
         <div class="container">
-            <h1 class="jumbotron-heading" style="color: black;">Film rating app</h1>
+            <h1 class="jumbotron-heading" style="color: black;">Share your love of movies</h1>
         </div>
     </section>
 
@@ -128,7 +86,7 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="./assets/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script>window.jQuery || document.write('<script src="./assets/jquery-3.js"><\/script>')</script>
 <script src="./assets/popper.js"></script>
 <script src="./assets/bootstrap.js"></script>
 <script src="./assets/holder.js"></script>

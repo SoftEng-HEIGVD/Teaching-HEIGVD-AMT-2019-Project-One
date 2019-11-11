@@ -8,6 +8,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode
 public class User {
+    // TODO: admin User
     private final String username;
     private final String firstName;
     private final String lastName;

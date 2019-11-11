@@ -22,10 +22,10 @@
     <title>Login Page</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="static/css/signin.css" rel="stylesheet">
+    <link href="./assets/signin.css" rel="stylesheet">
 
   </head>
 
@@ -35,13 +35,20 @@
 
       <form method="POST" action="login" class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
+        <label for="inputUsername" class="sr-only">Username</label>
         <input type="hidden" name="action" value="login">
-        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name ="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
+      <c:if test="${errs != null}">
+        <ul>
+          <c:forEach items="${errs}" var="err">
+            <li>${err}</li>
+          </c:forEach>
+        </ul>
+      </c:if>
 
     </div> <!-- /container -->
 

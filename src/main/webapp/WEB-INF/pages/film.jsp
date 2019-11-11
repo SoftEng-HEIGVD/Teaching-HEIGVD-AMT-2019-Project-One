@@ -1,46 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Stephane
-  Date: 27.10.19
-  Time: 21:00
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<html lang="en"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">
-
-    <title>Film rating app</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
-
-    <!-- Bootstrap core CSS -->
-    <link href="./assets/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="./assets/album.css" rel="stylesheet">
-  </head>
-
-  <body>
-
-    <header>
-      <div class="navbar navbar-dark bg-dark box-shadow">
-        <div class="container d-flex justify-content-between">
-          <a href="home" class="navbar-brand d-flex align-items-center">
-            <strong>Film rating app</strong>
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="true" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
-      </div>
-    </header>
+<%@include file="includes/header.jsp" %>
 
     <main role="main">
       <div class="album py-5 bg-light">

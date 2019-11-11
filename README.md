@@ -18,3 +18,8 @@ We add all dependencies and we specify the packaging target as .war.
 - Database connection and DAO
 
 SQL server
+- Init db
+-Sql table three entities
+- DAO with arquilian
+Servlet authentification
+-EJBs

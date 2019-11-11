@@ -1,5 +1,6 @@
 package ch.heigvd.amt.project.integration;
 
+import ch.heigvd.amt.project.business.IAuthenticationService;
 import ch.heigvd.amt.project.datastore.exceptions.DuplicateKeyException;
 import ch.heigvd.amt.project.datastore.exceptions.KeyNotFoundException;
 import ch.heigvd.amt.project.model.User;
@@ -14,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+// TODO: remove errors, log them instead
 @Stateless
 public class UsersDAO implements IUsersDAO {
 
@@ -25,8 +27,8 @@ public class UsersDAO implements IUsersDAO {
     //@Resource(lookup = "java:/jdbc/film_library")
     //DataSource dataSource;
 
-    /*@EJB
-    IAuthenticationService authenticationService;*/
+    @EJB
+    IAuthenticationService authenticationService;
 
     @Override
     public User create(User entity) throws DuplicateKeyException {
@@ -38,7 +40,7 @@ public class UsersDAO implements IUsersDAO {
             statement.setString(2, entity.getFirstName());
             statement.setString(3, entity.getLastName());
             statement.setString(4, entity.getEmail());
-            statement.setString(5, entity.getPassword());
+            statement.setString(5, authenticationService.hashPassword(entity.getPassword()));
             statement.execute();
             return entity;
         } catch (SQLException e) {
@@ -54,7 +56,7 @@ public class UsersDAO implements IUsersDAO {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("SELECT USERNAME, FIRST_NAME, LAST_NAME, EMAIL, HASHED_PW FROM amt_users WHERE USERNAME = ?");
+            PreparedStatement statement = con.prepareStatement("SELECT USERNAME, FIRST_NAME, LAST_NAME, EMAIL FROM amt_users WHERE USERNAME = ?");
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
             boolean hasRecord = rs.next();
@@ -66,7 +68,6 @@ public class UsersDAO implements IUsersDAO {
                     .firstName(rs.getString(2))
                     .lastName(rs.getString(3))
                     .email(rs.getString(4))
-                    .password(rs.getString(5))
                     .build();
             return existingUser;
         } catch (SQLException e) {
@@ -108,12 +109,11 @@ public class UsersDAO implements IUsersDAO {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("UPDATE amt_users SET FIRST_NAME=?, LAST_NAME=?, EMAIL=?, HASHED_PW=? WHERE USERNAME = ?");
+            PreparedStatement statement = con.prepareStatement("UPDATE amt_users SET FIRST_NAME=?, LAST_NAME=?, EMAIL=? WHERE USERNAME = ?");
             statement.setString(1, entity.getFirstName());
             statement.setString(2, entity.getLastName());
             statement.setString(3, entity.getEmail());
-            statement.setString(4, entity.getPassword());
-            statement.setString(5, entity.getUsername());
+            statement.setString(4, entity.getUsername());
             int numberOfUpdatedUsers = statement.executeUpdate();
             if (numberOfUpdatedUsers != 1) {
                 throw new KeyNotFoundException("Could not find user with username = " + entity.getUsername());
@@ -126,6 +126,30 @@ public class UsersDAO implements IUsersDAO {
         }
     }
 
+    @Override
+    public boolean authenticateUser(String username, String pass) {
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT HASHED_PW FROM amt_users WHERE USERNAME=?");
+            statement.setString(1, username);
+            ResultSet rs = statement.executeQuery();
+            boolean hasRecord = rs.next();
+            if (!hasRecord) {
+                throw new KeyNotFoundException("Could not find user with username = " + username);
+            }
+            String hashed = rs.getString(1);
+            // TODO: remettre
+            //return authenticationService.checkPassword(pass, hashed);
+            return hashed.equals(pass);
+        } catch (SQLException | KeyNotFoundException e) {
+            e.printStackTrace();
+            throw new Error(e);
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
     private void closeConnection(Connection connection) {
         try {
             connection.close();
@@ -133,5 +157,4 @@ public class UsersDAO implements IUsersDAO {
             e.printStackTrace();
         }
     }
-
 }

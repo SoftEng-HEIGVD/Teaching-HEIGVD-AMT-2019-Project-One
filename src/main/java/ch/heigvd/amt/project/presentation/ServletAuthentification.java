@@ -1,5 +1,8 @@
 package ch.heigvd.amt.project.presentation;
 
+import ch.heigvd.amt.project.integration.IUsersDAO;
+
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +12,9 @@ import java.io.IOException;
 
 @WebServlet(name = "ServletAuthentification", urlPatterns = "/login")
 public class ServletAuthentification extends HttpServlet {
+
+    @EJB
+    IUsersDAO usersDAO;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,8 +33,23 @@ public class ServletAuthentification extends HttpServlet {
      (for GET requests) or in the body (for POST requests).
      */
         String action = request.getParameter("action");
-        String email = request.getParameter("email");
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
+
+        boolean authenticated = false;
+
+        if(username == null || username.equals("")) {
+            String error = "Please enter username";
+            request.setAttribute("errs", error);
+            request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
+        } else if(password == null || password.equals("")) {
+            String error = "Please enter password";
+            request.setAttribute("errs", error);
+            request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
+        } else {
+            // TODO: if admin authenticate without verification
+            authenticated = usersDAO.authenticateUser(username, password);
+        }
 
     /*
      When the user is not logged in yet and tries to access /pages/xxx, then he
@@ -46,8 +67,13 @@ public class ServletAuthentification extends HttpServlet {
         targetUrl = request.getContextPath() + targetUrl;
 
         if ("login".equals(action)) {
-            request.getSession().setAttribute("principal", email);
-            response.sendRedirect(targetUrl);
+            if(authenticated) {
+                request.getSession().setAttribute("principal", username);
+                response.sendRedirect(targetUrl);
+            } else {
+                request.setAttribute("errs", "Wrong username or password");
+                request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
+            }
         } else if ("logout".equals(action)) {
             request.getSession().invalidate();
             response.sendRedirect(request.getContextPath());
