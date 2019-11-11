@@ -72,7 +72,7 @@
 
 	<section class="main-section" id="players">
 		<!--main-section-start-->
-            <div class="container">
+            <div class="container Player-Box">
                 <div class="row">
                     
                 <div class="col-sm-8">

@@ -44,6 +44,7 @@ PlayerManager playerManager = new PlayerManagerSQL();
         
      
 
+
         request.getRequestDispatcher("WEB-INF/pages/players.jsp").forward(request,response);
     }
 
@@ -54,13 +55,14 @@ PlayerManager playerManager = new PlayerManagerSQL();
        int draw= Integer.parseInt(req.getParameter("draw"));
        int start=Integer.parseInt(req.getParameter("start"));
        int length=Integer.parseInt(req.getParameter("length"));
+       String search=req.getParameter("search[value]");
        json.put("draw", draw);
         JSONArray data = new JSONArray();
      
         
-        List<Player> players=playerManager.getAllPlayers();  
+        List<Player> players=playerManager.getPlayerPartial(search,(int) req.getSession().getAttribute("id"));  
       
-        json.put("recordsTotal",players.size());
+        json.put("recordsTotal",playerManager.getNumberOfPlayers((int) req.getSession().getAttribute("id")));
        
         json.put("recordsFiltered",players.size());
 

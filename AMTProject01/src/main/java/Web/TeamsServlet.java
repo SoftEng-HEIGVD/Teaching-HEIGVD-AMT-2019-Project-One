@@ -77,7 +77,7 @@ public class TeamsServlet extends HttpServlet {
         JSONArray data = new JSONArray();
      
         
-        List<Team> teams=teamManager.getAllTeams();     
+        List<Team> teams=teamManager.getAllTeams((int) req.getSession().getAttribute("id"));     
         json.put("recordsTotal",teams.size());
         json.put("recordsFiltered",teams.size());
 

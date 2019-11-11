@@ -79,7 +79,7 @@
                            
                             
                             <div class="col-lg-8 col-sm-6  text-left wow fadeInRight delay-02s">
-                                <form method="post" action="newPlayer">
+                                <form method="post" action="newTeam">
                                     <div class="form-group">
                                       <label for="inputUserName">Team Name</label>
                                       <input type="text" class="form-control" id="inputUserName" name="teamName" placeholder="NoobMaster69">

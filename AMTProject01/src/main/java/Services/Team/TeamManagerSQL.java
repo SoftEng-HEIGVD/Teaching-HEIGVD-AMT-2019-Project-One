@@ -38,13 +38,13 @@ public class TeamManagerSQL implements TeamManager{
     }
     
     @Override
-    public List<Team> getAllTeams(){
+    public List<Team> getAllTeams(int creator){
         
             ArrayList<Team> teams = new ArrayList();
 
         try {
         Connection connection = dataSource.getConnection();
-        PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM `Team`");
+        PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM `Team` WHERE creator_id="+creator);
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
           int id = rs.getInt("team_id");
@@ -61,14 +61,14 @@ public class TeamManagerSQL implements TeamManager{
   }
        
     @Override
-    public Team getTeam(String name){
+    public Team getTeam(String name,int creator){
         
         int id = 0;
         String team ="";
         
          try {
         Connection connection = dataSource.getConnection();
-        PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM Team WHERE name = '"+name+"'");
+        PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM Team WHERE creator_id="+creator+" AND name = '"+name+"'");
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
           id = rs.getInt("team_id");
@@ -82,6 +82,54 @@ public class TeamManagerSQL implements TeamManager{
     }
     return  new Team(id,team);
 
+    }
+    
+    @Override
+    public ArrayList<Team> getTeamPartial(String name,int creator){
+        
+        ArrayList<Team> teams = new ArrayList();
+        
+         try {
+        Connection connection = dataSource.getConnection();
+        PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM Team WHERE creator_id="+creator+" AND name LIKE '"+name+"%'");
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+          int id = rs.getInt("team_id");
+          String team = rs.getString("name");
+          teams.add(new Team(id,team));
+        }
+        pstmt.close();
+              connection.close();
+
+        } catch (SQLException ex) {
+          Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return  teams;
+
+    }
+    
+    
+    
+    
+    @Override
+    public int getNumberOfTeams(int creator ){
+        
+        int number = 0;
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) AS count FROM Team WHERE creator_id="+creator);
+              ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+           number = rs.getInt("count");
+        }
+            pstmt.close();
+            connection.close();
+
+        } catch (SQLException ex) {
+          Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+        
+        return number;
     }
     
     @Override
@@ -99,7 +147,27 @@ public class TeamManagerSQL implements TeamManager{
     } catch (SQLException ex) {
       Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }        
+    }
+    
+    
+    @Override
+    public void deleteTeam(Team t, int creator){
+        
+        try {
+        Connection connection = dataSource.getConnection();
+        
+        
+        PreparedStatement pstmt = connection.prepareStatement("DELETE FROM Team WHERE creator_id="+creator+" AND team_id="+t.getId());
+         pstmt.execute();
+       
+        pstmt.close();
+        
+      
+    } catch (SQLException ex) {
+      Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     } 
+        
+    }
           
     
 }

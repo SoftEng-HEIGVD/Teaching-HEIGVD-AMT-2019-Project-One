@@ -80,7 +80,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>TeamAddServlet</servlet-name>
-        <url-pattern>/teamAdd</url-pattern>
+        <url-pattern>/newTeam</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>playersDataSource</servlet-name>

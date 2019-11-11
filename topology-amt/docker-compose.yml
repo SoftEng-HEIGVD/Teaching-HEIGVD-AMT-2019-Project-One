@@ -1,10 +1,14 @@
 version: '3'
 services:
-  wildfly:
-    build: ../images/wildfly
+  payara:
+    build: ../images/payara
+    environment:
+     - ADMIN_PASSWORD=adminadmin
     ports:
      - "9090:8080"
-     - "9990:9990"
+     - "3838:4848"
+    links:
+     - mysql:db
   mysql:
     build: ../images/mysql
     environment:

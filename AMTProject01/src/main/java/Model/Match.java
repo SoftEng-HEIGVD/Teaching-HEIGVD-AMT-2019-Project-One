@@ -18,6 +18,7 @@ public class Match {
     
     private int team1EndScore;
     private int team2EndScore;
+    private int creator;
 
     public Match(long id, Team team1, Team team2, int team1EndScore, int team2EndScore) {
 //        if(team1Players.size()!=5 || team2Players.size()!=5|| (team1EndScore<15&&team2EndScore<15)){
@@ -31,7 +32,7 @@ public class Match {
     }
 
     public Match(long id, int team1EndScore, int team2EndScore) {
-       this(id,null,null,team1EndScore,team2EndScore);
+       this(id,new Team(1,"no_team"),new Team(1,"no_team"),team1EndScore,team2EndScore);
     }
 
     public Team getTeam1() {
@@ -53,6 +54,15 @@ public class Match {
     public long getId() {
         return id;
     }
+
+    public int getCreator() {
+        return creator;
+    }
+
+    public void setCreator(int creator) {
+        this.creator = creator;
+    }
+    
     
     
 }

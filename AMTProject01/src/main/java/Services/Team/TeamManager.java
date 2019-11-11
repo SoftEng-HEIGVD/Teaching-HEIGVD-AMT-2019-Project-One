@@ -6,6 +6,7 @@
 package Services.Team;
 
 import Model.Team;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,9 +15,11 @@ import java.util.List;
  */
 public interface TeamManager {
     
-    public List<Team> getAllTeams();
-    public Team getTeam(String name);
-    
+    public List<Team> getAllTeams(int creator);
+    public Team getTeam(String name,int creator);
+    public ArrayList<Team> getTeamPartial(String name,int creator);
     public void addTeam(Team t);
+    public int getNumberOfTeams(int creator);
+    public void deleteTeam(Team t,int creator);
     
 }
