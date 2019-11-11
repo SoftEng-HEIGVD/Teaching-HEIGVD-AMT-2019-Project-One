@@ -34,7 +34,7 @@ import static org.mockito.Mockito.*;
  */
 
 @ExtendWith(MockitoExtension.class)
-public class PlayersServletTest {
+public class MatchesServletTest {
     
     
     @Mock
@@ -44,10 +44,10 @@ public class PlayersServletTest {
     HttpServletResponse response;
     
     @Mock
-    PlayersServlet servlet;
+    MatchesServlet servlet;
     
     @Mock
-    PlayerManagerSQL playerManager;   
+    MatchesManagerSQL matchManager;   
     
     @Mock
     RequestDispatcher dispatcher;
@@ -59,14 +59,14 @@ public class PlayersServletTest {
     
     @BeforeEach
     public void setup() {
-        servlet = new PlayersServlet();
-        servlet.playerManager = playerManager;
+        servlet = new MatchesServlet();
+        servlet.mm = matchManager;
     }
     
     @Test
     public void doGetShouldDispatch() throws ServletException, IOException{
     
-        when(request.getRequestDispatcher("WEB-INF/pages/players.jsp")).thenReturn(dispatcher);
+        when(request.getRequestDispatcher("WEB-INF/pages/matches.jsp")).thenReturn(dispatcher);
         
 
         servlet.doGet(request, response);

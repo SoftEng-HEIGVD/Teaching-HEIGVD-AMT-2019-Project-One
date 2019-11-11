@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Login", urlPatterns = {"/login"})
 public class Login extends HttpServlet {
     UserManagerSQL userManager= new UserManagerSQL();
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
@@ -35,7 +36,8 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      if(req.getParameter("logout")!=null){
+      
+        if(req.getParameter("logout")!=null){
            req.getSession().invalidate();
                                    resp.sendRedirect("login");
 

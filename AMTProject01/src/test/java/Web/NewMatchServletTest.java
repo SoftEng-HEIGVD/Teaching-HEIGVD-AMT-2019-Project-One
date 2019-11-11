@@ -7,8 +7,10 @@ package Web;
 
 
 import Model.Player;
+import Model.Team;
 import Services.Match.MatchesManagerSQL;
 import Services.Player.PlayerManagerSQL;
+import Services.Team.TeamManagerSQL;
 import Web.PlayersServlet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,6 +24,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.http.HttpSession;
 import static org.junit.Assert.assertEquals;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,17 +39,23 @@ import static org.mockito.Mockito.*;
  */
 
 @ExtendWith(MockitoExtension.class)
-public class PlayersServletTest {
+public class NewMatchServletTest {
     
     
     @Mock
     HttpServletRequest request;
     
     @Mock
+    HttpSession session;
+    
+    @Mock
     HttpServletResponse response;
     
     @Mock
-    PlayersServlet servlet;
+    NewMatchServlet servlet;
+    
+    @Mock
+    TeamManagerSQL teamManager;   
     
     @Mock
     PlayerManagerSQL playerManager;   
@@ -55,25 +66,36 @@ public class PlayersServletTest {
     @Mock
     Player player;
     
-    
+    @Mock
+    List<Team> ts;
     
     @BeforeEach
     public void setup() {
-        servlet = new PlayersServlet();
+        servlet = new NewMatchServlet();
         servlet.playerManager = playerManager;
+        servlet.teamManager = teamManager;
     }
     
     @Test
-    public void doGetShouldDispatch() throws ServletException, IOException{
+    public void doPostShouldForwrd() throws ServletException, IOException{
     
-        when(request.getRequestDispatcher("WEB-INF/pages/players.jsp")).thenReturn(dispatcher);
+        when(request.getParameter("userName")).thenReturn("goturak");
+        when(request.getParameter("name")).thenReturn("goturak");
+        when(request.getParameter("team")).thenReturn("astralis");
+        when(request.getSession()).thenReturn(session);
+        when(session.getAttribute("id")).thenReturn(1);
+        when(request.getRequestDispatcher("WEB-INF/pages/matchAdd.jsp")).thenReturn(dispatcher);
         
 
-        servlet.doGet(request, response);
+        servlet.doPost(request, response);
 
+        
         verify(dispatcher, atLeastOnce()).forward(request, response);
         
 }
+    
+  
+  
     
     
    

@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package Web;
-
-
+import Model.Match;
 import Model.Player;
 import Services.Match.MatchesManagerSQL;
 import Services.Player.PlayerManagerSQL;
@@ -22,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
+import javax.servlet.http.HttpSession;
 import static org.junit.Assert.assertEquals;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,7 +35,7 @@ import static org.mockito.Mockito.*;
  */
 
 @ExtendWith(MockitoExtension.class)
-public class PlayersServletTest {
+public class MatchSrevletTest {
     
     
     @Mock
@@ -44,10 +45,13 @@ public class PlayersServletTest {
     HttpServletResponse response;
     
     @Mock
-    PlayersServlet servlet;
+    MatchServlet servlet;
     
     @Mock
-    PlayerManagerSQL playerManager;   
+    PlayerManagerSQL playerManager; 
+    
+    @Mock
+    MatchesManagerSQL matchManager;
     
     @Mock
     RequestDispatcher dispatcher;
@@ -55,26 +59,41 @@ public class PlayersServletTest {
     @Mock
     Player player;
     
+    @Mock
+    HttpSession session;
     
+    @Mock
+    Match match;
+   
     
     @BeforeEach
     public void setup() {
-        servlet = new PlayersServlet();
-        servlet.playerManager = playerManager;
+        servlet = new MatchServlet();
+        servlet.pm = playerManager;
+        servlet.mm = matchManager;
+        
+            
     }
     
     @Test
-    public void doGetShouldDispatch() throws ServletException, IOException{
-    
-        when(request.getRequestDispatcher("WEB-INF/pages/players.jsp")).thenReturn(dispatcher);
+    public void doGetshouldsetMatchrRight() throws ServletException, IOException{
         
-
+        
+        when(request.getParameter("id")).thenReturn("2");
+        when(request.getSession()).thenReturn(session);
+        when(session.getAttribute("id")).thenReturn(1);
+        when(matchManager.getMatch(2,1)).thenReturn(match);
+        when(request.getRequestDispatcher("WEB-INF/pages/Match.jsp")).thenReturn(dispatcher);
         servlet.doGet(request, response);
-
-        verify(dispatcher, atLeastOnce()).forward(request, response);
         
-}
-    
+        
+        verify(dispatcher, atLeastOnce()).forward(request, response);
+        verify(request, atLeastOnce()).setAttribute("match", match);
+        
+        
+    }
     
    
 }
+
+
