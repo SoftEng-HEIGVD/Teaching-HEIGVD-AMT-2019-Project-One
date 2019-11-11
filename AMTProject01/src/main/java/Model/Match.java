@@ -13,20 +13,16 @@ import java.util.ArrayList;
  */
 public class Match {
     private long id;
-    private Player[] team1Players;
-    private Player[] team2Players;
     private Team team1;
     private Team team2;
     
     private int team1EndScore;
     private int team2EndScore;
 
-    public Match(long id,Player[] team1Players, Player[] team2Players, Team team1, Team team2, int team1EndScore, int team2EndScore) {
-        if(team1Players.length!=5 || team2Players.length!=5|| (team1EndScore<15&&team2EndScore<15)){
-            throw new IllegalArgumentException();
-        }
-        this.team1Players = team1Players;
-        this.team2Players = team2Players;
+    public Match(long id, Team team1, Team team2, int team1EndScore, int team2EndScore) {
+//        if(team1Players.size()!=5 || team2Players.size()!=5|| (team1EndScore<15&&team2EndScore<15)){
+//            throw new IllegalArgumentException();
+//        }
         this.team1 = team1;
         this.team2 = team2;
         this.team1EndScore = team1EndScore;
@@ -34,16 +30,8 @@ public class Match {
         this.id= id;
     }
 
-    public Match(long id,Player[] team1Players, Player[] team2Players, int team1EndScore, int team2EndScore) {
-       this(id,team1Players,team2Players,null,null,team1EndScore,team2EndScore);
-    }
-
-    public Player[] getTeam1Players() {
-        return team1Players;
-    }
-
-    public Player[] getTeam2Players() {
-        return team2Players;
+    public Match(long id, int team1EndScore, int team2EndScore) {
+       this(id,null,null,team1EndScore,team2EndScore);
     }
 
     public Team getTeam1() {

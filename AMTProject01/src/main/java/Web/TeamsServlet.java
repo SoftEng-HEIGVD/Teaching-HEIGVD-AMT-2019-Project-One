@@ -5,22 +5,26 @@
  */
 package Web;
 
+import Model.Player;
 import Model.Team;
-import Services.TeamManager;
+import Services.Team.TeamManagerSQL;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  *
  * @author goturak
  */
 public class TeamsServlet extends HttpServlet {
-    TeamManager teamManager= new TeamManager();
+    TeamManagerSQL teamManager= new TeamManagerSQL();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,10 +38,8 @@ public class TeamsServlet extends HttpServlet {
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
         
-        ArrayList<Team> ts= new ArrayList(teamManager.getAllTeams());
-        
-            request.setAttribute("teams", ts);
-            
+         
+     
             request.getRequestDispatcher("WEB-INF/pages/Teams.jsp").forward(request,response);
     }
 
@@ -64,11 +66,35 @@ public class TeamsServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       //To change body of generated methods, choose Tools | Templates.
+       JSONObject json = new JSONObject();
+       int draw= Integer.parseInt(req.getParameter("draw"));
+       int start=Integer.parseInt(req.getParameter("start"));
+       int length=Integer.parseInt(req.getParameter("length"));
+       json.put("draw", draw);
+        JSONArray data = new JSONArray();
+     
+        
+        List<Team> teams=teamManager.getAllTeams();     
+        json.put("recordsTotal",teams.size());
+        json.put("recordsFiltered",teams.size());
+
+        for(int i=start;i< start+length;i++){
+            if(i<teams.size()){
+                Team t= teams.get(i);
+                JSONArray pl= new JSONArray();
+                pl.add("<a href=\"team?t="+t.getName()+"\">"+t.getName()+"</a>");
+              
+                data.add(pl);
+             
+            }
+            
+        }
+        json.put("data", data);
+        resp.getWriter().write(json.toString());
+    }   
 
     /**
      * Returns a short description of the servlet.

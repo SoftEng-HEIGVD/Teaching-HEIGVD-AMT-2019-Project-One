@@ -86,7 +86,7 @@
                         </c:if>
                         <div class="">
 
-                                <c:forEach items="${match.team1Players}" var="item">
+                                <c:forEach items="${team1Players}" var="item">
                                     <a href="player?u=${item.userName}">
                                         <div class="service-list">
                                            
@@ -119,7 +119,7 @@
                         </c:if>
                         <div class="">
 
-                                <c:forEach items="${match.team2Players}" var="item">
+                                <c:forEach items="${team2Players}" var="item">
                                     <a href="player?u=${item.userName}">
                                         <div class="service-list">
                                            

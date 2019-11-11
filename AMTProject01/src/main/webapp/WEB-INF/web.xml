@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>Web.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/players</url-pattern>
+        <url-pattern>/teams</url-pattern>
+        <url-pattern>/matches</url-pattern>
+        <url-pattern>/newMatch</url-pattern>
+
+        <url-pattern>/newPlayer</url-pattern>
+
+    </filter-mapping>
     <servlet>
         <servlet-name>PlayersServlet</servlet-name>
         <servlet-class>Web.PlayersServlet</servlet-class>

@@ -7,7 +7,8 @@ package Web;
 
 import Model.Match;
 import Model.Player;
-import Services.MatchesManager;
+import Model.Team;
+import Services.Match.MatchesManagerSQL;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -25,7 +26,7 @@ import org.json.simple.JSONObject;
  */
 @WebServlet(name = "MatchesServlet", urlPatterns = {"/matches"})
 public class MatchesServlet extends HttpServlet {
-     MatchesManager mm= new MatchesManager();
+     MatchesManagerSQL mm= new MatchesManagerSQL();
 /**
  * 
  */
@@ -41,7 +42,8 @@ public class MatchesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
-        request.setAttribute("allMatches", mm.getAll());
+        
+   
         request.getRequestDispatcher("WEB-INF/pages/matches.jsp").forward(request,response);
     }
 
@@ -69,7 +71,7 @@ public class MatchesServlet extends HttpServlet {
                 }else{
                     mArray.add("no team");
                 }
-                mArray.add("<a href=\"match?="+m.getId()+"\">"+m.getTeam1EndScore()+"-"+m.getTeam2EndScore()+"</a>");
+                mArray.add("<a href=\"match?id="+m.getId()+"\">"+m.getTeam1EndScore()+"-"+m.getTeam2EndScore()+"</a>");
               
                 if(m.getTeam2()!=null){
                     mArray.add("<a href=\"team?t="+m.getTeam2().getName()+"\">"+m.getTeam2().getName()+"</a>");
