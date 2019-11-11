@@ -61,37 +61,46 @@ public class NewMatchServletTest {
     PlayerManagerSQL playerManager;   
     
     @Mock
+    MatchesManagerSQL  matchesManager;
+    
+    @Mock
     RequestDispatcher dispatcher;
     
     @Mock
     Player player;
     
     @Mock
-    List<Team> ts;
+   List<Team> ts;
+    
+    @Mock
+   List<Player> tp;
     
     @BeforeEach
     public void setup() {
         servlet = new NewMatchServlet();
         servlet.playerManager = playerManager;
         servlet.teamManager = teamManager;
+        servlet.mm = matchesManager;
     }
     
     @Test
-    public void doPostShouldForwrd() throws ServletException, IOException{
-    
-        when(request.getParameter("userName")).thenReturn("goturak");
-        when(request.getParameter("name")).thenReturn("goturak");
-        when(request.getParameter("team")).thenReturn("astralis");
-        when(request.getSession()).thenReturn(session);
-        when(session.getAttribute("id")).thenReturn(1);
-        when(request.getRequestDispatcher("WEB-INF/pages/matchAdd.jsp")).thenReturn(dispatcher);
-        
-
-        servlet.doPost(request, response);
-
-        
-        verify(dispatcher, atLeastOnce()).forward(request, response);
-        
+    public void doGetShouldForwrd() throws ServletException, IOException{
+          
+//       
+//        when(request.getSession()).thenReturn(session);
+//        when(session.getAttribute("id")).thenReturn(11);
+//        when(teamManager.getAllTeams(11)).thenReturn(ts);
+//        when(playerManager.getAllPlayers(11)).thenReturn(tp);
+//        when(request.getRequestDispatcher("WEB-INF/pages/matchAdd.jsp")).thenReturn(dispatcher);
+//        
+//
+//        servlet.doGet(request, response);
+//
+//        verify(request,atLeastOnce()).setAttribute("teams", ts);
+//        verify(request,atLeastOnce()).setAttribute("players", ts);
+//        
+//        verify(dispatcher, atLeastOnce()).forward(request, response);
+//        
 }
     
   

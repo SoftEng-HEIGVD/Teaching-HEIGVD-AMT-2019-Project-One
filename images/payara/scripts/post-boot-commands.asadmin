@@ -6,4 +6,4 @@ create-jdbc-resource --connectionpoolid TeamEsport_Pool jdbc/TeamEsport
 
 start-domain domain1
 
-deploy /home/AMTProjectOne.war
+deploy /home/TeamEsport.war
