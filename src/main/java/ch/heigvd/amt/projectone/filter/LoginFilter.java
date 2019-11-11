@@ -1,7 +1,5 @@
 package ch.heigvd.amt.projectone.filter;
 
-import ch.heigvd.amt.projectone.model.Client;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;

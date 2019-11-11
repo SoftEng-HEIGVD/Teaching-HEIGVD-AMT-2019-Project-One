@@ -2,8 +2,7 @@ package ch.heigvd.amt.projectone.services.dao;
 
 import ch.heigvd.amt.projectone.exceptions.DuplicateKeyException;
 import ch.heigvd.amt.projectone.exceptions.KeyNotFoundException;
-import ch.heigvd.amt.projectone.model.Client;
-import ch.heigvd.amt.projectone.model.Order;
+import ch.heigvd.amt.projectone.Order;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;

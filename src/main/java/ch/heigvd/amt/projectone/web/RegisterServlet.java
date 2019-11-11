@@ -1,7 +1,7 @@
 package ch.heigvd.amt.projectone.web;
 
 import ch.heigvd.amt.projectone.exceptions.DuplicateKeyException;
-import ch.heigvd.amt.projectone.model.Client;
+import ch.heigvd.amt.projectone.Client;
 import ch.heigvd.amt.projectone.services.dao.ClientsManagerLocal;
 
 import javax.ejb.EJB;
@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "RegisterServlet",urlPatterns = "/register")

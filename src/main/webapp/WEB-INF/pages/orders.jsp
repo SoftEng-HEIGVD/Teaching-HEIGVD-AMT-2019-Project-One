@@ -1,4 +1,4 @@
-<%@ page import="ch.heigvd.amt.projectone.model.Client" %>
+<%@ page import="ch.heigvd.amt.projectone.Client" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.

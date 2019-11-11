@@ -1,6 +1,6 @@
 package ch.heigvd.amt.projectone.services.dao;
 
-import ch.heigvd.amt.projectone.model.Client;
+import ch.heigvd.amt.projectone.Client;
 
 public interface ClientsManagerLocal extends IDAO<Client>{
 

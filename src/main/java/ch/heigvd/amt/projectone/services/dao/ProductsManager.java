@@ -2,8 +2,7 @@ package ch.heigvd.amt.projectone.services.dao;
 
 import ch.heigvd.amt.projectone.exceptions.DuplicateKeyException;
 import ch.heigvd.amt.projectone.exceptions.KeyNotFoundException;
-import ch.heigvd.amt.projectone.model.Client;
-import ch.heigvd.amt.projectone.model.Product;
+import ch.heigvd.amt.projectone.Product;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
@@ -11,8 +10,6 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Stateless
 public class ProductsManager implements ProductsManagerLocal {
