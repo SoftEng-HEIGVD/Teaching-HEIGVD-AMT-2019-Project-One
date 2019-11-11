@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ *  Interface listing all the needed Operation on team entities
  * @author benjamin
  */
 public interface TeamManager {

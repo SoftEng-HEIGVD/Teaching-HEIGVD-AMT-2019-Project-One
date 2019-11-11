@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+  *  Interface listing all the needed Operation on user entities
  * @author benjamin
  */
 public interface UserManager {

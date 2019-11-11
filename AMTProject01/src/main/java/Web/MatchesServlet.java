@@ -21,7 +21,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
- *
+ * Servlet handling the Match List page
  * @author goturak
  */
 @WebServlet(name = "MatchesServlet", urlPatterns = {"/matches"})

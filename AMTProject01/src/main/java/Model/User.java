@@ -8,7 +8,7 @@ package Model;
 import java.util.List;
 
 /**
- *
+ *  Class representing a user with an id, a name and a password
  * @author goturak
  */
 public class User {

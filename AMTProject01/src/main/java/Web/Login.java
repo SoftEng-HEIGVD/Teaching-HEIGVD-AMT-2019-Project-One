@@ -18,13 +18,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ *  Servlet handling the Login Page
  * @author goturak
  */
 @WebServlet(name = "Login", urlPatterns = {"/login"})
 public class Login extends HttpServlet {
     UserManagerSQL userManager= new UserManagerSQL();
-    
+  /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
@@ -34,6 +42,14 @@ public class Login extends HttpServlet {
         request.getRequestDispatcher("WEB-INF/pages/Login.jsp").forward(request,response);
     }
 
+     /**
+     * Handles the HTTP <code>POST</code> method.
+     * used to handle the form submission for the login/logout/registration
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       

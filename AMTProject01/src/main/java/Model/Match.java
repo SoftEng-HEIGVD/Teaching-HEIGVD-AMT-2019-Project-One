@@ -8,8 +8,9 @@ package Model;
 import java.util.ArrayList;
 
 /**
- *
- * @author goturak
+ * Class representing a Match entity with an id two teams 
+   two end scores and a creator id
+ * @author goturak 
  */
 public class Match {
     private long id;

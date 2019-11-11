@@ -19,14 +19,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ *Servlet Handling the Player Creation Page
  * @author goturak
  */
 public class PlayerAddServlet extends HttpServlet {
   
 PlayerManager playerManager = new PlayerManagerSQL();
     TeamManagerSQL teamManager= new TeamManagerSQL();
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    
+    
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -71,6 +72,6 @@ PlayerManager playerManager = new PlayerManagerSQL();
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

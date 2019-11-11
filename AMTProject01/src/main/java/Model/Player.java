@@ -5,7 +5,7 @@
 package Model;
 
 /**
- *
+ *  class representing a Player with an id, username, name, team and creator id
  * @author goturak
  */
 public class Player {

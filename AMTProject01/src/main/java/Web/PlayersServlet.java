@@ -21,14 +21,13 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
- *
+ * Servlet Handling the player list page
  * @author goturak
  */
 public class PlayersServlet extends HttpServlet {
 
    
 PlayerManager playerManager = new PlayerManagerSQL();
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -95,7 +94,7 @@ PlayerManager playerManager = new PlayerManagerSQL();
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }// 
 
     
 }

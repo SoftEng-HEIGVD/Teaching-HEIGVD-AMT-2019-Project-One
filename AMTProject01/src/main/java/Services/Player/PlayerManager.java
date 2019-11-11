@@ -12,8 +12,7 @@ import java.util.List;
 
 
 
-/**
- *
+/**  Interface listing all the needed Operation on Player entities
  * @author goturak
  */
 

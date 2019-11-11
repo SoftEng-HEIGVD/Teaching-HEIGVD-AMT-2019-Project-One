@@ -12,7 +12,7 @@ import Model.Team;
 import java.util.ArrayList;
 
 /**
- *
+ *  Interface listing all the needed Operation on match entities
  * @author benjamin
  */
 public interface MatchesManager {

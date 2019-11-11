@@ -26,7 +26,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
- *
+ *Servlet Handling the player detail page
  * @author goturak
  */
 public class PlayerServlet extends HttpServlet {
@@ -34,8 +34,8 @@ public class PlayerServlet extends HttpServlet {
 PlayerManager playerManager = new PlayerManagerSQL();
 
 MatchesManager mm= new MatchesManagerSQL();
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+
+/**
      * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
@@ -112,6 +112,6 @@ MatchesManager mm= new MatchesManagerSQL();
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

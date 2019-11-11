@@ -20,30 +20,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
- *
+ * Servlet Handling the team list page
  * @author goturak
  */
 public class TeamsServlet extends HttpServlet {
     TeamManagerSQL teamManager= new TeamManagerSQL();
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-         response.setContentType("text/html;charset=UTF-8");
-        
-         
-     
-            request.getRequestDispatcher("WEB-INF/pages/Teams.jsp").forward(request,response);
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    
+    
+    
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -55,12 +39,16 @@ public class TeamsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       response.setContentType("text/html;charset=UTF-8");
+        
+         
+     
+            request.getRequestDispatcher("WEB-INF/pages/Teams.jsp").forward(request,response);
     }
 
     /**
      * Handles the HTTP <code>POST</code> method.
-     *
+     * used to handle the ajax request from the datatable
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -73,12 +61,14 @@ public class TeamsServlet extends HttpServlet {
        int draw= Integer.parseInt(req.getParameter("draw"));
        int start=Integer.parseInt(req.getParameter("start"));
        int length=Integer.parseInt(req.getParameter("length"));
+              String search=req.getParameter("search[value]");
+
        json.put("draw", draw);
         JSONArray data = new JSONArray();
      
         
-        List<Team> teams=teamManager.getAllTeams((int) req.getSession().getAttribute("id"));     
-        json.put("recordsTotal",teams.size());
+        List<Team> teams=teamManager.getTeamPartial(search,(int) req.getSession().getAttribute("id"));     
+        json.put("recordsTotal",teamManager.getNumberOfTeams((int) req.getSession().getAttribute("id")));
         json.put("recordsFiltered",teams.size());
 
         for(int i=start;i< start+length;i++){

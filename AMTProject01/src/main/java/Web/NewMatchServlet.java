@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Servlet Handling the Match Creation Page
  * @author goturak
  */
 public class NewMatchServlet extends HttpServlet {
@@ -34,7 +34,7 @@ public class NewMatchServlet extends HttpServlet {
 
     MatchesManagerSQL mm= new MatchesManagerSQL();
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -55,6 +55,14 @@ public class NewMatchServlet extends HttpServlet {
         request.getRequestDispatcher("WEB-INF/pages/matchAdd.jsp").forward(request,response);
     }
 
+     /**
+     * Handles the HTTP <code>POST</code> method.
+     * used to handle the form submission for the creation
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       
@@ -93,6 +101,6 @@ public class NewMatchServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

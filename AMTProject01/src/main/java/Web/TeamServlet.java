@@ -23,7 +23,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
- *
+ *Servlet Handling the team detail page
  * @author goturak
  */
 public class TeamServlet extends HttpServlet {
