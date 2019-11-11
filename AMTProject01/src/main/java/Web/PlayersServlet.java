@@ -44,6 +44,7 @@ PlayerManager playerManager = new PlayerManagerSQL();
         
      
 
+
         request.getRequestDispatcher("WEB-INF/pages/players.jsp").forward(request,response);
     }
 

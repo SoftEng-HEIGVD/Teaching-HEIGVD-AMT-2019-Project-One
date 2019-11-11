@@ -120,6 +120,39 @@ public class MatchesManagerSQL implements MatchesManager {
     }
     
     @Override
+     public ArrayList<Match> getMatchesPlayedbyTeam(Team t){
+         
+         ArrayList<Match> matches=new ArrayList<>();
+        try {
+        Connection connection = dataSource.getConnection();
+        PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM `MatchWithTeam` "
+                + "WHERE team1_id = "+t.getId()+" OR team2_id = "+t.getId());
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+          int match_id = rs.getInt("match_id");
+          int score_team1 = rs.getInt("score_team1");
+          int score_team2 = rs.getInt("score_team2");
+          int team1_id = rs.getInt("team1_id");
+          int team2_id = rs.getInt("team1_id");
+          String team1  = rs.getString("team1");
+          String team2  = rs.getString("team2");
+          
+         
+          matches.add(new Match(match_id,new Team(team1_id,team1),new Team(team2_id,team2),score_team1,score_team2));
+                  
+        }
+        pstmt.close();
+      
+    } catch (SQLException ex) {
+      Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+        return matches;
+         
+         
+     }
+    
+    @Override
     public  ArrayList<Match>  getMatchesPlayedBy(Player p){
         ArrayList<Match> matches=new ArrayList<>();
         try {
@@ -213,6 +246,50 @@ public class MatchesManagerSQL implements MatchesManager {
             
             addPlayerToMatch(team1,1,id);
              addPlayerToMatch(team2,2,id);
+        
+    }
+    
+    
+    
+    @Override
+    public int getNumberOfMatch(){
+        
+        int number = 0;
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) AS count FROM Matches");
+              ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+           number = rs.getInt("count");
+        }
+            pstmt.close();
+            connection.close();
+
+        } catch (SQLException ex) {
+          Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+        
+        return number;
+    }
+    
+    @Override
+    public void DeleteMatch(long id){
+        
+        try {
+        Connection connection = dataSource.getConnection();
+        
+        
+        PreparedStatement pstmt = connection.prepareStatement("DELETE FROM Matches WHERE match_id="+id);
+         pstmt.execute();
+       
+        pstmt.close();
+        
+      
+    } catch (SQLException ex) {
+      Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+    } 
+        
+        
         
     }
     

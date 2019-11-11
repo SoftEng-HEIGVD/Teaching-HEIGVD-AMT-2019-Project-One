@@ -99,6 +99,33 @@ public class PlayerManagerSQL implements PlayerManager{
     }
     
     @Override
+    public ArrayList<Player> getPlayerPartial(String userName){
+        
+        
+        ArrayList<Player> players = new ArrayList();
+    
+        
+        try {
+        Connection connection = dataSource.getConnection();
+        PreparedStatement pstmt = connection.prepareStatement("SELECT player_id,pseudo,name,team,team_id FROM PlayerWithTeam WHERE pseudo LIKE'"+userName+"%'");
+        ResultSet rs = pstmt.executeQuery();
+        while(rs.next()){
+          String name = rs.getString("name");
+          String pseudo = rs.getString("pseudo"); 
+          String team = rs.getString("team");
+           int player_id = rs.getInt("player_id");
+          int team_id = rs.getInt("team_id");
+           players.add(new Player(player_id,pseudo,name,new Team(team_id,team)));
+        }
+        pstmt.close();
+      
+    } catch (SQLException ex) {
+      Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+    }        
+        return  players;
+    }
+    
+    @Override
     public List<Player> getPlayersFrom(Team t){
     
         ArrayList<Player> players = new ArrayList();
@@ -179,12 +206,11 @@ public class PlayerManagerSQL implements PlayerManager{
 
 
     @Override
-    public void Add(Player p){
+    public void changePlayerTeam(Player p, Team t){
         
-    try {
+         try {
         Connection connection = dataSource.getConnection();
-        PreparedStatement pstmt = connection.prepareStatement("INSERT INTO `Player`(`pseudo`,`name`,`team_id`) VALUES\n" +
-"    ('"+p.getUserName()+"','"+p.getName()+"',"+p.getTeam().getId()+")");
+        PreparedStatement pstmt = connection.prepareStatement("UPDATE `Player` SET team_id ="+t.getId()+ "WHERE player_id ="+p.getId());
          pstmt.execute();
        
         pstmt.close();
@@ -192,9 +218,68 @@ public class PlayerManagerSQL implements PlayerManager{
 
     } catch (SQLException ex) {
       Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
-    }        
+    }
+        
+        
+        
     }
     
+    @Override
+    public void Add(Player p){
+        
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement("INSERT INTO `Player`(`pseudo`,`name`,`team_id`) VALUES\n" +
+                                                               "('"+p.getUserName()+"','"+p.getName()+"',"+p.getTeam().getId()+")");
+             pstmt.execute();
+
+            pstmt.close();
+
+        } catch (SQLException ex) {
+          Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
     
+    @Override
+    public int getNumberOfPlayers(){
+        
+        int number = 0;
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) AS count FROM Player");
+              ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+           number = rs.getInt("count");
+        }
+            pstmt.close();
+            connection.close();
+
+        } catch (SQLException ex) {
+          Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+        
+        return number;
+    }
     
+     @Override
+    public void DeletePlayer(Player p){
+        
+        try {
+        Connection connection = dataSource.getConnection();
+        
+        
+        PreparedStatement pstmt = connection.prepareStatement("DELETE FROM Player WHERE player_id="+p.getId());
+         pstmt.execute();
+       
+        pstmt.close();
+        
+      
+    } catch (SQLException ex) {
+      Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+    } 
+        
+        
+        
+    }
+ 
 }

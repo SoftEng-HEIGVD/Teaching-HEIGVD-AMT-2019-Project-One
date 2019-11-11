@@ -5,6 +5,7 @@
  */
 package Services.Match;
 
+import Model.Team;
 import Model.Match;
 import Model.Player;
 import Model.Team;
@@ -22,7 +23,9 @@ public interface MatchesManager {
     
     public  ArrayList<Match>  getMatchesPlayedBy(Player p);
     
-    public  ArrayList<Match>  getMatchesPlayedBy(Team t);
+
+    public ArrayList<Match> getMatchesPlayedbyTeam(Team t);
+
     
     public void addMatch(Match match,ArrayList<Player>team1,ArrayList<Player>team2);
     

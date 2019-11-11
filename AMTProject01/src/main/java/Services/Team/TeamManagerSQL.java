@@ -85,6 +85,53 @@ public class TeamManagerSQL implements TeamManager{
     }
     
     @Override
+    public ArrayList<Team> getTeamPartial(String name){
+        
+        ArrayList<Team> teams = new ArrayList();
+        
+         try {
+        Connection connection = dataSource.getConnection();
+        PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM Team WHERE name LIKE '"+name+"%'");
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+          int id = rs.getInt("team_id");
+          String team = rs.getString("name");
+          teams.add(new Team(id,team));
+        }
+        pstmt.close();
+      
+    } catch (SQLException ex) {
+      Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return  teams;
+
+    }
+    
+    
+    
+    
+    @Override
+    public int getNumberOfTeeams(){
+        
+        int number = 0;
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) AS count FROM Team");
+              ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+           number = rs.getInt("count");
+        }
+            pstmt.close();
+            connection.close();
+
+        } catch (SQLException ex) {
+          Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+        
+        return number;
+    }
+    
+    @Override
     public void addTeam(Team t){
         
        try {
@@ -99,7 +146,27 @@ public class TeamManagerSQL implements TeamManager{
     } catch (SQLException ex) {
       Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }        
+    }
+    
+    
+    @Override
+    public void deleteTeam(Team t){
+        
+        try {
+        Connection connection = dataSource.getConnection();
+        
+        
+        PreparedStatement pstmt = connection.prepareStatement("DELETE FROM Team WHERE team_id="+t.getId());
+         pstmt.execute();
+       
+        pstmt.close();
+        
+      
+    } catch (SQLException ex) {
+      Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     } 
+        
+    }
           
     
 }
