@@ -60,9 +60,27 @@ public class PlayersServletTest {
     }
     
     @Test
-    public void basicTest(){
+    public void doGetShouldDispatch() throws ServletException, IOException{
     
-    assertEquals(true,true);
+        when(request.getRequestDispatcher("WEB-INF/pages/players.jsp")).thenReturn(dispatcher);
+
+        servlet.doGet(request, response);
+
+        verify(dispatcher, atLeastOnce()).forward(request, response);
+        
+}
+    
+    @Test
+    public void doPost() throws ServletException, IOException{
+    
+//        
+//        when(request.getParameter("search[value]")).thenReturn("1");
+//        when(request.getRequestDispatcher("WEB-INF/pages/players.jsp")).thenReturn(dispatcher);
+//
+//        servlet.doGet(request, response);
+//
+//        verify(dispatcher, atLeastOnce()).forward(request, response);
+//        
 }
     
    
