@@ -172,7 +172,8 @@ public class MatchesManagerSQL implements MatchesManager {
                   
         }
         pstmt.close();
-      
+         connection.close();
+     
     } catch (SQLException ex) {
       Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -204,7 +205,8 @@ public class MatchesManagerSQL implements MatchesManager {
          
        
         pstmt.close();
-      
+         connection.close();
+     
     } catch (SQLException ex) {
       Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -228,6 +230,8 @@ public class MatchesManagerSQL implements MatchesManager {
          pstmt.execute();
        
         pstmt.close();
+        connection.close();
+        
         }
       
     } catch (SQLException ex) {

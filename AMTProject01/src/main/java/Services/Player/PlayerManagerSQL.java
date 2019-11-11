@@ -62,7 +62,8 @@ public class PlayerManagerSQL implements PlayerManager{
           players.add(new Player(player_id,pseudo,name,new Team(team_id,team)));
         }
         pstmt.close();
-      
+         connection.close();
+     
     } catch (SQLException ex) {
       Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }        
@@ -89,7 +90,8 @@ public class PlayerManagerSQL implements PlayerManager{
            team_id = rs.getInt("team_id");
         }
         pstmt.close();
-      
+          connection.close();
+    
     } catch (SQLException ex) {
       Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }        
@@ -112,7 +114,8 @@ public class PlayerManagerSQL implements PlayerManager{
           players.add(new Player(id,pseudo,name,new Team(t.getId(),t.getName())));
         }
         pstmt.close();
-      
+        connection.close();
+     
     } catch (SQLException ex) {
       Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }        
@@ -138,15 +141,12 @@ public class PlayerManagerSQL implements PlayerManager{
           players.add(new Player(player_id,pseudo,name,new Team(team_id,team)));
         }
         pstmt.close();
-      
+        connection.close();
     } catch (SQLException ex) {
       Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
-    }        
+    }       
+        
           return players;
-        
-        
-        
-        
         
     }
     @Override
@@ -169,7 +169,8 @@ public class PlayerManagerSQL implements PlayerManager{
           players.add(new Player(player_id,pseudo,name,new Team(team_id,team)));
         }
         pstmt.close();
-      
+        connection.close();
+
     } catch (SQLException ex) {
       Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }        
@@ -187,7 +188,8 @@ public class PlayerManagerSQL implements PlayerManager{
          pstmt.execute();
        
         pstmt.close();
-      
+        connection.close();
+
     } catch (SQLException ex) {
       Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }        

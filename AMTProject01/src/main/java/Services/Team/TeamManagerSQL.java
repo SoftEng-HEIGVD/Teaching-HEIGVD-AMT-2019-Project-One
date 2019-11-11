@@ -52,7 +52,8 @@ public class TeamManagerSQL implements TeamManager{
           teams.add(new Team(id,name));
         }
         pstmt.close();
-      
+        connection.close();
+    
     } catch (SQLException ex) {
       Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -74,6 +75,7 @@ public class TeamManagerSQL implements TeamManager{
           team = rs.getString("name");
         }
         pstmt.close();
+        connection.close();
       
     } catch (SQLException ex) {
       Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,6 +94,7 @@ public class TeamManagerSQL implements TeamManager{
          pstmt.execute();
        
         pstmt.close();
+        connection.close();
       
     } catch (SQLException ex) {
       Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
