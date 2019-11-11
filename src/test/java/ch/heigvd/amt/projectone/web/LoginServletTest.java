@@ -1,41 +1,35 @@
 package ch.heigvd.amt.projectone.web;
 
-import ch.heigvd.amt.projectone.services.dao.ClientsManagerLocal;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
+import javax.servlet.http.HttpSession;
 
-import static org.mockito.Mockito.mock;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
-public class LoginServletTest {
+class LoginServletTest {
 
 
     @Mock
     HttpServletRequest request;
-
     @Mock
     HttpServletResponse response;
-
     @Mock
-    ClientsManagerLocal clientsManagerLocal;
+    HttpSession session;
 
     LoginServlet servlet;
 
     @BeforeEach
-    public void setup() throws IOException {
+    public void setup() {
         servlet = new LoginServlet();
-        servlet.clientsManagerLocal = clientsManagerLocal;
-        request = mock(HttpServletRequest.class);
-        response = mock(HttpServletResponse.class);
-
-        when(request.getParameter("username")).thenReturn(username);
+        when(request.getContextPath()).thenReturn("projectone");
+        when(request.getSession()).thenReturn(session);
+    }
+    @Test
+    void doPost() {
     }
 }

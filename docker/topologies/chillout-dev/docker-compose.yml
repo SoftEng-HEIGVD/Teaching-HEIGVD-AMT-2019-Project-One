@@ -1,0 +1,36 @@
+version: '2'
+services:
+    payara:
+        build: ../../images/payara-dev
+        environment:
+            - ADMIN_PASSWORD=admin
+            - PAYARA_ARGS="--debug"
+
+        ports:
+            - "8080:8080"
+            - "4848:4848"
+            - "9009:9009"
+        links:
+            - mysql:db
+    mysql:
+        build: ../../images/mysql
+        restart: always
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=root
+        ports:
+            - "3306:3306"
+        expose:
+            # Opens port 3306 on the container
+            - '3306'
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:latest
+        depends_on:
+            - mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+        ports:
+            - "6060:80"
+        links:
+            - mysql:db

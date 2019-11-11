@@ -1,0 +1,7 @@
+#!/bin/sh
+
+create-jdbc-connection-pool --restype javax.sql.DataSource --datasourceclassname com.mysql.cj.jdbc.MysqlXADataSource --property 'user=root:password=root:url=jdbc\:mysql\://db\:3306/chillout:useSSL=false' chillout_pool
+
+create-jdbc-resource --connectionpoolid chillout_pool jdbc/chillout
+
+deploy /tmp/projectone.war

@@ -16,14 +16,9 @@ public class HomeServlet extends HttpServlet {
     @EJB
     ClientsManagerLocal clientsManagerLocal;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         req.setAttribute("user", clientsManagerLocal.getClientById(Integer.parseInt(req.getParameter("id"))));
-        //TODO : TO change to an Home Page with tab Products , Orders, Account (with infos and logout)
         req.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(req, resp);
     }
 }

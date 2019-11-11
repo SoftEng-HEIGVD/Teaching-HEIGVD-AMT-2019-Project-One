@@ -7,17 +7,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class ClientTest {
 
     @Test
-    void itShouldHaveAConstructor() {
+    void itShouldHaveAConstructor(){
         Client client = Client.builder()
-                .username("oliechti")
                 .name("olivier")
+                .username("oliechti")
                 .password("xxxx")
-                .isAdmin(true)
                 .build();
-        assertEquals("oliechti", client.getUsername());
         assertEquals("olivier", client.getName());
+        assertEquals("oliechti", client.getUsername());
         assertEquals("xxxx", client.getPassword());
-        assertEquals(true, client.isAdmin());
+        assertEquals(false, client.isAdmin());
     }
 
 }
