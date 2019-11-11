@@ -36,17 +36,42 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       
-           // read form fields
+       
+        // read form fields
         String username = req.getParameter("username");     
         String pwd = req.getParameter("pwd");
-        User u= userManager.get(username);
-        System.out.println("my pwd:"+pwd+" theirs:"+u.getPwd());
-        if(u!=null&& u.getPwd().equals(pwd)){
-            req.getSession().setAttribute("id", u.getId());
-            resp.sendRedirect("players");
+        if(!username.isEmpty()&& !pwd.isEmpty()){
+            if(req.getParameter("loginButton")!=null){
+                User u= userManager.get(username);
+               
+                if(u!=null&& u.getPwd().equals(pwd)){
+                    req.getSession().setAttribute("id", u.getId());
+                    resp.sendRedirect("players");
+                }else{
+                    req.getRequestDispatcher("WEB-INF/pages/Login.jsp").forward(req,resp);
+
+                }
+            }else if(req.getParameter("regButton")!=null){
+                if(userManager.get(username)==null){
+                        User u= new User (username,pwd);
+                        userManager.add(u);
+                        u= userManager.get(username);
+                    if(u!=null){
+                        req.getSession().setAttribute("id", u.getId());
+                        resp.sendRedirect("players");
+                    }else{
+                        req.getRequestDispatcher("WEB-INF/pages/Login.jsp").forward(req,resp);
+
+                    }
+                }else{
+                    req.getRequestDispatcher("WEB-INF/pages/Login.jsp").forward(req,resp);
+
+                }
+                
+            }
         }else{
-            req.getRequestDispatcher("WEB-INF/pages/Login.jsp").forward(req,resp);
-            
+             req.getRequestDispatcher("WEB-INF/pages/Login.jsp").forward(req,resp);
+
         }
     }
 

@@ -52,9 +52,13 @@ PlayerManager playerManager = new PlayerManagerSQL();
       
            // read form fields
         String teamName = req.getParameter("teamName");     
-
+        if(!teamName.isEmpty()){
+            Team t= new Team(teamName);
+            t.setCreatorId((int) req.getSession().getAttribute("id"));
+            teamManager.addTeam(t);
+        }
         
-        
+      
         
             
       

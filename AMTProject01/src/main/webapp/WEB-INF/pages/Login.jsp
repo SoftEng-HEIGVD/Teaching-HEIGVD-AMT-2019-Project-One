@@ -72,7 +72,7 @@
 	<section class="main-section" id="players">
 		<!--main-section-start-->
 		<div class="container Player-Box">
-                        <h2> New Player:</h2>
+                        <h2> Login</h2>
 			
                         <div class="row">
                              
@@ -91,7 +91,8 @@
                                     </div>
                                      
                                     
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" name="loginButton" value="Login" class="btn btn-primary">Login</button>
+                                    <button type="submit" name="regButton" value="Register" class="btn btn-primary">Register</button>
                                   </form>
                             
                            

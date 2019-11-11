@@ -15,7 +15,7 @@ public class Team {
     
     private int id;
     private String name;
-
+    private int creatorId;
     public Team(int id,String name) {
         this.id = id;
         this.name = name;
@@ -31,6 +31,14 @@ public class Team {
 
     public String getName() {
         return name;
+    }
+
+    public int getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(int creatorId) {
+        this.creatorId = creatorId;
     }
    
     
