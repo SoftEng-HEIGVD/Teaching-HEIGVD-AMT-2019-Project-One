@@ -1,0 +1,9 @@
+#!/bin/sh
+
+create-jdbc-connection-pool --restype javax.sql.DataSource --datasourceclassname com.mysql.cj.jdbc.MysqlDataSource --property 'user=root:password=root:url=jdbc\:mysql\://db\:3306/TeamEsport:useSSL=false' TeamEsport_Pool
+
+create-jdbc-resource --connectionpoolid TeamEsport_Pool jdbc/TeamEsport
+
+start-domain domain1
+
+deploy /home/AMTProjectOne.war
