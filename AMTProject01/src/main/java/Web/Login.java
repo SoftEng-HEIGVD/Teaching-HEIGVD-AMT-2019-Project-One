@@ -35,8 +35,14 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      
-       
+      if(req.getParameter("logout")!=null){
+           req.getSession().invalidate();
+                                   resp.sendRedirect("login");
+
+           return;
+       }
+        
+        
         // read form fields
         String username = req.getParameter("username");     
         String pwd = req.getParameter("pwd");
@@ -45,11 +51,12 @@ public class Login extends HttpServlet {
                 User u= userManager.get(username);
                
                 if(u!=null&& u.getPwd().equals(pwd)){
+                    
                     req.getSession().setAttribute("id", u.getId());
+                    req.getSession().setAttribute("name", u.getName());
                     resp.sendRedirect("players");
                 }else{
                     req.getRequestDispatcher("WEB-INF/pages/Login.jsp").forward(req,resp);
-
                 }
             }else if(req.getParameter("regButton")!=null){
                 if(userManager.get(username)==null){
