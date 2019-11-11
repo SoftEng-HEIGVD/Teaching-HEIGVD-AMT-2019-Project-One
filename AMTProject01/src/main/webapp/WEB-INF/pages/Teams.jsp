@@ -133,7 +133,15 @@
 
 	<script type="text/javascript">
 		$(document).ready(function(e) {
-                        $('#teamsTable').DataTable();
+                        $('#teamsTable').DataTable({
+                            "processing": true,
+                            "serverSide": true,
+                            "ajax": {
+                                "url": "teams",
+                                "type": "POST"
+                            }                       
+                        });
+                        
 			$('#test').scrollToFixed();
 			$('.res-nav_click').click(function() {
 				$('.main-nav').slideToggle();

@@ -30,6 +30,7 @@
 	<link href="css/responsive.css" rel="stylesheet" type="text/css">
 	<link href="css/magnific-popup.css" rel="stylesheet" type="text/css">
 	<link href="css/animate.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="DataTables-1.10.20/css/jquery.dataTables.min.css"/>
 
 	<script type="text/javascript" src="js/jquery.1.8.3.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
@@ -39,6 +40,9 @@
 	<script type="text/javascript" src="js/wow.js"></script>
 	<script type="text/javascript" src="js/classie.js"></script>
 	<script type="text/javascript" src="js/magnific-popup.js"></script>
+        .
+        <script type="text/javascript" src="DataTables-1.10.20/js/jquery.dataTables.min.js"></script>
+
 	<script src="contactform/contactform.js"></script>
 
 	<!-- =======================================================
@@ -74,7 +78,7 @@
 	</section>
 	<section class="main-section" id="players">
 		<!--main-section-start-->
-		<div class="container Player-Box">
+		<div class="container">
 			<h3>The Players:</h3>
                         <div class="row">
                             <div class="list-group wow fadeInLeft delay-05s ">
@@ -99,29 +103,21 @@
                 
         <section class="main-section" id="players">
 		<!--main-section-start-->
-		<div class="container Player-Box">
+		<div class="container">
 			<h3>Match History</h3>
-                        <div class="row">
-                            <div class="list-group wow fadeInLeft delay-05s ">
-                                <c:forEach items="${players}" var="item">
-                                    <div class="service-list">
-                                       <div class="service-list-col1">
-                                               <i class="fa fa-paw"></i>
-                                       </div>
-                                       <div class="service-list-col2">
-                                               <h4>${item.userName}</h4>
+                        <table id="matchesTable" class="display">
+                            <thead>
+                                <tr>
+                                     <th>Team 1</th>
+                                    <th>Score</th>
+                                    <th>Team 2</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                                               <p>Nom: ${item.name}</p>
-                                       </div>
-                                       <div class="float-right" >
-                                           <a href="player?u=${item.userName}" class="btn btn-primary">Details</a>
-
-                                       </div>
-
-                                   </div>
-                               </c:forEach>
-                            </div>
-			</div>
+                               
+                            </tbody>
+                        </table>
 		</div>
 	</section>
 	<!--main-section-end-->
@@ -148,7 +144,14 @@
 
 	<script type="text/javascript">
 		$(document).ready(function(e) {
-
+                        $('#matchesTable').DataTable({
+                            "processing": true,
+                            "serverSide": true,
+                            "ajax": {
+                                "url": "team",
+                                "type": "POST"
+                            }
+                        });
 			$('#test').scrollToFixed();
 			$('.res-nav_click').click(function() {
 				$('.main-nav').slideToggle();

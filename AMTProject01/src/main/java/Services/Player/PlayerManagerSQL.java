@@ -62,7 +62,8 @@ public class PlayerManagerSQL implements PlayerManager{
           players.add(new Player(player_id,pseudo,name,new Team(team_id,team)));
         }
         pstmt.close();
-      
+        connection.close();
+     
     } catch (SQLException ex) {
       Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }        
@@ -89,7 +90,8 @@ public class PlayerManagerSQL implements PlayerManager{
            team_id = rs.getInt("team_id");
         }
         pstmt.close();
-      
+          connection.close();
+    
     } catch (SQLException ex) {
       Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }        
@@ -139,7 +141,8 @@ public class PlayerManagerSQL implements PlayerManager{
           players.add(new Player(id,pseudo,name,new Team(t.getId(),t.getName())));
         }
         pstmt.close();
-      
+        connection.close();
+     
     } catch (SQLException ex) {
       Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }        
@@ -147,7 +150,7 @@ public class PlayerManagerSQL implements PlayerManager{
         
     }
     @Override
-    public List<Player> getPlayersFromMatchTeam1(int match_id){
+    public List<Player> getPlayersFromMatchTeam1(long match_id){
         
         ArrayList<Player> players = new ArrayList();
         
@@ -165,19 +168,16 @@ public class PlayerManagerSQL implements PlayerManager{
           players.add(new Player(player_id,pseudo,name,new Team(team_id,team)));
         }
         pstmt.close();
-      
+        connection.close();
     } catch (SQLException ex) {
       Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
-    }        
+    }       
+        
           return players;
-        
-        
-        
-        
         
     }
     @Override
-    public List<Player> getPlayersFromMatchTeam2(int match_id) {
+    public List<Player> getPlayersFromMatchTeam2(long match_id) {
         
         
          ArrayList<Player> players = new ArrayList();
@@ -196,7 +196,8 @@ public class PlayerManagerSQL implements PlayerManager{
           players.add(new Player(player_id,pseudo,name,new Team(team_id,team)));
         }
         pstmt.close();
-      
+        connection.close();
+
     } catch (SQLException ex) {
       Logger.getLogger(TeamManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }        
@@ -213,7 +214,8 @@ public class PlayerManagerSQL implements PlayerManager{
          pstmt.execute();
        
         pstmt.close();
-      
+        connection.close();
+
     } catch (SQLException ex) {
       Logger.getLogger(PlayerManagerSQL.class.getName()).log(Level.SEVERE, null, ex);
     }

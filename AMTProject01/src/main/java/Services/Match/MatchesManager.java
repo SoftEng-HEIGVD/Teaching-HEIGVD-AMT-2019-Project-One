@@ -8,6 +8,7 @@ package Services.Match;
 import Model.Team;
 import Model.Match;
 import Model.Player;
+import Model.Team;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +23,11 @@ public interface MatchesManager {
     
     public  ArrayList<Match>  getMatchesPlayedBy(Player p);
     
+<<<<<<< HEAD
     public ArrayList<Match> getMatchesPlayedbyTeam(Team t);
+=======
+    public  ArrayList<Match>  getMatchesPlayedBy(Team t);
+>>>>>>> Template
     
     public void addMatch(Match match,ArrayList<Player>team1,ArrayList<Player>team2);
     

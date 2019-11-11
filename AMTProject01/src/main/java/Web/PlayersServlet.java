@@ -41,11 +41,6 @@ PlayerManager playerManager = new PlayerManagerSQL();
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-     
-        
-
-        request.setAttribute("allPlayers", playerManager.getAllPlayers());
 
         request.getRequestDispatcher("WEB-INF/pages/players.jsp").forward(request,response);
     }
@@ -61,8 +56,10 @@ PlayerManager playerManager = new PlayerManagerSQL();
         JSONArray data = new JSONArray();
      
         
-        List<Player> players=playerManager.getAllPlayers();     
+        List<Player> players=playerManager.getAllPlayers();  
+      
         json.put("recordsTotal",players.size());
+       
         json.put("recordsFiltered",players.size());
 
         for(int i=start;i< start+length;i++){

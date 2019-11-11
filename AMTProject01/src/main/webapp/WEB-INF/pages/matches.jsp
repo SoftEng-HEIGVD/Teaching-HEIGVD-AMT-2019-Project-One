@@ -100,34 +100,7 @@
                             </thead>
                             <tbody>
 
-                                <c:forEach items="${allMatches}" var="match">
-                             
-                                    <tr class="custom-clickable-row" data-href="match?id=${match.id}">
-                                        <td> 
-                                            
-                                                <c:if test="${empty match.team1}">
-                                                           no Team
-                                                </c:if>
-                                                <c:if test="${not empty match.team1}">
-                                                   ${match.team1.name}
-                                                </c:if>
-                                           
-                                        </td>
-                                        <td>${match.team1EndScore}-${match.team2EndScore}</td>
-                                         <td> 
-                                            
-                                                <c:if test="${empty match.team2}">
-                                                           no Team
-                                                </c:if>
-                                                <c:if test="${not empty match.team2}">
-                                                   ${match.team2.name}
-                                                </c:if>
-                                           
-                                        </td>
-                                    </tr>                                                
                                
-                                      
-                                </c:forEach>
                             </tbody>
                          </table>
 
